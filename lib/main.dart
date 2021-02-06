@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:newborn_care/screens/facility_login/facility_login.dart';
+import 'package:newborn_care/screens/individual_login/individual_login.dart';
 import 'package:newborn_care/screens/initial_screen/initial_screen.dart';
 
 void main() {
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
 
       routes: {
         '/InitialScreen': (context) => InitialScreen(),
+        '/FacilityLoginScreen': (context) => FacilityLogin(),
+        '/IndividualLoginScreen': (context) => IndividualLogin(),
 
       },
       initialRoute: initialAppRoute,
