@@ -71,7 +71,8 @@ class ShortAppBar extends StatelessWidget {
           color: color,
           borderRadius: new BorderRadius.only(
               bottomLeft: const Radius.circular(40.0),
-              bottomRight: const Radius.circular(40.0))),
+              bottomRight: const Radius.circular(40.0))
+      ),
     );
   }
 }
