@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 class LongAppBar extends StatelessWidget {
   final color = const Color(0xff82A0C8);
 
-@override
+  @override
   Widget build(BuildContext context) {
-    return   Container(
-
-      height:  MediaQuery.of(context).size.height/1.65 ,
+    return Container(
+      height: MediaQuery.of(context).size.height / 1.65,
       child: Column(
         children: [
           Expanded(
@@ -21,7 +20,6 @@ class LongAppBar extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
-
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
@@ -35,9 +33,8 @@ class LongAppBar extends StatelessWidget {
           ),
         ],
       ),
-      decoration: BoxDecoration( boxShadow: [
-        new BoxShadow(blurRadius: 4.0)
-      ],
+      decoration: BoxDecoration(
+          boxShadow: [new BoxShadow(blurRadius: 4.0)],
           color: color,
           borderRadius: new BorderRadius.only(
               bottomLeft: const Radius.circular(40.0),

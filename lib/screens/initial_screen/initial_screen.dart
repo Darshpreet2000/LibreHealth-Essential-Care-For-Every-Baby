@@ -6,45 +6,44 @@ import 'package:newborn_care/widgets/short_app_bar.dart';
 class InitialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: OrientationBuilder(
-        builder: (context, orientation) {
-         return SingleChildScrollView(
-            child:  ConstrainedBox(
-              constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
-
-              child: Column(
-                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  orientation==Orientation.portrait||(MediaQuery.of(context).size.height>600)?Container(
-                     height:MediaQuery
-                          .of(context)
-                          .size
-                          .height / 2, child: LongAppBar()):Container(child: ShortAppBar()),
-                  loginButtons(context,orientation)
-                ],
-              ),
-            ),
-          );
-
-        }
-        ));
+    return Scaffold(body: OrientationBuilder(builder: (context, orientation) {
+      return SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints:
+              BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              orientation == Orientation.portrait ||
+                      (MediaQuery.of(context).size.height > 600)
+                  ? Container(
+                      height: MediaQuery.of(context).size.height / 2,
+                      child: LongAppBar())
+                  : Container(
+                      child: ShortAppBar(
+                      title: "Essential Care For Every Baby",
+                    )),
+              loginButtons(context, orientation)
+            ],
+          ),
+        ),
+      );
+    }));
   }
 
-
-
-  Widget loginButtons(BuildContext context,Orientation orientation) {
+  Widget loginButtons(BuildContext context, Orientation orientation) {
     return Column(
-
       children: [
         SizedBox(
           height: 8,
         ),
         Container(
-        height: orientation==Orientation.portrait? MediaQuery.of(context).size.height/5:MediaQuery.of(context).size.height/4,
-        width:MediaQuery.of(context).size.width/1.2,
+          height: orientation == Orientation.portrait
+              ? MediaQuery.of(context).size.height / 5
+              : MediaQuery.of(context).size.height / 4,
+          width: MediaQuery.of(context).size.width / 1.2,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(0,8,0,8),
+            padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
             child: SizedBox(
               width: double.infinity, // match_parent
 
@@ -56,7 +55,6 @@ class InitialScreen extends StatelessWidget {
                 color: Colors.white,
                 onPressed: () {
                   Navigator.pushNamed(context, '/IndividualLoginScreen');
-
                 },
                 padding: EdgeInsets.all(8),
                 child: Text(
@@ -72,12 +70,12 @@ class InitialScreen extends StatelessWidget {
           ),
         ),
         Container(
-
-          height: orientation==Orientation.portrait? MediaQuery.of(context).size.height/5:MediaQuery.of(context).size.height/4,
-          width:MediaQuery.of(context).size.width/1.2,
-
+          height: orientation == Orientation.portrait
+              ? MediaQuery.of(context).size.height / 5
+              : MediaQuery.of(context).size.height / 4,
+          width: MediaQuery.of(context).size.width / 1.2,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(0,8,0,8),
+            padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
             child: SizedBox(
               width: double.infinity, // match_parent
 
@@ -89,7 +87,6 @@ class InitialScreen extends StatelessWidget {
                 color: Colors.white,
                 onPressed: () {
                   Navigator.pushNamed(context, '/FacilityLoginScreen');
-
                 },
                 padding: EdgeInsets.all(8),
                 child: Text(
@@ -120,15 +117,19 @@ class InitialScreen extends StatelessWidget {
                     new TextSpan(text: 'By Continuing you agree to our '),
                     new TextSpan(
                         text: 'Privacy Policies,\nData Usage Policies',
-                        style: new TextStyle(   fontWeight: FontWeight.bold, color:Colors.blue,decoration: TextDecoration.underline,
+                        style: new TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
                         )),
                     new TextSpan(
-                        text: ' including our ',
-                        style: new TextStyle(
-                        )),
+                        text: ' including our ', style: new TextStyle()),
                     new TextSpan(
                         text: 'Cookies Use',
-                        style: new TextStyle(  fontWeight: FontWeight.bold  , color:Colors.blue,decoration: TextDecoration.underline,
+                        style: new TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
                         )),
                   ],
                 ),
