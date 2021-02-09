@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:newborn_care/screens/list_of_babies/components/custom_drop_down.dart';
 import 'package:newborn_care/screens/list_of_babies/components/list_tiem.dart';
 
 class Body extends StatelessWidget {
@@ -50,12 +52,13 @@ class Body extends StatelessWidget {
   }
 
   Widget searchAndSort() {
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
           Expanded(flex: 2, child: searchContainer()),
-          Expanded(child: sortContainer())
+          Expanded(child: SortContainer())
         ],
       ),
     );
@@ -80,32 +83,84 @@ class Body extends StatelessWidget {
     );
   }
 
-  Widget sortContainer() {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Container(
-        decoration: BoxDecoration(
-            color: color, borderRadius: BorderRadius.all(Radius.circular(20))),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Sort by",
+
+}
+class SortContainer extends StatefulWidget {
+  @override
+  _SortContainerState createState() => _SortContainerState();
+}
+
+class _SortContainerState extends State<SortContainer> {
+  String _dropDownValue;
+  final color = const Color(0xff82A0C8);
+@override
+  Widget build(BuildContext context) {
+    return Container(
+
+      decoration: BoxDecoration(
+          color: color, borderRadius: BorderRadius.circular(30)),
+      margin: EdgeInsets.all(8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+
+                color: color, borderRadius: BorderRadius.circular(30)),
+            child: CustomDropdownButton(
+              value: null,
+
+                hint:
+              Text("  Sort by",
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 16)),
-              Icon(
-                Icons.keyboard_arrow_down,
-                color: Colors.white,
-                size: 22,
-              )
-            ],
+
+              items: [
+                DropdownMenuItem(
+
+                  value: 1,
+                  child: Center(
+                    child: Text("Time",style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14)),
+                  )
+                ),
+                DropdownMenuItem(
+                  value: 2,
+                    child: Center(
+                      child: Text("Status",style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14)),
+                    )
+                ),
+                DropdownMenuItem(
+                    value: 3,
+                    child: Center(
+                      child: Text("Location",style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14)),
+                    )
+                ),
+              ],
+
+              onChanged: (item) {
+
+                 },
+
+            ),
           ),
-        ),
+
+
+        ],
       ),
     );
   }
 }
+
+

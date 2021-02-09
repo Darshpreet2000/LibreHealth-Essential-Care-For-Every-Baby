@@ -18,6 +18,7 @@ class _BaseClassState extends State<BaseClass> {
         index: selectedIndex,
         children: <Widget>[Home(), ListOfBabies(), Notifications(), Profile()],
       ),
+
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
