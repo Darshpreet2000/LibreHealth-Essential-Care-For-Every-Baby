@@ -33,7 +33,7 @@ class _BaseClassState extends State<BaseClass> {
               icon: Icon(Icons.person_rounded), label: 'Profile'),
         ],
         currentIndex: selectedIndex,
-        fixedColor: Colors.blue,
+        fixedColor: Colors.blue[800],
         onTap: onItemTapped,
         type: BottomNavigationBarType.fixed,
       ),

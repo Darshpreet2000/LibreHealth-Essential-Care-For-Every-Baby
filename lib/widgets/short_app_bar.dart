@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class ShortAppBar extends StatelessWidget {
   final color = const Color(0xff82A0C8);
   final title;
-  final bool hideDrawerID;
-  const ShortAppBar({Key key, @required this.title, this.hideDrawerID})
+  final bool showDrawerID;
+  const ShortAppBar({Key key, @required this.title, this.showDrawerID})
       : super(key: key);
 
   @override
@@ -18,7 +18,7 @@ class ShortAppBar extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
             child: Row(
               children: [
-                hideDrawerID == true
+                showDrawerID == true
                     ? Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Icon(
@@ -41,7 +41,7 @@ class ShortAppBar extends StatelessWidget {
                       children: <TextSpan>[
                         new TextSpan(
                             text: title, style: TextStyle(fontSize: 22)),
-                        hideDrawerID == true
+                        showDrawerID == true
                             ? new TextSpan(
                                 text: "\n" + "ID: ****123",
                                 style: new TextStyle(

@@ -15,11 +15,11 @@ class Home extends StatelessWidget {
               orientation == Orientation.portrait
                   ? ShortAppBar(
                       title: "ECEB",
-                      hideDrawerID: true,
+                      showDrawerID: true,
                     )
                   : ShortAppBar(
                       title: "Essential Care For Every Baby",
-                      hideDrawerID: true,
+                      showDrawerID: true,
                     ),
               Body(orientation: orientation),
             ],
