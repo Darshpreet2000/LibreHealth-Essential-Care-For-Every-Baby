@@ -31,15 +31,18 @@ Widget summary(BuildContext context, GlobalKey globalKey) {
                   child: rowItem("Admitted", "14", "assets/blue.png", context)),
             ),
             Material(
-              child: InkWell(onTap: () {
-                navigationBar.onTap(1);
-              },
-                  child: rowItem("Discharged", "10", "assets/grey.png", context)),
+              child: InkWell(
+                  onTap: () {
+                    navigationBar.onTap(1);
+                  },
+                  child:
+                      rowItem("Discharged", "10", "assets/grey.png", context)),
             ),
             Material(
-              child: InkWell(onTap: () {
-                navigationBar.onTap(1);
-              },
+              child: InkWell(
+                  onTap: () {
+                    navigationBar.onTap(1);
+                  },
                   child: rowItem("High Risk", "8", "assets/red.png", context)),
             ),
           ],

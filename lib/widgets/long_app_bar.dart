@@ -41,7 +41,8 @@ class LongAppBar extends StatelessWidget {
               blurRadius: 4,
               offset: Offset(0, 3), // changes position of shadow
             ),
-          ],color: color,
+          ],
+          color: color,
           borderRadius: new BorderRadius.only(
               bottomLeft: const Radius.circular(40.0),
               bottomRight: const Radius.circular(40.0))),

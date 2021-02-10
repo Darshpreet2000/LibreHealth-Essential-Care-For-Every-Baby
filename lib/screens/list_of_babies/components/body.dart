@@ -57,7 +57,7 @@ class Body extends StatelessWidget {
       child: Row(
         children: [
           Expanded(flex: 2, child: searchContainer()),
-          Expanded(child: SortContainer())
+          Expanded(child: CustomDropDown())
         ],
       ),
     );
@@ -80,13 +80,5 @@ class Body extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class SortContainer extends StatelessWidget {
-  final color = const Color(0xff82A0C8);
-  @override
-  Widget build(BuildContext context) {
-    return CustomDropDown();
   }
 }

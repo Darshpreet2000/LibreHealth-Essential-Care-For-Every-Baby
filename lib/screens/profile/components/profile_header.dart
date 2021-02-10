@@ -47,7 +47,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "Name :Fiona",
+                      "Name: Fiona",
                       style: TextStyle(
                           color: Colors.grey[700], fontWeight: FontWeight.bold),
                     ),
@@ -55,7 +55,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "ID :1***234",
+                      "ID: 1***234",
                       style: TextStyle(
                           color: Colors.grey[700], fontWeight: FontWeight.bold),
                     ),
@@ -85,12 +85,17 @@ class _ProfileHeaderState extends State<ProfileHeader> {
             ),
           ),
           Expanded(
-            flex: 2,
-            child: Container(
-                child: CircleAvatar(
-                    radius: 65,
-                    backgroundImage: AssetImage('assets/doctor1.jpg'))),
-          ),
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 8),
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage('assets/doctor1.jpg'),
+                    radius: 50,
+                  ),
+                ),
+              )),
           Expanded(
             flex: 1,
             child: Column(

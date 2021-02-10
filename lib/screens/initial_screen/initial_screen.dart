@@ -47,23 +47,28 @@ class InitialScreen extends StatelessWidget {
             child: SizedBox(
               width: double.infinity, // match_parent
 
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.grey[350]),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  onPrimary: Colors.white, // foreground
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.grey[350]),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
                 ),
-                color: Colors.white,
                 onPressed: () {
                   Navigator.pushNamed(context, '/IndividualLoginScreen');
                 },
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  'Individual',
-                  style: TextStyle(
-                      color: Colors.blue[800],
-                      fontFamily: 'Source',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Individual',
+                    style: TextStyle(
+                        color: Colors.blue[800],
+                        fontFamily: 'Source',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20),
+                  ),
                 ),
               ),
             ),
@@ -79,23 +84,28 @@ class InitialScreen extends StatelessWidget {
             child: SizedBox(
               width: double.infinity, // match_parent
 
-              child: RaisedButton(
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.grey[350]),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.white,
+                  onPrimary: Colors.white, // foreground
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.grey[350]),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
                 ),
-                color: Colors.white,
                 onPressed: () {
-                  Navigator.pushNamed(context, '/FacilityLoginScreen');
+                  Navigator.pushNamed(context, '/IndividualLoginScreen');
                 },
-                padding: EdgeInsets.all(8),
-                child: Text(
-                  'Facility',
-                  style: TextStyle(
-                      color: Colors.blue[800],
-                      fontFamily: 'Source',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Facility',
+                    style: TextStyle(
+                        color: Colors.blue[800],
+                        fontFamily: 'Source',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20),
+                  ),
                 ),
               ),
             ),

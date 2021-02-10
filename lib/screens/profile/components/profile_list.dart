@@ -90,17 +90,14 @@ Widget activityAndSort() {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Expanded(
-            flex: 3,
-            child: Text(
-              "Activity",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
-            )),
-        Expanded(flex: 2, child: SortContainer())
+        Text(
+          "Activity",
+          style: TextStyle(
+              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+        CustomDropDown()
       ],
     ),
   );
@@ -125,12 +122,4 @@ Widget searchContainer() {
       ),
     ),
   );
-}
-
-class SortContainer extends StatelessWidget {
-  final color = const Color(0xff82A0C8);
-  @override
-  Widget build(BuildContext context) {
-    return CustomDropDown();
-  }
 }

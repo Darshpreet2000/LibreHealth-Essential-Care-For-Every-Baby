@@ -27,9 +27,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => InitialScreen(),
         '/FacilityLoginScreen': (context) => FacilityLogin(),
         '/IndividualLoginScreen': (context) => IndividualLogin(),
-
         '/RegisterABaby': (context) => RegisterABaby(),
-
         '/BabyDetails': (context) => BabyDetails(),
         '/Base': (context) => BaseClass(
               globalKey: globalKey,

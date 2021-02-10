@@ -60,7 +60,7 @@ class ShortAppBar extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 8, 8, 0),
               child: Container(
-                margin: const EdgeInsets.fromLTRB(0, 8, 16, 0),
+                margin: const EdgeInsets.fromLTRB(0, 8, 16, 8),
                 child: Center(
                   child: Image.asset(
                     "assets/mhbs.png",

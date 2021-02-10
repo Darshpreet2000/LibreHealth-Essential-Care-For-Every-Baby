@@ -20,11 +20,11 @@ class _CustomDropDownState extends State<CustomDropDown> {
 
     return OverlayEntry(
         builder: (context) => Positioned(
-              width: size.width ,
+              width: size.width,
               child: CompositedTransformFollower(
                 link: this._layerLink,
                 showWhenUnlinked: false,
-                offset: Offset(0.0, size.height-4),
+                offset: Offset(0.0, size.height - 4),
                 child: Material(
                   elevation: 60.0,
                   color: Colors.transparent,
@@ -100,16 +100,14 @@ class _CustomDropDownState extends State<CustomDropDown> {
       link: this._layerLink,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary:color, // background
+          primary: color, // background
           onPrimary: Colors.white, // foreground
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.0),
-
+            borderRadius: BorderRadius.circular(20.0),
           ),
         ),
-
         focusNode: this._focusNode,
-        onPressed: (){
+        onPressed: () {
           setState(() {
             isDropDownOpened = !isDropDownOpened;
             if (isDropDownOpened) {
@@ -121,19 +119,30 @@ class _CustomDropDownState extends State<CustomDropDown> {
             }
           });
         },
-
-         child: Row(
-           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-         children: [
-    Text('Sort By',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-         ),
-      isDropDownOpened? Icon(Icons.arrow_drop_up,color: Colors.white,):Icon(Icons.arrow_drop_down,color: Colors.white,)
-
-
-
-
-         ],
-         ),
+        child: Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 4),
+                child: Text(
+                  'Sort By',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+              ),
+              isDropDownOpened
+                  ? Icon(
+                      Icons.arrow_drop_up,
+                      color: Colors.white,
+                    )
+                  : Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.white,
+                    )
+            ],
+          ),
+        ),
       ),
     );
   }

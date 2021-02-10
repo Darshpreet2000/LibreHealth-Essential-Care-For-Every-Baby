@@ -21,10 +21,7 @@ Widget registerBaby(BuildContext context) {
               ),
             ),
             onPressed: () {
-
-
               Navigator.pushNamed(context, '/RegisterABaby');
-
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
