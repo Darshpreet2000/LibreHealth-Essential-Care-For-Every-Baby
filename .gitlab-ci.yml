@@ -12,6 +12,7 @@ build:
   script:
     - flutter pub get
     - flutter clean
+    - flutter build apk --debug
     - flutter build apk --release
 
   artifacts:
