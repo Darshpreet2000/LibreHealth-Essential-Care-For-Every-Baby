@@ -1,17 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class ListItemRiskMonitoringAlert extends StatefulWidget {
-  final String parent,checkup;
+  final String parent, checkup;
   final Color color;
-  final  bool value;
+  final bool value;
   final bool inDanger;
 
-  const ListItemRiskMonitoringAlert({Key key, this.parent, this.checkup, this.color, this.value, this.inDanger}) : super(key: key);
-
-
-
+  const ListItemRiskMonitoringAlert(
+      {Key key,
+      this.parent,
+      this.checkup,
+      this.color,
+      this.value,
+      this.inDanger})
+      : super(key: key);
 
   @override
   _ListItemMonitoringAlert createState() => _ListItemMonitoringAlert(value);
@@ -30,25 +33,23 @@ class _ListItemMonitoringAlert extends State<ListItemRiskMonitoringAlert> {
         child: Row(
           children: [
             Expanded(
-
               flex: 1,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
                     Container(
-                      width:30,
-                      height:25
-                      ,decoration: BoxDecoration(
-                        color: widget.color,
-                        borderRadius: BorderRadius.all(Radius.circular(20))
-                    ),),
+                      width: 30,
+                      height: 25,
+                      decoration: BoxDecoration(
+                          color: widget.color,
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                    ),
                   ],
                 ),
               ),
             ),
             Expanded(
-
               flex: 4,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -58,11 +59,15 @@ class _ListItemMonitoringAlert extends State<ListItemRiskMonitoringAlert> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
-                      child: Text("Baby of "+widget.parent,),
+                      child: Text(
+                        "Baby of " + widget.parent,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
-                      child: Text("Location: Prenatal Ward",),
+                      child: Text(
+                        "Location: Prenatal Ward",
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
@@ -73,7 +78,6 @@ class _ListItemMonitoringAlert extends State<ListItemRiskMonitoringAlert> {
               ),
             ),
             Expanded(
-
               flex: 3,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -81,19 +85,25 @@ class _ListItemMonitoringAlert extends State<ListItemRiskMonitoringAlert> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                     Text(widget.checkup,style: TextStyle(fontWeight: FontWeight.bold),)
+                    Text(
+                      widget.checkup,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )
                   ],
                 ),
               ),
             ),
             Expanded(
-
               flex: 1,
               child: Column(
                 children: [
-                  Checkbox(value: checkedValue, onChanged: (value){setState(() {
-                    checkedValue=!checkedValue;
-                  });})
+                  Checkbox(
+                      value: checkedValue,
+                      onChanged: (value) {
+                        setState(() {
+                          checkedValue = !checkedValue;
+                        });
+                      })
                 ],
               ),
             ),

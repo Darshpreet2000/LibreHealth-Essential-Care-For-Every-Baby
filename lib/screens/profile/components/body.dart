@@ -11,11 +11,11 @@ class Body extends StatelessWidget {
       child: Column(
         children: [
           ShortAppBar(
-            title: "ECEB",showDrawerID: true,
+            title: "ECEB",
+            showDrawerID: true,
           ),
           ProfileHeader(),
           ProfileList(),
-
         ],
       ),
     );

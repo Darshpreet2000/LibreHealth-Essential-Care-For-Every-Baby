@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget summary(BuildContext context) {
+Widget summary(BuildContext context, GlobalKey globalKey) {
+  final BottomNavigationBar navigationBar = globalKey.currentWidget;
+
   return Container(
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,9 +23,25 @@ Widget summary(BuildContext context) {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            rowItem("Admitted", "14", "assets/blue.png", context),
-            rowItem("Discharged", "10", "assets/grey.png", context),
-            rowItem("High Risk", "8", "assets/red.png", context),
+            Material(
+              child: InkWell(
+                  onTap: () {
+                    navigationBar.onTap(1);
+                  },
+                  child: rowItem("Admitted", "14", "assets/blue.png", context)),
+            ),
+            Material(
+              child: InkWell(onTap: () {
+                navigationBar.onTap(1);
+              },
+                  child: rowItem("Discharged", "10", "assets/grey.png", context)),
+            ),
+            Material(
+              child: InkWell(onTap: () {
+                navigationBar.onTap(1);
+              },
+                  child: rowItem("High Risk", "8", "assets/red.png", context)),
+            ),
           ],
         ),
       ],

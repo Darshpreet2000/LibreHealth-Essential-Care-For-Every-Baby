@@ -75,7 +75,6 @@ class ProfileList extends StatelessWidget {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-
         ],
       ),
     );
@@ -83,24 +82,25 @@ class ProfileList extends StatelessWidget {
 
   Widget listHeading() {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: activityAndSort()
-    );
+        padding: const EdgeInsets.all(8.0), child: activityAndSort());
   }
 }
-Widget activityAndSort() {
 
+Widget activityAndSort() {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Row(
       children: [
-      Expanded(
-        flex: 3,
-       child: Text("Activity",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18),)
-      ),
         Expanded(
-            flex: 2,
-            child: SortContainer())
+            flex: 3,
+            child: Text(
+              "Activity",
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            )),
+        Expanded(flex: 2, child: SortContainer())
       ],
     ),
   );
@@ -127,22 +127,10 @@ Widget searchContainer() {
   );
 }
 
-
-
 class SortContainer extends StatelessWidget {
   final color = const Color(0xff82A0C8);
   @override
   Widget build(BuildContext context) {
-    return Container(
-
-        margin: EdgeInsets.all(8),
-        padding: EdgeInsets.only(left: 8),
-        decoration: BoxDecoration(
-
-            color: color, borderRadius: BorderRadius.circular(20)),
-        child:CustomDropDown()
-    );
+    return CustomDropDown();
   }
 }
-
-

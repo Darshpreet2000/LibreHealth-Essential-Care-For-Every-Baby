@@ -1,54 +1,50 @@
 import 'package:flutter/material.dart';
 
-
 class ListItemRiskAssessment extends StatefulWidget {
   final String parent;
   final Color color;
-  final  bool value;
+  final bool value;
   final bool inDanger;
 
-  const ListItemRiskAssessment({Key key, this.parent, this.color, this.value, this.inDanger}) : super(key: key);
-
-
+  const ListItemRiskAssessment(
+      {Key key, this.parent, this.color, this.value, this.inDanger})
+      : super(key: key);
 
   @override
-  _ListItemRiskAssessmentState createState() => _ListItemRiskAssessmentState(value);
+  _ListItemRiskAssessmentState createState() =>
+      _ListItemRiskAssessmentState(value);
 }
 
 class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
-
   bool checkedValue;
 
   _ListItemRiskAssessmentState(this.checkedValue);
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
             Expanded(
-
               flex: 1,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
                     Container(
-                      width:30,
-                      height:25
-                      ,decoration: BoxDecoration(
-                color: widget.color,
-                      borderRadius: BorderRadius.all(Radius.circular(20))
-                    ),),
+                      width: 30,
+                      height: 25,
+                      decoration: BoxDecoration(
+                          color: widget.color,
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                    ),
                   ],
                 ),
               ),
             ),
             Expanded(
-
               flex: 4,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -58,11 +54,15 @@ class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
-                      child: Text("Baby of "+widget.parent,),
+                      child: Text(
+                        "Baby of " + widget.parent,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
-                      child: Text("Location: Prenatal Ward",),
+                      child: Text(
+                        "Location: Prenatal Ward",
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
@@ -72,8 +72,7 @@ class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
                 ),
               ),
             ),
-        Expanded(
-
+            Expanded(
               flex: 3,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -83,12 +82,12 @@ class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
-                      child: Text("Status changed",style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: Text("Status changed",
+                          style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
                     Padding(
-
                       padding: const EdgeInsets.only(top: 2),
-                     child: RichText(
+                      child: RichText(
                         text: new TextSpan(
                           // Note: Styles for TextSpans must be explicitly defined.
                           // Child text spans will inherit styles from parent
@@ -96,21 +95,22 @@ class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
                             color: Colors.black,
                           ),
                           children: <TextSpan>[
-                            new TextSpan(text: 'Problem to ', style: new TextStyle(
-                        fontWeight: FontWeight.bold,
-                        )),
-                            widget.inDanger?
                             new TextSpan(
-                                text: 'Danger',
-                                style: new TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.red
-                                )):new TextSpan(
-                                text: 'Normal',
+                                text: 'Problem to ',
                                 style: new TextStyle(
                                   fontWeight: FontWeight.bold,
                                 )),
-
+                            widget.inDanger
+                                ? new TextSpan(
+                                    text: 'Danger',
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.red))
+                                : new TextSpan(
+                                    text: 'Normal',
+                                    style: new TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    )),
                           ],
                         ),
                       ),
@@ -120,13 +120,16 @@ class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
               ),
             ),
             Expanded(
-
               flex: 1,
               child: Column(
                 children: [
-                 Checkbox(value: checkedValue, onChanged: (value){setState(() {
-                   checkedValue=value;
-                 });})
+                  Checkbox(
+                      value: checkedValue,
+                      onChanged: (value) {
+                        setState(() {
+                          checkedValue = value;
+                        });
+                      })
                 ],
               ),
             ),

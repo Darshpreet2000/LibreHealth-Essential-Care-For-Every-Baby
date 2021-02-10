@@ -34,8 +34,14 @@ class LongAppBar extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-          boxShadow: [new BoxShadow(blurRadius: 4.0)],
-          color: color,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.6),
+              spreadRadius: 2,
+              blurRadius: 4,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],color: color,
           borderRadius: new BorderRadius.only(
               bottomLeft: const Radius.circular(40.0),
               bottomRight: const Radius.circular(40.0))),

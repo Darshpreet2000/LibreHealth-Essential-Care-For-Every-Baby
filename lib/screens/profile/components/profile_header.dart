@@ -39,7 +39,9 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                     child: Text(
                       "Account Details",
                       style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold,fontSize: 16),
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
                     ),
                   ),
                   Padding(
@@ -65,7 +67,8 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                         Text(
                           "Share Location: ",
                           style: TextStyle(
-                              color: Colors.grey[700], fontWeight: FontWeight.bold),
+                              color: Colors.grey[700],
+                              fontWeight: FontWeight.bold),
                         ),
                         Switch(
                             value: isOn,
@@ -97,7 +100,6 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(Icons.settings),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(Icons.edit),

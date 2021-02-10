@@ -11,68 +11,80 @@ class ShortAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 120,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-            child: Row(
-              children: [
-                showDrawerID == true
-                    ? Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Icon(
-                          Icons.menu,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+              child: Row(
+                children: [
+                  showDrawerID == true
+                      ? Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Icon(
+                            Icons.menu,
+                            color: Colors.white,
+                            size: 28,
+                          ),
+                        )
+                      : Container(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: RichText(
+                      text: new TextSpan(
+                        // Note: Styles for TextSpans must be explicitly defined.
+                        // Child text spans will inherit styles from parent
+                        style: new TextStyle(
                           color: Colors.white,
-                          size: 28,
+                          fontWeight: FontWeight.bold,
                         ),
-                      )
-                    : Container(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: RichText(
-                    text: new TextSpan(
-                      // Note: Styles for TextSpans must be explicitly defined.
-                      // Child text spans will inherit styles from parent
-                      style: new TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                        children: <TextSpan>[
+                          new TextSpan(
+                              text: title, style: TextStyle(fontSize: 22)),
+                          showDrawerID == true
+                              ? new TextSpan(
+                                  text: "\n" + "ID: ****123",
+                                  style: new TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ))
+                              : new TextSpan(text: ""),
+                        ],
                       ),
-                      children: <TextSpan>[
-                        new TextSpan(
-                            text: title, style: TextStyle(fontSize: 22)),
-                        showDrawerID == true
-                            ? new TextSpan(
-                                text: "\n" + "ID: ****123",
-                                style: new TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ))
-                            : new TextSpan(text: ""),
-                      ],
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 8, 16, 0),
-            child: Center(
-              child: Image.asset(
-                "assets/mhbs.png",
-                width: 100,
+                ],
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 8, 8, 0),
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(0, 8, 16, 0),
+                child: Center(
+                  child: Image.asset(
+                    "assets/mhbs.png",
+                    width: 100,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
       decoration: BoxDecoration(
-          boxShadow: [new BoxShadow(blurRadius: 4.0)],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.6),
+              spreadRadius: 2,
+              blurRadius: 4,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
           color: color,
           borderRadius: new BorderRadius.only(
               bottomLeft: const Radius.circular(40.0),
-              bottomRight: const Radius.circular(40.0))
-      ),
+              bottomRight: const Radius.circular(40.0))),
     );
   }
 }

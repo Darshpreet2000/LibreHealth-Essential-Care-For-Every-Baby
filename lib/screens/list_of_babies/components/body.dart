@@ -25,7 +25,7 @@ class Body extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
-          listItem(
+          ListItem(
               "Oni", "Prenatal Ward", "Male", Colors.blue[100], Colors.white),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 4, 8, 0),
@@ -38,13 +38,13 @@ class Body extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
-          listItem("Deka", "Prenatal Ward", "Female", Colors.red[100],
+          ListItem("Deka", "Prenatal Ward", "Female", Colors.red[100],
               Colors.red[400]),
-          listItem("Priya", "Prenatal Ward", "Female", Colors.yellow[100],
+          ListItem("Priya", "Prenatal Ward", "Female", Colors.yellow[100],
               Colors.yellow[400]),
-          listItem("Jane", "Prenatal Ward", "Male", Colors.green[100],
+          ListItem("Jane", "Prenatal Ward", "Male", Colors.green[100],
               Colors.green[400]),
-          listItem("Priya", "Prenatal Ward", "Female", Colors.yellow[100],
+          ListItem("Priya", "Prenatal Ward", "Female", Colors.yellow[100],
               Colors.yellow[400]),
         ],
       ),
@@ -52,7 +52,6 @@ class Body extends StatelessWidget {
   }
 
   Widget searchAndSort() {
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -82,23 +81,12 @@ class Body extends StatelessWidget {
       ),
     );
   }
-
-
 }
+
 class SortContainer extends StatelessWidget {
   final color = const Color(0xff82A0C8);
-@override
+  @override
   Widget build(BuildContext context) {
-    return Container(
-
-        margin: EdgeInsets.all(8),
-        padding: EdgeInsets.only(left: 8),
-        decoration: BoxDecoration(
-
-            color: color, borderRadius: BorderRadius.circular(20)),
-        child:CustomDropDown()
-    );
+    return CustomDropDown();
   }
 }
-
-

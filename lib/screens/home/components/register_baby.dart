@@ -20,7 +20,12 @@ Widget registerBaby(BuildContext context) {
                 borderRadius: BorderRadius.circular(18.0),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+
+
+              Navigator.pushNamed(context, '/RegisterABaby');
+
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

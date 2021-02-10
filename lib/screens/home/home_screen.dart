@@ -4,6 +4,10 @@ import 'package:newborn_care/widgets/short_app_bar.dart';
 import 'components/body.dart';
 
 class Home extends StatelessWidget {
+  final GlobalKey globalKey;
+
+  const Home({Key key, this.globalKey}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: OrientationBuilder(builder: (context, orientation) {
@@ -21,7 +25,7 @@ class Home extends StatelessWidget {
                       title: "Essential Care For Every Baby",
                       showDrawerID: true,
                     ),
-              Body(orientation: orientation),
+              Body(globalKey: globalKey, orientation: orientation),
             ],
           ),
         ),
