@@ -29,7 +29,6 @@ class _NotificationAppBarState extends State<NotificationAppBar>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // give the tab bar a height [can change hheight to preferred height]
         Container(
           height: 100,
           decoration: BoxDecoration(

@@ -27,16 +27,17 @@ Widget registerBaby(BuildContext context) {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child:
-                      Icon(Icons.today_outlined, size: 40, color: Colors.blue),
-                ),
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      'assets/register.png',
+                      width: 60,
+                    )),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     "To Register a Baby",
                     style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   ),

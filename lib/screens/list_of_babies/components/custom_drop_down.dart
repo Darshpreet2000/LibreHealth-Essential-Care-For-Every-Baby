@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomDropDown extends StatefulWidget {
+  final Function enableDisableScroll;
+
+  CustomDropDown(this.enableDisableScroll);
+
   @override
   _CustomDropDownState createState() => _CustomDropDownState();
 }
@@ -26,12 +30,13 @@ class _CustomDropDownState extends State<CustomDropDown> {
                 showWhenUnlinked: false,
                 offset: Offset(0.0, size.height - 4),
                 child: Material(
-                  elevation: 60.0,
+                  elevation: 50.0,
                   color: Colors.transparent,
                   child: GestureDetector(
                     onTap: () {
                       this._focusNode.unfocus();
                       this._overlayEntry.remove();
+                      widget.enableDisableScroll();
                       setState(() {
                         isDropDownOpened = false;
                       });
@@ -111,37 +116,37 @@ class _CustomDropDownState extends State<CustomDropDown> {
           setState(() {
             isDropDownOpened = !isDropDownOpened;
             if (isDropDownOpened) {
+              widget.enableDisableScroll();
               this._overlayEntry = this._createOverlayEntry();
               Overlay.of(context).insert(this._overlayEntry);
             } else {
+              widget.enableDisableScroll();
               this._focusNode.unfocus();
               this._overlayEntry.remove();
             }
           });
         },
-        child: Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 4),
-                child: Text(
-                  'Sort By',
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 4),
+              child: Text(
+                'Sort By',
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
-              isDropDownOpened
-                  ? Icon(
-                      Icons.arrow_drop_up,
-                      color: Colors.white,
-                    )
-                  : Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.white,
-                    )
-            ],
-          ),
+            ),
+            isDropDownOpened
+                ? Icon(
+                    Icons.arrow_drop_up,
+                    color: Colors.white,
+                  )
+                : Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.white,
+                  )
+          ],
         ),
       ),
     );

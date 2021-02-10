@@ -6,6 +6,9 @@ import 'package:newborn_care/screens/list_of_babies/components/list_tiem.dart';
 
 class Body extends StatelessWidget {
   final color = const Color(0xff82A0C8);
+  final enableDisableScroll;
+
+  Body(this.enableDisableScroll);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class Body extends StatelessWidget {
           ListItem(
               "Oni", "Prenatal Ward", "Male", Colors.blue[100], Colors.white),
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 4, 8, 0),
+            padding: const EdgeInsets.fromLTRB(16, 8, 8, 0),
             child: Text(
               "Past Registered",
               style: TextStyle(
@@ -57,7 +60,7 @@ class Body extends StatelessWidget {
       child: Row(
         children: [
           Expanded(flex: 2, child: searchContainer()),
-          Expanded(child: CustomDropDown())
+          Expanded(child: CustomDropDown(this.enableDisableScroll))
         ],
       ),
     );

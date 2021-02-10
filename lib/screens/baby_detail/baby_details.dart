@@ -5,22 +5,32 @@ class BabyDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          ShortAppBar(
-            title: "Baby Details",
-            showDrawerID: true,
-          ),
-          Spacer(),
-          Expanded(
-              child: Text(
-            "This Screen is Pending",
-            style: TextStyle(
-              fontSize: 18,
-            ),
-          )),
-          Spacer(),
-        ],
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80.0),
+        child: MediaQuery.of(context).orientation == Orientation.portrait
+            ? ShortAppBar(
+                title: "ECEB",
+                showDrawerID: true,
+              )
+            : ShortAppBar(
+                title: "Essential Care For Every Baby",
+                showDrawerID: true,
+              ),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Spacer(),
+            Expanded(
+                child: Text(
+              "This Screen is Pending",
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            )),
+            Spacer(),
+          ],
+        ),
       ),
     );
   }

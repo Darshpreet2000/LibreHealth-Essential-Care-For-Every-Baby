@@ -5,49 +5,54 @@ Widget summary(BuildContext context, GlobalKey globalKey) {
   final BottomNavigationBar navigationBar = globalKey.currentWidget;
 
   return Container(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "Summary of 24 hours",
-            style: TextStyle(
-              color: Colors.grey,
-              fontWeight: FontWeight.bold,
-              fontSize: 22,
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Summary of 24 hours",
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+              textAlign: TextAlign.left,
             ),
-            textAlign: TextAlign.left,
           ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Material(
-              child: InkWell(
-                  onTap: () {
-                    navigationBar.onTap(1);
-                  },
-                  child: rowItem("Admitted", "14", "assets/blue.png", context)),
-            ),
-            Material(
-              child: InkWell(
-                  onTap: () {
-                    navigationBar.onTap(1);
-                  },
-                  child:
-                      rowItem("Discharged", "10", "assets/grey.png", context)),
-            ),
-            Material(
-              child: InkWell(
-                  onTap: () {
-                    navigationBar.onTap(1);
-                  },
-                  child: rowItem("High Risk", "8", "assets/red.png", context)),
-            ),
-          ],
-        ),
-      ],
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Material(
+                child: InkWell(
+                    onTap: () {
+                      navigationBar.onTap(1);
+                    },
+                    child:
+                        rowItem("Admitted", "14", "assets/blue.png", context)),
+              ),
+              Material(
+                child: InkWell(
+                    onTap: () {
+                      navigationBar.onTap(1);
+                    },
+                    child: rowItem(
+                        "Discharged", "10", "assets/grey.png", context)),
+              ),
+              Material(
+                child: InkWell(
+                    onTap: () {
+                      navigationBar.onTap(1);
+                    },
+                    child:
+                        rowItem("High Risk", "8", "assets/red.png", context)),
+              ),
+            ],
+          ),
+        ],
+      ),
     ),
   );
 }

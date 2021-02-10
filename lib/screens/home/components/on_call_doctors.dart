@@ -15,7 +15,7 @@ Widget onCallDoctors(BuildContext context) {
             style: TextStyle(
               color: Colors.grey,
               fontWeight: FontWeight.bold,
-              fontSize: 22,
+              fontSize: 18,
             ),
             textAlign: TextAlign.left,
           ),

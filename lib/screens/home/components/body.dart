@@ -18,7 +18,7 @@ class Body extends StatelessWidget {
       children: [
         summary(context, globalKey),
         registerBaby(context),
-        onCallDoctors(context)
+        onCallDoctors(context),
       ],
     );
   }

@@ -61,7 +61,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8),
                     child: Row(
                       children: [
                         Text(

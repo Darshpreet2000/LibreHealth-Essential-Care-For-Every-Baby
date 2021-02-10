@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     GlobalKey globalKey = new GlobalKey(debugLabel: 'btm_app_bar');
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Newborn Care',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
