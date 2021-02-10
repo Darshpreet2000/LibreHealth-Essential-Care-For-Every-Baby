@@ -85,80 +85,18 @@ class Body extends StatelessWidget {
 
 
 }
-class SortContainer extends StatefulWidget {
-  @override
-  _SortContainerState createState() => _SortContainerState();
-}
-
-class _SortContainerState extends State<SortContainer> {
-  String _dropDownValue;
+class SortContainer extends StatelessWidget {
   final color = const Color(0xff82A0C8);
 @override
   Widget build(BuildContext context) {
     return Container(
 
-      decoration: BoxDecoration(
-          color: color, borderRadius: BorderRadius.circular(30)),
-      margin: EdgeInsets.all(8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
+        margin: EdgeInsets.all(8),
+        padding: EdgeInsets.only(left: 8),
+        decoration: BoxDecoration(
 
-                color: color, borderRadius: BorderRadius.circular(30)),
-            child: CustomDropdownButton(
-              value: null,
-
-                hint:
-              Text("  Sort by",
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16)),
-
-              items: [
-                DropdownMenuItem(
-
-                  value: 1,
-                  child: Center(
-                    child: Text("Time",style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14)),
-                  )
-                ),
-                DropdownMenuItem(
-                  value: 2,
-                    child: Center(
-                      child: Text("Status",style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14)),
-                    )
-                ),
-                DropdownMenuItem(
-                    value: 3,
-                    child: Center(
-                      child: Text("Location",style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14)),
-                    )
-                ),
-              ],
-
-              onChanged: (item) {
-
-                 },
-
-            ),
-          ),
-
-
-        ],
-      ),
+            color: color, borderRadius: BorderRadius.circular(20)),
+        child:CustomDropDown()
     );
   }
 }
