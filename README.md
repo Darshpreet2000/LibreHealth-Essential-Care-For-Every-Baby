@@ -1,16 +1,31 @@
-# newborn_care
+<div align="center">
+<p align="center"><img src="assets/mhbs.png" width="150"></p> 
+<h2 align="center"><b>Essential Care For Every Baby</b></h2>
+</div>
 
-A new Flutter application.
+## Goal
 
-## Getting Started
+To provide clinical decision-support for nurses and doctors delivering essential newborn care interventions during the first day of life. 
 
-This project is a starting point for a Flutter application.
+This project is developed using Flutter, it supports Android, IOS, Web application with single codebase
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+|   |  | |
+| ------ | ------ | ------ | 
+|<img src="/screenshots/Initial.png"  align="top"> |  <img src="/screenshots/Home.png" align="top">| <img src="/screenshots/List_of_Babies.png" align="top"> |
+| Initial Screen  |Home Screen  |List of Babies Screen  
+ | <img src="/screenshots/Notification.png" align="top">| <img src="/screenshots/Profile.png" align="top">|<img src="/screenshots/Login.png" align="top">|
+||Notification Screen  | Profile Screen | Login Screen|
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### Landscape 
+
+|   |  | 
+| ------ | ------ |  
+| <img src="/screenshots/Home_Landscape.png" align="top"> | <img src="/screenshots/List_of_Babies_Landscape.png" align="top"> |
+| <img src="/screenshots/Notification_Landscape.png" align="top">| <img src="/screenshots/Profile_Landscape.png" align="top">  | 
+|<img src="/screenshots/Initial_Landscape.png" align="top">| <img src="/screenshots/Login_Landscape.png" align="top">||
+
+## License
+
+This project is licensed under the Mozilla Public License 2.0 with Healthcare Disclaimer. a copy of this license can be found in `LICENSE`.
