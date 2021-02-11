@@ -1,6 +1,9 @@
 <div align="center">
 <p align="center"><img src="assets/mhbs.png" width="150"></p> 
 <h2 align="center"><b>Essential Care For Every Baby</b></h2>
+<h4><a href="https://gitlab.com/Darshpreet2000/Essential_Care_For_Every_Baby/-/jobs/1021717267/artifacts/raw/build/app/outputs/flutter-apk/app-release.apk">Download Android Application (Link)</a></h4>
+<h4>Or 
+use as web app https://essential-care-for-every-baby.web.app/</h4>
 </div>
 
 ## Goal
