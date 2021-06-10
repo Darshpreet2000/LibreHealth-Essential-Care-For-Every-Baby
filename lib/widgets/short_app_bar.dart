@@ -1,90 +1,71 @@
 import 'package:flutter/material.dart';
+import '../main.dart';
 
 class ShortAppBar extends StatelessWidget {
   final color = const Color(0xff82A0C8);
   final title;
-  final bool? showDrawerID;
-  const ShortAppBar({Key? key, required this.title, this.showDrawerID})
+  final bool? showDrawer;
+  const ShortAppBar({Key? key, required this.title, this.showDrawer})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 120,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-              child: Row(
-                children: [
-                  showDrawerID == true
-                      ? Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Icon(
-                            Icons.menu,
-                            color: Colors.white,
-                            size: 28,
-                          ),
-                        )
-                      : Container(),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: RichText(
-                      text: new TextSpan(
-                        // Note: Styles for TextSpans must be explicitly defined.
-                        // Child text spans will inherit styles from parent
-                        style: new TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        children: <TextSpan>[
-                          new TextSpan(
-                              text: title, style: TextStyle(fontSize: 22)),
-                          showDrawerID == true
-                              ? new TextSpan(
-                                  text: "\n" + "ID: ****123",
-                                  style: new TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ))
-                              : new TextSpan(text: ""),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 8, 8, 0),
-              child: Container(
-                margin: const EdgeInsets.fromLTRB(0, 8, 16, 8),
-                child: Center(
-                  child: Image.asset(
-                    "assets/mhbs.png",
-                    width: 100,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+    return AppBar(
+      brightness: Brightness.dark,
+      iconTheme: IconThemeData(
+        color: Colors.white, //change your color here
       ),
-      decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.6),
-              spreadRadius: 2,
-              blurRadius: 4,
-              offset: Offset(0, 3), // changes position of shadow
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        bottom: Radius.circular(35),
+      )),
+      leading: showDrawer!
+          ? Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                icon: Icon(
+                  Icons.menu,
+                  size: 28,
+                ),
+                onPressed: () {
+                  drawerKey!.currentState!.openDrawer();
+                },
+              ),
+            )
+          : null,
+      title: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 16,
+          ),
+          Text(
+            title,
+            style: new TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
             ),
-          ],
-          color: color,
-          borderRadius: new BorderRadius.only(
-              bottomLeft: const Radius.circular(40.0),
-              bottomRight: const Radius.circular(40.0))),
+          ),
+          Text(
+            "ID: ****123",
+            style: new TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+          ),
+        ],
+      ),
+      flexibleSpace: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Spacer(),
+          SafeArea(
+            child: Image.asset(
+              "assets/mhbs.png",
+              width: 100,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

@@ -42,7 +42,7 @@ class LongAppBar extends StatelessWidget {
               offset: Offset(0, 3), // changes position of shadow
             ),
           ],
-          color: color,
+          color: Theme.of(context).primaryColor,
           borderRadius: new BorderRadius.only(
               bottomLeft: const Radius.circular(40.0),
               bottomRight: const Radius.circular(40.0))),

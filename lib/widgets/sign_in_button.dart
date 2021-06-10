@@ -28,7 +28,7 @@ class SignIn extends StatelessWidget {
         ),
         onPressed: calculateWhetherDisabledReturnsBool()
             ? null
-            : () => {Navigator.pushNamed(context, '/Base')},
+            : () => {Navigator.pushReplacementNamed(context, '/Base')},
         style: ElevatedButton.styleFrom(
             primary: Colors.white,
             shape: new RoundedRectangleBorder(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:newborn_care/screens/baby_detail/baby_details.dart';
 import 'package:newborn_care/screens/base/base_class.dart';
 import 'package:newborn_care/screens/facility_login/facility_login.dart';
 import 'package:newborn_care/screens/individual_login/individual_login.dart';
@@ -10,30 +9,36 @@ void main() {
   runApp(MyApp());
 }
 
+GlobalKey<ScaffoldState>? drawerKey;
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     String initialAppRoute = '/';
     GlobalKey globalKey = new GlobalKey(debugLabel: 'btm_app_bar');
+    drawerKey = new GlobalKey<ScaffoldState>();
 
-    return MaterialApp(
-      title: 'Newborn Care',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return Center(
+      child: MaterialApp(
+        theme: ThemeData(
+          primaryColor: Color(0xff82A0C8),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      routes: {
-        '/': (context) => InitialScreen(),
-        '/FacilityLoginScreen': (context) => FacilityLogin(),
-        '/IndividualLoginScreen': (context) => IndividualLogin(),
-        '/RegisterABaby': (context) => RegisterABaby(),
-        '/BabyDetails': (context) => BabyDetails(),
-        '/Base': (context) => BaseClass(
-              globalKey: globalKey,
-            ),
-      },
-      initialRoute: initialAppRoute,
+
+        title: 'Newborn Care',
+        routes: {
+          '/': (context) => InitialScreen(),
+          '/FacilityLoginScreen': (context) => FacilityLogin(),
+          '/IndividualLoginScreen': (context) => IndividualLogin(),
+          '/RegisterABaby': (context) => RegisterABaby(),
+          '/Base': (context) => BaseClass(
+                globalKey: globalKey,
+                drawerKey: drawerKey,
+              ),
+        },
+        initialRoute: initialAppRoute,
+      ),
     );
   }
 }
