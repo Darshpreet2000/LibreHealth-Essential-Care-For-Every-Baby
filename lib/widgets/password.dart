@@ -6,7 +6,7 @@ class Password extends StatelessWidget {
   final Function notifyParent;
 
   const Password(
-      {Key key, @required this.textController, @required this.notifyParent})
+      {Key? key, required this.textController, required this.notifyParent})
       : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class Password extends StatelessWidget {
         },
         decoration: new InputDecoration(
           border: new OutlineInputBorder(
-            borderSide: new BorderSide(color: Colors.grey[300]),
+            borderSide: new BorderSide(color: Colors.grey[300]!),
             borderRadius: const BorderRadius.all(
               const Radius.circular(305.0),
             ),

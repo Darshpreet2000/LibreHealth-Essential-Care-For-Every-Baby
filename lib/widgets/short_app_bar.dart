@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class ShortAppBar extends StatelessWidget {
   final color = const Color(0xff82A0C8);
   final title;
-  final bool showDrawerID;
-  const ShortAppBar({Key key, @required this.title, this.showDrawerID})
+  final bool? showDrawerID;
+  const ShortAppBar({Key? key, required this.title, this.showDrawerID})
       : super(key: key);
 
   @override

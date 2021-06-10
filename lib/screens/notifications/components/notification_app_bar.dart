@@ -9,7 +9,7 @@ class NotificationAppBar extends StatefulWidget {
 
 class _NotificationAppBarState extends State<NotificationAppBar>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -20,7 +20,7 @@ class _NotificationAppBarState extends State<NotificationAppBar>
   @override
   void dispose() {
     super.dispose();
-    _tabController.dispose();
+    _tabController!.dispose();
   }
 
   final color = const Color(0xff82A0C8);

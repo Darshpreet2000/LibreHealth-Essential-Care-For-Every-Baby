@@ -52,7 +52,7 @@ class InitialScreen extends StatelessWidget {
                       primary: Colors.white,
                       onPrimary: Colors.white, // foreground
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.grey[350]),
+                        side: BorderSide(color: Colors.grey[350]!),
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       ),
                     ),
@@ -92,7 +92,7 @@ class InitialScreen extends StatelessWidget {
                       primary: Colors.white,
                       onPrimary: Colors.white, // foreground
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.grey[350]),
+                        side: BorderSide(color: Colors.grey[350]!),
                         borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       ),
                     ),

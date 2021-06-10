@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget summary(BuildContext context, GlobalKey globalKey) {
-  final BottomNavigationBar navigationBar = globalKey.currentWidget;
+  final BottomNavigationBar? navigationBar = globalKey.currentWidget as BottomNavigationBar?;
 
   return Container(
     child: Padding(
@@ -28,7 +28,7 @@ Widget summary(BuildContext context, GlobalKey globalKey) {
               Material(
                 child: InkWell(
                     onTap: () {
-                      navigationBar.onTap(1);
+                      navigationBar!.onTap!(1);
                     },
                     child:
                         rowItem("Admitted", "14", "assets/blue.png", context)),
@@ -36,7 +36,7 @@ Widget summary(BuildContext context, GlobalKey globalKey) {
               Material(
                 child: InkWell(
                     onTap: () {
-                      navigationBar.onTap(1);
+                      navigationBar!.onTap!(1);
                     },
                     child: rowItem(
                         "Discharged", "10", "assets/grey.png", context)),
@@ -44,7 +44,7 @@ Widget summary(BuildContext context, GlobalKey globalKey) {
               Material(
                 child: InkWell(
                     onTap: () {
-                      navigationBar.onTap(1);
+                      navigationBar!.onTap!(1);
                     },
                     child:
                         rowItem("High Risk", "8", "assets/red.png", context)),

@@ -5,7 +5,7 @@ class SignIn extends StatelessWidget {
   final Function notifyParent;
 
   const SignIn(
-      {Key key, @required this.textController, @required this.notifyParent})
+      {Key? key, required this.textController, required this.notifyParent})
       : super(key: key);
 
   bool calculateWhetherDisabledReturnsBool() {

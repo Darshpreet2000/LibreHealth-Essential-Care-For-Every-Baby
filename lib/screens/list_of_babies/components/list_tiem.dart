@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ListItem extends StatelessWidget {
   final String parent, ward, gender;
-  final Color color, darkColor;
+  final Color? color, darkColor;
 
   ListItem(this.parent, this.ward, this.gender, this.color, this.darkColor);
 

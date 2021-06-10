@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ListItemRiskMonitoringAlert extends StatefulWidget {
-  final String parent, checkup;
-  final Color color;
-  final bool value;
-  final bool inDanger;
+  final String? parent, checkup;
+  final Color? color;
+  final bool? value;
+  final bool? inDanger;
 
   const ListItemRiskMonitoringAlert(
-      {Key key,
+      {Key? key,
       this.parent,
       this.checkup,
       this.color,
@@ -21,7 +21,7 @@ class ListItemRiskMonitoringAlert extends StatefulWidget {
 }
 
 class _ListItemMonitoringAlert extends State<ListItemRiskMonitoringAlert> {
-  bool checkedValue;
+  bool? checkedValue;
 
   _ListItemMonitoringAlert(this.checkedValue);
 
@@ -60,7 +60,7 @@ class _ListItemMonitoringAlert extends State<ListItemRiskMonitoringAlert> {
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
                       child: Text(
-                        "Baby of " + widget.parent,
+                        "Baby of " + widget.parent!,
                       ),
                     ),
                     Padding(
@@ -86,7 +86,7 @@ class _ListItemMonitoringAlert extends State<ListItemRiskMonitoringAlert> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      widget.checkup,
+                      widget.checkup!,
                       style: TextStyle(fontWeight: FontWeight.bold),
                     )
                   ],
@@ -101,7 +101,7 @@ class _ListItemMonitoringAlert extends State<ListItemRiskMonitoringAlert> {
                       value: checkedValue,
                       onChanged: (value) {
                         setState(() {
-                          checkedValue = !checkedValue;
+                          checkedValue = !checkedValue!;
                         });
                       })
                 ],

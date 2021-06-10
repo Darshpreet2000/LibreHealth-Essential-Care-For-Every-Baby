@@ -5,9 +5,9 @@ import 'package:newborn_care/screens/notifications/notification_screen.dart';
 import 'package:newborn_care/screens/profile/profile_screen.dart';
 
 class BaseClass extends StatefulWidget {
-  final GlobalKey globalKey;
+  final GlobalKey? globalKey;
 
-  const BaseClass({Key key, this.globalKey}) : super(key: key);
+  const BaseClass({Key? key, this.globalKey}) : super(key: key);
 
   @override
   _BaseClassState createState() => _BaseClassState();
