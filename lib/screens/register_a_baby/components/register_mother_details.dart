@@ -72,7 +72,7 @@ class _RegisterMotherDetailsState extends State<RegisterMotherDetails> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-        
+          
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -80,7 +80,6 @@ class _RegisterMotherDetailsState extends State<RegisterMotherDetails> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-        
         ],
       ),
     );

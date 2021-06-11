@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
-import 'package:newborn_care/screens/register_a_baby/components/toggle_buttons/gender_button.dart';
-import 'package:newborn_care/screens/register_a_baby/components/toggle_buttons/skin_color_changes_button.dart';
-import 'package:newborn_care/screens/register_a_baby/components/toggle_buttons/traumas_during_birth_button.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -35,6 +32,7 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
+      
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
@@ -147,6 +145,7 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
+       
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
