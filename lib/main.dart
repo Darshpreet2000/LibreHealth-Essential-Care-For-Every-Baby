@@ -23,9 +23,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
           primaryColor: Color(0xff82A0C8),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
         title: 'Newborn Care',
         routes: {
           '/': (context) => InitialScreen(),

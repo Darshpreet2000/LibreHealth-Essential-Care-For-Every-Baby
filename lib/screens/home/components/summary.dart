@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget summary(BuildContext context, GlobalKey globalKey) {
-  final BottomNavigationBar? navigationBar = globalKey.currentWidget as BottomNavigationBar?;
+  final BottomNavigationBar? navigationBar =
+      globalKey.currentWidget as BottomNavigationBar?;
 
   return Container(
     child: Padding(
