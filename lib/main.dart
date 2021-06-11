@@ -4,6 +4,7 @@ import 'package:newborn_care/screens/facility_login/facility_login.dart';
 import 'package:newborn_care/screens/individual_login/individual_login.dart';
 import 'package:newborn_care/screens/initial_screen/initial_screen.dart';
 import 'package:newborn_care/screens/register_a_baby/register_a_baby.dart';
+import 'package:newborn_care/theme/theme_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,10 +22,8 @@ class MyApp extends StatelessWidget {
 
     return Center(
       child: MaterialApp(
-        theme: ThemeData(
-          primaryColor: Color(0xff82A0C8),
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
+        theme: MyTheme.lightTheme,
+          darkTheme: MyTheme.darkTheme,
         title: 'Newborn Care',
         routes: {
           '/': (context) => InitialScreen(),

@@ -19,6 +19,7 @@ class _BaseClassState extends State<BaseClass> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.drawerKey);
     return Scaffold(
       key: widget.drawerKey,
       drawer: Drawer(
