@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
+import 'package:newborn_care/screens/register_a_baby/components/toggle_buttons/gender_button.dart';
+import 'package:newborn_care/screens/register_a_baby/components/toggle_buttons/skin_color_changes_button.dart';
+import 'package:newborn_care/screens/register_a_baby/components/toggle_buttons/traumas_during_birth_button.dart';
+import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class RegisterBabyDetails extends StatefulWidget {
   final BabyDetailsModel _babyDetails;
@@ -134,7 +139,7 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-   
+        Center(child: WeightSlider(widget._babyDetails)),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
@@ -151,6 +156,58 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
         ),
         
       ]),
+    );
+  }
+}
+
+class WeightSlider extends StatefulWidget {
+  final BabyDetailsModel _babyDetails;
+
+  WeightSlider(this._babyDetails);
+
+  @override
+  _WeightSliderState createState() => _WeightSliderState();
+}
+
+class _WeightSliderState extends State<WeightSlider> {
+  int calculateNumber(int number) {
+    int a = number % 100;
+
+    if (a > 0) {
+      return (number ~/ 100) * 100 + 100;
+    }
+
+    return number;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SfSliderTheme(
+      data: SfSliderThemeData(
+        activeMinorTickColor: Colors.red,
+        inactiveMinorTickColor: Colors.red[200],
+           
+      ),
+      child: SfSlider(
+       
+        min: 1000.0,
+        max: 4000.0,
+        interval: 1000,
+        showTicks: true,
+        showLabels: true,
+        enableTooltip: true,
+        minorTicksPerInterval: 5,
+        tooltipShape: SfPaddleTooltipShape(),
+        value: widget._babyDetails.weight,
+        onChanged: (dynamic newValue) {
+          setState(() {
+            double temp = newValue;
+            int pass = temp.toInt();
+            pass = calculateNumber(pass);
+            widget._babyDetails.weight = pass.toDouble();
+          });
+        },
+      ),
     );
   }
 }
