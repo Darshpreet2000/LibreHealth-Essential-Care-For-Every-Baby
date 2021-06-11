@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
+import 'package:newborn_care/screens/register_a_baby/components/toggle_buttons/babies_delivered_button.dart';
+import 'package:newborn_care/screens/register_a_baby/components/toggle_buttons/mode_of_delivery_button.dart';
 
 class RegisterMotherDetails extends StatefulWidget {
   final RegisterBabyModel _registerBabyModel;
@@ -72,7 +74,10 @@ class _RegisterMotherDetailsState extends State<RegisterMotherDetails> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-          
+          BabiesDeliveredButton(
+              "Single",
+              "Multiple",
+              widget._registerBabyModel),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -80,6 +85,10 @@ class _RegisterMotherDetailsState extends State<RegisterMotherDetails> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
+          ModeOfDeliveryButton(
+              "Normal",
+              "Others", 
+              widget._registerBabyModel),
         ],
       ),
     );
