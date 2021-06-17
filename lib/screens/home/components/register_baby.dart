@@ -13,13 +13,6 @@ Widget registerBaby(BuildContext context) {
         Container(
           height: 90,
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white, // background
-              onPrimary: Colors.white, // foreground
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
-              ),
-            ),
             onPressed: () {
               Navigator.pushNamed(context, '/RegisterABaby');
             },
@@ -37,9 +30,10 @@ Widget registerBaby(BuildContext context) {
                   child: Text(
                     "To Register a Baby",
                     style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                      fontSize: 18,
+                      color: Theme.of(context).textTheme.subtitle1!.color,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 )
               ],

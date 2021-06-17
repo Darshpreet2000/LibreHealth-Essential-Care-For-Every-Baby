@@ -70,7 +70,7 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget._babyDetails.birthDateTime!.day.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.day.toString()),
                           ),
                         ),
                       ),
@@ -83,7 +83,7 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget._babyDetails.birthDateTime!.month.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.month.toString()),
                           ),
                         ),
                       ),
@@ -96,7 +96,7 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             
-                            child: Text(widget._babyDetails.birthDateTime!.year.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.year.toString()),
                           ),
                         ),
                       )
@@ -112,7 +112,7 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget._babyDetails.birthDateTime!.hour.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.hour.toString()),
                           ),
                         ),
                       ),
@@ -124,7 +124,7 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget._babyDetails.birthDateTime!.minute.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.minute.toString()),
                           ),
                         ),
                       )

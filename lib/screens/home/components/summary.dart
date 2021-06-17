@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget summary(BuildContext context, GlobalKey globalKey) {
-  final BottomNavigationBar? navigationBar =
-      globalKey.currentWidget as BottomNavigationBar?;
+  final BottomNavigationBar? navigationBar = globalKey.currentWidget as BottomNavigationBar?;
 
   return Container(
     child: Padding(
@@ -61,38 +60,32 @@ Widget summary(BuildContext context, GlobalKey globalKey) {
 Widget rowItem(String title, String number, String path, BuildContext context) {
   return Container(
     width: MediaQuery.of(context).size.width / 4,
-    decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
+    decoration:
+        BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+    margin: EdgeInsets.all(8),
+    child: Material(
+      elevation: 35,
+      child: Column(
+        children: [
+          Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Image.asset(path, scale: 2)),
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text(
+              title + ": ",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text(
+              number,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
           ),
         ],
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(10))),
-    margin: EdgeInsets.all(12),
-    child: Column(
-      children: [
-        Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Image.asset(path, scale: 2)),
-        Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Text(
-            title + ": ",
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Text(
-            number,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-        ),
-      ],
+      ),
     ),
   );
 }

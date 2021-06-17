@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:newborn_care/widgets/long_app_bar.dart';
 import 'package:newborn_care/widgets/password.dart';
 import 'package:newborn_care/widgets/short_app_bar.dart';
@@ -11,18 +13,25 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  var textController = new TextEditingController();
-  refresh() {
-    setState(() {
-      textController.text = "fiona@diakfka.com";
-    });
-  }
+  var userNameTextController = new TextEditingController();
+  var passwordTextController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return OrientationBuilder(builder: (context, orientation) {
-      return SingleChildScrollView(
-        child: Container(
+      return BlocListener<AuthenticationBloc, AuthenticationState>(
+          listener: (context, state) {
+        if (state is AuthenticationLoaded) {
+          Navigator.pushReplacementNamed(context, '/Base');
+        }
+        if (state is AuthenticationError) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(state.message)));
+        }
+      }, child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+              builder: (context, state) {
+        return SingleChildScrollView(
+            child: Container(
           child: Column(
             children: [
               orientation == Orientation.portrait ||
@@ -37,17 +46,18 @@ class _BodyState extends State<Body> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      state is AuthenticationLoading
+                          ? CircularProgressIndicator()
+                          : Container(),
                       UserName(
-                        textController: textController,
-                        notifyParent: refresh,
+                        textController: userNameTextController,
                       ),
                       Password(
-                        textController: textController,
-                        notifyParent: refresh,
+                        textController: passwordTextController,
                       ),
                       SignIn(
-                        textController: textController,
-                        notifyParent: refresh,
+                        userNameTextController: userNameTextController,
+                        passwordTextController: passwordTextController,
                       )
                     ],
                   ),
@@ -55,8 +65,8 @@ class _BodyState extends State<Body> {
               )
             ],
           ),
-        ),
-      );
+        ));
+      }));
     });
   }
 }

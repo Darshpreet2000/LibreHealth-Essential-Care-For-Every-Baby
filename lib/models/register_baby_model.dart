@@ -20,7 +20,7 @@ class BabyDetailsModel {
   bool? gender, skinColorChanges, traumasDuringBirth;
   //to hold toggle buttons data
   double? weight;
-  DateTime? birthDateTime;
+  DateTime birthDateTime = DateTime.now();
   String? skinColorChangesNotes, traumasDuringBirthNotes;
   BabyDetailsModel() {
     //assigning them as null to initialize
@@ -32,6 +32,5 @@ class BabyDetailsModel {
     weight = 1000.0;
     traumasDuringBirthNotes = "";
     skinColorChangesNotes = "";
-    birthDateTime = DateTime.now();
   }
 }

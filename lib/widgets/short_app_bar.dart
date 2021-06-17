@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:newborn_care/repository/HiveStorageRepository.dart';
+
 import '../main.dart';
 
 class ShortAppBar extends StatelessWidget {
@@ -48,7 +50,7 @@ class ShortAppBar extends StatelessWidget {
             ),
           ),
           Text(
-            "ID: ****123",
+            "ID: ${HiveStorageRepository().getProfile().id}",
             style: new TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
           ),

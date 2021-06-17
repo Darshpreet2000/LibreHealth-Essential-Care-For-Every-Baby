@@ -92,7 +92,7 @@ class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
                           // Note: Styles for TextSpans must be explicitly defined.
                           // Child text spans will inherit styles from parent
                           style: new TextStyle(
-                            color: Colors.black,
+                            color: Theme.of(context).textTheme.bodyText1!.color,
                           ),
                           children: <TextSpan>[
                             new TextSpan(

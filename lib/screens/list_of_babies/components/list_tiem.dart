@@ -4,7 +4,7 @@ class ListItem extends StatelessWidget {
   final String parent, ward, gender;
   final Color? color, darkColor;
 
-  ListItem(this.parent, this.ward, this.gender, this.color, this.darkColor);
+  const ListItem(this.parent, this.ward, this.gender, this.color, this.darkColor);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class ListItem extends StatelessWidget {
                     offset: Offset(0, 3), // changes position of shadow
                   ),
                 ],
-                color: Colors.white,
+                color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,13 +67,19 @@ class ListItem extends StatelessWidget {
                                   // Child text spans will inherit styles from parent
                                   style: new TextStyle(
                                     fontSize: 14.0,
-                                    color: Colors.black,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .color,
                                   ),
                                   children: <TextSpan>[
                                     new TextSpan(
                                         text: "Baby ",
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .color,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20)),
                                     new TextSpan(
@@ -82,7 +88,10 @@ class ListItem extends StatelessWidget {
                                     new TextSpan(
                                         text: parent,
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .color,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20)),
                                   ],
@@ -97,7 +106,10 @@ class ListItem extends StatelessWidget {
                                   // Child text spans will inherit styles from parent
                                   style: new TextStyle(
                                     fontSize: 14.0,
-                                    color: Colors.black,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .color,
                                   ),
                                   children: <TextSpan>[
                                     new TextSpan(
@@ -106,7 +118,10 @@ class ListItem extends StatelessWidget {
                                     new TextSpan(
                                         text: ward,
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .color,
                                             fontWeight: FontWeight.bold)),
                                   ],
                                 ),
@@ -119,12 +134,15 @@ class ListItem extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.person,
-                                    color: Colors.black,
+                                    color: Theme.of(context).iconTheme.color,
                                     size: 24,
                                   ),
                                   Text(gender,
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .color,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16)),
                                 ],
@@ -134,7 +152,7 @@ class ListItem extends StatelessWidget {
                               ),
                               Icon(
                                 Icons.chevron_right_sharp,
-                                color: Colors.black,
+                                color: Theme.of(context).iconTheme.color,
                                 size: 30,
                               )
                             ],

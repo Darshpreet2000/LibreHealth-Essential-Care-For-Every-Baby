@@ -19,7 +19,6 @@ class _BaseClassState extends State<BaseClass> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.drawerKey);
     return Scaffold(
       key: widget.drawerKey,
       drawer: Drawer(
@@ -31,27 +30,21 @@ class _BaseClassState extends State<BaseClass> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             _createHeader(),
-            ListTile(
-              leading: Icon(Icons.schedule,
-                  color: Theme.of(context).iconTheme.color),
+            ListTile(leading: Icon(Icons.schedule,color:Theme.of(context).iconTheme.color),
               title: Text('Doctor\'s Schedule'),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
-            ListTile(
-              leading:
-                  Icon(Icons.message, color: Theme.of(context).iconTheme.color),
+            ListTile(leading: Icon(Icons.message,color:Theme.of(context).iconTheme.color),
               title: Text('Messages'),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
-            ListTile(
-              leading: Icon(Icons.info_rounded,
-                  color: Theme.of(context).iconTheme.color),
+            ListTile(leading: Icon(Icons.info_rounded,color:Theme.of(context).iconTheme.color),
               title: Text('About'),
               onTap: () {
                 // Update the state of the app.
@@ -59,8 +52,8 @@ class _BaseClassState extends State<BaseClass> {
               },
             ),
             ListTile(
-              leading:
-                  Icon(Icons.share, color: Theme.of(context).iconTheme.color),
+              
+              leading: Icon(Icons.share,color:Theme.of(context).iconTheme.color),
               title: Text('Share App'),
               onTap: () {
                 // Update the state of the app.
@@ -68,36 +61,34 @@ class _BaseClassState extends State<BaseClass> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.bug_report,
-                  color: Theme.of(context).iconTheme.color),
+              leading: Icon(Icons.bug_report,color:Theme.of(context).iconTheme.color),
               title: Text('Report a bug'),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
-            ListTile(
-              title: FutureBuilder(
-                future: getAppInfo(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                  if (snapshot.hasData) {
-                    return Text(
-                      "v " + snapshot.data,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    );
-                  }
+             ListTile(
+            title: FutureBuilder(
+              future: getAppInfo(),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.hasData) {
                   return Text(
-                    "v 1.0.0",
+                    "v " + snapshot.data,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   );
-                },
-              ),
-            )
+                }
+                return Text(
+                  "v 1.0.0",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                );
+              },
+            ),
+             )
           ],
         ),
       ),
@@ -141,6 +132,7 @@ class _BaseClassState extends State<BaseClass> {
     });
   }
 
+
   Future getAppInfo() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
@@ -148,11 +140,13 @@ class _BaseClassState extends State<BaseClass> {
     return version;
   }
 
+
   Widget _createHeader() {
     return DrawerHeader(
-      decoration: BoxDecoration(color: Color(0xff82A0C8)),
-      child: Column(
+              decoration: BoxDecoration(color: Color(0xff82A0C8)),
+              child: Column(
         children: <Widget>[
+         
           Expanded(
             child: Align(
               alignment: Alignment.center,
@@ -182,8 +176,10 @@ class _BaseClassState extends State<BaseClass> {
               ),
             ),
           ),
+         
         ],
       ),
-    );
+            );
   }
 }
+

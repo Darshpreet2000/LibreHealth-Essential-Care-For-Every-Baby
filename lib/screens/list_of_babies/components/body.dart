@@ -21,10 +21,7 @@ class Body extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 4, 8, 0),
             child: Text(
               "Recently Added",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               textAlign: TextAlign.start,
             ),
           ),
@@ -34,10 +31,7 @@ class Body extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 8, 8, 0),
             child: Text(
               "Past Registered",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               textAlign: TextAlign.start,
             ),
           ),

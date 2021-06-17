@@ -41,7 +41,6 @@ Widget onCallDoctors(BuildContext context) {
                   Text(
                     "Andrea",
                     style: TextStyle(
-                      color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
@@ -76,7 +75,6 @@ Widget onCallDoctors(BuildContext context) {
                   Text(
                     "Kim",
                     style: TextStyle(
-                      color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
@@ -111,7 +109,6 @@ Widget onCallDoctors(BuildContext context) {
                   Text(
                     "Jane",
                     style: TextStyle(
-                      color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),

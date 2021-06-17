@@ -19,25 +19,31 @@ class _ListOfBabiesState extends State<ListOfBabies> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
-          child: MediaQuery.of(context).orientation == Orientation.portrait
-              ? ShortAppBar(
-                  title: "List of Babies",
-                  showDrawer: true,
-                )
-              : ShortAppBar(
-                  title: "List of Babies",
-                  showDrawer: true,
-                ),
+        body: CustomScrollView(
+      physics: scrollEnabled
+          ? AlwaysScrollableScrollPhysics()
+          : NeverScrollableScrollPhysics(),
+      slivers: [
+        SliverAppBar(
+          floating: true,
+          automaticallyImplyLeading: false,
+          elevation: 20,
+          forceElevated: true,
+          pinned: true,
+          toolbarHeight: 80,
+          backgroundColor: Colors.transparent,
+          flexibleSpace: PreferredSize(
+              preferredSize: Size.fromHeight(80.0),
+              child: ShortAppBar(
+                title: "List of Babies",
+                showDrawer: true,
+              )),
         ),
-        body: SingleChildScrollView(
-          physics: scrollEnabled
-              ? AlwaysScrollableScrollPhysics()
-              : NeverScrollableScrollPhysics(),
-          child: Container(
-            child: Body(enableDisableScroll),
-          ),
-        ));
+        SliverList(
+            delegate: SliverChildListDelegate([
+          Body(enableDisableScroll),
+        ]))
+      ],
+    ));
   }
 }

@@ -19,17 +19,23 @@ class ProfileAdapter extends TypeAdapter<Profile> {
     return Profile(
       fields[0] as String,
       fields[1] as String,
+      fields[2] as String,
+      fields[3] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, Profile obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
-      ..write(obj.id);
+      ..write(obj.id)
+      ..writeByte(2)
+      ..write(obj.username)
+      ..writeByte(3)
+      ..write(obj.password);
   }
 
   @override

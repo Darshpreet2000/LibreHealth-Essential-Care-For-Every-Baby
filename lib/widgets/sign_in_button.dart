@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
 
 class SignIn extends StatelessWidget {
-  final textController;
-  final Function notifyParent;
+  final userNameTextController;
+  final passwordTextController;
 
   const SignIn(
-      {Key? key, required this.textController, required this.notifyParent})
+      {Key? key,
+      required this.userNameTextController,
+      required this.passwordTextController})
       : super(key: key);
 
   bool calculateWhetherDisabledReturnsBool() {
-    if (textController.text.toString().length > 0) return false;
-    return true;
+    if (userNameTextController.text.toString().isEmpty ||
+        passwordTextController.text.toString().isEmpty) return true;
+    return false;
   }
 
   @override
@@ -28,7 +33,12 @@ class SignIn extends StatelessWidget {
         ),
         onPressed: calculateWhetherDisabledReturnsBool()
             ? null
-            : () => {Navigator.pushReplacementNamed(context, '/Base')},
+            : () {
+                BlocProvider.of<AuthenticationBloc>(context).add(
+                    AuthenticationLoginEvent(userNameTextController.text,
+                        passwordTextController.text));
+             
+              },
         style: ElevatedButton.styleFrom(
             primary: Colors.white,
             shape: new RoundedRectangleBorder(
