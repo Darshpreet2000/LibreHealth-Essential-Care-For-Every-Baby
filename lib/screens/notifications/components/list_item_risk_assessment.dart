@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ListItemRiskAssessment extends StatefulWidget {
-  final String parent;
-  final Color color;
-  final bool value;
-  final bool inDanger;
+  final String? parent;
+  final Color? color;
+  final bool? value;
+  final bool? inDanger;
 
   const ListItemRiskAssessment(
-      {Key key, this.parent, this.color, this.value, this.inDanger})
+      {Key? key, this.parent, this.color, this.value, this.inDanger})
       : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class ListItemRiskAssessment extends StatefulWidget {
 }
 
 class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
-  bool checkedValue;
+  bool? checkedValue;
 
   _ListItemRiskAssessmentState(this.checkedValue);
 
@@ -55,7 +55,7 @@ class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
                       child: Text(
-                        "Baby of " + widget.parent,
+                        "Baby of " + widget.parent!,
                       ),
                     ),
                     Padding(
@@ -100,7 +100,7 @@ class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
                                 style: new TextStyle(
                                   fontWeight: FontWeight.bold,
                                 )),
-                            widget.inDanger
+                            widget.inDanger!
                                 ? new TextSpan(
                                     text: 'Danger',
                                     style: new TextStyle(

@@ -10,11 +10,11 @@ class BabyDetails extends StatelessWidget {
         child: MediaQuery.of(context).orientation == Orientation.portrait
             ? ShortAppBar(
                 title: "ECEB",
-                showDrawerID: true,
+                showDrawer: true,
               )
             : ShortAppBar(
                 title: "Essential Care For Every Baby",
-                showDrawerID: true,
+                showDrawer: true,
               ),
       ),
       body: Center(

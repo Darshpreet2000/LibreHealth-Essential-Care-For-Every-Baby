@@ -13,13 +13,13 @@ class _CustomDropDownState extends State<CustomDropDown> {
   final color = const Color(0xff82A0C8);
   final FocusNode _focusNode = FocusNode();
 
-  OverlayEntry _overlayEntry;
+  late OverlayEntry _overlayEntry;
 
   final LayerLink _layerLink = LayerLink();
   bool isDropDownOpened = false;
 
   OverlayEntry _createOverlayEntry() {
-    RenderBox renderBox = context.findRenderObject();
+    RenderBox renderBox = context.findRenderObject() as RenderBox;
     var size = renderBox.size;
 
     return OverlayEntry(
@@ -118,7 +118,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
             if (isDropDownOpened) {
               widget.enableDisableScroll();
               this._overlayEntry = this._createOverlayEntry();
-              Overlay.of(context).insert(this._overlayEntry);
+              Overlay.of(context)!.insert(this._overlayEntry);
             } else {
               widget.enableDisableScroll();
               this._focusNode.unfocus();

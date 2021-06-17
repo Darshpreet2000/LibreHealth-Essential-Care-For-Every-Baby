@@ -4,9 +4,9 @@ import 'package:newborn_care/widgets/short_app_bar.dart';
 import 'components/body.dart';
 
 class Home extends StatelessWidget {
-  final GlobalKey globalKey;
+  final GlobalKey? globalKey;
 
-  const Home({Key key, this.globalKey}) : super(key: key);
+  const Home({Key? key, this.globalKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,11 @@ class Home extends StatelessWidget {
           child: MediaQuery.of(context).orientation == Orientation.portrait
               ? ShortAppBar(
                   title: "ECEB",
-                  showDrawerID: true,
+                  showDrawer: true,
                 )
               : ShortAppBar(
                   title: "Essential Care For Every Baby",
-                  showDrawerID: true,
+                  showDrawer: true,
                 ),
         ),
         body: OrientationBuilder(builder: (context, orientation) {
