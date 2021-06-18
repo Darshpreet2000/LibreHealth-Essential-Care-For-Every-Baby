@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class Password extends StatefulWidget {
   final textController;
- 
-   const Password({Key? key, required this.textController}) : super(key: key);
+
+  const Password({Key? key, required this.textController}) : super(key: key);
 
   @override
   _PasswordState createState() => _PasswordState();
 }
 
 class _PasswordState extends State<Password> {
-   bool _showPassword = false;
-   
+  bool _showPassword = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,15 +21,15 @@ class _PasswordState extends State<Password> {
         obscureText: !this._showPassword,
         decoration: new InputDecoration(
           prefixIcon: Icon(Icons.security),
-        suffixIcon: IconButton(
-          icon: Icon(
-            Icons.remove_red_eye,
-            color: this._showPassword ? Colors.blue : Colors.grey,
+          suffixIcon: IconButton(
+            icon: Icon(
+              Icons.remove_red_eye,
+              color: this._showPassword ? Colors.blue : Colors.grey,
+            ),
+            onPressed: () {
+              setState(() => this._showPassword = !this._showPassword);
+            },
           ),
-          onPressed: () {
-            setState(() => this._showPassword = !this._showPassword);
-          },
-        ),
           border: new OutlineInputBorder(
             borderSide: new BorderSide(color: Colors.grey[300]!),
             borderRadius: const BorderRadius.all(
@@ -40,7 +40,6 @@ class _PasswordState extends State<Password> {
           labelText: 'Password',
         ),
       ),
-      
     );
   }
 }

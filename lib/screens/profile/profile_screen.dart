@@ -16,7 +16,7 @@ class _ProfileState extends State<Profile> {
       scrollEnabled = !scrollEnabled;
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

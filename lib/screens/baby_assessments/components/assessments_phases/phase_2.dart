@@ -20,11 +20,11 @@ class _Phase2State extends State<Phase2> {
   @override
   void initState() {
     for (int i = 0; i < 2; i++) {
-      fastBreathing.addAll([false,false]);
-      chestIndrawing.addAll([false,false]);
-      isFeeding.addAll([false,false]);
-      convulsions.addAll([false,false]);
-      jaundice.addAll([false,false]);
+      fastBreathing.addAll([false, false]);
+      chestIndrawing.addAll([false, false]);
+      isFeeding.addAll([false, false]);
+      convulsions.addAll([false, false]);
+      jaundice.addAll([false, false]);
     }
     super.initState();
   }
@@ -193,27 +193,42 @@ class _Phase2State extends State<Phase2> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Fast Breathing",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  child: Text(
+                    "Fast Breathing",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SwtichYesNo("Yes", "No", fastBreathing),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Chest Indrawing",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  child: Text(
+                    "Chest Indrawing",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SwtichYesNo("Yes", "No", chestIndrawing),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Is Baby Feeding Properly?",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  child: Text(
+                    "Is Baby Feeding Properly?",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SwtichYesNo("Yes", "No", isFeeding),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Convulsions Signs",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  child: Text(
+                    "Convulsions Signs",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SwtichYesNo("Yes", "No", convulsions),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Jaundice Signs",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  child: Text(
+                    "Jaundice Signs",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SwtichYesNo("Yes", "No", convulsions),
               ],

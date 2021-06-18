@@ -14,7 +14,6 @@ class _Phase1State extends State<Phase1> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(8),
-      
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -81,7 +80,6 @@ class _Phase1State extends State<Phase1> {
             decoration: BoxDecoration(
                 color: Colors.blue[50],
                 borderRadius: BorderRadius.all(Radius.circular(20))),
-           
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -104,8 +102,8 @@ class _Phase1State extends State<Phase1> {
                       checkedValue = newValue;
                     });
                   },
-                  controlAffinity: ListTileControlAffinity
-                      .leading, //  <-- leading Checkbox
+                  controlAffinity:
+                      ListTileControlAffinity.leading, //  <-- leading Checkbox
                 ),
                 CheckboxListTile(
                   title: Text(
@@ -119,8 +117,8 @@ class _Phase1State extends State<Phase1> {
                       checkedValue = newValue;
                     });
                   },
-                  controlAffinity: ListTileControlAffinity
-                      .leading, //  <-- leading Checkbox
+                  controlAffinity:
+                      ListTileControlAffinity.leading, //  <-- leading Checkbox
                 ),
                 CheckboxListTile(
                   title: Text(
@@ -134,10 +132,9 @@ class _Phase1State extends State<Phase1> {
                       checkedValue = newValue;
                     });
                   },
-                  controlAffinity: ListTileControlAffinity
-                      .leading, //  <-- leading Checkbox
+                  controlAffinity:
+                      ListTileControlAffinity.leading, //  <-- leading Checkbox
                 ),
-            
               ],
             ),
           ),

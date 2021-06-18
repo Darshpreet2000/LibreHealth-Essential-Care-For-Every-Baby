@@ -54,7 +54,6 @@ class _MyAppState extends State<MyApp> {
 
     return MultiBlocProvider(
       providers: [
-      
         BlocProvider<RegisterBabyBloc>(
           create: (BuildContext context) => RegisterBabyBloc(
               RegisterBabyModel(), RegisterBabyRepositoryImpl()),

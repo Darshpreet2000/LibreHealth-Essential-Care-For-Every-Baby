@@ -6,8 +6,7 @@ class TraumasDuringBirthButton extends StatefulWidget {
   final BabyDetailsModel _babyDetailsModel;
   final TextEditingController traumasTextController =
       new TextEditingController();
-  TraumasDuringBirthButton(
-      this.first, this.second, this._babyDetailsModel);
+  TraumasDuringBirthButton(this.first, this.second, this._babyDetailsModel);
 
   @override
   _TraumasDuringBirthButtonState createState() =>
@@ -29,9 +28,12 @@ class _TraumasDuringBirthButtonState extends State<TraumasDuringBirthButton> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       side: BorderSide(color: Colors.blue, width: 2.5),
-                      primary: widget._babyDetailsModel.traumasDuringBirth!=null&&widget._babyDetailsModel.traumasDuringBirth==true
-                          ? Colors.blue
-                          : null,
+                      primary:
+                          widget._babyDetailsModel.traumasDuringBirth != null &&
+                                  widget._babyDetailsModel.traumasDuringBirth ==
+                                      true
+                              ? Colors.blue
+                              : null,
                       shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0))),
                   onPressed: () {
@@ -42,9 +44,12 @@ class _TraumasDuringBirthButtonState extends State<TraumasDuringBirthButton> {
                   child: Text(
                     widget.first,
                     style: TextStyle(
-                      color:  widget._babyDetailsModel.traumasDuringBirth!=null&&widget._babyDetailsModel.traumasDuringBirth==true
-                          ? Colors.white
-                          : Theme.of(context).textTheme.subtitle1!.color,
+                      color:
+                          widget._babyDetailsModel.traumasDuringBirth != null &&
+                                  widget._babyDetailsModel.traumasDuringBirth ==
+                                      true
+                              ? Colors.white
+                              : Theme.of(context).textTheme.subtitle1!.color,
                     ),
                   ),
                 ),
@@ -57,19 +62,28 @@ class _TraumasDuringBirthButtonState extends State<TraumasDuringBirthButton> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       side: BorderSide(color: Colors.blue, width: 2.5),
-                      primary:  widget._babyDetailsModel.traumasDuringBirth!=null&&widget._babyDetailsModel.traumasDuringBirth==false ? Colors.blue : null,
+                      primary:
+                          widget._babyDetailsModel.traumasDuringBirth != null &&
+                                  widget._babyDetailsModel.traumasDuringBirth ==
+                                      false
+                              ? Colors.blue
+                              : null,
                       shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0))),
                   onPressed: () {
-                    setState(() {widget._babyDetailsModel.traumasDuringBirth = false;
+                    setState(() {
+                      widget._babyDetailsModel.traumasDuringBirth = false;
                     });
                   },
                   child: Text(
                     widget.second,
                     style: TextStyle(
-                      color:  widget._babyDetailsModel.traumasDuringBirth!=null&&widget._babyDetailsModel.traumasDuringBirth==false
-                          ? Colors.white
-                          : Theme.of(context).textTheme.subtitle1!.color,
+                      color:
+                          widget._babyDetailsModel.traumasDuringBirth != null &&
+                                  widget._babyDetailsModel.traumasDuringBirth ==
+                                      false
+                              ? Colors.white
+                              : Theme.of(context).textTheme.subtitle1!.color,
                     ),
                   ),
                 ),
@@ -77,9 +91,9 @@ class _TraumasDuringBirthButtonState extends State<TraumasDuringBirthButton> {
             ),
           ],
         ),
-        
-         widget._babyDetailsModel.traumasDuringBirth!=null&&widget._babyDetailsModel.traumasDuringBirth==true    
-         ? Container(
+        widget._babyDetailsModel.traumasDuringBirth != null &&
+                widget._babyDetailsModel.traumasDuringBirth == true
+            ? Container(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextField(

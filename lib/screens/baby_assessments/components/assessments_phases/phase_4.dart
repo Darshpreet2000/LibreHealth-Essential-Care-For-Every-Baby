@@ -4,14 +4,13 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class Phase4 extends StatefulWidget {
-  const Phase4({ Key? key }) : super(key: key);
+  const Phase4({Key? key}) : super(key: key);
 
   @override
   _Phase4State createState() => _Phase4State();
 }
 
 class _Phase4State extends State<Phase4> {
-
   bool checkedValue = false;
   List<bool> fastBreathing = [];
   List<bool> chestIndrawing = [];
@@ -21,11 +20,11 @@ class _Phase4State extends State<Phase4> {
   @override
   void initState() {
     for (int i = 0; i < 2; i++) {
-      fastBreathing.addAll([false,false]);
-      chestIndrawing.addAll([false,false]);
-      isFeeding.addAll([false,false]);
-      convulsions.addAll([false,false]);
-      jaundice.addAll([false,false]);
+      fastBreathing.addAll([false, false]);
+      chestIndrawing.addAll([false, false]);
+      isFeeding.addAll([false, false]);
+      convulsions.addAll([false, false]);
+      jaundice.addAll([false, false]);
     }
     super.initState();
   }
@@ -104,7 +103,6 @@ class _Phase4State extends State<Phase4> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -127,30 +125,44 @@ class _Phase4State extends State<Phase4> {
                   padding: const EdgeInsets.all(8.0),
                   child: Center(child: TemperatureSlider()),
                 ),
-                
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Fast Breathing",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  child: Text(
+                    "Fast Breathing",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SwtichYesNo("Yes", "No", fastBreathing),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Chest Indrawing",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  child: Text(
+                    "Chest Indrawing",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SwtichYesNo("Yes", "No", chestIndrawing),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Is Baby Feeding Properly?",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  child: Text(
+                    "Is Baby Feeding Properly?",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SwtichYesNo("Yes", "No", isFeeding),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Convulsions Signs",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  child: Text(
+                    "Convulsions Signs",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SwtichYesNo("Yes", "No", convulsions),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Jaundice Signs",style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  child: Text(
+                    "Jaundice Signs",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SwtichYesNo("Yes", "No", convulsions),
               ],

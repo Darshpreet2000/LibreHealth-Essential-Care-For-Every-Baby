@@ -68,7 +68,8 @@ class _GenderButtonState extends State<GenderButton> {
               child: Text(
                 widget.second,
                 style: TextStyle(
-                  color: widget._babyDetailsModel.gender!=null&&widget._babyDetailsModel.gender==false
+                  color: widget._babyDetailsModel.gender != null &&
+                          widget._babyDetailsModel.gender == false
                       ? Colors.white
                       : Theme.of(context).textTheme.subtitle1!.color,
                 ),

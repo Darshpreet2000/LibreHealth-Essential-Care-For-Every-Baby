@@ -37,7 +37,6 @@ class SignIn extends StatelessWidget {
                 BlocProvider.of<AuthenticationBloc>(context).add(
                     AuthenticationLoginEvent(userNameTextController.text,
                         passwordTextController.text));
-             
               },
         style: ElevatedButton.styleFrom(
             primary: Colors.white,

@@ -14,7 +14,8 @@ class HiveStorageRepository {
 
   Profile getProfile() {
     var box = Hive.box('eceb');
-    return Profile(box.get("name"), box.get("id"),box.get("username"), box.get("password"));
+    return Profile(box.get("name"), box.get("id"), box.get("username"),
+        box.get("password"));
   }
 
   void markUserAsLoggedIn() {
@@ -26,9 +27,10 @@ class HiveStorageRepository {
     var box = Hive.box('eceb');
     box.put('userLoggedIn', false);
   }
+
   //Check User Logged In
-  bool checkUserLoggedIn(){
-     var box = Hive.box('eceb');
+  bool checkUserLoggedIn() {
+    var box = Hive.box('eceb');
     if (box.containsKey('userLoggedIn') && box.get('userLoggedIn') == true)
       return true;
 

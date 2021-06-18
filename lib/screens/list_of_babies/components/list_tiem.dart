@@ -4,7 +4,8 @@ class ListItem extends StatelessWidget {
   final String parent, ward, gender;
   final Color? color, darkColor;
 
-  const ListItem(this.parent, this.ward, this.gender, this.color, this.darkColor);
+  const ListItem(
+      this.parent, this.ward, this.gender, this.color, this.darkColor);
 
   @override
   Widget build(BuildContext context) {

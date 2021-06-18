@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 class SwtichYesNo extends StatefulWidget {
   final String first, second;
   final List<bool> isSelected;
-  
-  SwtichYesNo(
-      this.first, this.second, this.isSelected);
+
+  SwtichYesNo(this.first, this.second, this.isSelected);
 
   @override
   _SwtichYesNoState createState() => _SwtichYesNoState();
@@ -79,6 +78,4 @@ class _SwtichYesNoState extends State<SwtichYesNo> {
       ],
     );
   }
-
-  
 }

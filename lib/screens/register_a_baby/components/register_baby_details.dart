@@ -35,7 +35,7 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-         GenderButton("Male", "Female", widget._babyDetails),
+        GenderButton("Male", "Female", widget._babyDetails),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
@@ -51,9 +51,9 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                       DateTime(DateTime.now().year, DateTime.now().month, 1),
                   maxTime: DateTime.now(),
                   onChanged: (date) {}, onConfirm: (date) {
-                  setState(() {
-                     widget._babyDetails.birthDateTime = date;
-                  });
+                setState(() {
+                  widget._babyDetails.birthDateTime = date;
+                });
               }, locale: LocaleType.en);
             },
             child: Container(
@@ -66,11 +66,13 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                         padding: const EdgeInsets.all(2.0),
                         child: Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget._babyDetails.birthDateTime.day.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.day
+                                .toString()),
                           ),
                         ),
                       ),
@@ -78,12 +80,13 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                         padding: const EdgeInsets.all(2.0),
                         child: Container(
                           decoration: BoxDecoration(
-                           borderRadius: BorderRadius.all(Radius.circular(8)),
-                          
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget._babyDetails.birthDateTime.month.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.month
+                                .toString()),
                           ),
                         ),
                       ),
@@ -91,12 +94,13 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                         padding: const EdgeInsets.all(2.0),
                         child: Container(
                           decoration: BoxDecoration(
-                           borderRadius: BorderRadius.all(Radius.circular(8)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            
-                            child: Text(widget._babyDetails.birthDateTime.year.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.year
+                                .toString()),
                           ),
                         ),
                       )
@@ -108,11 +112,13 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                         padding: const EdgeInsets.all(2.0),
                         child: Container(
                           decoration: BoxDecoration(
-                           borderRadius: BorderRadius.all(Radius.circular(8)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget._babyDetails.birthDateTime.hour.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.hour
+                                .toString()),
                           ),
                         ),
                       ),
@@ -120,11 +126,13 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                         padding: const EdgeInsets.all(2.0),
                         child: Container(
                           decoration: BoxDecoration(
-                           borderRadius: BorderRadius.all(Radius.circular(8)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget._babyDetails.birthDateTime.minute.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.minute
+                                .toString()),
                           ),
                         ),
                       )
@@ -156,8 +164,7 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-        TraumasDuringBirthButton("Yes", "No",
-            widget._babyDetails),
+        TraumasDuringBirthButton("Yes", "No", widget._babyDetails),
       ]),
     );
   }
@@ -189,10 +196,8 @@ class _WeightSliderState extends State<WeightSlider> {
       data: SfSliderThemeData(
         activeMinorTickColor: Colors.red,
         inactiveMinorTickColor: Colors.red[200],
-           
       ),
       child: SfSlider(
-       
         min: 1000.0,
         max: 4000.0,
         interval: 1000,

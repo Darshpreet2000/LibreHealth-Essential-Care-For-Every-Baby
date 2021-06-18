@@ -75,9 +75,7 @@ class _RegisterMotherDetailsState extends State<RegisterMotherDetails> {
             ),
           ),
           BabiesDeliveredButton(
-              "Single",
-              "Multiple",
-              widget._registerBabyModel),
+              "Single", "Multiple", widget._registerBabyModel),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -85,10 +83,7 @@ class _RegisterMotherDetailsState extends State<RegisterMotherDetails> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-          ModeOfDeliveryButton(
-              "Normal",
-              "Others", 
-              widget._registerBabyModel),
+          ModeOfDeliveryButton("Normal", "Others", widget._registerBabyModel),
         ],
       ),
     );

@@ -12,5 +12,4 @@ class AuthenticationLoginEvent extends AuthenticationEvent {
   final String password;
 
   AuthenticationLoginEvent(this.username, this.password);
-  
 }

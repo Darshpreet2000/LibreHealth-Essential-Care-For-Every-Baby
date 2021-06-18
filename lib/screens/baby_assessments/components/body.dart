@@ -9,7 +9,6 @@ import 'assessments_phases/phase_3_danger.dart';
 import 'assessments_phases/phase_3_normal.dart';
 import 'assessments_phases/phase_3_problem.dart';
 
-
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
 
@@ -18,9 +17,6 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
- 
-
-
   @override
   Widget build(BuildContext context) {
     return Container(

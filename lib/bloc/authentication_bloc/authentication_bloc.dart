@@ -20,11 +20,11 @@ class AuthenticationBloc
     if (event is AuthenticationLoginEvent) {
       yield AuthenticationLoading();
       try {
-        if(!authenticationRepository.checkUserLoggedIn()) {
-           Profile profile = await authenticationRepository.loginUser(
-            event.username, event.password);
-           HiveStorageRepository().storeProfile(profile);
-        }    
+        if (!authenticationRepository.checkUserLoggedIn()) {
+          Profile profile = await authenticationRepository.loginUser(
+              event.username, event.password);
+          HiveStorageRepository().storeProfile(profile);
+        }
         yield AuthenticationLoaded();
       } catch (e) {
         yield AuthenticationError(e.toString());

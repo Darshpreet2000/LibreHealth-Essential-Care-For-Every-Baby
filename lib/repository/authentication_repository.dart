@@ -15,6 +15,6 @@ class AuthenticationRepository {
   }
 
   bool checkUserLoggedIn() {
-   return HiveStorageRepository().checkUserLoggedIn();
+    return HiveStorageRepository().checkUserLoggedIn();
   }
 }

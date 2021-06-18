@@ -12,36 +12,37 @@ class ProfileList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
-          return Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
-              margin: EdgeInsets.all(16),
-              child: Material(
-                elevation: 35,
-                child: Column(
-                  children: [
-                    listHeading(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        rowItem("Registered \nBabies", "14", context),
-                        rowItem("Diagnosed/ \nChangelist", "10", context),
-                        rowItem("Discharged \nBabies", "8", context),
-                      ],
-                    ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 4,
-                      itemBuilder: (context, index) {
-                        return ListItem(listHeading:"Baby of Oni has been registered at prenatal ward",);
-                      },
-                    )
-                  ],
-                ),
-              ));
-        
+    return Container(
+        decoration:
+            BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
+        margin: EdgeInsets.all(16),
+        child: Material(
+          elevation: 35,
+          child: Column(
+            children: [
+              listHeading(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  rowItem("Registered \nBabies", "14", context),
+                  rowItem("Diagnosed/ \nChangelist", "10", context),
+                  rowItem("Discharged \nBabies", "8", context),
+                ],
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return ListItem(
+                    listHeading:
+                        "Baby of Oni has been registered at prenatal ward",
+                  );
+                },
+              )
+            ],
+          ),
+        ));
   }
 
   Widget rowItem(String title, String number, BuildContext context) {

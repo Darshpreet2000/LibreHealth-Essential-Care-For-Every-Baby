@@ -73,7 +73,8 @@ class _ModeOfDeliveryButtonState extends State<ModeOfDeliveryButton> {
                   child: Text(
                     widget.second,
                     style: TextStyle(
-                      color:widget._registerBabyModel.modeOfDelivery!=null&&widget._registerBabyModel.modeOfDelivery==false
+                      color: widget._registerBabyModel.modeOfDelivery != null &&
+                              widget._registerBabyModel.modeOfDelivery == false
                           ? Colors.white
                           : Theme.of(context).textTheme.subtitle1!.color,
                     ),
@@ -83,7 +84,8 @@ class _ModeOfDeliveryButtonState extends State<ModeOfDeliveryButton> {
             ),
           ],
         ),
-        widget._registerBabyModel.modeOfDelivery!=null&&widget._registerBabyModel.modeOfDelivery==false
+        widget._registerBabyModel.modeOfDelivery != null &&
+                widget._registerBabyModel.modeOfDelivery == false
             ? ModeOfDeliverySlider(widget._registerBabyModel)
             : Container()
       ],

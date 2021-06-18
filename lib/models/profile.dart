@@ -4,7 +4,7 @@ part 'profile.g.dart';
 //flutter packages pub run build_runner build
 
 @HiveType(typeId: 0)
-class Profile { 
+class Profile {
   @HiveField(0)
   final String name;
   @HiveField(1)
@@ -14,6 +14,5 @@ class Profile {
   @HiveField(3)
   final String password;
 
-  Profile(this.name, this.id,this.username,this.password);
-
+  Profile(this.name, this.id, this.username, this.password);
 }

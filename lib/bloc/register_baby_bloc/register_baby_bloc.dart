@@ -35,7 +35,7 @@ class RegisterBabyBloc extends Bloc<RegisterBabyEvent, RegisterBabyState> {
         yield RegisterBabyInitialState(_registerBabyModel);
       }
       //push data to dhis2 using api
-      
+
     }
   }
 }
