@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:newborn_care/screens/list_of_babies/components/list_tiem.dart';
+import 'package:newborn_care/screens/list_of_babies/components/list_item.dart';
 
 
 class Body extends StatefulWidget {

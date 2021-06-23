@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:newborn_care/screens/list_of_babies/components/custom_drop_down.dart';
-import 'package:newborn_care/screens/list_of_babies/components/list_tiem.dart';
+import 'package:newborn_care/screens/list_of_babies/components/list_item.dart';
 
 class Body extends StatelessWidget {
   final color = const Color(0xff82A0C8);
