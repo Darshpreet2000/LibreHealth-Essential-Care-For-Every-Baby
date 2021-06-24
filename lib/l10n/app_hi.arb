@@ -1,0 +1,139 @@
+{
+  "about": "तकरीबन",
+  "accountDetails": "खाता विवरण",
+  "activity": "गतिविधि",
+  "admitted": "स्वीकार किया",
+  "babiesDelivered": "बच्चों की डिलीवरी",
+  "babyOf": "{motherName} का बच्चा",
+  "babysDetails": "बच्चे का विवरण",
+  "birthDateTime": "जन्म तिथि और समय",
+  "byContinuingYouAgreeToOur": "जारी रखकर आप हमारी सहमति देते हैं to",
+  "cookiesUse": "कुकीज़ का प्रयोग करें",
+  "cSection": "प्रसव का तरीका",
+  "diagnosed": "निदान\nशिशुओं",
+  "discharged": "छुट्टी दे दी गई",
+  "dischargedBabies": "छुट्टी दे दी गई\nशिशुओं",
+  "doctorsSchedule": "डॉक्टर की अनुसूची",
+  "eceb": "ईसीईबी",
+  "essentialCareForEveryBaby": "हर बच्चे के लिए आवश्यक देखभाल",
+  "facility": "सुविधा",
+  "female": "महिला",
+  "forcepsDelivery": "संदंश वितरण",
+  "gender": "लिंग",
+  "helpingBabiesSurvive": "बच्चों को जीवित रहने में मदद करना",
+  "highRisk": "भारी जोखिम",
+  "home": "घर",
+  "hoursFromBirth": "जन्म से {hours} घंटे",
+ 
+  "minutesFromBirth": "जन्म से {minutes} मिनट",
+ 
+  "id": "ईद",
+  "includingOur": "हमारे सहित",
+  "individual": "व्यक्ति",
+  "listOfBabies": "शिशुओं की सूची",
+  "location": "स्थान",
+  "male": "पुरुष",
+  "messages": "संदेशों",
+  
+  "modeOfDelivery": "प्रसव का तरीका",
+  "monitoringAlerts": "निगरानी अलर्ट",
+  "mothersDetails": "माता का विवरण",
+  "mothersName": "माता का नाम",
+  "multiple": "विभिन्न",
+  "name": "नाम",
+  "no": "नहीं न",
+  "normal": "साधारण",
+  "notifications": "सूचनाएं",
+  "onCallDoctors": "कॉल डॉक्टरों पर",
+  "other": "अन्य",
+  "others": "अन्य",
+  "password": "पारण शब्द",
+  "pastRegistered": "विगत पंजीकृत",
+  "privacyPolicies": "गोपनीयता पालिसी,\nडेटा उपयोग नीतियां",
+  "profile": "प्रोफ़ाइल",
+  "recentlyAdded": "हाल ही में जोड़ा",
+  "register": "रजिस्टर करें",
+  "registeredBabies": "दर्ज कराई\nशिशुओं",
+  "registration": "पंजीकरण",
+  "reportABug": "गलती सूचित करें",
+  "riskAssessment": "जोख़िम का आकलन",
+  "searchTheListOfBabies": "शिशुओं की सूची खोजें",
+  "shareApp": "ऐप शेयर करें",
+  "shareLocation": "स्थान साझा करें",
+  "signin": "दाखिल करना",
+  "single": "एक",
+  "skinColorChangesInNewBorn": "नवजात शिशु में त्वचा का रंग बदलता है",
+  "sortBy": "इसके अनुसार क्रमबद्ध करें",
+  "status": "स्थिति",
+  "summaryOf24Hours": "24 घंटे का सारांश",
+  "time": "समय",
+  "toRegisterABaby": "एक बच्चे को पंजीकृत करने के लिए",
+  "traumasDuringBirth": "जन्म के दौरान आघात",
+  "username": "उपयोगकर्ता नाम",
+  "vacuumExtraction": "वैक्यूम निष्कर्षण",
+  "wardsName": "वार्ड का नाम",
+  "weightOfBabyInGrams": "बच्चे का वजन (ग्राम में)",
+  "yes": "हाँ",
+  "danger": "खतरा",
+  "@danger": {},
+  "postCheckup": "{minute} चेकअप पोस्ट करें",
+  "@postCheckup": {
+    "placeholders": {
+      "minute": {}
+    }
+  },
+  "problem": "संकट",
+  "@problem": {},
+  "riskAssessments": "जोख़िम का आकलन",
+  "@riskAssessments": {},
+  "statusChanged": "स्थिति {from} बदलकर {to} कर दी गई",
+  "@statusChanged": {
+    "placeholders": {
+      "from": {},
+      "to": {}
+    }
+  },
+  "enterMothersName": "माता का नाम दर्ज करें",
+  "@enterMothersName": {},
+  "enterWardName": "वार्ड का नाम दर्ज करें",
+  "@enterWardName": {},
+  "errorDuringCommunication": "संचार के दौरान त्रुटि",
+  "@errorDuringCommunication": {},
+  "errorOccuredWhileCommunication": "स्थिति कोड के साथ सर्वर से संचार करते समय त्रुटि हुई: {code}",
+  "@errorOccuredWhileCommunication": {
+    "placeholders": {
+      "code": {}
+    }
+  },
+  "invalidInput": "अमान्य निवेश",
+  "@invalidInput": {},
+  "invalidRequest": "अमान्य अनुरोध",
+  "@invalidRequest": {},
+  "noInternetConnection": "कोई इंटरनेट कनेक्शन नहीं",
+  "@noInternetConnection": {},
+  "selectBabiesDelivered": "डिलीवर किए गए बच्चों का चयन करें",
+  "@selectBabiesDelivered": {},
+  "selectGenderForChild": "बच्चे के लिए लिंग चुनें {index}",
+  "@selectGenderForChild": {
+    "placeholders": {
+      "index": {}
+    }
+  },
+  "selectModeOfDelivery": "डिलीवरी का तरीका चुनें",
+  "@selectModeOfDelivery": {},
+  "selectSkinColorChangesForChild": "बच्चे के लिए त्वचा के रंग में बदलाव चुनें {index}",
+  "@selectSkinColorChangesForChild": {
+    "placeholders": {
+      "index": {}
+    }
+  },
+  "selectTraumasDuringBirthForChild": "बच्चे के लिए जन्म के दौरान आघात का चयन करें {index}",
+  "@selectTraumasDuringBirthForChild": {
+    "placeholders": {
+      "index": {}
+    }
+  },
+  "unauthorised": "अनधिकृत",
+  "@unauthorised": {}
+
+}
