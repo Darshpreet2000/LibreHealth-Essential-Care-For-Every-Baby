@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart'; 
 import 'package:newborn_care/screens/list_of_babies/components/custom_drop_down.dart';
 import 'package:newborn_care/screens/profile/components/list_item.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ProfileList extends StatelessWidget {
   final color = const Color(0xff82A0C8);
   final enableDisableScroll;
@@ -21,13 +20,13 @@ class ProfileList extends StatelessWidget {
                 elevation: 35,
                 child: Column(
                   children: [
-                    listHeading(),
+                    listHeading(context),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        rowItem("Registered \nBabies", "14", context),
-                        rowItem("Diagnosed/ \nChangelist", "10", context),
-                        rowItem("Discharged \nBabies", "8", context),
+                        rowItem( AppLocalizations.of(context)!.registeredBabies, "14", context),
+                        rowItem( AppLocalizations.of(context)!.dischargedBabies, "10", context),
+                        rowItem( AppLocalizations.of(context)!.dischargedBabies, "8", context),
                       ],
                     ),
                     ListView.builder(
@@ -77,28 +76,30 @@ class ProfileList extends StatelessWidget {
     );
   }
 
-  Widget listHeading() {
+  Widget listHeading(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(8.0), child: activityAndSort());
+        padding: const EdgeInsets.all(8.0), child: activityAndSort(context));
   }
 
-  Widget activityAndSort() {
+  Widget activityAndSort(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            "Activity",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          Expanded(
+            child: Text(
+              AppLocalizations.of(context)!.activity,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
           ),
-          CustomDropDown(enableDisableScroll)
+          Expanded(child: CustomDropDown(enableDisableScroll))
         ],
       ),
     );
   }
 
-  Widget searchContainer() {
+  Widget searchContainer(BuildContext context) {
     final color = const Color(0xff82A0C8);
 
     return Padding(
@@ -109,7 +110,7 @@ class ProfileList extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Search the list of babies",
+             AppLocalizations.of(context)!.searchTheListOfBabies,
             textAlign: TextAlign.start,
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),

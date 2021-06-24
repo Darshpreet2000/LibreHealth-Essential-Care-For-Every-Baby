@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newborn_care/widgets/short_app_bar.dart';
 import 'components/body.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Home extends StatelessWidget {
   final GlobalKey? globalKey;
@@ -25,11 +26,11 @@ class Home extends StatelessWidget {
             preferredSize: Size.fromHeight(80.0),
             child: MediaQuery.of(context).orientation == Orientation.portrait
                 ? ShortAppBar(
-                    title: "ECEB",
+                    title:  AppLocalizations.of(context)!.eceb,
                     showDrawer: true,
                   )
                 : ShortAppBar(
-                    title: "Essential Care For Every Baby",
+                    title: AppLocalizations.of(context)!.essentialCareForEveryBaby,
                     showDrawer: true,
                   ),
           ),

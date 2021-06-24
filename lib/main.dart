@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:newborn_care/models/profile.dart';
@@ -17,6 +18,7 @@ import 'package:newborn_care/theme/theme_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'bloc/register_baby_bloc/register_baby_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +26,7 @@ void main() async {
   runApp(MyApp());
 }
 
-GlobalKey<ScaffoldState>? drawerKey;
+GlobalKey<ScaffoldState>? drawerKey; 
 Future registerHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProfileAdapter());
@@ -46,9 +48,10 @@ class _MyAppState extends State<MyApp> {
     }
     super.initState();
   }
-
-  @override
+  
+ @override
   Widget build(BuildContext context) {
+     
     GlobalKey globalKey = new GlobalKey(debugLabel: 'btm_app_bar');
     drawerKey = new GlobalKey<ScaffoldState>();
 
@@ -67,6 +70,19 @@ class _MyAppState extends State<MyApp> {
       child: Center(
         child: MaterialApp(
           title: 'Newborn Care',
+          localizationsDelegates: [
+             AppLocalizations.delegate, // Add this line
+             GlobalMaterialLocalizations.delegate,
+             GlobalWidgetsLocalizations.delegate,
+             GlobalCupertinoLocalizations.delegate,
+          ],
+           
+          supportedLocales: [
+            const Locale('en', ''), // English, no country code
+            const Locale('hi', ''), // Hindi, no country code
+            const Locale('ar', ''), // Arabic, no country code
+            const Locale('de', ''), // German, no country code
+          ],
           theme: MyTheme.lightTheme,
           darkTheme: MyTheme.darkTheme,
           routes: {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
 import 'package:newborn_care/screens/register_a_baby/components/toggle_buttons/babies_delivered_button.dart';
 import 'package:newborn_care/screens/register_a_baby/components/toggle_buttons/mode_of_delivery_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterMotherDetails extends StatefulWidget {
   final RegisterBabyModel _registerBabyModel;
@@ -29,7 +30,7 @@ class _RegisterMotherDetailsState extends State<RegisterMotherDetails> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "Mother's Details",
+              AppLocalizations.of(context)!.mothersDetails,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
@@ -46,8 +47,8 @@ class _RegisterMotherDetailsState extends State<RegisterMotherDetails> {
                         const Radius.circular(20.0),
                       ),
                       borderSide: new BorderSide(color: Colors.grey)),
-                  hintText: 'Mother\'s Name',
-                  labelText: 'Mother\'s Name',
+                  hintText: AppLocalizations.of(context)!.mothersName,
+                  labelText: AppLocalizations.of(context)!.mothersName
                 )),
           ),
           Padding(
@@ -63,31 +64,35 @@ class _RegisterMotherDetailsState extends State<RegisterMotherDetails> {
                         const Radius.circular(20.0),
                       ),
                       borderSide: new BorderSide(color: Colors.grey)),
-                  hintText: 'Ward\'s Name',
-                  labelText: 'Ward\'s Name',
+                  hintText: AppLocalizations.of(context)!.wardsName,
+                  labelText: AppLocalizations.of(context)!.wardsName,
                 )),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "Babies Delivered",
+             AppLocalizations.of(context)!.babiesDelivered,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           BabiesDeliveredButton(
-              "Single",
-              "Multiple",
+             AppLocalizations.of(context)!.single,
+
+             AppLocalizations.of(context)!.multiple,
               widget._registerBabyModel),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "Mode of Delivery",
+            
+             AppLocalizations.of(context)!.modeOfDelivery,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           ModeOfDeliveryButton(
-              "Normal",
-              "Others", 
+            
+             AppLocalizations.of(context)!.normal,
+            
+             AppLocalizations.of(context)!.others,
               widget._registerBabyModel),
         ],
       ),

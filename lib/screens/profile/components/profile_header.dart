@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newborn_care/repository/HiveStorageRepository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileHeader extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Account Details",
+                       AppLocalizations.of(context)!.accountDetails,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
@@ -40,14 +41,14 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "Name: ${HiveStorageRepository().getProfile().name}",
+                        "${AppLocalizations.of(context)!.name}: ${HiveStorageRepository().getProfile().name}",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "ID: ${HiveStorageRepository().getProfile().id}",
+                        "${AppLocalizations.of(context)!.id}: ${HiveStorageRepository().getProfile().id}",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -57,7 +58,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                       child: Row(
                         children: [
                           Text(
-                            "Share Location: ",
+                            "${AppLocalizations.of(context)!.shareLocation}: ",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Switch(

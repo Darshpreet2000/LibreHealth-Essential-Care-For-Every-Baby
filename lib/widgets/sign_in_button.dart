@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignIn extends StatelessWidget {
   final userNameTextController;
@@ -24,7 +25,7 @@ class SignIn extends StatelessWidget {
       width: 180,
       child: ElevatedButton(
         child: new Text(
-          "Sign In",
+         AppLocalizations.of(context)!.signin,
           style: TextStyle(
               fontSize: 16,
               color: calculateWhetherDisabledReturnsBool()

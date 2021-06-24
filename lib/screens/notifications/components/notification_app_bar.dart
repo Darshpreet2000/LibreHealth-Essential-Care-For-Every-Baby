@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class NotificationAppBar extends StatelessWidget {
   final TabController? _tabController;
 
@@ -16,7 +16,8 @@ class NotificationAppBar extends StatelessWidget {
       forceElevated: true,
       pinned: true,
       backgroundColor: Colors.transparent,
-      flexibleSpace: AppBar(
+      flexibleSpace: AppBar(      brightness: Brightness.dark,
+
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(30),
@@ -35,7 +36,7 @@ class NotificationAppBar extends StatelessWidget {
               child: Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'Risk Assessments',
+                    AppLocalizations.of(context)!.riskAssessments,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   )),
             ),
@@ -45,7 +46,7 @@ class NotificationAppBar extends StatelessWidget {
               child: Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'Monitoring Alerts',
+                   AppLocalizations.of(context)!.monitoringAlerts,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   )),
             ),

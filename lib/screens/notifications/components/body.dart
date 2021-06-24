@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'list_item_monitoring_alert.dart';
 import 'list_item_risk_assessment.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class Body extends StatelessWidget {
   final TabController? _tabController;
 
@@ -96,81 +98,61 @@ class Body extends StatelessWidget {
           children: [
             ListItemRiskMonitoringAlert(
               parent: "Oni",
-              checkup: "Post 90 min Checkup",
+              checkup:  AppLocalizations.of(context)!.postCheckup("90"),
               color: Colors.green,
               value: false,
               inDanger: false,
             ),
             ListItemRiskMonitoringAlert(
               parent: "Jane",
-              checkup: "25-30 min Checkup",
+              checkup: AppLocalizations.of(context)!.postCheckup("90"),
               color: Colors.red,
               value: true,
               inDanger: false,
             ),
             ListItemRiskMonitoringAlert(
               parent: "Avi",
-              checkup: "3 hr- 4 hr Checkup",
+              checkup: AppLocalizations.of(context)!.postCheckup("90"),
+              color: Colors.yellow,
+              value: false,
+              inDanger: false,
+            ),
+             ListItemRiskMonitoringAlert(
+              parent: "Avi",
+              checkup: AppLocalizations.of(context)!.postCheckup("90"),
               color: Colors.yellow,
               value: false,
               inDanger: false,
             ),
             ListItemRiskMonitoringAlert(
-              parent: "Oni",
-              checkup: "Post 90 min Checkup",
-              color: Colors.green,
-              value: false,
-              inDanger: false,
-            ),
-            ListItemRiskMonitoringAlert(
               parent: "Avi",
-              checkup: "3 hr- 4 hr Checkup",
+              checkup: AppLocalizations.of(context)!.postCheckup("90"),
               color: Colors.yellow,
               value: false,
               inDanger: false,
             ),
             ListItemRiskMonitoringAlert(
               parent: "Jane",
-              checkup: "25-30 min Checkup",
+              checkup:AppLocalizations.of(context)!.postCheckup("90"),
               color: Colors.red,
               value: true,
               inDanger: false,
             ),
             ListItemRiskMonitoringAlert(
               parent: "Jane",
-              checkup: "25-30 min Checkup",
+              checkup:AppLocalizations.of(context)!.postCheckup("90"),
               color: Colors.red,
               value: true,
               inDanger: false,
             ),
             ListItemRiskMonitoringAlert(
               parent: "Avi",
-              checkup: "3 hr- 4 hr Checkup",
+              checkup: AppLocalizations.of(context)!.postCheckup("90"),
               color: Colors.yellow,
               value: false,
               inDanger: false,
             ),
-            ListItemRiskMonitoringAlert(
-              parent: "Oni",
-              checkup: "Post 90 min Checkup",
-              color: Colors.green,
-              value: false,
-              inDanger: false,
-            ),
-            ListItemRiskMonitoringAlert(
-              parent: "Jane",
-              checkup: "25-30 min Checkup",
-              color: Colors.red,
-              value: true,
-              inDanger: false,
-            ),
-            ListItemRiskMonitoringAlert(
-              parent: "Avi",
-              checkup: "3 hr- 4 hr Checkup",
-              color: Colors.yellow,
-              value: false,
-              inDanger: false,
-            ),
+            
           ],
         ),
       ],

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Widget summary(BuildContext context, GlobalKey globalKey) {
   final BottomNavigationBar? navigationBar = globalKey.currentWidget as BottomNavigationBar?;
@@ -13,7 +14,7 @@ Widget summary(BuildContext context, GlobalKey globalKey) {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              "Summary of 24 hours",
+              AppLocalizations.of(context)!.summaryOf24Hours,
               style: TextStyle(
                 color: Colors.grey,
                 fontWeight: FontWeight.bold,
@@ -31,7 +32,7 @@ Widget summary(BuildContext context, GlobalKey globalKey) {
                       navigationBar!.onTap!(1);
                     },
                     child:
-                        rowItem("Admitted", "14", "assets/blue.png", context)),
+                        rowItem( AppLocalizations.of(context)!.admitted, "14", "assets/blue.png", context)),
               ),
               Material(
                 child: InkWell(
@@ -39,7 +40,7 @@ Widget summary(BuildContext context, GlobalKey globalKey) {
                       navigationBar!.onTap!(1);
                     },
                     child: rowItem(
-                        "Discharged", "10", "assets/grey.png", context)),
+                         AppLocalizations.of(context)!.discharged, "10", "assets/grey.png", context)),
               ),
               Material(
                 child: InkWell(
@@ -47,7 +48,7 @@ Widget summary(BuildContext context, GlobalKey globalKey) {
                       navigationBar!.onTap!(1);
                     },
                     child:
-                        rowItem("High Risk", "8", "assets/red.png", context)),
+                        rowItem( AppLocalizations.of(context)!.highRisk, "8", "assets/red.png", context)),
               ),
             ],
           ),

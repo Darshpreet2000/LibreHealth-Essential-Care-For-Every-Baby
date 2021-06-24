@@ -4,6 +4,7 @@ import 'package:newborn_care/screens/list_of_babies/list_of_babies_screen.dart';
 import 'package:newborn_care/screens/notifications/notification_screen.dart';
 import 'package:newborn_care/screens/profile/profile_screen.dart';
 import 'package:package_info/package_info.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BaseClass extends StatefulWidget {
   final GlobalKey? globalKey;
@@ -31,21 +32,21 @@ class _BaseClassState extends State<BaseClass> {
           children: <Widget>[
             _createHeader(),
             ListTile(leading: Icon(Icons.schedule,color:Theme.of(context).iconTheme.color),
-              title: Text('Doctor\'s Schedule'),
+              title: Text( AppLocalizations.of(context)!.doctorsSchedule,),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
             ListTile(leading: Icon(Icons.message,color:Theme.of(context).iconTheme.color),
-              title: Text('Messages'),
+              title: Text( AppLocalizations.of(context)!.messages),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
             ListTile(leading: Icon(Icons.info_rounded,color:Theme.of(context).iconTheme.color),
-              title: Text('About'),
+              title: Text( AppLocalizations.of(context)!.about),
               onTap: () {
                 // Update the state of the app.
                 // ...
@@ -54,7 +55,7 @@ class _BaseClassState extends State<BaseClass> {
             ListTile(
               
               leading: Icon(Icons.share,color:Theme.of(context).iconTheme.color),
-              title: Text('Share App'),
+              title: Text( AppLocalizations.of(context)!.shareApp),
               onTap: () {
                 // Update the state of the app.
                 // ...
@@ -62,7 +63,7 @@ class _BaseClassState extends State<BaseClass> {
             ),
             ListTile(
               leading: Icon(Icons.bug_report,color:Theme.of(context).iconTheme.color),
-              title: Text('Report a bug'),
+              title: Text( AppLocalizations.of(context)!.reportABug),
               onTap: () {
                 // Update the state of the app.
                 // ...
@@ -106,17 +107,17 @@ class _BaseClassState extends State<BaseClass> {
       bottomNavigationBar: BottomNavigationBar(
         key: widget.globalKey,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label:  AppLocalizations.of(context)!.home,),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.list,
                 size: 25,
               ),
-              label: 'List of Babies'),
+              label: AppLocalizations.of(context)!.listOfBabies,),
           BottomNavigationBarItem(
-              icon: Icon(Icons.notifications), label: 'Notifications'),
+              icon: Icon(Icons.notifications), label:  AppLocalizations.of(context)!.notifications,),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded), label: 'Profile'),
+              icon: Icon(Icons.person_rounded), label:  AppLocalizations.of(context)!.profile,),
         ],
         currentIndex: selectedIndex,
         fixedColor: Colors.blue[800],
@@ -168,7 +169,7 @@ class _BaseClassState extends State<BaseClass> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 4),
               child: Text(
-                'Helping Babies Survive',
+                AppLocalizations.of(context)!.helpingBabiesSurvive,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

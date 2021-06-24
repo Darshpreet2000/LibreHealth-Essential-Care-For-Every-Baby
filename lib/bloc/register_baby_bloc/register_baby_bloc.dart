@@ -30,10 +30,11 @@ class RegisterBabyBloc extends Bloc<RegisterBabyEvent, RegisterBabyState> {
       try {
         await _registerBabyRepositoryImpl
             .checkDataEnteredCorrectly(_registerBabyModel);
+          
       } catch (e) {
-        yield RegisterBabyErrorState(e.toString());
-        yield RegisterBabyInitialState(_registerBabyModel);
-      }
+           yield  RegisterBabyErrorState(e.toString());
+           yield RegisterBabyInitialState(_registerBabyModel);
+        }
       //push data to dhis2 using api
       
     }

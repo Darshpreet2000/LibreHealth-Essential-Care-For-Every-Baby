@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LongAppBar extends StatelessWidget {
   final color = const Color(0xff82A0C8);
@@ -23,7 +24,7 @@ class LongAppBar extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
-                "Essential Care For Every Baby",
+              AppLocalizations.of(context)!.essentialCareForEveryBaby,
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
