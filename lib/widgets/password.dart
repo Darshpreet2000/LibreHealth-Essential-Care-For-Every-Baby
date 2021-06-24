@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Password extends StatefulWidget {
   final textController;
@@ -36,8 +37,8 @@ class _PasswordState extends State<Password> {
               const Radius.circular(305.0),
             ),
           ),
-          hintText: 'Password',
-          labelText: 'Password',
+          hintText: AppLocalizations.of(context)!.password,
+          labelText: AppLocalizations.of(context)!.password,
         ),
       ),
       

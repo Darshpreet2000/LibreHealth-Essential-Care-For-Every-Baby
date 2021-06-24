@@ -6,6 +6,7 @@ import 'package:newborn_care/screens/register_a_baby/components/toggle_buttons/s
 import 'package:newborn_care/screens/register_a_baby/components/toggle_buttons/traumas_during_birth_button.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterBabyDetails extends StatefulWidget {
   final BabyDetailsModel _babyDetails;
@@ -24,22 +25,21 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Baby's Details",
+           AppLocalizations.of(context)!.babysDetails,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Gender",
+           AppLocalizations.of(context)!.gender,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-         GenderButton("Male", "Female", widget._babyDetails),
+         GenderButton(AppLocalizations.of(context)!.male,AppLocalizations.of(context)!.female, widget._babyDetails),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "Birth Date and Time",
+          child: Text(AppLocalizations.of(context)!.birthDateTime,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
@@ -135,28 +135,25 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
             )),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "Weight of the baby in (grams)",
+          child: Text(AppLocalizations.of(context)!.weightOfBabyInGrams,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
         Center(child: WeightSlider(widget._babyDetails)),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "Skin Color Changes in Newborn",
+          child: Text(AppLocalizations.of(context)!.skinColorChangesInNewBorn,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-        SkinColorChangesButton("Yes", "No", widget._babyDetails),
+        SkinColorChangesButton(AppLocalizations.of(context)!.yes,AppLocalizations.of(context)!.no, widget._babyDetails),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "Traumas during Birth",
+          child: Text(AppLocalizations.of(context)!.traumasDuringBirth,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-        TraumasDuringBirthButton("Yes", "No",
+        TraumasDuringBirthButton(AppLocalizations.of(context)!.yes,AppLocalizations.of(context)!.no,
             widget._babyDetails),
       ]),
     );

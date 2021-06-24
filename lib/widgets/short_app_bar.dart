@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newborn_care/repository/HiveStorageRepository.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../main.dart';
 
 class ShortAppBar extends StatelessWidget {
@@ -50,7 +50,7 @@ class ShortAppBar extends StatelessWidget {
             ),
           ),
           Text(
-            "ID: ${HiveStorageRepository().getProfile().id}",
+            AppLocalizations.of(context)!.id+ ": ${HiveStorageRepository().getProfile().id}",
             style: new TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
           ),

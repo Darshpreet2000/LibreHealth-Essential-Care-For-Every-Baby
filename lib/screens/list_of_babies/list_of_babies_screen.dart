@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
 import '../../widgets/short_app_bar.dart';
 import 'components/body.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ListOfBabies extends StatefulWidget {
   @override
@@ -35,7 +35,7 @@ class _ListOfBabiesState extends State<ListOfBabies> {
           flexibleSpace: PreferredSize(
               preferredSize: Size.fromHeight(80.0),
               child: ShortAppBar(
-                title: "List of Babies",
+                title:  AppLocalizations.of(context)!.listOfBabies,
                 showDrawer: true,
               )),
         ),

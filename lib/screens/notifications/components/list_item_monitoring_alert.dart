@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ListItemRiskMonitoringAlert extends StatefulWidget {
   final String? parent, checkup;
@@ -60,13 +61,13 @@ class _ListItemMonitoringAlert extends State<ListItemRiskMonitoringAlert> {
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
                       child: Text(
-                        "Baby of " + widget.parent!,
+                        AppLocalizations.of(context)!.babyOf(widget.parent!),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
                       child: Text(
-                        "Location: Prenatal Ward",
+                        "${ AppLocalizations.of(context)!.location}: Prenatal Ward",
                       ),
                     ),
                     Padding(

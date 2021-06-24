@@ -4,7 +4,7 @@ import 'package:newborn_care/bloc/register_baby_bloc/register_baby_bloc.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
 import 'package:newborn_care/screens/register_a_baby/components/register_baby_details.dart';
 import 'package:newborn_care/screens/register_a_baby/components/register_mother_details.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
 
@@ -52,7 +52,7 @@ class Body extends StatelessWidget {
                             .add(RegisterBaby());
                       },
                       child: Text(
-                        "Register",
+                       AppLocalizations.of(context)!.register,
                         style: TextStyle(color: Colors.black, fontSize: 16),
                       ),
                     ),

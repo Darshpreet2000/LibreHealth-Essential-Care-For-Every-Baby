@@ -8,6 +8,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter  
+  intl: ^0.17.0  
   cupertino_icons: ^1.0.3
   syncfusion_flutter_sliders: ^19.1.67-beta
   syncfusion_flutter_core: ^19.1.67
@@ -22,7 +25,6 @@ dependencies:
   hive: ^2.0.4
   hive_flutter: ^1.0.0
 
-  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -31,6 +33,7 @@ dev_dependencies:
 
 
 flutter:
+  generate: true
   uses-material-design: true
   assets:
      - assets/

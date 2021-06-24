@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart'; 
 import 'package:newborn_care/widgets/short_app_bar.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'components/body.dart';
 
 class Profile extends StatefulWidget {
@@ -36,11 +35,11 @@ class _ProfileState extends State<Profile> {
             flexibleSpace:
                 MediaQuery.of(context).orientation == Orientation.portrait
                     ? ShortAppBar(
-                        title: "ECEB",
+                        title: AppLocalizations.of(context)!.eceb,
                         showDrawer: true,
                       )
                     : ShortAppBar(
-                        title: "Essential Care For Every Baby",
+                        title:  AppLocalizations.of(context)!.essentialCareForEveryBaby,
                         showDrawer: true,
                       ),
           ),

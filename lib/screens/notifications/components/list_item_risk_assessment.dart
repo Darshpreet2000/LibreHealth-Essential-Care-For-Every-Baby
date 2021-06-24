@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ListItemRiskAssessment extends StatefulWidget {
   final String? parent;
   final Color? color;
@@ -55,13 +57,13 @@ class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
                       child: Text(
-                        "Baby of " + widget.parent!,
+                       AppLocalizations.of(context)!.babyOf(widget.parent!),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
                       child: Text(
-                        "Location: Prenatal Ward",
+                        "${AppLocalizations.of(context)!.location}: Prenatal Ward",
                       ),
                     ),
                     Padding(
@@ -80,41 +82,15 @@ class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                   
+                    
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
-                      child: Text("Status changed",
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 2),
-                      child: RichText(
-                        text: new TextSpan(
-                          // Note: Styles for TextSpans must be explicitly defined.
-                          // Child text spans will inherit styles from parent
-                          style: new TextStyle(
-                            color: Theme.of(context).textTheme.bodyText1!.color,
-                          ),
-                          children: <TextSpan>[
-                            new TextSpan(
-                                text: 'Problem to ',
-                                style: new TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                )),
-                            widget.inDanger!
-                                ? new TextSpan(
-                                    text: 'Danger',
-                                    style: new TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.red))
-                                : new TextSpan(
-                                    text: 'Normal',
-                                    style: new TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    )),
-                          ],
-                        ),
+                      child: Text(AppLocalizations.of(context)!.statusChanged(AppLocalizations.of(context)!.normal,AppLocalizations.of(context)!.danger), style: new TextStyle(
+                            color: Theme.of(context).textTheme.bodyText1!.color, fontWeight: FontWeight.bold,
+                          ),)
                       ),
-                    ),
+                  
                   ],
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Widget onCallDoctors(BuildContext context) {
   final color = const Color(0xff82A0C8);
@@ -11,7 +12,7 @@ Widget onCallDoctors(BuildContext context) {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "On Call Doctors",
+            AppLocalizations.of(context)!.onCallDoctors,
             style: TextStyle(
               color: Colors.grey,
               fontWeight: FontWeight.bold,

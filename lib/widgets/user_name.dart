@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserName extends StatelessWidget {
   final textController;
@@ -21,8 +22,8 @@ class UserName extends StatelessWidget {
               const Radius.circular(305.0),
             ),
           ),
-          hintText: 'Local Login Address',
-          labelText: 'Username',
+          hintText: AppLocalizations.of(context)!.username,
+          labelText: AppLocalizations.of(context)!.username,
         ),
       ),
     );

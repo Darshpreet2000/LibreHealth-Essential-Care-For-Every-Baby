@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ModeOfDeliveryButton extends StatefulWidget {
   final String first, second;
 
@@ -146,7 +147,7 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
                           border: Border.all(color: Colors.blueAccent),
                           borderRadius: BorderRadius.all(Radius.circular(8))),
                       child: Text(
-                        "C-Section",
+                      AppLocalizations.of(context)!.cSection,
                         style: TextStyle(
                           color: widget.modeOfDeliveryList[0]
                               ? Colors.white
@@ -179,7 +180,7 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
                           border: Border.all(color: Colors.blueAccent),
                           borderRadius: BorderRadius.all(Radius.circular(8))),
                       child: Text(
-                        "Forceps \nDelivery",
+                        AppLocalizations.of(context)!.forcepsDelivery,
                         style: TextStyle(
                           color: widget.modeOfDeliveryList[1]
                               ? Colors.white
@@ -212,7 +213,7 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
                           border: Border.all(color: Colors.blueAccent),
                           borderRadius: BorderRadius.all(Radius.circular(8))),
                       child: Text(
-                        "Vacuum \nExtraction",
+                       AppLocalizations.of(context)!.vacuumExtraction,
                         style: TextStyle(
                           color: widget.modeOfDeliveryList[2]
                               ? Colors.white
@@ -245,7 +246,7 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
                           border: Border.all(color: Colors.blueAccent),
                           borderRadius: BorderRadius.all(Radius.circular(8))),
                       child: Text(
-                        "Other",
+                       AppLocalizations.of(context)!.other,
                         style: TextStyle(
                           color: widget.modeOfDeliveryList[3]
                               ? Colors.white

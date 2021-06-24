@@ -3,9 +3,10 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:newborn_care/exceptions/custom_exceptions.dart';
+import 'package:newborn_care/main.dart';
 import 'package:newborn_care/utils/api_config.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AuthenticationClient {
   Future loginUser(String username, String password) async {
     String basicAuth =
@@ -19,7 +20,7 @@ class AuthenticationClient {
       );
       return _response(response);
     } on SocketException {
-      throw FetchDataException('No Internet connection');
+      throw FetchDataException(AppLocalizations.of(drawerKey!.currentContext!)!.noInternetConnection);
     }
   }
 
@@ -36,7 +37,7 @@ class AuthenticationClient {
         throw UnauthorisedException(response.statusCode);
       default:
         throw FetchDataException(
-            'Error occured while Communication with Server with StatusCode: ${response.statusCode}');
+            AppLocalizations.of(drawerKey!.currentContext!)!.errorOccuredWhileCommunication(response.statusCode));
     }
   }
 }

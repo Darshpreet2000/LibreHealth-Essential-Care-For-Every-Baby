@@ -6,6 +6,7 @@ import 'package:newborn_care/widgets/password.dart';
 import 'package:newborn_care/widgets/short_app_bar.dart';
 import 'package:newborn_care/widgets/sign_in_button.dart';
 import 'package:newborn_care/widgets/user_name.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -38,7 +39,7 @@ class _BodyState extends State<Body> {
                       (MediaQuery.of(context).size.height > 600)
                   ? LongAppBar()
                   : ShortAppBar(
-                      title: "Essential Care For Every Baby",
+                      title: AppLocalizations.of(context)!.essentialCareForEveryBaby,
                     ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
