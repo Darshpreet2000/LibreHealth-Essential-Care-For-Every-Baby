@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider<AuthenticationBloc>(
           create: (BuildContext context) =>
-              AuthenticationBloc(AuthenticationRepository()),
+              AuthenticationBloc(AuthenticationRepository(),HiveStorageRepository()),
         ),
       ],
       child: Center(
