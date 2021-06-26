@@ -5,16 +5,12 @@ class HiveStorageRepository {
   //Profile
   void storeProfile(Profile profile) {
     var box = Hive.box('eceb');
-    box.put("id", profile.id);
-    box.put("name", profile.name);
-    box.put("username", profile.username);
-    box.put("password", profile.password);
+    box.put("user", profile);
     markUserAsLoggedIn();
   }
-
   Profile getProfile() {
     var box = Hive.box('eceb');
-    return Profile(box.get("name"), box.get("id"),box.get("username"), box.get("password"));
+    return box.get('user');
   }
 
   void markUserAsLoggedIn() {
@@ -26,9 +22,10 @@ class HiveStorageRepository {
     var box = Hive.box('eceb');
     box.put('userLoggedIn', false);
   }
+
   //Check User Logged In
-  bool checkUserLoggedIn(){
-     var box = Hive.box('eceb');
+  bool checkUserLoggedIn() {
+    var box = Hive.box('eceb');
     if (box.containsKey('userLoggedIn') && box.get('userLoggedIn') == true)
       return true;
 

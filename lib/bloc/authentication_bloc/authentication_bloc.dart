@@ -10,7 +10,8 @@ part 'authentication_state.dart';
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationRepository authenticationRepository;
-  AuthenticationBloc(this.authenticationRepository)
+  HiveStorageRepository hiveStorageRepository;
+  AuthenticationBloc(this.authenticationRepository,this.hiveStorageRepository)
       : super(AuthenticationInitial());
 
   @override
@@ -20,11 +21,10 @@ class AuthenticationBloc
     if (event is AuthenticationLoginEvent) {
       yield AuthenticationLoading();
       try {
-        if(!authenticationRepository.checkUserLoggedIn()) {
            Profile profile = await authenticationRepository.loginUser(
             event.username, event.password);
-           HiveStorageRepository().storeProfile(profile);
-        }    
+          hiveStorageRepository.storeProfile(profile);
+        
         yield AuthenticationLoaded();
       } catch (e) {
         yield AuthenticationError(e.toString());
