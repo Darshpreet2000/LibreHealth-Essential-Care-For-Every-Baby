@@ -1,22 +1,101 @@
+import 'package:newborn_care/utils/dhis2_config.dart';
+import 'package:intl/intl.dart';
+
 class RegisterBabyModel {
-  String? motherName, wardName;
+  String motherName="", wardName="";
   //to hold toggle buttons data
   bool? babiesDelivered, modeOfDelivery;
   //to hold toggle buttons data
   List<BabyDetailsModel> children = [];
-  String? modeOfDeliveryName;
+  String modeOfDeliveryName="";
   RegisterBabyModel() {
     babiesDelivered = null;
     modeOfDelivery = null;
     children.add(new BabyDetailsModel());
-    wardName = "";
-    motherName = "";
-    modeOfDeliveryName = "";
+  
   }
+  Map<String, dynamic> toJson(int index) => {
+       
+        "trackedEntityType": DHIS2Config().trackedEntity,
+        "orgUnit": DHIS2Config().orgUnit,
+        'attributes': [
+          {"attribute": DHIS2Config().motherNameECEBID, "value": motherName},
+          {
+            "attribute": DHIS2Config().genderECEBID,
+            "value": children[index].gender==true?1:0
+          },
+          {
+            "attribute": DHIS2Config().babiesDeliveredECEBID,
+            "value": children.length
+          },
+          {
+            "attribute": DHIS2Config().birthDateTimeECEBID,
+            "value": DateFormat("yyyy-MM-ddThh:mm")
+                .format(children[index].birthDateTime)
+          },
+          {
+            "attribute": DHIS2Config().modeOfDeliveryECEBID,
+            "value": modeOfDeliveryName
+          },{
+                            
+            "attribute": DHIS2Config().teiWardname,
+            "value":wardName
+          }
+        ],
+        "enrollments": [
+          {
+            "orgUnit": DHIS2Config().orgUnit,
+            "program": DHIS2Config().programECEBID,
+            "enrollmentDate":
+                DateFormat("yyyy-MM-ddThh:mm").format(DateTime.now()),
+            "incidentDate":
+                DateFormat("yyyy-MM-ddThh:mm").format(DateTime.now()),
+              "events":[
+                      {
+                        "program": DHIS2Config().programECEBID,
+                        "orgUnit": DHIS2Config().orgUnit,
+                        "eventDate": DateFormat("yyyy-MM-ddThh:mm").format(DateTime.now()),
+                        "status":"COMPLETED",
+                        "storedBy":"admin",
+                        "programStage":DHIS2Config().stageRegisteringBabies,
+                        "dataValues": [
+                          {
+                            "dataElement": DHIS2Config().ecebWeight,
+                            "value":children[index].weight
+                          },
+                          {
+                            
+                            "dataElement": DHIS2Config().ecebSkinColorChanges,
+                            "value":children[index].skinColorChanges
+                          },{
+                            
+                            "dataElement": DHIS2Config().ecebTraumasDuringBirth,
+                            "value":children[index].traumasDuringBirth
+                          },{
+                            
+                            "dataElement": DHIS2Config().ecebWardName,
+                            "value":wardName
+                          },{
+                            
+                            "dataElement": DHIS2Config().ecebtraumasDuringBirthNotes,
+                            "value":children[index].traumasDuringBirthNotes
+                          },{
+                            
+                            "dataElement": DHIS2Config().ecebskinColorChangesNotes,
+                            "value":children[index].skinColorChangesNotes
+                          }
+                      ]
+                    },
+                  ]
+          }
+        ]
+      };
+  
 }
 
 class BabyDetailsModel {
   //to hold toggle buttons data
+  //gender=> true-male, false-female
   bool? gender, skinColorChanges, traumasDuringBirth;
   //to hold toggle buttons data
   double? weight;

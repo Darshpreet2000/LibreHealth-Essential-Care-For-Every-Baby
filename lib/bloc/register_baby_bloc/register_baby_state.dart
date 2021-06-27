@@ -12,7 +12,10 @@ class RegisterBabyInitialState extends RegisterBabyState {
   get getRegisterModel => _registerBabyModel;
 }
 
+class RegisterBabyRegisteredState extends RegisterBabyState {}
+
 class RegisterBabyLoadingState extends RegisterBabyState {}
+
 
 class RegisterBabyErrorState extends RegisterBabyState {
   final String? message;

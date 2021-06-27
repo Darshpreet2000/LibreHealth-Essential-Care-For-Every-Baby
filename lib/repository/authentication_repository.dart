@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/network/authentication_client.dart';
-import 'package:newborn_care/repository/HiveStorageRepository.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/main.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

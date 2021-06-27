@@ -13,6 +13,10 @@ class ChangeChildrenCount extends RegisterBabyEvent {
 }
 
 class RegisterBaby extends RegisterBabyEvent {
+  final BuildContext context;
+
+  RegisterBaby(this.context);
+
   @override
   List<Object> get props => [];
 }

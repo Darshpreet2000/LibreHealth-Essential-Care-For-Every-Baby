@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newborn_care/repository/HiveStorageRepository.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../main.dart';
 

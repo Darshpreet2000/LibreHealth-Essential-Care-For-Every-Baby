@@ -7,7 +7,7 @@ import 'package:newborn_care/exceptions/custom_exceptions.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/network/authentication_client.dart';
 import 'dart:convert';
-import 'package:newborn_care/repository/HiveStorageRepository.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/authentication_repository.dart';
 import 'package:newborn_care/utils/api_config.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
