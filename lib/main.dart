@@ -5,8 +5,10 @@ import 'package:hive/hive.dart';
 import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
+import 'package:newborn_care/models/request_type.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/authentication_repository.dart';
+import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/repository/register_baby_repository.dart';
 import 'package:newborn_care/screens/baby_assessments/baby_assessments.dart';
 import 'package:newborn_care/screens/base/base_class.dart';
@@ -17,8 +19,11 @@ import 'package:newborn_care/screens/register_a_baby/register_a_baby.dart';
 import 'package:newborn_care/theme/theme_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'bloc/refresh_bloc/refresh_bloc.dart';
 import 'bloc/register_baby_bloc/register_baby_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'models/network_request.dart'; 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,11 +34,14 @@ void main() async {
 GlobalKey<ScaffoldState> drawerKey = new GlobalKey<ScaffoldState>();
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerGlobalKey =
     GlobalKey<ScaffoldMessengerState>(debugLabel: 'app_localization_key');
-
+late Box<List> listBox;
 Future registerHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProfileAdapter());
+  Hive.registerAdapter(NetworkRequestAdapter());
+  Hive.registerAdapter(RequestTypeAdapter());
   await Hive.openBox('eceb');
+  listBox = await Hive.openBox<List>('eceblist');
 }
 
 class MyApp extends StatefulWidget {
@@ -58,6 +66,14 @@ class _MyAppState extends State<MyApp> {
 
     return MultiBlocProvider(
       providers: [
+         BlocProvider<RefreshBloc>(
+          create: (BuildContext context) => RefreshBloc(RefreshRepository()),
+        ),
+        
+        BlocProvider<RegisterBabyBloc>(
+          create: (BuildContext context) => RegisterBabyBloc(
+              RegisterBabyModel(), RegisterBabyRepositoryImpl()),
+        ),
         BlocProvider<RegisterBabyBloc>(
           create: (BuildContext context) => RegisterBabyBloc(
               RegisterBabyModel(), RegisterBabyRepositoryImpl()),

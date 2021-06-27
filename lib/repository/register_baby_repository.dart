@@ -19,7 +19,7 @@ class RegisterBabyRepositoryImpl {
       throw Exception(
           AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
               .selectBabiesDelivered);
-    if (_registerBabyModel.modeOfDelivery == null)
+    if (_registerBabyModel.modeOfDelivery == null||(_registerBabyModel.modeOfDelivery==false&&_registerBabyModel.modeOfDeliveryName.isEmpty))
       throw Exception(
           AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
               .selectModeOfDelivery);

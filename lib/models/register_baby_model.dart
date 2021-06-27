@@ -12,10 +12,8 @@ class RegisterBabyModel {
     babiesDelivered = null;
     modeOfDelivery = null;
     children.add(new BabyDetailsModel());
-  
   }
   Map<String, dynamic> toJson(int index) => {
-       
         "trackedEntityType": DHIS2Config().trackedEntity,
         "orgUnit": DHIS2Config().orgUnit,
         'attributes': [
