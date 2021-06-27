@@ -57,7 +57,7 @@ class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
                       child: Text(
-                       AppLocalizations.of(context)!.babyOf(widget.parent!),
+                        AppLocalizations.of(context)!.babyOf(widget.parent!),
                       ),
                     ),
                     Padding(
@@ -82,15 +82,17 @@ class _ListItemRiskAssessmentState extends State<ListItemRiskAssessment> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                   
-                    
                     Padding(
-                      padding: const EdgeInsets.only(top: 2),
-                      child: Text(AppLocalizations.of(context)!.statusChanged(AppLocalizations.of(context)!.normal,AppLocalizations.of(context)!.danger), style: new TextStyle(
-                            color: Theme.of(context).textTheme.bodyText1!.color, fontWeight: FontWeight.bold,
-                          ),)
-                      ),
-                  
+                        padding: const EdgeInsets.only(top: 2),
+                        child: Text(
+                          AppLocalizations.of(context)!.statusChanged(
+                              AppLocalizations.of(context)!.normal,
+                              AppLocalizations.of(context)!.danger),
+                          style: new TextStyle(
+                            color: Theme.of(context).textTheme.bodyText1!.color,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
                   ],
                 ),
               ),

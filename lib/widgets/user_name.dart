@@ -3,9 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserName extends StatelessWidget {
   final textController;
-  const UserName(
-      {Key? key, required this.textController})
-      : super(key: key);
+  const UserName({Key? key, required this.textController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +11,7 @@ class UserName extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: TextField(
         controller: textController,
-    
-        decoration: new InputDecoration(  
+        decoration: new InputDecoration(
           prefixIcon: Icon(Icons.person),
           border: new OutlineInputBorder(
             borderSide: new BorderSide(color: Colors.grey[300]!),

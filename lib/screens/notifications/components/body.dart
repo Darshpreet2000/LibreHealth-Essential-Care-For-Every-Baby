@@ -98,7 +98,7 @@ class Body extends StatelessWidget {
           children: [
             ListItemRiskMonitoringAlert(
               parent: "Oni",
-              checkup:  AppLocalizations.of(context)!.postCheckup("90"),
+              checkup: AppLocalizations.of(context)!.postCheckup("90"),
               color: Colors.green,
               value: false,
               inDanger: false,
@@ -117,7 +117,7 @@ class Body extends StatelessWidget {
               value: false,
               inDanger: false,
             ),
-             ListItemRiskMonitoringAlert(
+            ListItemRiskMonitoringAlert(
               parent: "Avi",
               checkup: AppLocalizations.of(context)!.postCheckup("90"),
               color: Colors.yellow,
@@ -133,14 +133,14 @@ class Body extends StatelessWidget {
             ),
             ListItemRiskMonitoringAlert(
               parent: "Jane",
-              checkup:AppLocalizations.of(context)!.postCheckup("90"),
+              checkup: AppLocalizations.of(context)!.postCheckup("90"),
               color: Colors.red,
               value: true,
               inDanger: false,
             ),
             ListItemRiskMonitoringAlert(
               parent: "Jane",
-              checkup:AppLocalizations.of(context)!.postCheckup("90"),
+              checkup: AppLocalizations.of(context)!.postCheckup("90"),
               color: Colors.red,
               value: true,
               inDanger: false,
@@ -152,7 +152,6 @@ class Body extends StatelessWidget {
               value: false,
               inDanger: false,
             ),
-            
           ],
         ),
       ],

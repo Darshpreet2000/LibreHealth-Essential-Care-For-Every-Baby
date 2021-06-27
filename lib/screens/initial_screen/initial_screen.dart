@@ -22,7 +22,8 @@ class InitialScreen extends StatelessWidget {
                       child: LongAppBar())
                   : Container(
                       child: ShortAppBar(
-                      title: AppLocalizations.of(context)!.essentialCareForEveryBaby,
+                      title: AppLocalizations.of(context)!
+                          .essentialCareForEveryBaby,
                     )),
               loginButtons(context, orientation)
             ],
@@ -133,16 +134,20 @@ class InitialScreen extends StatelessWidget {
                     color: Colors.black,
                   ),
                   children: <TextSpan>[
-                    new TextSpan(text: '${AppLocalizations.of(context)!.byContinuingYouAgreeToOur} '),
                     new TextSpan(
-                        text: '${AppLocalizations.of(context)!.privacyPolicies}',
+                        text:
+                            '${AppLocalizations.of(context)!.byContinuingYouAgreeToOur} '),
+                    new TextSpan(
+                        text:
+                            '${AppLocalizations.of(context)!.privacyPolicies}',
                         style: new TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.blue,
                           decoration: TextDecoration.underline,
                         )),
                     new TextSpan(
-                        text: ' ${AppLocalizations.of(context)!.includingOur} ', style: new TextStyle()),
+                        text: ' ${AppLocalizations.of(context)!.includingOur} ',
+                        style: new TextStyle()),
                     new TextSpan(
                         text: AppLocalizations.of(context)!.cookiesUse,
                         style: new TextStyle(

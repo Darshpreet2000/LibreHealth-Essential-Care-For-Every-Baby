@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class ListItem extends StatelessWidget {
   final String parent, ward, gender;
   final Color? color, darkColor;
 
-  const ListItem(this.parent, this.ward, this.gender, this.color, this.darkColor);
+  const ListItem(
+      this.parent, this.ward, this.gender, this.color, this.darkColor);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,8 @@ class ListItem extends StatelessWidget {
                           topRight: Radius.circular(20))),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("${AppLocalizations.of(context)!.minutesFromBirth("22")}",
+                    child: Text(
+                        "${AppLocalizations.of(context)!.minutesFromBirth("22")}",
                         textAlign: TextAlign.start,
                         style: TextStyle(color: Colors.black, fontSize: 16)),
                   ),
@@ -76,7 +77,8 @@ class ListItem extends StatelessWidget {
                                   ),
                                   children: <TextSpan>[
                                     new TextSpan(
-                                        text: AppLocalizations.of(context)!.babyOf("Oni"),
+                                        text: AppLocalizations.of(context)!
+                                            .babyOf("Oni"),
                                         style: TextStyle(
                                             color: Theme.of(context)
                                                 .textTheme
@@ -84,7 +86,6 @@ class ListItem extends StatelessWidget {
                                                 .color,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20)),
-                                  
                                   ],
                                 ),
                               ),
@@ -104,7 +105,8 @@ class ListItem extends StatelessWidget {
                                   ),
                                   children: <TextSpan>[
                                     new TextSpan(
-                                        text: "${AppLocalizations.of(context)!.location}: ",
+                                        text:
+                                            "${AppLocalizations.of(context)!.location}: ",
                                         style: new TextStyle()),
                                     new TextSpan(
                                         text: ward,

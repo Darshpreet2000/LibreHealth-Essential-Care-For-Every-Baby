@@ -8,6 +8,7 @@ class HiveStorageRepository {
     box.put("user", profile);
     markUserAsLoggedIn();
   }
+
   Profile getProfile() {
     var box = Hive.box('eceb');
     return box.get('user');

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:newborn_care/widgets/short_app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'components/body.dart';
@@ -15,7 +15,7 @@ class _ProfileState extends State<Profile> {
       scrollEnabled = !scrollEnabled;
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,16 +32,17 @@ class _ProfileState extends State<Profile> {
             pinned: true,
             toolbarHeight: 80,
             backgroundColor: Colors.transparent,
-            flexibleSpace:
-                MediaQuery.of(context).orientation == Orientation.portrait
-                    ? ShortAppBar(
-                        title: AppLocalizations.of(context)!.eceb,
-                        showDrawer: true,
-                      )
-                    : ShortAppBar(
-                        title:  AppLocalizations.of(context)!.essentialCareForEveryBaby,
-                        showDrawer: true,
-                      ),
+            flexibleSpace: MediaQuery.of(context).orientation ==
+                    Orientation.portrait
+                ? ShortAppBar(
+                    title: AppLocalizations.of(context)!.eceb,
+                    showDrawer: true,
+                  )
+                : ShortAppBar(
+                    title:
+                        AppLocalizations.of(context)!.essentialCareForEveryBaby,
+                    showDrawer: true,
+                  ),
           ),
           SliverList(
               delegate: SliverChildListDelegate([

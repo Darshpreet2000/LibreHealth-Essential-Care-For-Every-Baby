@@ -35,7 +35,7 @@ class _ListOfBabiesState extends State<ListOfBabies> {
           flexibleSpace: PreferredSize(
               preferredSize: Size.fromHeight(80.0),
               child: ShortAppBar(
-                title:  AppLocalizations.of(context)!.listOfBabies,
+                title: AppLocalizations.of(context)!.listOfBabies,
                 showDrawer: true,
               )),
         ),

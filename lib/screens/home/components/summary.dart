@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Widget summary(BuildContext context, GlobalKey globalKey) {
-  final BottomNavigationBar? navigationBar = globalKey.currentWidget as BottomNavigationBar?;
+  final BottomNavigationBar? navigationBar =
+      globalKey.currentWidget as BottomNavigationBar?;
 
   return Container(
     child: Padding(
@@ -31,24 +32,24 @@ Widget summary(BuildContext context, GlobalKey globalKey) {
                     onTap: () {
                       navigationBar!.onTap!(1);
                     },
-                    child:
-                        rowItem( AppLocalizations.of(context)!.admitted, "14", "assets/blue.png", context)),
+                    child: rowItem(AppLocalizations.of(context)!.admitted, "14",
+                        "assets/blue.png", context)),
               ),
               Material(
                 child: InkWell(
                     onTap: () {
                       navigationBar!.onTap!(1);
                     },
-                    child: rowItem(
-                         AppLocalizations.of(context)!.discharged, "10", "assets/grey.png", context)),
+                    child: rowItem(AppLocalizations.of(context)!.discharged,
+                        "10", "assets/grey.png", context)),
               ),
               Material(
                 child: InkWell(
                     onTap: () {
                       navigationBar!.onTap!(1);
                     },
-                    child:
-                        rowItem( AppLocalizations.of(context)!.highRisk, "8", "assets/red.png", context)),
+                    child: rowItem(AppLocalizations.of(context)!.highRisk, "8",
+                        "assets/red.png", context)),
               ),
             ],
           ),

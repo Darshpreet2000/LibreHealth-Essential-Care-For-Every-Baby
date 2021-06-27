@@ -30,7 +30,7 @@ class ShortAppBar extends StatelessWidget {
                   size: 28,
                 ),
                 onPressed: () {
-                  drawerKey!.currentState!.openDrawer();
+                  drawerKey.currentState!.openDrawer();
                 },
               ),
             )
@@ -50,7 +50,8 @@ class ShortAppBar extends StatelessWidget {
             ),
           ),
           Text(
-            AppLocalizations.of(context)!.id+ ": ${HiveStorageRepository().getProfile().id}",
+            AppLocalizations.of(context)!.id +
+                ": ${HiveStorageRepository().getProfile().id}",
             style: new TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
           ),

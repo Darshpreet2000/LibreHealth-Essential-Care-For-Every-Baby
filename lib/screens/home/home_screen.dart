@@ -26,11 +26,12 @@ class Home extends StatelessWidget {
             preferredSize: Size.fromHeight(80.0),
             child: MediaQuery.of(context).orientation == Orientation.portrait
                 ? ShortAppBar(
-                    title:  AppLocalizations.of(context)!.eceb,
+                    title: AppLocalizations.of(context)!.eceb,
                     showDrawer: true,
                   )
                 : ShortAppBar(
-                    title: AppLocalizations.of(context)!.essentialCareForEveryBaby,
+                    title:
+                        AppLocalizations.of(context)!.essentialCareForEveryBaby,
                     showDrawer: true,
                   ),
           ),

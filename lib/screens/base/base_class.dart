@@ -31,65 +31,75 @@ class _BaseClassState extends State<BaseClass> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             _createHeader(),
-            ListTile(leading: Icon(Icons.schedule,color:Theme.of(context).iconTheme.color),
-              title: Text( AppLocalizations.of(context)!.doctorsSchedule,),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(leading: Icon(Icons.message,color:Theme.of(context).iconTheme.color),
-              title: Text( AppLocalizations.of(context)!.messages),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(leading: Icon(Icons.info_rounded,color:Theme.of(context).iconTheme.color),
-              title: Text( AppLocalizations.of(context)!.about),
+            ListTile(
+              leading: Icon(Icons.schedule,
+                  color: Theme.of(context).iconTheme.color),
+              title: Text(
+                AppLocalizations.of(context)!.doctorsSchedule,
+              ),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
             ListTile(
-              
-              leading: Icon(Icons.share,color:Theme.of(context).iconTheme.color),
-              title: Text( AppLocalizations.of(context)!.shareApp),
+              leading:
+                  Icon(Icons.message, color: Theme.of(context).iconTheme.color),
+              title: Text(AppLocalizations.of(context)!.messages),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
             ListTile(
-              leading: Icon(Icons.bug_report,color:Theme.of(context).iconTheme.color),
-              title: Text( AppLocalizations.of(context)!.reportABug),
+              leading: Icon(Icons.info_rounded,
+                  color: Theme.of(context).iconTheme.color),
+              title: Text(AppLocalizations.of(context)!.about),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
             ),
-             ListTile(
-            title: FutureBuilder(
-              future: getAppInfo(),
-              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                if (snapshot.hasData) {
+            ListTile(
+              leading:
+                  Icon(Icons.share, color: Theme.of(context).iconTheme.color),
+              title: Text(AppLocalizations.of(context)!.shareApp),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.bug_report,
+                  color: Theme.of(context).iconTheme.color),
+              title: Text(AppLocalizations.of(context)!.reportABug),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+            ),
+            ListTile(
+              title: FutureBuilder(
+                future: getAppInfo(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(
+                      "v " + snapshot.data,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  }
                   return Text(
-                    "v " + snapshot.data,
+                    "v 1.0.0",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   );
-                }
-                return Text(
-                  "v 1.0.0",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              },
-            ),
-             )
+                },
+              ),
+            )
           ],
         ),
       ),
@@ -107,17 +117,25 @@ class _BaseClassState extends State<BaseClass> {
       bottomNavigationBar: BottomNavigationBar(
         key: widget.globalKey,
         items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label:  AppLocalizations.of(context)!.home,),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.list,
-                size: 25,
-              ),
-              label: AppLocalizations.of(context)!.listOfBabies,),
+            icon: Icon(Icons.home),
+            label: AppLocalizations.of(context)!.home,
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.notifications), label:  AppLocalizations.of(context)!.notifications,),
+            icon: Icon(
+              Icons.list,
+              size: 25,
+            ),
+            label: AppLocalizations.of(context)!.listOfBabies,
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded), label:  AppLocalizations.of(context)!.profile,),
+            icon: Icon(Icons.notifications),
+            label: AppLocalizations.of(context)!.notifications,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_rounded),
+            label: AppLocalizations.of(context)!.profile,
+          ),
         ],
         currentIndex: selectedIndex,
         fixedColor: Colors.blue[800],
@@ -133,7 +151,6 @@ class _BaseClassState extends State<BaseClass> {
     });
   }
 
-
   Future getAppInfo() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
@@ -141,13 +158,11 @@ class _BaseClassState extends State<BaseClass> {
     return version;
   }
 
-
   Widget _createHeader() {
     return DrawerHeader(
-              decoration: BoxDecoration(color: Color(0xff82A0C8)),
-              child: Column(
+      decoration: BoxDecoration(color: Color(0xff82A0C8)),
+      child: Column(
         children: <Widget>[
-         
           Expanded(
             child: Align(
               alignment: Alignment.center,
@@ -177,10 +192,8 @@ class _BaseClassState extends State<BaseClass> {
               ),
             ),
           ),
-         
         ],
       ),
-            );
+    );
   }
 }
-

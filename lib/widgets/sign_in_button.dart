@@ -25,7 +25,7 @@ class SignIn extends StatelessWidget {
       width: 180,
       child: ElevatedButton(
         child: new Text(
-         AppLocalizations.of(context)!.signin,
+          AppLocalizations.of(context)!.signin,
           style: TextStyle(
               fontSize: 16,
               color: calculateWhetherDisabledReturnsBool()
@@ -38,7 +38,6 @@ class SignIn extends StatelessWidget {
                 BlocProvider.of<AuthenticationBloc>(context).add(
                     AuthenticationLoginEvent(userNameTextController.text,
                         passwordTextController.text));
-             
               },
         style: ElevatedButton.styleFrom(
             primary: Colors.white,

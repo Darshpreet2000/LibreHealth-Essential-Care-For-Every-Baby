@@ -11,7 +11,7 @@ class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   AuthenticationRepository authenticationRepository;
   HiveStorageRepository hiveStorageRepository;
-  AuthenticationBloc(this.authenticationRepository,this.hiveStorageRepository)
+  AuthenticationBloc(this.authenticationRepository, this.hiveStorageRepository)
       : super(AuthenticationInitial());
 
   @override
@@ -21,10 +21,10 @@ class AuthenticationBloc
     if (event is AuthenticationLoginEvent) {
       yield AuthenticationLoading();
       try {
-           Profile profile = await authenticationRepository.loginUser(
+        Profile profile = await authenticationRepository.loginUser(
             event.username, event.password);
-          hiveStorageRepository.storeProfile(profile);
-        
+        hiveStorageRepository.storeProfile(profile);
+
         yield AuthenticationLoaded();
       } catch (e) {
         yield AuthenticationError(e.toString());

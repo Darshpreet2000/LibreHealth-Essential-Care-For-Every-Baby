@@ -31,7 +31,7 @@ class Body extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 8, 8, 0),
             child: Text(
-             AppLocalizations.of(context)!.pastRegistered,
+              AppLocalizations.of(context)!.pastRegistered,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               textAlign: TextAlign.start,
             ),

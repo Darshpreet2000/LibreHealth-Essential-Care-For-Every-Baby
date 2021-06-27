@@ -39,7 +39,8 @@ class _BodyState extends State<Body> {
                       (MediaQuery.of(context).size.height > 600)
                   ? LongAppBar()
                   : ShortAppBar(
-                      title: AppLocalizations.of(context)!.essentialCareForEveryBaby,
+                      title: AppLocalizations.of(context)!
+                          .essentialCareForEveryBaby,
                     ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

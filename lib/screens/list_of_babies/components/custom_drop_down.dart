@@ -51,7 +51,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                           AppLocalizations.of(context)!.time,
+                              AppLocalizations.of(context)!.time,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -68,7 +68,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                             AppLocalizations.of(context)!.status,
+                              AppLocalizations.of(context)!.status,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -85,7 +85,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                            AppLocalizations.of(context)!.location,
+                              AppLocalizations.of(context)!.location,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -132,8 +132,8 @@ class _CustomDropDownState extends State<CustomDropDown> {
           children: [
             Flexible(
               child: Text(
-              AppLocalizations.of(context)!.sortBy,  overflow: TextOverflow.ellipsis,
-                    
+                AppLocalizations.of(context)!.sortBy,
+                overflow: TextOverflow.ellipsis,
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),

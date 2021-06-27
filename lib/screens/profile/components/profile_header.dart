@@ -33,7 +33,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                       AppLocalizations.of(context)!.accountDetails,
+                        AppLocalizations.of(context)!.accountDetails,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),

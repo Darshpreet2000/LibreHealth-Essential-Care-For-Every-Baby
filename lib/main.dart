@@ -26,7 +26,10 @@ void main() async {
   runApp(MyApp());
 }
 
-GlobalKey<ScaffoldState>? drawerKey; 
+GlobalKey<ScaffoldState> drawerKey = new GlobalKey<ScaffoldState>();
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerGlobalKey =
+    GlobalKey<ScaffoldMessengerState>(debugLabel: 'app_localization_key');
+
 Future registerHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProfileAdapter());
@@ -48,35 +51,32 @@ class _MyAppState extends State<MyApp> {
     }
     super.initState();
   }
-  
- @override
+
+  @override
   Widget build(BuildContext context) {
-     
     GlobalKey globalKey = new GlobalKey(debugLabel: 'btm_app_bar');
-    drawerKey = new GlobalKey<ScaffoldState>();
 
     return MultiBlocProvider(
       providers: [
-      
         BlocProvider<RegisterBabyBloc>(
           create: (BuildContext context) => RegisterBabyBloc(
               RegisterBabyModel(), RegisterBabyRepositoryImpl()),
         ),
         BlocProvider<AuthenticationBloc>(
-          create: (BuildContext context) =>
-              AuthenticationBloc(AuthenticationRepository(),HiveStorageRepository()),
+          create: (BuildContext context) => AuthenticationBloc(
+              AuthenticationRepository(), HiveStorageRepository()),
         ),
       ],
       child: Center(
         child: MaterialApp(
+          scaffoldMessengerKey: scaffoldMessengerGlobalKey,
           title: 'Newborn Care',
           localizationsDelegates: [
-             AppLocalizations.delegate, // Add this line
-             GlobalMaterialLocalizations.delegate,
-             GlobalWidgetsLocalizations.delegate,
-             GlobalCupertinoLocalizations.delegate,
+            AppLocalizations.delegate, // Add this line
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
           ],
-           
           supportedLocales: [
             const Locale('en', ''), // English, no country code
             const Locale('hi', ''), // Hindi, no country code

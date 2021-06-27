@@ -25,21 +25,23 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-           AppLocalizations.of(context)!.babysDetails,
+            AppLocalizations.of(context)!.babysDetails,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-           AppLocalizations.of(context)!.gender,
+            AppLocalizations.of(context)!.gender,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-         GenderButton(AppLocalizations.of(context)!.male,AppLocalizations.of(context)!.female, widget._babyDetails),
+        GenderButton(AppLocalizations.of(context)!.male,
+            AppLocalizations.of(context)!.female, widget._babyDetails),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(AppLocalizations.of(context)!.birthDateTime,
+          child: Text(
+            AppLocalizations.of(context)!.birthDateTime,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
@@ -51,9 +53,9 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                       DateTime(DateTime.now().year, DateTime.now().month, 1),
                   maxTime: DateTime.now(),
                   onChanged: (date) {}, onConfirm: (date) {
-                  setState(() {
-                     widget._babyDetails.birthDateTime = date;
-                  });
+                setState(() {
+                  widget._babyDetails.birthDateTime = date;
+                });
               }, locale: LocaleType.en);
             },
             child: Container(
@@ -66,11 +68,13 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                         padding: const EdgeInsets.all(2.0),
                         child: Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget._babyDetails.birthDateTime.day.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.day
+                                .toString()),
                           ),
                         ),
                       ),
@@ -78,12 +82,13 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                         padding: const EdgeInsets.all(2.0),
                         child: Container(
                           decoration: BoxDecoration(
-                           borderRadius: BorderRadius.all(Radius.circular(8)),
-                          
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget._babyDetails.birthDateTime.month.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.month
+                                .toString()),
                           ),
                         ),
                       ),
@@ -91,12 +96,13 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                         padding: const EdgeInsets.all(2.0),
                         child: Container(
                           decoration: BoxDecoration(
-                           borderRadius: BorderRadius.all(Radius.circular(8)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            
-                            child: Text(widget._babyDetails.birthDateTime.year.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.year
+                                .toString()),
                           ),
                         ),
                       )
@@ -108,11 +114,13 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                         padding: const EdgeInsets.all(2.0),
                         child: Container(
                           decoration: BoxDecoration(
-                           borderRadius: BorderRadius.all(Radius.circular(8)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget._babyDetails.birthDateTime.hour.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.hour
+                                .toString()),
                           ),
                         ),
                       ),
@@ -120,11 +128,13 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
                         padding: const EdgeInsets.all(2.0),
                         child: Container(
                           decoration: BoxDecoration(
-                           borderRadius: BorderRadius.all(Radius.circular(8)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
                               border: Border.all(color: Colors.blue)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(widget._babyDetails.birthDateTime.minute.toString()),
+                            child: Text(widget._babyDetails.birthDateTime.minute
+                                .toString()),
                           ),
                         ),
                       )
@@ -135,26 +145,30 @@ class _RegisterBabyDetailsState extends State<RegisterBabyDetails> {
             )),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(AppLocalizations.of(context)!.weightOfBabyInGrams,
+          child: Text(
+            AppLocalizations.of(context)!.weightOfBabyInGrams,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
         Center(child: WeightSlider(widget._babyDetails)),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(AppLocalizations.of(context)!.skinColorChangesInNewBorn,
+          child: Text(
+            AppLocalizations.of(context)!.skinColorChangesInNewBorn,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-        SkinColorChangesButton(AppLocalizations.of(context)!.yes,AppLocalizations.of(context)!.no, widget._babyDetails),
+        SkinColorChangesButton(AppLocalizations.of(context)!.yes,
+            AppLocalizations.of(context)!.no, widget._babyDetails),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(AppLocalizations.of(context)!.traumasDuringBirth,
+          child: Text(
+            AppLocalizations.of(context)!.traumasDuringBirth,
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-        TraumasDuringBirthButton(AppLocalizations.of(context)!.yes,AppLocalizations.of(context)!.no,
-            widget._babyDetails),
+        TraumasDuringBirthButton(AppLocalizations.of(context)!.yes,
+            AppLocalizations.of(context)!.no, widget._babyDetails),
       ]),
     );
   }
@@ -186,10 +200,8 @@ class _WeightSliderState extends State<WeightSlider> {
       data: SfSliderThemeData(
         activeMinorTickColor: Colors.red,
         inactiveMinorTickColor: Colors.red[200],
-           
       ),
       child: SfSlider(
-       
         min: 1000.0,
         max: 4000.0,
         interval: 1000,

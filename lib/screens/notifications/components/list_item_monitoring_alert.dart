@@ -67,7 +67,7 @@ class _ListItemMonitoringAlert extends State<ListItemRiskMonitoringAlert> {
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
                       child: Text(
-                        "${ AppLocalizations.of(context)!.location}: Prenatal Ward",
+                        "${AppLocalizations.of(context)!.location}: Prenatal Ward",
                       ),
                     ),
                     Padding(

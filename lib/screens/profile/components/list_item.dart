@@ -22,7 +22,7 @@ class ListItem extends StatelessWidget {
             padding: const EdgeInsets.only(
                 left: 16.0, right: 16.0, top: 8, bottom: 8),
             child: Text(
-              listHeading! ,
+              listHeading!,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               textAlign: TextAlign.start,
             ),

@@ -1,31 +1,25 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:newborn_care/main.dart';
-
 class CustomException implements Exception {
   final _message;
   final _prefix;
-
-  CustomException([this._message, this._prefix]);
+  CustomException([this._prefix, this._message]);
 
   String toString() {
-    return "$_prefix$_message";
+    return "$_prefix: $_message";
   }
 }
 
 class FetchDataException extends CustomException {
-  FetchDataException(message)
-      : super(message,
-            "${AppLocalizations.of(drawerKey!.currentContext!)!.errorDuringCommunication}: ");
+  FetchDataException(prefix, message) : super(prefix, message);
 }
 
 class BadRequestException extends CustomException {
-  BadRequestException([message]) : super(message, "${AppLocalizations.of(drawerKey!.currentContext!)!.invalidRequest}: ");
+  BadRequestException(prefix, message) : super(prefix, message);
 }
 
 class UnauthorisedException extends CustomException {
-  UnauthorisedException(message) : super(message, "${AppLocalizations.of(drawerKey!.currentContext!)!.unauthorised}: ");
+  UnauthorisedException(prefix, message) : super(prefix, message);
 }
 
 class InvalidInputException extends CustomException {
-  InvalidInputException(message) : super(message, "${AppLocalizations.of(drawerKey!.currentContext!)!.invalidInput}: ");
+  InvalidInputException(prefix, message) : super(prefix, message);
 }

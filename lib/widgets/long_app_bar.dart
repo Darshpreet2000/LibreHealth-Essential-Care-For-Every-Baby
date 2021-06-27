@@ -24,7 +24,7 @@ class LongAppBar extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: Text(
-              AppLocalizations.of(context)!.essentialCareForEveryBaby,
+                AppLocalizations.of(context)!.essentialCareForEveryBaby,
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

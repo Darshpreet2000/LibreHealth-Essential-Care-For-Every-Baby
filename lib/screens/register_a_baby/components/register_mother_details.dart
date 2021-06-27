@@ -42,14 +42,13 @@ class _RegisterMotherDetailsState extends State<RegisterMotherDetails> {
                   widget._registerBabyModel.motherName = _value;
                 },
                 decoration: new InputDecoration(
-                  border: new OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(
-                        const Radius.circular(20.0),
-                      ),
-                      borderSide: new BorderSide(color: Colors.grey)),
-                  hintText: AppLocalizations.of(context)!.mothersName,
-                  labelText: AppLocalizations.of(context)!.mothersName
-                )),
+                    border: new OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(20.0),
+                        ),
+                        borderSide: new BorderSide(color: Colors.grey)),
+                    hintText: AppLocalizations.of(context)!.mothersName,
+                    labelText: AppLocalizations.of(context)!.mothersName)),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -71,29 +70,23 @@ class _RegisterMotherDetailsState extends State<RegisterMotherDetails> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-             AppLocalizations.of(context)!.babiesDelivered,
+              AppLocalizations.of(context)!.babiesDelivered,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
           BabiesDeliveredButton(
-             AppLocalizations.of(context)!.single,
-
-             AppLocalizations.of(context)!.multiple,
+              AppLocalizations.of(context)!.single,
+              AppLocalizations.of(context)!.multiple,
               widget._registerBabyModel),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-            
-             AppLocalizations.of(context)!.modeOfDelivery,
+              AppLocalizations.of(context)!.modeOfDelivery,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
-          ModeOfDeliveryButton(
-            
-             AppLocalizations.of(context)!.normal,
-            
-             AppLocalizations.of(context)!.others,
-              widget._registerBabyModel),
+          ModeOfDeliveryButton(AppLocalizations.of(context)!.normal,
+              AppLocalizations.of(context)!.others, widget._registerBabyModel),
         ],
       ),
     );
