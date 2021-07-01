@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Phase1 extends StatefulWidget {
   const Phase1({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class _Phase1State extends State<Phase1> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("0-60 minutes From Birth (Phase-1)",
+                child: Text(AppLocalizations.of(context)!.phase1,
                     textAlign: TextAlign.start,
                     style: TextStyle(color: Colors.black, fontSize: 16)),
               ),
@@ -50,7 +51,7 @@ class _Phase1State extends State<Phase1> {
                 Expanded(
                   flex: 1,
                   child: Text(
-                    "Current Location: ",
+                  AppLocalizations.of(context)!.currentLocation,
                     style: TextStyle(fontSize: 14),
                   ),
                 ),
@@ -67,8 +68,8 @@ class _Phase1State extends State<Phase1> {
                                 const Radius.circular(20.0),
                               ),
                               borderSide: new BorderSide(color: Colors.grey)),
-                          hintText: 'Ward\'s Name',
-                          labelText: 'Ward\'s Name',
+                          hintText: AppLocalizations.of(context)!.wardsName,
+                          labelText: AppLocalizations.of(context)!.wardsName,
                         )),
                   ),
                 ),
@@ -84,7 +85,7 @@ class _Phase1State extends State<Phase1> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Assessments Performed: ",
+                  AppLocalizations.of(context)!.assessmentsPerformed,
                   style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,
@@ -92,7 +93,7 @@ class _Phase1State extends State<Phase1> {
                 ),
                 CheckboxListTile(
                   title: Text(
-                    "Skin to Skin Care Given",
+                    AppLocalizations.of(context)!.skinToSkinCareGiven,
                     style: TextStyle(
                         color: Colors.blue[700], fontWeight: FontWeight.bold),
                   ),
@@ -107,7 +108,7 @@ class _Phase1State extends State<Phase1> {
                 ),
                 CheckboxListTile(
                   title: Text(
-                    "Breathing Monitored",
+                  AppLocalizations.of(context)!.breathingMonitored,                    
                     style: TextStyle(
                         color: Colors.blue[700], fontWeight: FontWeight.bold),
                   ),
@@ -122,7 +123,7 @@ class _Phase1State extends State<Phase1> {
                 ),
                 CheckboxListTile(
                   title: Text(
-                    "Breast Feeding Initiated",
+                    AppLocalizations.of(context)!.breastFeedingInitiated,
                     style: TextStyle(
                         color: Colors.blue[700], fontWeight: FontWeight.bold),
                   ),
@@ -149,7 +150,7 @@ class _Phase1State extends State<Phase1> {
                 setState(() {});
               },
               child: Text(
-                "Save Assessments",
+                AppLocalizations.of(context)!.saveAssessments,    
                 style: TextStyle(
                   color: Colors.white,
                 ),
