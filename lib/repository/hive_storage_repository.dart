@@ -5,7 +5,7 @@ import 'package:newborn_care/models/profile.dart';
 class HiveStorageRepository {
   // Hive Storage Network Queue
   void storeNetworkRequest(NetworkRequest request) {
-     Box<List> listBox= Hive.box<List>('eceblist');
+    Box<List> listBox = Hive.box<List>('eceblist');
     List<NetworkRequest> networkRequests = [];
     if (listBox.containsKey('networkRequest'))
       networkRequests = listBox.get('networkRequest')!.cast<NetworkRequest>();
@@ -14,12 +14,12 @@ class HiveStorageRepository {
   }
 
   void storeNetworkRequestList(List<NetworkRequest> networkRequests) {
-     Box<List> listBox= Hive.box<List>('eceblist');
+    Box<List> listBox = Hive.box<List>('eceblist');
     listBox.put('networkRequest', networkRequests);
   }
 
   List<NetworkRequest> getNetworkRequests() {
-   Box<List> listBox= Hive.box<List>('eceblist');
+    Box<List> listBox = Hive.box<List>('eceblist');
     List<NetworkRequest> networkRequests = [];
     print(listBox.keys);
     if (listBox.containsKey('networkRequest'))

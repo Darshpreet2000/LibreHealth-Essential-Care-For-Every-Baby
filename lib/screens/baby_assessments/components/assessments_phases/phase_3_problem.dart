@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class Phase3Problem extends StatelessWidget {
   const Phase3Problem({Key? key}) : super(key: key);
 
@@ -30,7 +31,7 @@ class Phase3Problem extends StatelessWidget {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Text(
-                AppLocalizations.of(context)!.followingInterventionsToBeTaken,
+              AppLocalizations.of(context)!.followingInterventionsToBeTaken,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Padding(
@@ -41,7 +42,7 @@ class Phase3Problem extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: CheckboxListTile(
                   title: Text(
-                     AppLocalizations.of(context)!.prolongedSkinToSkin,
+                    AppLocalizations.of(context)!.prolongedSkinToSkin,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
@@ -59,7 +60,7 @@ class Phase3Problem extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: CheckboxListTile(
                   title: Text(
-                  AppLocalizations.of(context)!.expressBreastMilk,
+                    AppLocalizations.of(context)!.expressBreastMilk,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
@@ -95,7 +96,7 @@ class Phase3Problem extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: CheckboxListTile(
                   title: Text(
-                      AppLocalizations.of(context)!.improveThermalCare,
+                    AppLocalizations.of(context)!.improveThermalCare,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),

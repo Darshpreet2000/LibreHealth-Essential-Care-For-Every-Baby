@@ -4,7 +4,7 @@ import 'package:newborn_care/exceptions/custom_exceptions.dart';
 import 'package:newborn_care/models/request_type.dart';
 
 class RefreshClient {
-   http.Client client;
+  http.Client client;
   Map<String, String> map;
   RefreshClient(this.client, this.map);
   Future doNetworkRequest(dynamic request) async {
@@ -20,10 +20,9 @@ class RefreshClient {
         response = await http.get(
           Uri.parse(request.url),
           headers: request.headers,
-       
         );
       return _response(response);
-    }  on SocketException {
+    } on SocketException {
       throw FetchDataException(map["noInternetConnection"], 503);
     }
   }

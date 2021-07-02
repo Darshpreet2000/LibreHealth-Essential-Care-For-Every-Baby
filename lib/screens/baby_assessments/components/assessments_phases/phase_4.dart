@@ -4,6 +4,7 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class Phase4 extends StatefulWidget {
   const Phase4({Key? key}) : super(key: key);
 
@@ -57,8 +58,7 @@ class _Phase4State extends State<Phase4> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                    AppLocalizations.of(context)!.checkupAfter90Minutes,
+                child: Text(AppLocalizations.of(context)!.checkupAfter90Minutes,
                     textAlign: TextAlign.start,
                     style: TextStyle(color: Colors.black, fontSize: 16)),
               ),
@@ -89,7 +89,7 @@ class _Phase4State extends State<Phase4> {
                               ),
                               borderSide: new BorderSide(color: Colors.grey)),
                           hintText: AppLocalizations.of(context)!.wardsName,
-                          labelText:AppLocalizations.of(context)!.wardsName,
+                          labelText: AppLocalizations.of(context)!.wardsName,
                         )),
                   ),
                 ),
@@ -108,7 +108,7 @@ class _Phase4State extends State<Phase4> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                   AppLocalizations.of(context)!.weightOfBabyInGrams,
+                    AppLocalizations.of(context)!.weightOfBabyInGrams,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -116,9 +116,10 @@ class _Phase4State extends State<Phase4> {
                   padding: const EdgeInsets.all(8.0),
                   child: Center(child: WeightSlider()),
                 ),
-                 Padding(
+                Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(AppLocalizations.of(context)!.temperatureOfBabyInFarenheit,
+                  child: Text(
+                    AppLocalizations.of(context)!.temperatureOfBabyInFarenheit,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -128,39 +129,49 @@ class _Phase4State extends State<Phase4> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(AppLocalizations.of(context)!.fastBreathing,
+                  child: Text(
+                    AppLocalizations.of(context)!.fastBreathing,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                SwtichYesNo(AppLocalizations.of(context)!.yes,AppLocalizations.of(context)!.no, fastBreathing),
+                SwtichYesNo(AppLocalizations.of(context)!.yes,
+                    AppLocalizations.of(context)!.no, fastBreathing),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(AppLocalizations.of(context)!.chestIndrawing,
+                  child: Text(
+                    AppLocalizations.of(context)!.chestIndrawing,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                SwtichYesNo(AppLocalizations.of(context)!.yes,AppLocalizations.of(context)!.no, chestIndrawing),
+                SwtichYesNo(AppLocalizations.of(context)!.yes,
+                    AppLocalizations.of(context)!.no, chestIndrawing),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(AppLocalizations.of(context)!.isBabyFeedingProperly,
+                  child: Text(
+                    AppLocalizations.of(context)!.isBabyFeedingProperly,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                SwtichYesNo(AppLocalizations.of(context)!.yes, AppLocalizations.of(context)!.no, isFeeding),
+                SwtichYesNo(AppLocalizations.of(context)!.yes,
+                    AppLocalizations.of(context)!.no, isFeeding),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(AppLocalizations.of(context)!.convulsionsSigns,
+                  child: Text(
+                    AppLocalizations.of(context)!.convulsionsSigns,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                SwtichYesNo(AppLocalizations.of(context)!.yes, AppLocalizations.of(context)!.no, convulsions),
+                SwtichYesNo(AppLocalizations.of(context)!.yes,
+                    AppLocalizations.of(context)!.no, convulsions),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(AppLocalizations.of(context)!.jaundiceSigns,
+                  child: Text(
+                    AppLocalizations.of(context)!.jaundiceSigns,
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                SwtichYesNo(AppLocalizations.of(context)!.yes,AppLocalizations.of(context)!.no, convulsions),
+                SwtichYesNo(AppLocalizations.of(context)!.yes,
+                    AppLocalizations.of(context)!.no, convulsions),
               ],
             ),
           ),
@@ -172,7 +183,8 @@ class _Phase4State extends State<Phase4> {
                   shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0))),
               onPressed: () {},
-              child: Text(AppLocalizations.of(context)!.saveAssessments,
+              child: Text(
+                AppLocalizations.of(context)!.saveAssessments,
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -194,7 +206,6 @@ class ExaminationsCheckBoxList extends StatefulWidget {
 }
 
 class _ExaminationsCheckBoxListState extends State<ExaminationsCheckBoxList> {
-  
   List<List<bool>> checkBoxListState = [];
 
   @override
@@ -209,19 +220,35 @@ class _ExaminationsCheckBoxListState extends State<ExaminationsCheckBoxList> {
   @override
   Widget build(BuildContext context) {
     var checkBoxListTitles = [
-    [AppLocalizations.of(context)!.head, AppLocalizations.of(context)!.genitals],
-    [AppLocalizations.of(context)!.eyes, AppLocalizations.of(context)!.anus],
-    [AppLocalizations.of(context)!.earsnosethroat, AppLocalizations.of(context)!.muscuoskeletal],
-    [AppLocalizations.of(context)!.chest,AppLocalizations.of(context)!.neurological],
-    [AppLocalizations.of(context)!.cardiovascular, AppLocalizations.of(context)!.skin],
-    [AppLocalizations.of(context)!.abdomen, AppLocalizations.of(context)!.overall]
-  ];
+      [
+        AppLocalizations.of(context)!.head,
+        AppLocalizations.of(context)!.genitals
+      ],
+      [AppLocalizations.of(context)!.eyes, AppLocalizations.of(context)!.anus],
+      [
+        AppLocalizations.of(context)!.earsnosethroat,
+        AppLocalizations.of(context)!.muscuoskeletal
+      ],
+      [
+        AppLocalizations.of(context)!.chest,
+        AppLocalizations.of(context)!.neurological
+      ],
+      [
+        AppLocalizations.of(context)!.cardiovascular,
+        AppLocalizations.of(context)!.skin
+      ],
+      [
+        AppLocalizations.of(context)!.abdomen,
+        AppLocalizations.of(context)!.overall
+      ]
+    ];
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(AppLocalizations.of(context)!.systematicExaminationsPerformed,
+          Text(
+            AppLocalizations.of(context)!.systematicExaminationsPerformed,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
@@ -283,6 +310,7 @@ class _ExaminationsCheckBoxListState extends State<ExaminationsCheckBoxList> {
     );
   }
 }
+
 class WeightSlider extends StatefulWidget {
   WeightSlider();
 

@@ -23,7 +23,7 @@ import 'bloc/refresh_bloc/refresh_bloc.dart';
 import 'bloc/register_baby_bloc/register_baby_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'models/network_request.dart'; 
+import 'models/network_request.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,10 +66,9 @@ class _MyAppState extends State<MyApp> {
 
     return MultiBlocProvider(
       providers: [
-         BlocProvider<RefreshBloc>(
+        BlocProvider<RefreshBloc>(
           create: (BuildContext context) => RefreshBloc(RefreshRepository()),
         ),
-        
         BlocProvider<RegisterBabyBloc>(
           create: (BuildContext context) => RegisterBabyBloc(
               RegisterBabyModel(), RegisterBabyRepositoryImpl()),

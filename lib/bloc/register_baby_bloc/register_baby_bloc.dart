@@ -36,7 +36,7 @@ class RegisterBabyBloc extends Bloc<RegisterBabyEvent, RegisterBabyState> {
         //push data to dhis2 using api
         await _registerBabyRepositoryImpl
             .registerBabyDetails(_registerBabyModel);
-       
+
         BlocProvider.of<RefreshBloc>(event.context).add(RefreshEventStart());
         _registerBabyModel = new RegisterBabyModel();
         yield RegisterBabyRegisteredState();

@@ -51,7 +51,7 @@ class _Phase1State extends State<Phase1> {
                 Expanded(
                   flex: 1,
                   child: Text(
-                  AppLocalizations.of(context)!.currentLocation,
+                    AppLocalizations.of(context)!.currentLocation,
                     style: TextStyle(fontSize: 14),
                   ),
                 ),
@@ -108,7 +108,7 @@ class _Phase1State extends State<Phase1> {
                 ),
                 CheckboxListTile(
                   title: Text(
-                  AppLocalizations.of(context)!.breathingMonitored,                    
+                    AppLocalizations.of(context)!.breathingMonitored,
                     style: TextStyle(
                         color: Colors.blue[700], fontWeight: FontWeight.bold),
                   ),
@@ -150,7 +150,7 @@ class _Phase1State extends State<Phase1> {
                 setState(() {});
               },
               child: Text(
-                AppLocalizations.of(context)!.saveAssessments,    
+                AppLocalizations.of(context)!.saveAssessments,
                 style: TextStyle(
                   color: Colors.white,
                 ),

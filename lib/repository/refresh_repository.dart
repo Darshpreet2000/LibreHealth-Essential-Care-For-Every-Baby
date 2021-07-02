@@ -4,6 +4,7 @@ import 'package:newborn_care/network/refresh_client.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
+
 class RefreshRepository {
   Map<String, String> m = new Map();
   RefreshRepository() {

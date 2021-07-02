@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class Phase3Danger extends StatelessWidget {
   const Phase3Danger({Key? key}) : super(key: key);
 
@@ -26,10 +27,11 @@ class Phase3Danger extends StatelessWidget {
         child: Column(
           children: [
             Text(
-             AppLocalizations.of(context)!.theBabyHasBeenClassifiedDanger,
+              AppLocalizations.of(context)!.theBabyHasBeenClassifiedDanger,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            Text(  AppLocalizations.of(context)!.followingInterventionsToBeTaken,
+            Text(
+              AppLocalizations.of(context)!.followingInterventionsToBeTaken,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Padding(
@@ -40,7 +42,7 @@ class Phase3Danger extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: CheckboxListTile(
                   title: Text(
-                     AppLocalizations.of(context)!.gaveAntibiotics,
+                    AppLocalizations.of(context)!.gaveAntibiotics,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
@@ -58,7 +60,7 @@ class Phase3Danger extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: CheckboxListTile(
                   title: Text(
-                      AppLocalizations.of(context)!.soughAdvancedCare,
+                    AppLocalizations.of(context)!.soughAdvancedCare,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),

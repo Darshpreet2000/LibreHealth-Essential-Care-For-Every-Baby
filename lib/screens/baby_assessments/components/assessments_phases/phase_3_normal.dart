@@ -76,7 +76,9 @@ class Phase3Normal extends StatelessWidget {
                     color: Colors.green[100],
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: CheckboxListTile(
-                  title: Text(AppLocalizations.of(context)!.adviseAboutBreastFeedingProblems,
+                  title: Text(
+                    AppLocalizations.of(context)!
+                        .adviseAboutBreastFeedingProblems,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
