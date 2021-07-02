@@ -68,7 +68,10 @@ class _MyAppState extends State<MyApp> {
 
     return MultiBlocProvider(
       providers: [
-       
+        BlocProvider<UserActivityBloc>(
+          create: (BuildContext context) => UserActivityBloc(
+              UserActivityRepository(), HiveStorageRepository()),
+        ),
         BlocProvider<RefreshBloc>(
           create: (BuildContext context) => RefreshBloc(RefreshRepository()),
         ),

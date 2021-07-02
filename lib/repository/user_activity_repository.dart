@@ -30,6 +30,24 @@ class UserActivityRepository {
     });
   }
   Future fetchUsersMessages() async {
-    
+    try {
+      Profile profile = HiveStorageRepository().getProfile();
+      String response = await UserActivityClient(http.Client(), m)
+          .fetchUserMessages(profile.username, profile.password);
+      Map<String, dynamic> res = jsonDecode(response);
+      List<UserActivity> result = [];
+      for (var item in res['messageConversations']) {
+        UserActivity userActivity = UserActivity.fromJson(item);
+        String details = await UserActivityClient(http.Client(), m)
+            .fetchUserMessagesDetails(
+                profile.username, profile.password, userActivity.id);
+        res = jsonDecode(details);
+        userActivity.dateTime = DateTime.parse(res["created"]);
+        result.add(userActivity);
+      }
+      return result;
+    } catch (e) {
+      throw e;
+    }
   }
 }
