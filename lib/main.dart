@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
+import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
 import 'package:newborn_care/models/request_type.dart';
@@ -24,6 +25,7 @@ import 'bloc/register_baby_bloc/register_baby_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'models/network_request.dart';
+import 'repository/user_activity_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,6 +68,7 @@ class _MyAppState extends State<MyApp> {
 
     return MultiBlocProvider(
       providers: [
+       
         BlocProvider<RefreshBloc>(
           create: (BuildContext context) => RefreshBloc(RefreshRepository()),
         ),

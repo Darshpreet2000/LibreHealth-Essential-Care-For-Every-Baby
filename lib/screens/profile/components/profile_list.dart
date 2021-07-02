@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
 import 'package:newborn_care/screens/list_of_babies/components/custom_drop_down.dart';
 import 'package:newborn_care/screens/profile/components/list_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -12,40 +14,49 @@ class ProfileList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration:
-            BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10))),
-        margin: EdgeInsets.all(16),
-        child: Material(
-          elevation: 35,
-          child: Column(
-            children: [
-              listHeading(context),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  rowItem(AppLocalizations.of(context)!.registeredBabies, "14",
-                      context),
-                  rowItem(AppLocalizations.of(context)!.dischargedBabies, "10",
-                      context),
-                  rowItem(AppLocalizations.of(context)!.dischargedBabies, "8",
-                      context),
-                ],
-              ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return ListItem(
-                    listHeading:
-                        "Baby of Oni has been registered at prenatal ward",
-                  );
-                },
-              )
-            ],
-          ),
-        ));
+    return BlocBuilder<UserActivityBloc, UserActivityState>(
+      builder: (context, state) {
+        if (state is UserActivityLoaded)
+          return Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10))),
+              margin: EdgeInsets.all(16),
+              child: Material(
+                elevation: 35,
+                child: Column(
+                  children: [
+                    listHeading(context),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        rowItem(AppLocalizations.of(context)!.registeredBabies,
+                            "14", context),
+                        rowItem(AppLocalizations.of(context)!.dischargedBabies,
+                            "10", context),
+                        rowItem(AppLocalizations.of(context)!.dischargedBabies,
+                            "8", context),
+                      ],
+                    ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: state.userActivityList.length,
+                      itemBuilder: (context, index) {
+                        return ListItem(
+                          listHeading: state.userActivityList[index].title,
+                          dateTime: state.userActivityList[index].dateTime,
+                        );
+                      },
+                    )
+                  ],
+                ),
+              ));
+        if (state is UserActivityError) {
+          return Container();
+        }
+        return CircularProgressIndicator();
+      },
+    );
   }
 
   Widget rowItem(String title, String number, BuildContext context) {
