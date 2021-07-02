@@ -184,5 +184,21 @@
     "skin": "Skin",
     "abdomen":"Abdomen",
     "overall": "Overall",
-    "systematicExaminationsPerformed":"Systematic Examinations Performed :"      
+    "systematicExaminationsPerformed":"Systematic Examinations Performed :",      
+    "theBabyHasBeenClassifiedNormal":"The baby has been classified as Normal",
+    "followingInterventionsToBeTaken":"Following interventions to be taken:",
+    "maintainNormalTemperature": "Maintain Normal Temperature",
+    "supportBreastFeeding":"Support BreastFeeding",
+    "adviseAboutBreastFeedingProblems": "Advise About BreastFeeding Problems",
+    "immunize":"Immunize",
+    "theBabyHasBeenClassifiedDanger":"The baby has been classified as Danger",
+    "theBabyHasBeenClassifiedProblem":"The baby has been classified as Problem",
+    "gaveAntibiotics":"Gave Antibiotics",
+    "soughAdvancedCare": "Sought Advanced Care",
+    "prolongedSkinToSkin":  "Prolonged skin-to-skin",
+    "expressBreastMilk":"Express Breast Milk",
+    "useAlternativeFeedingMethods":"Use Alternative Feeding Methods",
+    "improveThermalCare": "Improve Thermal Care",
+    "continuedInpatientCare":"Continued inpatient care",
+    "checkupAfter90Minutes":"Checkup After 90 Minutes"
  }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class Phase3Problem extends StatelessWidget {
   const Phase3Problem({Key? key}) : super(key: key);
 
@@ -25,11 +26,11 @@ class Phase3Problem extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "The baby has been classified as Problem",
+              AppLocalizations.of(context)!.problem,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Text(
-              "Following interventions to be taken:",
+                AppLocalizations.of(context)!.followingInterventionsToBeTaken,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Padding(
@@ -40,7 +41,7 @@ class Phase3Problem extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: CheckboxListTile(
                   title: Text(
-                    "Prolonged skin-to-skin",
+                     AppLocalizations.of(context)!.prolongedSkinToSkin,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
@@ -58,7 +59,7 @@ class Phase3Problem extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: CheckboxListTile(
                   title: Text(
-                    "Express Breast Milk",
+                  AppLocalizations.of(context)!.expressBreastMilk,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
@@ -76,7 +77,7 @@ class Phase3Problem extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: CheckboxListTile(
                   title: Text(
-                    "Use Alternative Feeding Methods",
+                    AppLocalizations.of(context)!.useAlternativeFeedingMethods,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
@@ -94,7 +95,7 @@ class Phase3Problem extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: CheckboxListTile(
                   title: Text(
-                    "Improve Thermal Care",
+                      AppLocalizations.of(context)!.improveThermalCare,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
@@ -112,7 +113,7 @@ class Phase3Problem extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: CheckboxListTile(
                   title: Text(
-                    "Continued inpatient care",
+                    AppLocalizations.of(context)!.continuedInpatientCare,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
