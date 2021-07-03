@@ -22,7 +22,7 @@ class ListOfBabiesBloc extends Bloc<ListOfBabiesEvent, ListOfBabiesState> {
     yield ListOfBabiesLoading();
     if (event is ListOfBabiesFetchData) {
       try {
-         
+        childList = await listOfBabiesRepository.fetchListOfBabies();
         childList.sort((a, b) {
           var adate = a.birthTime;
           var bdate = b.birthTime;
