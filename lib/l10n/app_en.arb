@@ -200,5 +200,7 @@
     "useAlternativeFeedingMethods":"Use Alternative Feeding Methods",
     "improveThermalCare": "Improve Thermal Care",
     "continuedInpatientCare":"Continued inpatient care",
-    "checkupAfter90Minutes":"Checkup After 90 Minutes"
+    "checkupAfter90Minutes":"Checkup After 90 Minutes",
+
+    "completeAssessments":"Please complete assessments"
  }

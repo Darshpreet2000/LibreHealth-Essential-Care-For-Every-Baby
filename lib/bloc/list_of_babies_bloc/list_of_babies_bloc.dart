@@ -13,27 +13,32 @@ class ListOfBabiesBloc extends Bloc<ListOfBabiesEvent, ListOfBabiesState> {
   ListOfBabiesBloc(this.listOfBabiesRepository, this.hiveStorageRepository)
       : super(ListOfBabiesLoading());
 
-  List<ChildModel> childList = [];
-
   @override
   Stream<ListOfBabiesState> mapEventToState(
     ListOfBabiesEvent event,
   ) async* {
     yield ListOfBabiesLoading();
-    if (event is ListOfBabiesFetchData) {
+    if (event is ListOfBabiesFetchData) { 
+      Map<String, ChildModel> childListMap = new Map();
       try {
-        childList = await listOfBabiesRepository.fetchListOfBabies();
-        childList.sort((a, b) {
+        List<ChildModel> childModel =
+            await listOfBabiesRepository.fetchListOfBabies();
+        //converting to map
+        
+        childModel.forEach((element) {
+          childListMap[element.trackedEntityID] = element;
+        });
+        childListMap.values.toList().sort((a, b) {
           var adate = a.birthTime;
           var bdate = b.birthTime;
           return bdate.compareTo(adate);
         });
-        hiveStorageRepository.storeListOfChild(childList);
+        hiveStorageRepository.storeListOfChild(childListMap);
       } catch (e) {
-        childList = hiveStorageRepository.getListOfChild();
+        childListMap = hiveStorageRepository.getListOfChild();
       }
       List<ChildModel> recentList = [], pastRegistered = [];
-      childList.forEach((element) {
+      childListMap.values.toList().forEach((element) {
         if ((DateTime.now()).difference(element.birthTime).inHours < 24) {
           recentList.add(element);
         } else {
@@ -43,15 +48,16 @@ class ListOfBabiesBloc extends Bloc<ListOfBabiesEvent, ListOfBabiesState> {
       yield ListOfBabiesLoaded(recentList, pastRegistered);
     }
     if (event is ListOfBabiesAddChild) {
-      childList.add(event.childModel);
-      childList.sort((a, b) {
+      Map<String, ChildModel> childListMap  = hiveStorageRepository.getListOfChild();
+      childListMap[event.key] = event.childModel;
+      childListMap.values.toList().sort((a, b) {
         var adate = a.birthTime;
         var bdate = b.birthTime;
         return bdate.compareTo(adate);
       });
-      hiveStorageRepository.storeListOfChild(childList);
+      hiveStorageRepository.storeListOfChild(childListMap);
       List<ChildModel> recentList = [], pastRegistered = [];
-      childList.forEach((element) {
+      childListMap.values.toList().forEach((element) {
         if ((DateTime.now()).difference(element.birthTime).inHours < 24) {
           recentList.add(element);
         } else {

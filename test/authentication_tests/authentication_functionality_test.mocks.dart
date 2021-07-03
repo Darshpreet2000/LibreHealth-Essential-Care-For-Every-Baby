@@ -65,13 +65,13 @@ class MockHiveStorageRepository extends _i1.Mock
   }
 
   @override
-  void storeListOfChild(List<_i8.ChildModel>? list) =>
+  void storeListOfChild(Map<String, _i8.ChildModel>? list) =>
       super.noSuchMethod(Invocation.method(#storeListOfChild, [list]),
           returnValueForMissingStub: null);
   @override
-  List<_i8.ChildModel> getListOfChild() =>
-      (super.noSuchMethod(Invocation.method(#getListOfChild, []),
-          returnValue: <_i8.ChildModel>[]) as List<_i8.ChildModel>);
+  Map<String, _i8.ChildModel> getListOfChild() => (super.noSuchMethod(
+      Invocation.method(#getListOfChild, []),
+      returnValue: <String, _i8.ChildModel>{}) as Map<String, _i8.ChildModel>);
   @override
   void storeNotifications(List<_i9.UserActivity>? notificationsList) => super
       .noSuchMethod(Invocation.method(#storeNotifications, [notificationsList]),

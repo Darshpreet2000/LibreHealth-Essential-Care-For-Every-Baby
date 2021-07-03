@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'child_model.dart';
+part of '../child_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -23,13 +23,14 @@ class ChildModelAdapter extends TypeAdapter<ChildModel> {
       fields[3] as int?,
       fields[4] as int?,
       fields[5] as DateTime,
+      fields[6] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ChildModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.parent)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class ChildModelAdapter extends TypeAdapter<ChildModel> {
       ..writeByte(4)
       ..write(obj.darkColor)
       ..writeByte(5)
-      ..write(obj.birthTime);
+      ..write(obj.birthTime)
+      ..writeByte(6)
+      ..write(obj.trackedEntityID);
   }
 
   @override

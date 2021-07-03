@@ -6,8 +6,8 @@ abstract class ListOfBabiesEvent {
 
 class ListOfBabiesAddChild extends ListOfBabiesEvent {
   final ChildModel childModel;
-
-  ListOfBabiesAddChild(this.childModel);
+  final String key;
+  ListOfBabiesAddChild(this.childModel, this.key);
 }
 
 class ListOfBabiesFetchData extends ListOfBabiesEvent {}

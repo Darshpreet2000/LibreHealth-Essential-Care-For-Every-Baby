@@ -1,37 +1,41 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_activity.dart';
+part of '../profile.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class UserActivityAdapter extends TypeAdapter<UserActivity> {
+class ProfileAdapter extends TypeAdapter<Profile> {
   @override
-  final int typeId = 4;
+  final int typeId = 0;
 
   @override
-  UserActivity read(BinaryReader reader) {
+  Profile read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return UserActivity(
+    return Profile(
       fields[0] as String,
       fields[1] as String,
-    )..dateTime = fields[2] as DateTime;
+      fields[2] as String,
+      fields[3] as String,
+    );
   }
 
   @override
-  void write(BinaryWriter writer, UserActivity obj) {
+  void write(BinaryWriter writer, Profile obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.title)
+      ..write(obj.name)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
-      ..write(obj.dateTime);
+      ..write(obj.username)
+      ..writeByte(3)
+      ..write(obj.password);
   }
 
   @override
@@ -40,7 +44,7 @@ class UserActivityAdapter extends TypeAdapter<UserActivity> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserActivityAdapter &&
+      other is ProfileAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

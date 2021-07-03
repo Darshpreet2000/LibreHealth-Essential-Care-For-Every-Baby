@@ -1,19 +1,25 @@
 import 'package:hive/hive.dart';
+import 'package:newborn_care/models/request_service_type.dart';
 import 'package:newborn_care/models/request_type.dart';
-part 'network_request.g.dart';
+part 'auto_generate/network_request.g.dart';
 
 //flutter packages pub run build_runner build
 
 @HiveType(typeId: 1)
 class NetworkRequest {
   @HiveField(0)
-  final RequestType type;
+  RequestType type;
   @HiveField(1)
-  final String url;
+  String url;
   @HiveField(2)
-  final String data;
+  String data;
   @HiveField(3)
-  final Map<String, String> headers;
+  Map<String, String> headers;
 
-  NetworkRequest(this.type, this.url, this.data, this.headers);
+  @HiveField(4)
+  String key;
+  @HiveField(5)
+  RequestServiceType requestServiceType;
+  NetworkRequest(this.type, this.url, this.data, this.headers, this.key,
+      this.requestServiceType);
 }

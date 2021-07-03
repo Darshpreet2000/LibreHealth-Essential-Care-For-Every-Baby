@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-part 'user_activity.g.dart';
+part 'auto_generate/user_activity.g.dart';
 
 //flutter packages pub run build_runner build
 @HiveType(typeId: 4)

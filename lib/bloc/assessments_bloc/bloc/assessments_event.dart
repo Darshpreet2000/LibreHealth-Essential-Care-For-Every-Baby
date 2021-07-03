@@ -7,8 +7,4 @@ abstract class AssessmentsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AssessmentsEventAddStage1 extends AssessmentsEvent {
-  final Phase1 phase1;
-
-  AssessmentsEventAddStage1(this.phase1);
-}
+class AssessmentsEventAddStage1 extends AssessmentsEvent {}

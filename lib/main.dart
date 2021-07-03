@@ -8,6 +8,7 @@ import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
+import 'package:newborn_care/models/request_service_type.dart';
 import 'package:newborn_care/models/request_type.dart';
 import 'package:newborn_care/models/user_activity.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
@@ -41,6 +42,7 @@ GlobalKey<ScaffoldState> drawerKey = new GlobalKey<ScaffoldState>();
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerGlobalKey =
     GlobalKey<ScaffoldMessengerState>(debugLabel: 'app_localization_key');
 late Box<List> listBox;
+late Box<Map> mapBox;
 Future registerHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProfileAdapter());
@@ -48,8 +50,10 @@ Future registerHive() async {
   Hive.registerAdapter(RequestTypeAdapter());
   Hive.registerAdapter(UserActivityAdapter());
   Hive.registerAdapter(ChildModelAdapter());
+  Hive.registerAdapter(RequestServiceTypeAdapter());
   await Hive.openBox('eceb');
   listBox = await Hive.openBox<List>('eceblist');
+  mapBox = await Hive.openBox<Map>('ecebMap');
 }
 
 class MyApp extends StatefulWidget {

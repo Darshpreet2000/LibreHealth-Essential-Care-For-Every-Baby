@@ -43,10 +43,11 @@ class RegisterBabyRepositoryImpl {
     });
   }
 
-  Future registerBabyDetails(RegisterBabyModel _registerBabyModel) async {
+  Future registerBabyDetails(
+      RegisterBabyModel _registerBabyModel, String key) async {
     RegisterBabyAPIClient registerBabyAPIClient = new RegisterBabyAPIClient();
     String json = convertToJson(_registerBabyModel);
-    registerBabyAPIClient.registerBabyDetailsAsTrackedEntity(json);
+    registerBabyAPIClient.registerBabyDetailsAsTrackedEntity(json, key);
     return;
   }
 
