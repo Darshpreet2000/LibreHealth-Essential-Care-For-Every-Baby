@@ -31,12 +31,6 @@ class DHIS2Config {
       "#{ECEB_Severe_Jaundice} || #{ECEB_Assess_Temperature}<= 35.5 || #{ECEB_Assess_Temperature} >= 37.5  || #{ECEB_Weight} < 1500 || #{ECEB_Chest_Indrawing} ||#{ECEB_Not_Feeding} || #{ECEB_Fast_Breathing} || #{ECEB_Convulsions}";
 
   //Stage - 1 Assessments
-  static const String ecebSkinColorChanges = "DXdXA90lOYK";
-  static const String ecebSkinColorChangesNotes = "bZ5hszY7Myn";
-  static const String ecebWeight = "M8CLfn84QaV";
-  static const String ecebTraumasDuringBirth = "ERxsxYUAXXa";
-  static const String ecebTraumasDuringBirthNotes = "kX6x2gghjPN";
-  static const String ecebWardName = "s6l1WJeNh0q";
   static const String eceb_Stage_1_Initiate_Breastfeeding = "M8CLfn84QaV";
   static const String eceb_Stage_1_Monitor_Breathing = "IxfeTQ4ne9C";
   static const String eceb_Stage_1_Skin_To_Skin_Care = "RDncZ0AGIEQ";
