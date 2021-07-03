@@ -3,12 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
+import 'package:newborn_care/bloc/list_of_babies_bloc/list_of_babies_bloc.dart';
 import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
+import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
 import 'package:newborn_care/models/request_type.dart';
+import 'package:newborn_care/models/user_activity.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/authentication_repository.dart';
+import 'package:newborn_care/repository/list_of_babies_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/repository/register_baby_repository.dart';
 import 'package:newborn_care/screens/baby_assessments/baby_assessments.dart';
@@ -42,6 +46,8 @@ Future registerHive() async {
   Hive.registerAdapter(ProfileAdapter());
   Hive.registerAdapter(NetworkRequestAdapter());
   Hive.registerAdapter(RequestTypeAdapter());
+  Hive.registerAdapter(UserActivityAdapter());
+  Hive.registerAdapter(ChildModelAdapter());
   await Hive.openBox('eceb');
   listBox = await Hive.openBox<List>('eceblist');
 }
@@ -68,6 +74,10 @@ class _MyAppState extends State<MyApp> {
 
     return MultiBlocProvider(
       providers: [
+        BlocProvider<ListOfBabiesBloc>(
+          create: (BuildContext context) => ListOfBabiesBloc(
+              ListOfBabiesRepository(), HiveStorageRepository()),
+        ),
         BlocProvider<UserActivityBloc>(
           create: (BuildContext context) => UserActivityBloc(
               UserActivityRepository(), HiveStorageRepository()),

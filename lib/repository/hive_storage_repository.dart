@@ -1,9 +1,24 @@
 import 'package:hive/hive.dart';
+import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/network_request.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/user_activity.dart';
 
 class HiveStorageRepository {
+  //List of child
+  void storeListOfChild(List<ChildModel> list) {
+    Box<List> listBox = Hive.box<List>('eceblist');
+    listBox.put('listOfChild', list);
+  }
+
+  List<ChildModel> getListOfChild() {
+    Box<List> listBox = Hive.box<List>('eceblist');
+    if (listBox.containsKey('listOfChild')) {
+      return listBox.get('listOfChild')!.cast<ChildModel>();
+    }
+    return [];
+  }
+
   //User Activity Notification
   void storeNotifications(List<UserActivity> notificationsList) {
     Box<List> listBox = Hive.box<List>('eceblist');

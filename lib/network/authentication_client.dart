@@ -15,7 +15,7 @@ class AuthenticationClient {
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     try {
       final response = await client.get(
-        Uri.parse(DHIS2Config().serverURL + APIConfig().login),
+        Uri.parse(DHIS2Config.serverURL + APIConfig().login),
         headers: <String, String>{
           'authorization': basicAuth,
         },
