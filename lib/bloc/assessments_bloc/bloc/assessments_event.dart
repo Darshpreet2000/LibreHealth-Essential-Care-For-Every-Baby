@@ -10,3 +10,5 @@ abstract class AssessmentsEvent extends Equatable {
 class AssessmentsEventAddStage1 extends AssessmentsEvent {
   AssessmentsEventAddStage1();
 }
+
+class AssessmentsEventFetchData extends AssessmentsEvent {}

@@ -17,10 +17,10 @@ class ListItem extends StatelessWidget {
         : "${AppLocalizations.of(context)!.minutesFromBirth(DateTime.now().difference(childModel.birthTime).inMinutes)}";
     return Container(
       margin: EdgeInsets.only(bottom: 16),
-      color: Color(childModel.darkColor!),
+      color: Color(childModel.darkColor),
       child: Material(
         elevation: 10,
-        color: new Color(childModel.darkColor!),
+        color: new Color(childModel.darkColor),
         child: InkWell(
           onTap: () {
             if (allowNavigate)
@@ -51,7 +51,7 @@ class ListItem extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: Color(childModel.color!),
+                      color: Color(childModel.color),
                       borderRadius: BorderRadius.only(
                           bottomRight: Radius.circular(15),
                           bottomLeft: Radius.circular(15),

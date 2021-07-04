@@ -20,13 +20,14 @@ class Stage1Adapter extends TypeAdapter<Stage1> {
       ..ecebStage1InitiateBreastfeeding = fields[0] as bool?
       ..ecebStage1MonitorBreathing = fields[1] as bool?
       ..ecebStage1SkinToSkinCare = fields[2] as bool?
-      ..ecebWardName = fields[3] as String;
+      ..ecebWardName = fields[3] as String
+      ..isCompleted = fields[4] as bool;
   }
 
   @override
   void write(BinaryWriter writer, Stage1 obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.ecebStage1InitiateBreastfeeding)
       ..writeByte(1)
@@ -34,7 +35,9 @@ class Stage1Adapter extends TypeAdapter<Stage1> {
       ..writeByte(2)
       ..write(obj.ecebStage1SkinToSkinCare)
       ..writeByte(3)
-      ..write(obj.ecebWardName);
+      ..write(obj.ecebWardName)
+      ..writeByte(4)
+      ..write(obj.isCompleted);
   }
 
   @override

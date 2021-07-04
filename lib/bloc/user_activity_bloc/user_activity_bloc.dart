@@ -22,6 +22,7 @@ class UserActivityBloc extends Bloc<UserActivityEvent, UserActivityState> {
     yield UserActivityLoading();
     if (event is UserActivityFetch) {
       try {
+        yield UserActivityLoaded(hiveStorageRepository.getNotificationsList());
         List<UserActivity> response =
             await _userActivityRepository.fetchUsersMessages();
         hiveStorageRepository.storeNotifications(response);

@@ -66,6 +66,7 @@ class _Phase1State extends State<Phase1> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
+                        readOnly: widget.stage1.isCompleted,
                         controller: widget._wardNameTextController,
                         onChanged: (String _value) {
                           widget.stage1.ecebWardName = _value;
@@ -108,6 +109,7 @@ class _Phase1State extends State<Phase1> {
                   ),
                   value: widget.stage1.ecebStage1SkinToSkinCare,
                   onChanged: (newValue) {
+                    if (widget.stage1.isCompleted == false) 
                     setState(() {
                       widget.stage1.ecebStage1SkinToSkinCare = newValue;
                     });
@@ -123,10 +125,11 @@ class _Phase1State extends State<Phase1> {
                   ),
                   value: widget.stage1.ecebStage1MonitorBreathing,
                   onChanged: (newValue) {
-                    setState(() {
-                      widget.stage1.ecebStage1MonitorBreathing = newValue;
-                    });
-                  },
+                    if (widget.stage1.isCompleted == false) 
+                          setState(() {
+                            widget.stage1.ecebStage1MonitorBreathing = newValue;
+                          });
+                        },
                   controlAffinity:
                       ListTileControlAffinity.leading, //  <-- leading Checkbox
                 ),
@@ -137,11 +140,13 @@ class _Phase1State extends State<Phase1> {
                         color: Colors.blue[700], fontWeight: FontWeight.bold),
                   ),
                   value: widget.stage1.ecebStage1InitiateBreastfeeding,
-                  onChanged: (newValue) {
-                    setState(() {
-                      widget.stage1.ecebStage1InitiateBreastfeeding = newValue;
-                    });
-                  },
+                  onChanged:  (newValue) {
+                    if (widget.stage1.isCompleted == false) 
+                          setState(() {
+                            widget.stage1.ecebStage1InitiateBreastfeeding =
+                                newValue;
+                          });
+                        },
                   controlAffinity:
                       ListTileControlAffinity.leading, //  <-- leading Checkbox
                 ),

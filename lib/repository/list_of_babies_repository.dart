@@ -25,6 +25,9 @@ class ListOfBabiesRepository {
       "invalidInput":
           AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
               .invalidInput,
+      "errorOccuredWhileCommunication":
+          AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
+              .errorDuringCommunication,
       "errorDuringCommunication":
           AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
               .errorDuringCommunication

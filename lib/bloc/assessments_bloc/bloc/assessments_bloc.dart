@@ -21,11 +21,22 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
   Stream<AssessmentsState> mapEventToState(
     AssessmentsEvent event,
   ) async* {
-    if (event is AssessmentsEventAddStage1) {
+    if (event is AssessmentsEventFetchData) {
+      yield AssessmentsLoading();
+      try {
+        childModel.assessmentsList = await _assessmentsRepository
+            .fetchAssessments(childModel.trackedEntityID);
+        yield AssessmentsInitial(childModel);
+      } catch (e) {
+        yield AssessmentsError(e.toString());
+        yield AssessmentsInitial(childModel);
+      }
+    } else if (event is AssessmentsEventAddStage1) {
       try {
         // check if data is filled correctly
         _assessmentsRepository
             .validatePhase1Assessments(childModel.assessmentsList[0] as Stage1);
+
         //push data to dhis2 using api
         _assessmentsRepository.registerStage1Details(
             childModel.assessmentsList[0] as Stage1,

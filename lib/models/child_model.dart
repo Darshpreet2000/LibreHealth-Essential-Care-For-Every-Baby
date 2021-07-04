@@ -8,20 +8,20 @@ part 'auto_generate/child_model.g.dart';
 @HiveType(typeId: 3)
 class ChildModel {
   @HiveField(0)
-  final String parent;
+  String parent;
   @HiveField(1)
-  final String ward;
+  String ward;
   @HiveField(2)
-  final int gender;
+  int gender;
 
   @HiveField(3)
-  final int? color;
+  int color;
 
   @HiveField(4)
-  final int? darkColor;
+  int darkColor;
 
   @HiveField(5)
-  final DateTime birthTime;
+  DateTime birthTime;
 
   @HiveField(6)
   String trackedEntityID;
@@ -38,7 +38,7 @@ class ChildModel {
     String? parent, ward;
     DateTime? birthTime;
     int? color, darkColor, gender;
-    String trackedEntityID = json['trackedEntityType'];
+    String trackedEntityID = json['trackedEntityInstance'];
     color = Colors.blue[100]!.value;
     darkColor = Colors.white.value;
     var jsonList = json['attributes'];

@@ -18,3 +18,5 @@ class AssessmentsError extends AssessmentsState {
 
   AssessmentsError(this.message);
 }
+
+class AssessmentsLoading extends AssessmentsState {}

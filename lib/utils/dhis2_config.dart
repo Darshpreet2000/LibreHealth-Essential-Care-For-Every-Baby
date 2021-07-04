@@ -14,6 +14,7 @@ class DHIS2Config {
   static const String classification = "ivo84s6Uv29";
 
   //Stage 0 Registering Babies
+  static const String stage0ID = "e63FeH2EwPL";
   static const String stageRegisteringBabies = "e63FeH2EwPL";
   static const String ecebWeight = "M8CLfn84QaV";
   static const String ecebSkinColorChanges = "DXdXA90lOYK";
@@ -31,11 +32,13 @@ class DHIS2Config {
       "#{ECEB_Severe_Jaundice} || #{ECEB_Assess_Temperature}<= 35.5 || #{ECEB_Assess_Temperature} >= 37.5  || #{ECEB_Weight} < 1500 || #{ECEB_Chest_Indrawing} ||#{ECEB_Not_Feeding} || #{ECEB_Fast_Breathing} || #{ECEB_Convulsions}";
 
   //Stage - 1 Assessments
-  static const String eceb_Stage_1_Initiate_Breastfeeding = "M8CLfn84QaV";
+  static const String stage1ID = "URydNJS8i3T";
+  static const String eceb_Stage_1_Initiate_Breastfeeding = "Ya3AmFV6Yu9";
   static const String eceb_Stage_1_Monitor_Breathing = "IxfeTQ4ne9C";
   static const String eceb_Stage_1_Skin_To_Skin_Care = "RDncZ0AGIEQ";
 
   //Stage - 2 Assessments
+  static const String stage2ID = "neIkFKr6xO4";
   static const String ecebCurrentLocation = "bPfXwTgGdkI";
   static const String ecebAssessTemperature = "zZpNiKcIMHA";
   static const String ecebSevereJaundice = "oIpUd9Up3CX";
@@ -43,7 +46,7 @@ class DHIS2Config {
   static const String ecebChestIndrawing = "HcG32VrK3Um";
   static const String ecebNotFeeding = "VD9JO6bY2o1";
   static const String ecebConvulsions = "VqJL6KvxrKT";
-  static const String eceb_Stage_2_Assess_Exam = "Ya3AmFV6Yu9";
+  static const String eceb_Stage_2_Assess_Exam = "jBnuHZPSOiX";
   static const String eceb_Stage_2_Prevent_Disease_VitaminK = "XfdHyjVbRWo";
   static const String eceb_Stage_2_Prevent_Disease_Cord_Care = "VsKyN9x1hZk";
   static const String eceb_Stage_2_Prevent_Disease_Eye_Care = "y80qB17Dv8b";

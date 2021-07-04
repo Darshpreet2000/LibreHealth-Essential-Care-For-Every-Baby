@@ -14,6 +14,8 @@ class Stage1 {
   bool? ecebStage1SkinToSkinCare;
   @HiveField(3)
   String ecebWardName = "";
+  @HiveField(4)
+  bool isCompleted = false;
 
   Stage1() {
     ecebStage1InitiateBreastfeeding = false;
@@ -43,4 +45,25 @@ class Stage1 {
           }
         ]
       };
+
+  Stage1.fromJson(dynamic json) {
+    var jsonList = json['dataValues'];
+    isCompleted = true;
+    jsonList.forEach((element) {
+      switch (element['dataElement']) {
+        case DHIS2Config.eceb_Stage_1_Initiate_Breastfeeding:
+          ecebStage1InitiateBreastfeeding = element['value'] == 'true';
+          break;
+        case DHIS2Config.eceb_Stage_1_Monitor_Breathing:
+          ecebStage1MonitorBreathing = element['value'] == 'true';
+          break;
+        case DHIS2Config.eceb_Stage_1_Skin_To_Skin_Care:
+          ecebStage1SkinToSkinCare = (element['value']) == 'true';
+          break;
+        case DHIS2Config.ecebWardName:
+          ecebWardName = element['value'];
+          break;
+      }
+    });
+  }
 }

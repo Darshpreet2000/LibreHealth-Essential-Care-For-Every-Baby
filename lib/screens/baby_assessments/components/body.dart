@@ -20,6 +20,12 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   @override
+  void initState() {
+    widget.assessmentsBloc.add(AssessmentsEventFetchData());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocListener<AssessmentsBloc, AssessmentsState>(
       bloc: widget.assessmentsBloc,
@@ -56,7 +62,7 @@ class _BodyState extends State<Body> {
                 ],
               ),
             );
-          return Container();
+          return Center(child: CircularProgressIndicator());
         },
       ),
     );
