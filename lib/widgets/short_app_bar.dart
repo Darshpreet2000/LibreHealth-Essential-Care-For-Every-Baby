@@ -7,7 +7,7 @@ class ShortAppBar extends StatelessWidget {
   final color = const Color(0xff82A0C8);
   final title;
   final bool? showDrawer;
-  const ShortAppBar({Key? key, required this.title, this.showDrawer})
+  const ShortAppBar({Key? key, required this.title, required this.showDrawer})
       : super(key: key);
 
   @override

@@ -52,8 +52,8 @@ class RefreshRepository {
         var json = jsonDecode(response);
         if (request.requestServiceType == RequestServiceType.RegisterBaby) {
           var response = (json["response"]);
-           var importSummary = (response["importSummaries"]);
-          var importArray=(importSummary[0]);
+          var importSummary = (response["importSummaries"]);
+          var importArray = (importSummary[0]);
           String responseKey = (importArray["reference"]);
 
           //update trackedEntity id

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:newborn_care/widgets/long_app_bar.dart';
 import 'package:newborn_care/widgets/password.dart';
-import 'package:newborn_care/widgets/short_app_bar.dart';
+import 'package:newborn_care/widgets/short_app_bar_login.dart';
 import 'package:newborn_care/widgets/sign_in_button.dart';
 import 'package:newborn_care/widgets/user_name.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -38,7 +38,7 @@ class _BodyState extends State<Body> {
               orientation == Orientation.portrait ||
                       (MediaQuery.of(context).size.height > 600)
                   ? LongAppBar()
-                  : ShortAppBar(
+                  : ShortAppBarLogin(
                       title: AppLocalizations.of(context)!.individual,
                     ),
               Padding(

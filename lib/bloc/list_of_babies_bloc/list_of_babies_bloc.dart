@@ -21,8 +21,7 @@ class ListOfBabiesBloc extends Bloc<ListOfBabiesEvent, ListOfBabiesState> {
     if (event is ListOfBabiesFetchData) {
       List<ChildModel> childListMap = [];
       try {
-        childListMap =
-            await listOfBabiesRepository.fetchListOfBabies();
+        childListMap = await listOfBabiesRepository.fetchListOfBabies();
         //converting to map
         hiveStorageRepository.storeListOfChild(childListMap);
         childListMap.sort((a, b) => b.birthTime.compareTo(a.birthTime));
@@ -42,7 +41,7 @@ class ListOfBabiesBloc extends Bloc<ListOfBabiesEvent, ListOfBabiesState> {
     }
     if (event is ListOfBabiesAddChild) {
       hiveStorageRepository.storeSingleChild(event.childModel);
-      List<ChildModel>  childListMap = hiveStorageRepository.getListOfAllChild();
+      List<ChildModel> childListMap = hiveStorageRepository.getListOfAllChild();
       childListMap.sort((a, b) => b.birthTime.compareTo(a.birthTime));
       List<ChildModel> recentList = [], pastRegistered = [];
       childListMap.forEach((element) {

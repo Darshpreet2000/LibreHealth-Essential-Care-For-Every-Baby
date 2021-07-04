@@ -5,11 +5,6 @@ import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_1.dart';
-import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_2.dart';
-import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_3_danger.dart';
-import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_3_normal.dart';
-import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_3_problem.dart';
-import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_4.dart';
 import 'package:newborn_care/screens/list_of_babies/components/list_item.dart';
 
 class Body extends StatefulWidget {
@@ -28,7 +23,7 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return BlocListener<AssessmentsBloc, AssessmentsState>(
       bloc: widget.assessmentsBloc,
-      listener: (context, state) { 
+      listener: (context, state) {
         if (state is AssessmentsError) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(state.message),

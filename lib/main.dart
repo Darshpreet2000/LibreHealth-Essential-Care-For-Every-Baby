@@ -126,7 +126,6 @@ class _MyAppState extends State<MyApp> {
             '/FacilityLoginScreen': (context) => FacilityLogin(),
             '/IndividualLoginScreen': (context) => IndividualLogin(),
             '/RegisterABaby': (context) => RegisterABaby(),
-         //   '/BabyDetails': (context) => BabyAssessments(),
             '/Base': (context) => BaseClass(
                   globalKey: globalKey,
                   drawerKey: drawerKey,

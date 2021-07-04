@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
 
 part 'auto_generate/stage_1.g.dart';
+
 @HiveType(typeId: 6)
 class Stage1 {
   @HiveField(0)
