@@ -1,16 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
+import 'package:newborn_care/models/stage_1.dart';
 
 class Phase1 extends StatefulWidget {
-  const Phase1({Key? key}) : super(key: key);
-
+  final Stage1 stage1;
+  final AssessmentsBloc assessmentsBloc;
+  final TextEditingController _wardNameTextController =
+      new TextEditingController();
+  Phase1(this.stage1, this.assessmentsBloc) {
+    _wardNameTextController.text = stage1.ecebWardName;
+  }
   @override
   _Phase1State createState() => _Phase1State();
 }
 
 class _Phase1State extends State<Phase1> {
-  bool? checkedValue = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,7 +66,10 @@ class _Phase1State extends State<Phase1> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                        onChanged: (String _value) {},
+                        controller: widget._wardNameTextController,
+                        onChanged: (String _value) {
+                          widget.stage1.ecebWardName = _value;
+                        },
                         decoration: new InputDecoration(
                           isDense: true, // Added this
                           border: new OutlineInputBorder(
@@ -97,10 +106,10 @@ class _Phase1State extends State<Phase1> {
                     style: TextStyle(
                         color: Colors.blue[700], fontWeight: FontWeight.bold),
                   ),
-                  value: checkedValue,
+                  value: widget.stage1.ecebStage1SkinToSkinCare,
                   onChanged: (newValue) {
                     setState(() {
-                      checkedValue = newValue;
+                      widget.stage1.ecebStage1SkinToSkinCare = newValue;
                     });
                   },
                   controlAffinity:
@@ -112,10 +121,10 @@ class _Phase1State extends State<Phase1> {
                     style: TextStyle(
                         color: Colors.blue[700], fontWeight: FontWeight.bold),
                   ),
-                  value: checkedValue,
+                  value: widget.stage1.ecebStage1MonitorBreathing,
                   onChanged: (newValue) {
                     setState(() {
-                      checkedValue = newValue;
+                      widget.stage1.ecebStage1MonitorBreathing = newValue;
                     });
                   },
                   controlAffinity:
@@ -127,10 +136,10 @@ class _Phase1State extends State<Phase1> {
                     style: TextStyle(
                         color: Colors.blue[700], fontWeight: FontWeight.bold),
                   ),
-                  value: checkedValue,
+                  value: widget.stage1.ecebStage1InitiateBreastfeeding,
                   onChanged: (newValue) {
                     setState(() {
-                      checkedValue = newValue;
+                      widget.stage1.ecebStage1InitiateBreastfeeding = newValue;
                     });
                   },
                   controlAffinity:
@@ -147,7 +156,7 @@ class _Phase1State extends State<Phase1> {
                   shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0))),
               onPressed: () {
-                setState(() {});
+                widget.assessmentsBloc.add(AssessmentsEventAddStage1());
               },
               child: Text(
                 AppLocalizations.of(context)!.saveAssessments,

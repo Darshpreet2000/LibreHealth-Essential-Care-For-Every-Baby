@@ -24,7 +24,7 @@ class _BaseClassState extends State<BaseClass> {
   @override
   void initState() {
     BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
-    BlocProvider.of<UserActivityBloc>(context).add(UserActivityFetch());
+    //   BlocProvider.of<UserActivityBloc>(context).add(UserActivityFetch());
     BlocProvider.of<ListOfBabiesBloc>(context).add(ListOfBabiesFetchData());
     super.initState();
   }

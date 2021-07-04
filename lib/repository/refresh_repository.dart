@@ -37,11 +37,12 @@ class RefreshRepository {
       List<NetworkRequest> networkRequests =
           HiveStorageRepository().getNetworkRequests();
       //get map of list of child
-      Map<String, ChildModel> map = HiveStorageRepository().getListOfChild();
       while (networkRequests.isNotEmpty) {
         NetworkRequest request = networkRequests.first;
         if (request.requestServiceType == RequestServiceType.AddEvent) {
-          String trackedEntityId = map[request.key]!.trackedEntityID;
+          String trackedEntityId = HiveStorageRepository()
+              .getSingleChild(request.key)
+              .trackedEntityID;
           request.url = DHIS2Config.serverURL +
               APIConfig().getaddEventsAPI(DHIS2Config.orgUnit,
                   DHIS2Config.programECEBID, trackedEntityId);
@@ -50,10 +51,16 @@ class RefreshRepository {
             await RefreshClient(http.Client(), m).doNetworkRequest(request);
         var json = jsonDecode(response);
         if (request.requestServiceType == RequestServiceType.RegisterBaby) {
-          String responseKey = json['response']['importSummaries']['reference'];
+          var response = (json["response"]);
+           var importSummary = (response["importSummaries"]);
+          var importArray=(importSummary[0]);
+          String responseKey = (importArray["reference"]);
+
           //update trackedEntity id
-          map[request.key]!.trackedEntityID = responseKey;
-          HiveStorageRepository().storeListOfChild(map);
+          ChildModel child =
+              HiveStorageRepository().getSingleChild(request.key);
+          child.trackedEntityID = responseKey;
+          HiveStorageRepository().updateChild(child.key, child);
         }
         networkRequests.removeAt(0);
         HiveStorageRepository().storeNetworkRequestList(networkRequests);

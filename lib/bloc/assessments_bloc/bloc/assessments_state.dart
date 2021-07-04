@@ -8,9 +8,9 @@ abstract class AssessmentsState extends Equatable {
 }
 
 class AssessmentsInitial extends AssessmentsState {
-  final List<dynamic> assessmentsModel;
+  final ChildModel childModel;
 
-  AssessmentsInitial(this.assessmentsModel);
+  AssessmentsInitial(this.childModel);
 }
 
 class AssessmentsError extends AssessmentsState {

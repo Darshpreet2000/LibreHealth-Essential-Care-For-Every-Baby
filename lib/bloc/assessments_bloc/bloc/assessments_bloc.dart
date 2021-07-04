@@ -2,16 +2,20 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
 part 'assessments_event.dart';
 part 'assessments_state.dart';
 
 class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
   AssessmentsRepository _assessmentsRepository;
-  List<Object> assessmentsModelList;
-  AssessmentsBloc(this._assessmentsRepository, this.assessmentsModelList)
-      : super(AssessmentsInitial(assessmentsModelList));
+  HiveStorageRepository hiveStorageRepository;
+  ChildModel childModel;
+  AssessmentsBloc(
+      this._assessmentsRepository, this.childModel, this.hiveStorageRepository)
+      : super(AssessmentsInitial(childModel));
 
   @override
   Stream<AssessmentsState> mapEventToState(
@@ -21,12 +25,15 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
       try {
         // check if data is filled correctly
         _assessmentsRepository
-            .validatePhase1Assessments(assessmentsModelList[0] as Stage1);
+            .validatePhase1Assessments(childModel.assessmentsList[0] as Stage1);
         //push data to dhis2 using api
-
+        _assessmentsRepository.registerStage1Details(
+            childModel.assessmentsList[0] as Stage1,
+            childModel.trackedEntityID);
+        hiveStorageRepository.updateChild(childModel.key, childModel);
       } catch (e) {
         yield AssessmentsError(e.toString());
-        yield AssessmentsInitial(assessmentsModelList);
+        yield AssessmentsInitial(childModel);
       }
     }
   }

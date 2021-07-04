@@ -6,17 +6,32 @@ import 'package:newborn_care/models/user_activity.dart';
 
 class HiveStorageRepository {
   //List of child
-  void storeListOfChild(Map<String, ChildModel> list) {
-    Box<Map> listBox = Hive.box<Map>('ecebMap');
-    listBox.put('listOfChild', list);
+  void storeSingleChild(ChildModel child) {
+    Box<ChildModel> mapBox = Hive.box<ChildModel>('ecebMap');
+    mapBox.put(child.key, child);
   }
 
-  Map<String, ChildModel> getListOfChild() {
-    Box<Map> listBox = Hive.box<Map>('ecebMap');
-    if (listBox.containsKey('listOfChild')) {
-      return listBox.get("listOfChild")!.cast<String, ChildModel>();
-    }
-    return new Map();
+  void storeListOfChild(List<ChildModel> childList) {
+    Box<ChildModel> mapBox = Hive.box<ChildModel>('ecebMap');
+    mapBox.clear();
+    childList.forEach((element) {
+      mapBox.put(element.key, element);
+    });
+  }
+
+  void updateChild(String key, ChildModel childModel) {
+    Box<ChildModel> mapBox = Hive.box<ChildModel>('ecebMap');
+    mapBox.put(key, childModel);
+  }
+
+  ChildModel getSingleChild(String key) {
+    Box<ChildModel> mapBox = Hive.box<ChildModel>('ecebMap');
+    return mapBox.get(key)!;
+  }
+
+  List<ChildModel> getListOfAllChild() {
+    Box<ChildModel> mapBox = Hive.box<ChildModel>('ecebMap');
+    return mapBox.values.toList();
   }
 
   //User Activity Notification

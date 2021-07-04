@@ -10,13 +10,13 @@ import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
 import 'package:newborn_care/models/request_service_type.dart';
 import 'package:newborn_care/models/request_type.dart';
+import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/models/user_activity.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/authentication_repository.dart';
 import 'package:newborn_care/repository/list_of_babies_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/repository/register_baby_repository.dart';
-import 'package:newborn_care/screens/baby_assessments/baby_assessments.dart';
 import 'package:newborn_care/screens/base/base_class.dart';
 import 'package:newborn_care/screens/facility_login/facility_login.dart';
 import 'package:newborn_care/screens/individual_login/individual_login.dart';
@@ -42,7 +42,7 @@ GlobalKey<ScaffoldState> drawerKey = new GlobalKey<ScaffoldState>();
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerGlobalKey =
     GlobalKey<ScaffoldMessengerState>(debugLabel: 'app_localization_key');
 late Box<List> listBox;
-late Box<Map> mapBox;
+late Box<ChildModel> mapBox;
 Future registerHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProfileAdapter());
@@ -51,9 +51,10 @@ Future registerHive() async {
   Hive.registerAdapter(UserActivityAdapter());
   Hive.registerAdapter(ChildModelAdapter());
   Hive.registerAdapter(RequestServiceTypeAdapter());
+  Hive.registerAdapter(Stage1Adapter());
   await Hive.openBox('eceb');
   listBox = await Hive.openBox<List>('eceblist');
-  mapBox = await Hive.openBox<Map>('ecebMap');
+  mapBox = await Hive.openBox<ChildModel>('ecebMap');
 }
 
 class MyApp extends StatefulWidget {
@@ -125,7 +126,7 @@ class _MyAppState extends State<MyApp> {
             '/FacilityLoginScreen': (context) => FacilityLogin(),
             '/IndividualLoginScreen': (context) => IndividualLogin(),
             '/RegisterABaby': (context) => RegisterABaby(),
-            '/BabyDetails': (context) => BabyAssessments(),
+         //   '/BabyDetails': (context) => BabyAssessments(),
             '/Base': (context) => BaseClass(
                   globalKey: globalKey,
                   drawerKey: drawerKey,

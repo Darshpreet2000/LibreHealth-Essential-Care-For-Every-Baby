@@ -1,14 +1,24 @@
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
 
+part 'auto_generate/stage_1.g.dart';
+@HiveType(typeId: 6)
 class Stage1 {
-  final bool ecebStage1InitiateBreastfeeding;
-  final bool ecebStage1MonitorBreathing;
-  final bool ecebStage1SkinToSkinCare;
-  final String ecebWardName;
+  @HiveField(0)
+  bool? ecebStage1InitiateBreastfeeding;
+  @HiveField(1)
+  bool? ecebStage1MonitorBreathing;
+  @HiveField(2)
+  bool? ecebStage1SkinToSkinCare;
+  @HiveField(3)
+  String ecebWardName = "";
 
-  Stage1(this.ecebStage1InitiateBreastfeeding, this.ecebStage1MonitorBreathing,
-      this.ecebStage1SkinToSkinCare, this.ecebWardName);
+  Stage1() {
+    ecebStage1InitiateBreastfeeding = false;
+    ecebStage1MonitorBreathing = false;
+    ecebStage1SkinToSkinCare = false;
+  }
 
   Map<String, dynamic> toJson() => {
         "program": DHIS2Config.programECEBID,

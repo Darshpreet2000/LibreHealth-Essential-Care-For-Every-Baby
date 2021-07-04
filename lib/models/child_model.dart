@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
+import 'package:uuid/uuid.dart';
 part 'auto_generate/child_model.g.dart';
 
 //flutter packages pub run build_runner build
@@ -25,8 +26,14 @@ class ChildModel {
   @HiveField(6)
   String trackedEntityID;
 
+  @HiveField(7)
+  List<Object> assessmentsList = [];
+
+  @HiveField(8)
+  String key; //to uniquely store the child
+
   ChildModel(this.parent, this.ward, this.gender, this.color, this.darkColor,
-      this.birthTime, this.trackedEntityID);
+      this.birthTime, this.trackedEntityID, this.key);
   factory ChildModel.fromJson(dynamic json) {
     String? parent, ward;
     DateTime? birthTime;
@@ -68,6 +75,6 @@ class ChildModel {
       }
     });
     return new ChildModel(parent!, ward!, gender!, color!, darkColor!,
-        birthTime!, trackedEntityID);
+        birthTime!, trackedEntityID, Uuid().v1());
   }
 }

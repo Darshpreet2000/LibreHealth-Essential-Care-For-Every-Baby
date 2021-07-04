@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
 import 'package:newborn_care/models/child_model.dart';
+import 'package:newborn_care/repository/assessments_repository.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
+import 'package:newborn_care/screens/baby_assessments/baby_assessments.dart';
 
 class ListItem extends StatelessWidget {
   final ChildModel childModel;
@@ -20,8 +24,13 @@ class ListItem extends StatelessWidget {
         child: InkWell(
           onTap: () {
             if (allowNavigate)
-              Navigator.pushNamed(context, '/BabyDetails',
-                  arguments: childModel);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BabyAssessments(
+                          childModel,
+                          AssessmentsBloc(AssessmentsRepository(), childModel,
+                              HiveStorageRepository()))));
           },
           child: Container(
             margin: EdgeInsets.fromLTRB(16, 8, 16, 16),
