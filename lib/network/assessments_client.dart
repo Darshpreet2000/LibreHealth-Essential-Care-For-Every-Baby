@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:newborn_care/exceptions/custom_exceptions.dart';
 import 'package:newborn_care/models/network_request.dart';
@@ -30,28 +29,29 @@ class AssessmentsClient {
     HiveStorageRepository().storeNetworkRequest(request);
   }
 
-  Future getAssessmentsOfChild(String id) async {
-    String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('testuser:Admin@123'));
-    String url = DHIS2Config.serverURL +
-        APIConfig().getaddEventsAPI(
-            DHIS2Config.orgUnit, DHIS2Config.programECEBID, id);
-
+  Future getAssessmentsOfChild(String key) async {
     try {
       await RefreshRepository().startRefreshing();
     } catch (e) {
       throw e;
     }
     try {
-      final response = await http.get(
+      String trackedEntityID =
+          HiveStorageRepository().getSingleChild(key).trackedEntityID;
+      String basicAuth =
+          'Basic ' + base64Encode(utf8.encode('testuser:Admin@123'));
+      String url = DHIS2Config.serverURL +
+          APIConfig().getaddEventsAPI(
+              DHIS2Config.orgUnit, DHIS2Config.programECEBID, trackedEntityID);
+      final response = await client.get(
         //get all tracked entites which were updated in 24 hours
         Uri.parse(url),
         headers: <String, String>{
           'authorization': basicAuth,
         },
-      );
+      ).timeout(const Duration(seconds: 10));
       return _response(response);
-    } on SocketException {
+    } catch (e) {
       throw FetchDataException(map["noInternetConnection"], 503);
     }
   }

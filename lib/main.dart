@@ -41,6 +41,7 @@ void main() async {
 GlobalKey<ScaffoldState> drawerKey = new GlobalKey<ScaffoldState>();
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerGlobalKey =
     GlobalKey<ScaffoldMessengerState>(debugLabel: 'app_localization_key');
+late Box box;
 late Box<List> listBox;
 late Box<ChildModel> mapBox;
 Future registerHive() async {
@@ -52,7 +53,7 @@ Future registerHive() async {
   Hive.registerAdapter(ChildModelAdapter());
   Hive.registerAdapter(RequestServiceTypeAdapter());
   Hive.registerAdapter(Stage1Adapter());
-  await Hive.openBox('eceb');
+  box = await Hive.openBox('eceb');
   listBox = await Hive.openBox<List>('eceblist');
   mapBox = await Hive.openBox<ChildModel>('ecebMap');
 }

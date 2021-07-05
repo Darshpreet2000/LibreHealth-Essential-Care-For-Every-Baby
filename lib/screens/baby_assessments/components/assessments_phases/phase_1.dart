@@ -109,10 +109,10 @@ class _Phase1State extends State<Phase1> {
                   ),
                   value: widget.stage1.ecebStage1SkinToSkinCare,
                   onChanged: (newValue) {
-                    if (widget.stage1.isCompleted == false) 
-                    setState(() {
-                      widget.stage1.ecebStage1SkinToSkinCare = newValue;
-                    });
+                    if (widget.stage1.isCompleted == false)
+                      setState(() {
+                        widget.stage1.ecebStage1SkinToSkinCare = newValue;
+                      });
                   },
                   controlAffinity:
                       ListTileControlAffinity.leading, //  <-- leading Checkbox
@@ -125,11 +125,11 @@ class _Phase1State extends State<Phase1> {
                   ),
                   value: widget.stage1.ecebStage1MonitorBreathing,
                   onChanged: (newValue) {
-                    if (widget.stage1.isCompleted == false) 
-                          setState(() {
-                            widget.stage1.ecebStage1MonitorBreathing = newValue;
-                          });
-                        },
+                    if (widget.stage1.isCompleted == false)
+                      setState(() {
+                        widget.stage1.ecebStage1MonitorBreathing = newValue;
+                      });
+                  },
                   controlAffinity:
                       ListTileControlAffinity.leading, //  <-- leading Checkbox
                 ),
@@ -140,13 +140,13 @@ class _Phase1State extends State<Phase1> {
                         color: Colors.blue[700], fontWeight: FontWeight.bold),
                   ),
                   value: widget.stage1.ecebStage1InitiateBreastfeeding,
-                  onChanged:  (newValue) {
-                    if (widget.stage1.isCompleted == false) 
-                          setState(() {
-                            widget.stage1.ecebStage1InitiateBreastfeeding =
-                                newValue;
-                          });
-                        },
+                  onChanged: (newValue) {
+                    if (widget.stage1.isCompleted == false)
+                      setState(() {
+                        widget.stage1.ecebStage1InitiateBreastfeeding =
+                            newValue;
+                      });
+                  },
                   controlAffinity:
                       ListTileControlAffinity.leading, //  <-- leading Checkbox
                 ),
@@ -161,12 +161,17 @@ class _Phase1State extends State<Phase1> {
                   shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0))),
               onPressed: () {
-                widget.assessmentsBloc.add(AssessmentsEventAddStage1());
+                if (widget.stage1.isCompleted == false)
+                  widget.assessmentsBloc.add(AssessmentsEventAddStage1());
               },
               child: Text(
-                AppLocalizations.of(context)!.saveAssessments,
+                widget.stage1.isCompleted == false
+                    ? AppLocalizations.of(context)!.saveAssessments
+                    : AppLocalizations.of(context)!.assessmentsSaved,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: widget.stage1.isCompleted == false
+                      ? Colors.white
+                      : Colors.white70,
                 ),
               ),
             ),

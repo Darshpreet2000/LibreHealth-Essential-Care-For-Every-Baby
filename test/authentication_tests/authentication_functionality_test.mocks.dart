@@ -71,9 +71,10 @@ class MockHiveStorageRepository extends _i1.Mock
       super.noSuchMethod(Invocation.method(#storeSingleChild, [child]),
           returnValueForMissingStub: null);
   @override
-  void storeListOfChild(List<_i2.ChildModel>? childList) =>
-      super.noSuchMethod(Invocation.method(#storeListOfChild, [childList]),
-          returnValueForMissingStub: null);
+  _i7.Future<void> storeListOfChild(List<_i2.ChildModel>? childList) =>
+      (super.noSuchMethod(Invocation.method(#storeListOfChild, [childList]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future.value()) as _i7.Future<void>);
   @override
   void updateChild(String? key, _i2.ChildModel? childModel) =>
       super.noSuchMethod(Invocation.method(#updateChild, [key, childModel]),

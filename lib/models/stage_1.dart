@@ -26,6 +26,8 @@ class Stage1 {
   Map<String, dynamic> toJson() => {
         "program": DHIS2Config.programECEBID,
         "orgUnit": DHIS2Config.orgUnit,
+        "trackedEntityInstance": DHIS2Config.trackedEntity,
+        "programStage": DHIS2Config.stage1ID,
         "eventDate": DateFormat("yyyy-MM-ddThh:mm").format(DateTime.now()),
         "status": "COMPLETED",
         "completedDate": DateFormat("yyyy-MM-ddThh:mm").format(DateTime.now()),
@@ -40,8 +42,8 @@ class Stage1 {
             "value": ecebStage1MonitorBreathing
           },
           {
-            "dataElement": DHIS2Config.eceb_Stage_1_Initiate_Breastfeeding,
-            "value": ecebStage1InitiateBreastfeeding
+            "dataElement": DHIS2Config.eceb_Stage_1_Skin_To_Skin_Care,
+            "value": ecebStage1SkinToSkinCare
           }
         ]
       };

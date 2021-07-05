@@ -50,7 +50,7 @@ class UserActivityClient {
         },
       );
       return _response(response);
-    } on SocketException {
+    } catch (e) {
       throw FetchDataException(map["noInternetConnection"], 503);
     }
   }

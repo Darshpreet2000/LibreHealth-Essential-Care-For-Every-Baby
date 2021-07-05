@@ -1,10 +1,7 @@
 part of 'assessments_bloc.dart';
 
-abstract class AssessmentsState extends Equatable {
+abstract class AssessmentsState {
   const AssessmentsState();
-
-  @override
-  List<Object> get props => [];
 }
 
 class AssessmentsInitial extends AssessmentsState {

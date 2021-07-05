@@ -49,6 +49,8 @@ class RefreshRepository {
           request.url = DHIS2Config.serverURL +
               APIConfig().getaddEventsAPI(DHIS2Config.orgUnit,
                   DHIS2Config.programECEBID, trackedEntityId);
+          request.data = request.data
+              .replaceAll(DHIS2Config.trackedEntity, trackedEntityId);
         }
         var response =
             await RefreshClient(http.Client(), m).doNetworkRequest(request);

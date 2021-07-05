@@ -21,7 +21,7 @@ class ListOfBabiesClient {
       throw e;
     }
     try {
-      final response = await http.get(
+      final response = await client.get(
         //get all tracked entites which were updated in 24 hours
         Uri.parse(DHIS2Config.serverURL +
             APIConfig().trackedEntityInstance +
@@ -29,9 +29,9 @@ class ListOfBabiesClient {
         headers: <String, String>{
           'authorization': basicAuth,
         },
-      );
+      ).timeout(const Duration(seconds: 10));
       return _response(response);
-    } on SocketException {
+    } catch (e) {
       throw FetchDataException(map["noInternetConnection"], 503);
     }
   }

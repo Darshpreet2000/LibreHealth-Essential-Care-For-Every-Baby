@@ -43,8 +43,14 @@ class AssessmentsRepository {
       throw Exception(
           AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
               .completeAssessments);
+    //marking stage as completed
     stage1.isCompleted = true;
     return;
+  }
+
+  List<Object> addNextAssessment(List<Object> assessments) {
+    if (assessments.length == 0) assessments.add(Stage1());
+    return assessments;
   }
 
   Future registerStage1Details(Stage1 stage1, String id) async {
@@ -55,12 +61,12 @@ class AssessmentsRepository {
     return;
   }
 
-  Future fetchAssessments(String id) async {
+  Future fetchAssessments(String key) async {
     AssessmentsClient assessmentsClient =
         new AssessmentsClient(http.Client(), m);
     try {
       Map<String, dynamic> response =
-          jsonDecode(await assessmentsClient.getAssessmentsOfChild(id));
+          jsonDecode(await assessmentsClient.getAssessmentsOfChild(key));
       List<Object> result = [];
       for (var item in response['events']) {
         if (item['programStage'] == DHIS2Config.stage1ID &&

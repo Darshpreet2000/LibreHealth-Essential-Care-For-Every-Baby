@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:newborn_care/exceptions/custom_exceptions.dart';
 import 'package:newborn_care/models/request_type.dart';
@@ -11,18 +10,22 @@ class RefreshClient {
     try {
       var response;
       if (request.type == RequestType.POST)
-        response = await http.post(
-          Uri.parse(request.url),
-          headers: request.headers,
-          body: request.data,
-        );
+        response = await http
+            .post(
+              Uri.parse(request.url),
+              headers: request.headers,
+              body: request.data,
+            )
+            .timeout(const Duration(seconds: 10));
       else
-        response = await http.get(
-          Uri.parse(request.url),
-          headers: request.headers,
-        );
+        response = await http
+            .get(
+              Uri.parse(request.url),
+              headers: request.headers,
+            )
+            .timeout(const Duration(seconds: 10));
       return _response(response);
-    } on SocketException {
+    } catch (e) {
       throw FetchDataException(map["noInternetConnection"], 503);
     }
   }

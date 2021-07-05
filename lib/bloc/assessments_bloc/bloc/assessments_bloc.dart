@@ -24,8 +24,10 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
     if (event is AssessmentsEventFetchData) {
       yield AssessmentsLoading();
       try {
-        childModel.assessmentsList = await _assessmentsRepository
-            .fetchAssessments(childModel.trackedEntityID);
+        childModel.assessmentsList =
+            await _assessmentsRepository.fetchAssessments(childModel.key);
+        childModel.assessmentsList = _assessmentsRepository
+            .addNextAssessment(childModel.assessmentsList);
         yield AssessmentsInitial(childModel);
       } catch (e) {
         yield AssessmentsError(e.toString());
@@ -39,9 +41,9 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
 
         //push data to dhis2 using api
         _assessmentsRepository.registerStage1Details(
-            childModel.assessmentsList[0] as Stage1,
-            childModel.trackedEntityID);
+            childModel.assessmentsList[0] as Stage1, childModel.key);
         hiveStorageRepository.updateChild(childModel.key, childModel);
+        yield AssessmentsInitial(childModel);
       } catch (e) {
         yield AssessmentsError(e.toString());
         yield AssessmentsInitial(childModel);
