@@ -22,7 +22,7 @@ class UserActivityClient {
     try {
       final response = await http.get(
         Uri.parse(
-            DHIS2Config.serverURL + APIConfig().userMessages + "?pageSize=10"),
+            DHIS2Config.serverURL + APIConfig().userMessages + "?pageSize=5"),
         headers: <String, String>{
           'authorization': basicAuth,
         },

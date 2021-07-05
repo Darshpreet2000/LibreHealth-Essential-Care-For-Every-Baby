@@ -43,7 +43,7 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
         _assessmentsRepository.registerStage1Details(
             childModel.assessmentsList[0] as Stage1, childModel.key);
         hiveStorageRepository.updateChild(childModel.key, childModel);
-        yield AssessmentsInitial(childModel);
+        yield AssessmentsAdded(childModel);
       } catch (e) {
         yield AssessmentsError(e.toString());
         yield AssessmentsInitial(childModel);

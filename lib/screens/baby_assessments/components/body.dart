@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
+import 'package:newborn_care/bloc/refresh_bloc/refresh_bloc.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_1.dart';
@@ -30,6 +31,9 @@ class _BodyState extends State<Body> {
     return BlocListener<AssessmentsBloc, AssessmentsState>(
       bloc: widget.assessmentsBloc,
       listener: (context, state) {
+        if (state is AssessmentsAdded) {
+          BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
+        }
         if (state is AssessmentsError) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(state.message),
@@ -40,7 +44,7 @@ class _BodyState extends State<Body> {
       child: BlocBuilder<AssessmentsBloc, AssessmentsState>(
         bloc: widget.assessmentsBloc,
         builder: (context, state) {
-          if (state is AssessmentsInitial)
+          if (state is AssessmentsInitial || state is AssessmentsAdded)
             return Container(
               child: Column(
                 children: [

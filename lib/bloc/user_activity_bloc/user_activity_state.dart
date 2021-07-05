@@ -1,10 +1,7 @@
 part of 'user_activity_bloc.dart';
 
-abstract class UserActivityState extends Equatable {
+abstract class UserActivityState {
   const UserActivityState();
-
-  @override
-  List<Object> get props => [];
 }
 
 class UserActivityLoading extends UserActivityState {}
