@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:newborn_care/models/profile.dart';
-import 'package:newborn_care/repository/HiveStorageRepository.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/authentication_repository.dart';
 part 'authentication_event.dart';
 part 'authentication_state.dart';

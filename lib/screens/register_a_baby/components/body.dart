@@ -4,7 +4,6 @@ import 'package:newborn_care/bloc/register_baby_bloc/register_baby_bloc.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
 import 'package:newborn_care/screens/register_a_baby/components/register_baby_details.dart';
 import 'package:newborn_care/screens/register_a_baby/components/register_mother_details.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -19,6 +18,7 @@ class Body extends StatelessWidget {
             duration: const Duration(seconds: 3),
           ));
         }
+        if (state is RegisterBabyRegisteredState) Navigator.pop(context);
       },
       child: BlocBuilder<RegisterBabyBloc, RegisterBabyState>(
           builder: (BuildContext context, state) {
@@ -45,16 +45,16 @@ class Body extends StatelessWidget {
                     height: 50,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
+                          primary: Colors.blue,
                           shape: RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(30.0))),
                       onPressed: () {
                         BlocProvider.of<RegisterBabyBloc>(context)
-                            .add(RegisterBaby());
+                            .add(RegisterBaby(context));
                       },
                       child: Text(
-                        AppLocalizations.of(context)!.register,
-                        style: TextStyle(color: Colors.black, fontSize: 16),
+                        "Register",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ),
                   ),

@@ -11,8 +11,8 @@ class RegisterMotherDetails extends StatefulWidget {
   final TextEditingController _wardNameTextController =
       new TextEditingController();
   RegisterMotherDetails(this._registerBabyModel) {
-    _motherNameTextController.text = _registerBabyModel.motherName!;
-    _wardNameTextController.text = _registerBabyModel.wardName!;
+    _motherNameTextController.text = _registerBabyModel.motherName;
+    _wardNameTextController.text = _registerBabyModel.wardName;
   }
 
   @override

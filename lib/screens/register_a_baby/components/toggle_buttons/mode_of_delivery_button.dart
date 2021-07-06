@@ -98,13 +98,30 @@ class _ModeOfDeliveryButtonState extends State<ModeOfDeliveryButton> {
 class ModeOfDeliverySlider extends StatefulWidget {
   final RegisterBabyModel _registerBabyModel;
   final List<bool> modeOfDeliveryList = [false, false, false, false];
-  ModeOfDeliverySlider(this._registerBabyModel);
+  ModeOfDeliverySlider(this._registerBabyModel){
+    switch (_registerBabyModel.modeOfDeliveryName) {
+        case "C-Section":
+         modeOfDeliveryList[0]=true;
+          break;
+        case "Forceps Delivery":
+         modeOfDeliveryList[1]=true;
+          break;
+        case "Vacuum Extraction":
+         modeOfDeliveryList[2]=true;
+          break;
+         case "Other":
+         modeOfDeliveryList[3]=true;
+          break;
+      }
+  }
 
   @override
   _ModeOfDeliverySliderState createState() => _ModeOfDeliverySliderState();
 }
 
 class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
+  
+  
   void selectIndex(int index) {
     print(widget._registerBabyModel.wardName);
     setState(() {
@@ -112,6 +129,17 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
         widget.modeOfDeliveryList[i] = false;
       }
       widget.modeOfDeliveryList[index] = true;
+      switch (index) {
+        case 0:
+          widget._registerBabyModel.modeOfDeliveryName = "C-Section";
+          break;
+        case 1:widget._registerBabyModel.modeOfDeliveryName = "Forceps Delivery";
+          break;
+        case 2:widget._registerBabyModel.modeOfDeliveryName = "Vacuum Extraction";
+          break;
+        case 3:widget._registerBabyModel.modeOfDeliveryName = "Other";
+          break;
+      }
     });
   }
 

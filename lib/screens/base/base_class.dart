@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newborn_care/bloc/refresh_bloc/refresh_bloc.dart';
 import 'package:newborn_care/screens/home/home_screen.dart';
 import 'package:newborn_care/screens/list_of_babies/list_of_babies_screen.dart';
 import 'package:newborn_care/screens/notifications/notification_screen.dart';
@@ -17,6 +19,11 @@ class BaseClass extends StatefulWidget {
 
 class _BaseClassState extends State<BaseClass> {
   int selectedIndex = 0;
+  @override
+  void initState() {
+    BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,16 +110,37 @@ class _BaseClassState extends State<BaseClass> {
           ],
         ),
       ),
-      body: IndexedStack(
-        index: selectedIndex,
-        children: <Widget>[
-          Home(
-            globalKey: widget.globalKey,
+      body: BlocListener<RefreshBloc, RefreshState>(
+        listener: (context, state) {
+          if (state is RefreshLoading) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text("Syncing data with DHIS2")));
+          }
+          if (state is RefreshLoaded) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text("Data synced")));
+          }
+          if (state is RefreshError) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message)));
+          }
+        },
+        child: RefreshIndicator(
+          onRefresh: () async {
+            BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
+          },
+          child: IndexedStack(
+            index: selectedIndex,
+            children: <Widget>[
+              Home(
+                globalKey: widget.globalKey,
+              ),
+              ListOfBabies(),
+              Notifications(),
+              Profile()
+            ],
           ),
-          ListOfBabies(),
-          Notifications(),
-          Profile()
-        ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         key: widget.globalKey,

@@ -9,6 +9,7 @@ class DHIS2Config {
   String babiesDeliveredECEBID = "IVNp5un0dGa";
   String birthDateTimeECEBID = "ZEi7UfVy21n";
   String modeOfDeliveryECEBID = "JH16XsPOvJr";
+  String teiWardname = "HKmbmXfiDJB";
 
   //Stage 0 Registering Babies
   String stageRegisteringBabies = "e63FeH2EwPL";
@@ -16,4 +17,6 @@ class DHIS2Config {
   String ecebSkinColorChanges = "DXdXA90lOYK";
   String ecebTraumasDuringBirth = "ERxsxYUAXXa";
   String ecebWardName = "s6l1WJeNh0q";
+  String ecebskinColorChangesNotes = "bZ5hszY7Myn";
+  String ecebtraumasDuringBirthNotes = "kX6x2gghjPN";
 }
