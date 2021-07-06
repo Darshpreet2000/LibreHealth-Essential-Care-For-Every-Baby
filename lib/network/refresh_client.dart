@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:newborn_care/exceptions/custom_exceptions.dart';
 import 'package:newborn_care/models/request_type.dart';
@@ -26,7 +27,9 @@ class RefreshClient {
             )
             .timeout(const Duration(seconds: 15));
       return _response(response);
-    } catch (e) {
+    } on TimeoutException {
+      throw FetchDataException(map["noInternetConnection"], 503);
+    } on SocketException {
       throw FetchDataException(map["noInternetConnection"], 503);
     }
   }

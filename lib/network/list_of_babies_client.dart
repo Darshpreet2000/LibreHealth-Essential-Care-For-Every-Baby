@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:newborn_care/exceptions/custom_exceptions.dart';
@@ -31,7 +33,9 @@ class ListOfBabiesClient {
         },
       ).timeout(const Duration(seconds: 10));
       return _response(response);
-    } catch (e) {
+    } on TimeoutException {
+      throw FetchDataException(map["noInternetConnection"], 503);
+    } on SocketException {
       throw FetchDataException(map["noInternetConnection"], 503);
     }
   }

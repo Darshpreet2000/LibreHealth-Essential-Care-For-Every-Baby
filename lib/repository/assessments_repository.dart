@@ -43,6 +43,7 @@ class AssessmentsRepository {
       throw Exception(
           AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
               .completeAssessments);
+
     //marking stage as completed
     stage1.isCompleted = true;
     return;

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
@@ -31,7 +32,9 @@ class UserActivityClient {
         },
       ).timeout(const Duration(seconds: 10));
       return _response(response);
-    } catch (e) {
+    } on TimeoutException {
+      throw FetchDataException(map["noInternetConnection"], 503);
+    } on SocketException {
       throw FetchDataException(map["noInternetConnection"], 503);
     }
   }
@@ -53,7 +56,9 @@ class UserActivityClient {
         },
       ).timeout(const Duration(seconds: 10));
       return _response(response);
-    } catch (e) {
+    } on TimeoutException {
+      throw FetchDataException(map["noInternetConnection"], 503);
+    } on SocketException {
       throw FetchDataException(map["noInternetConnection"], 503);
     }
   }
