@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newborn_care/widgets/short_app_bar.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'components/body.dart';
 
 class RegisterABaby extends StatelessWidget {
@@ -10,7 +11,7 @@ class RegisterABaby extends StatelessWidget {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(80.0),
           child: ShortAppBar(
-            title: "Registration",
+            title: AppLocalizations.of(context)!.registration,
             showDrawer: false,
           )),
       body: Body(),

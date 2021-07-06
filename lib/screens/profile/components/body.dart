@@ -9,13 +9,11 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          ProfileHeader(),
-          ProfileList(enableDisableScroll),
-        ],
-      ),
+    return Column(
+      children: [
+        ProfileHeader(),
+        ProfileList(enableDisableScroll),
+      ],
     );
   }
 }

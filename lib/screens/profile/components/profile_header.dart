@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:newborn_care/repository/HiveStorageRepository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileHeader extends StatefulWidget {
   @override
@@ -13,106 +15,96 @@ class _ProfileHeaderState extends State<ProfileHeader> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 2,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(10))),
       margin: EdgeInsets.all(16),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 4,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+      child: Material(
+        elevation: 35,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 4,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        AppLocalizations.of(context)!.accountDetails,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "${AppLocalizations.of(context)!.name}: ${HiveStorageRepository().getProfile().name}",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "${AppLocalizations.of(context)!.id}: ${HiveStorageRepository().getProfile().id}",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 8, left: 8, bottom: 8),
+                      child: Row(
+                        children: [
+                          Text(
+                            "${AppLocalizations.of(context)!.shareLocation}: ",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Switch(
+                              value: isOn,
+                              onChanged: (value) {
+                                setState(() {
+                                  isOn = value;
+                                });
+                              })
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8, bottom: 8),
+                  child: FittedBox(
+                    fit: BoxFit.cover,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage('assets/doctor1.jpg'),
+                      radius: 50,
+                    ),
+                  ),
+                )),
+            Expanded(
+              flex: 1,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Account Details",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16),
-                    ),
+                    child: Icon(Icons.settings),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Name: Fiona",
-                      style: TextStyle(
-                          color: Colors.grey[700], fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "ID: 1***234",
-                      style: TextStyle(
-                          color: Colors.grey[700], fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, left: 8, bottom: 8),
-                    child: Row(
-                      children: [
-                        Text(
-                          "Share Location: ",
-                          style: TextStyle(
-                              color: Colors.grey[700],
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Switch(
-                            value: isOn,
-                            onChanged: (value) {
-                              setState(() {
-                                isOn = value;
-                              });
-                            })
-                      ],
-                    ),
+                    child: Icon(Icons.edit),
                   ),
                 ],
               ),
-            ),
-          ),
-          Expanded(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8, bottom: 8),
-                child: FittedBox(
-                  fit: BoxFit.cover,
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage('assets/doctor1.jpg'),
-                    radius: 50,
-                  ),
-                ),
-              )),
-          Expanded(
-            flex: 1,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.settings),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.edit),
-                ),
-              ],
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:newborn_care/screens/list_of_babies/components/custom_drop_down.dart';
-import 'package:newborn_care/screens/list_of_babies/components/list_tiem.dart';
+import 'package:newborn_care/screens/list_of_babies/components/list_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Body extends StatelessWidget {
   final color = const Color(0xff82A0C8);
@@ -16,15 +17,12 @@ class Body extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          searchAndSort(),
+          searchAndSort(context),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 4, 8, 0),
             child: Text(
-              "Recently Added",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
+              AppLocalizations.of(context)!.recentlyAdded,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               textAlign: TextAlign.start,
             ),
           ),
@@ -33,11 +31,8 @@ class Body extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 8, 8, 0),
             child: Text(
-              "Past Registered",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
+              AppLocalizations.of(context)!.pastRegistered,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               textAlign: TextAlign.start,
             ),
           ),
@@ -54,19 +49,19 @@ class Body extends StatelessWidget {
     );
   }
 
-  Widget searchAndSort() {
+  Widget searchAndSort(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          Expanded(flex: 2, child: searchContainer()),
+          Expanded(flex: 2, child: searchContainer(context)),
           Expanded(child: CustomDropDown(this.enableDisableScroll))
         ],
       ),
     );
   }
 
-  Widget searchContainer() {
+  Widget searchContainer(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Container(
@@ -75,7 +70,7 @@ class Body extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            "Search the list of babies",
+            AppLocalizations.of(context)!.searchTheListOfBabies,
             textAlign: TextAlign.start,
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),

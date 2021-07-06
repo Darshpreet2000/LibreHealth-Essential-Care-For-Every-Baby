@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomDropDown extends StatefulWidget {
   final Function enableDisableScroll;
@@ -50,7 +51,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Time",
+                              AppLocalizations.of(context)!.time,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -67,7 +68,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Status",
+                              AppLocalizations.of(context)!.status,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -84,7 +85,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Location",
+                              AppLocalizations.of(context)!.location,
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold),
@@ -129,10 +130,10 @@ class _CustomDropDownState extends State<CustomDropDown> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 4),
+            Flexible(
               child: Text(
-                'Sort By',
+                AppLocalizations.of(context)!.sortBy,
+                overflow: TextOverflow.ellipsis,
                 style:
                     TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ListItem extends StatelessWidget {
   final String parent, ward, gender;
   final Color? color, darkColor;
 
-  ListItem(this.parent, this.ward, this.gender, this.color, this.darkColor);
+  const ListItem(
+      this.parent, this.ward, this.gender, this.color, this.darkColor);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class ListItem extends StatelessWidget {
                     offset: Offset(0, 3), // changes position of shadow
                   ),
                 ],
-                color: Colors.white,
+                color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +47,8 @@ class ListItem extends StatelessWidget {
                           topRight: Radius.circular(20))),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("22 Minutes From Birth",
+                    child: Text(
+                        "${AppLocalizations.of(context)!.minutesFromBirth("22")}",
                         textAlign: TextAlign.start,
                         style: TextStyle(color: Colors.black, fontSize: 16)),
                   ),
@@ -67,22 +70,20 @@ class ListItem extends StatelessWidget {
                                   // Child text spans will inherit styles from parent
                                   style: new TextStyle(
                                     fontSize: 14.0,
-                                    color: Colors.black,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .color,
                                   ),
                                   children: <TextSpan>[
                                     new TextSpan(
-                                        text: "Baby ",
+                                        text: AppLocalizations.of(context)!
+                                            .babyOf("Oni"),
                                         style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20)),
-                                    new TextSpan(
-                                        text: "of ",
-                                        style: new TextStyle(fontSize: 16)),
-                                    new TextSpan(
-                                        text: parent,
-                                        style: TextStyle(
-                                            color: Colors.black,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .color,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20)),
                                   ],
@@ -97,16 +98,23 @@ class ListItem extends StatelessWidget {
                                   // Child text spans will inherit styles from parent
                                   style: new TextStyle(
                                     fontSize: 14.0,
-                                    color: Colors.black,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .color,
                                   ),
                                   children: <TextSpan>[
                                     new TextSpan(
-                                        text: "Location: ",
+                                        text:
+                                            "${AppLocalizations.of(context)!.location}: ",
                                         style: new TextStyle()),
                                     new TextSpan(
                                         text: ward,
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .color,
                                             fontWeight: FontWeight.bold)),
                                   ],
                                 ),
@@ -119,12 +127,15 @@ class ListItem extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.person,
-                                    color: Colors.black,
+                                    color: Theme.of(context).iconTheme.color,
                                     size: 24,
                                   ),
                                   Text(gender,
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .color,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16)),
                                 ],
@@ -134,7 +145,7 @@ class ListItem extends StatelessWidget {
                               ),
                               Icon(
                                 Icons.chevron_right_sharp,
-                                color: Colors.black,
+                                color: Theme.of(context).iconTheme.color,
                                 size: 30,
                               )
                             ],

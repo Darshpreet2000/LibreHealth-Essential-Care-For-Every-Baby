@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newborn_care/widgets/long_app_bar.dart';
 import 'package:newborn_care/widgets/short_app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class InitialScreen extends StatelessWidget {
   @override
@@ -21,7 +22,8 @@ class InitialScreen extends StatelessWidget {
                       child: LongAppBar())
                   : Container(
                       child: ShortAppBar(
-                      title: "Essential Care For Every Baby",
+                      title: AppLocalizations.of(context)!
+                          .essentialCareForEveryBaby,
                     )),
               loginButtons(context, orientation)
             ],
@@ -62,7 +64,7 @@ class InitialScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Individual',
+                        AppLocalizations.of(context)!.individual,
                         style: TextStyle(
                             color: Colors.blue[800],
                             fontFamily: 'Source',
@@ -102,7 +104,7 @@ class InitialScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Facility',
+                        AppLocalizations.of(context)!.facility,
                         style: TextStyle(
                             color: Colors.blue[800],
                             fontFamily: 'Source',
@@ -132,18 +134,22 @@ class InitialScreen extends StatelessWidget {
                     color: Colors.black,
                   ),
                   children: <TextSpan>[
-                    new TextSpan(text: 'By Continuing you agree to our '),
                     new TextSpan(
-                        text: 'Privacy Policies,\nData Usage Policies',
+                        text:
+                            '${AppLocalizations.of(context)!.byContinuingYouAgreeToOur} '),
+                    new TextSpan(
+                        text:
+                            '${AppLocalizations.of(context)!.privacyPolicies}',
                         style: new TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.blue,
                           decoration: TextDecoration.underline,
                         )),
                     new TextSpan(
-                        text: ' including our ', style: new TextStyle()),
+                        text: ' ${AppLocalizations.of(context)!.includingOur} ',
+                        style: new TextStyle()),
                     new TextSpan(
-                        text: 'Cookies Use',
+                        text: AppLocalizations.of(context)!.cookiesUse,
                         style: new TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.blue,

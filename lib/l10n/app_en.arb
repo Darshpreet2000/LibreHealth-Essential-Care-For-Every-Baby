@@ -1,0 +1,156 @@
+{
+    "essentialCareForEveryBaby": "Essential Care For Every Baby",
+    "eceb": "ECEB",
+
+    "individual": "Individual",
+    "facility": "Facility",
+   
+   
+    "byContinuingYouAgreeToOur":"By Continuing you agree to our",
+    "privacyPolicies":"Privacy Policies,\nData Usage Policies",
+    "includingOur":"including our",
+    "cookiesUse":"Cookies Use",
+
+    "username": "username",
+    "password": "password",
+    "signin": "Sign In",
+
+    "helpingBabiesSurvive":"Helping Babies Survive",
+    "doctorsSchedule":"Doctor's Schedule",
+    "messages":"Messages",
+    "about":"About",
+    "shareApp":"Share App",
+    "reportABug":"Report a Bug",
+
+    "home":"Home",
+    "listOfBabies":"List of Babies",
+    "notifications":"Notifications",
+    "profile":"Profile",
+    "summaryOf24Hours":"Summary of 24 Hours",
+    "admitted":"Admitted",
+    "discharged":"Discharged",
+    "highRisk":"High Risk",
+    "toRegisterABaby":"To Register a Baby",
+    "onCallDoctors":"On Call Doctors",
+
+    "registration":"Registration",
+    "mothersDetails":"Mother's Details",
+    "mothersName":"Mother's name",
+    "wardsName":"Ward's Name",
+    "babiesDelivered":"Babies Delivered",
+    "single":"Single",
+    "multiple":"Multiple",
+    "modeOfDelivery":"Mode Of Delivery",
+    
+    "cSection":"C-Section",
+    "forcepsDelivery":"Forceps \nDelivery",
+    "vacuumExtraction":"Vacuum \nExtraction",
+    "other":"Other",
+    "normal":"Normal",
+    "others":"Others",
+    "babysDetails":"Baby's Details",
+    "gender":"Gender",
+    "birthDateTime":"Birth Date & Time",
+    "weightOfBabyInGrams":"Weight of the baby in (grams)",
+
+    "skinColorChangesInNewBorn":"Skin Color Changes in Newborn",
+
+    "traumasDuringBirth":"Traumas During Birth",
+    "yes":"Yes",
+    "no":"No",
+    "register":"Register",
+
+
+    "recentlyAdded":"Recently Added",
+    "pastRegistered":"Past Registered",
+    "babyOf":"Baby of {motherName}",
+    "@babyOf": {
+          "placeholders":{
+              "motherName":{}
+          }
+    },
+    "minutesFromBirth":"{minutes} minutes from birth",
+    "@minutesFromBirth": {
+        "placeholders":{
+            "minutes":{}
+        }
+    },
+    "hoursFromBirth":"{hours} hours from birth",
+    "@hoursFromBirth": {
+        "placeholders":{
+            "hours":{}
+        }
+    },
+    "location":"Location",
+    "male":"Male",
+    "female":"Female",
+    "searchTheListOfBabies":"Search the list of babies",
+    "sortBy":"Sort By",
+    "time":"Time",
+    "status":"Status",
+    
+    "riskAssessment":"Risk Assessments",
+    "monitoringAlerts":"Monitoring Alerts",
+
+
+    "accountDetails":"Account Details",
+    "name":"Name",
+    "id":"ID",
+    "shareLocation":"Share Location",
+    "activity":"Activity",
+    "registeredBabies":"Registered \nBabies",
+    "diagnosed":"Diagnosed \nBabies",
+    "dischargedBabies":"Discharged \nBabies",
+
+
+    "riskAssessments":"Risk Assessments",
+    "problem":"Problem",
+    "danger":"Danger",
+    "statusChanged":"Status changed {from} to {to}",
+    "@statusChanged": {
+        "placeholders":{
+            "from":{},
+            "to":{}
+        }
+    },
+    "postCheckup":"Post {minute} minute checkup",
+    "@postCheckup": {
+        "placeholders":{
+            "minute":{}
+        }
+    },
+    "enterMothersName":"Enter Mother's name",
+    
+    "enterWardName":"Enter Ward name",
+    "selectBabiesDelivered":"Select babies delivered",
+    "selectModeOfDelivery":"Select mode of delivery",
+    "selectGenderForChild":"Select gender for child {index}",
+    "@selectGenderForChild" :{
+        "placeholders":{
+            "index":{}
+        }
+    },
+    "selectSkinColorChangesForChild":"Select skin color changes for child {index}",  
+     "@selectSkinColorChangesForChild" :{
+        "placeholders":{
+            "index":{}
+        }
+    },
+    "selectTraumasDuringBirthForChild":"Select traumas during birth for child {index}",
+    "@selectTraumasDuringBirthForChild" :{
+        "placeholders":{
+            "index":{}
+        }
+    },
+    "noInternetConnection":"No internet connection",
+    "errorOccuredWhileCommunication":"Error occured while communication with server with statuscode: {code}",
+    "@errorOccuredWhileCommunication" :{
+        "placeholders":{
+            "code":{}
+        }
+    },
+    "errorDuringCommunication":"Error during communication",
+    "invalidRequest":"Invalid request",
+    "unauthorised":"Unauthorized",
+    "invalidInput":"Invalid input"
+}
