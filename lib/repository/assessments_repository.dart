@@ -55,7 +55,7 @@ class AssessmentsRepository {
 
   Future registerStage1Details(Stage1 stage1, String id) async {
     AssessmentsClient assessmentsClient =
-        new AssessmentsClient(http.Client(), m);
+        new AssessmentsClient(http.Client(), m,lock);
     String json = jsonEncode(stage1);
     assessmentsClient.registerEvent(json, id);
     return;
@@ -63,7 +63,7 @@ class AssessmentsRepository {
 
   Future fetchAssessments(String key) async {
     AssessmentsClient assessmentsClient =
-        new AssessmentsClient(http.Client(), m);
+        new AssessmentsClient(http.Client(), m,lock);
     try {
       Map<String, dynamic> response =
           jsonDecode(await assessmentsClient.getAssessmentsOfChild(key));

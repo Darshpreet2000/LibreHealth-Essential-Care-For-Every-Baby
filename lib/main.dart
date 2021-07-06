@@ -24,6 +24,7 @@ import 'package:newborn_care/screens/initial_screen/initial_screen.dart';
 import 'package:newborn_care/screens/register_a_baby/register_a_baby.dart';
 import 'package:newborn_care/theme/theme_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:synchronized/synchronized.dart';
 
 import 'bloc/refresh_bloc/refresh_bloc.dart';
 import 'bloc/register_baby_bloc/register_baby_bloc.dart';
@@ -44,6 +45,7 @@ final GlobalKey<ScaffoldMessengerState> scaffoldMessengerGlobalKey =
 late Box box;
 late Box<List> listBox;
 late Box<ChildModel> mapBox;
+var lock = new Lock();
 Future registerHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProfileAdapter());

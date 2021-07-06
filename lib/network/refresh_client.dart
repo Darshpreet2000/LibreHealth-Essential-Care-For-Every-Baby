@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:newborn_care/exceptions/custom_exceptions.dart';
 import 'package:newborn_care/models/request_type.dart';
@@ -16,16 +17,16 @@ class RefreshClient {
               headers: request.headers,
               body: request.data,
             )
-            .timeout(const Duration(seconds: 10));
+            .timeout(const Duration(seconds: 15));
       else
         response = await http
             .get(
               Uri.parse(request.url),
               headers: request.headers,
             )
-            .timeout(const Duration(seconds: 10));
+            .timeout(const Duration(seconds: 15));
       return _response(response);
-    } catch (e) {
+    }  catch (e) {
       throw FetchDataException(map["noInternetConnection"], 503);
     }
   }

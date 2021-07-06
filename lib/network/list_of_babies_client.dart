@@ -5,17 +5,18 @@ import 'package:newborn_care/exceptions/custom_exceptions.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/utils/api_config.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
+import 'package:synchronized/synchronized.dart';
 
 class ListOfBabiesClient {
   http.Client client;
   Map<String, String> map;
-
-  ListOfBabiesClient(this.client, this.map);
+  Lock lock;
+  ListOfBabiesClient(this.client, this.map,this.lock);
   Future fetchListOfBabies(String username, String password) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     try {
-      await RefreshRepository().startRefreshing();
+      await lock.synchronized(RefreshRepository().startRefreshing);
     } catch (e) {
       throw e;
     }

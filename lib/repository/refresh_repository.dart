@@ -35,7 +35,7 @@ class RefreshRepository {
               .errorDuringCommunication
     });
   }
-  Future<void> startRefreshing() async {
+  void startRefreshing() async {
     try {
       List<NetworkRequest> networkRequests =
           HiveStorageRepository().getNetworkRequests();

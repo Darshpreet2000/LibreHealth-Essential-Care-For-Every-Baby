@@ -33,7 +33,6 @@ class RegisterBabyBloc extends Bloc<RegisterBabyEvent, RegisterBabyState> {
       yield RegisterBabyInitialState(_registerBabyModel);
     } else if (event is RegisterBaby) {
       // check if data is filled correctly
-      //yield RegisterBabyLoadingState();
       try {
         await _registerBabyRepositoryImpl
             .checkDataEnteredCorrectly(_registerBabyModel);
