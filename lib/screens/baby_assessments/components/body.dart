@@ -67,8 +67,8 @@ class _BodyState extends State<Body> {
               ),
             );
           return SizedBox(
-             height: MediaQuery.of(context).size.height / 1.5,
-            child: Center(child: CircularProgressIndicator()));
+              height: MediaQuery.of(context).size.height / 1.5,
+              child: Center(child: CircularProgressIndicator()));
         },
       ),
     );

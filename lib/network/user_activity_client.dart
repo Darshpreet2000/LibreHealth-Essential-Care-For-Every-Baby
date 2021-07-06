@@ -10,16 +10,15 @@ import 'package:synchronized/synchronized.dart';
 class UserActivityClient {
   http.Client client;
   Map<String, String> map;
-  
+
   Lock lock;
-  UserActivityClient(this.client, this.map,this.lock);
-  
+  UserActivityClient(this.client, this.map, this.lock);
+
   Future fetchUserMessages(String username, String password) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     try {
-      
-      await lock.synchronized( RefreshRepository().startRefreshing);
+      await lock.synchronized(RefreshRepository().startRefreshing);
     } catch (e) {
       throw e;
     }
@@ -41,8 +40,8 @@ class UserActivityClient {
       String username, String password, String id) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
-    try { 
-    await lock.synchronized( RefreshRepository().startRefreshing);
+    try {
+      await lock.synchronized(RefreshRepository().startRefreshing);
     } catch (e) {
       throw e;
     }

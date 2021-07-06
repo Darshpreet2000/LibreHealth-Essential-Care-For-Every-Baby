@@ -35,7 +35,7 @@ class ListOfBabiesRepository {
   }
   Future fetchListOfBabies() async {
     Profile profile = HiveStorageRepository().getProfile();
-    String response = await ListOfBabiesClient(http.Client(), m,lock)
+    String response = await ListOfBabiesClient(http.Client(), m, lock)
         .fetchListOfBabies(profile.username, profile.password);
     Map<String, dynamic> res = jsonDecode(response);
     List<ChildModel> result = [];

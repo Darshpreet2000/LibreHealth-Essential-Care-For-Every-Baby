@@ -26,7 +26,7 @@ class RefreshClient {
             )
             .timeout(const Duration(seconds: 15));
       return _response(response);
-    }  catch (e) {
+    } catch (e) {
       throw FetchDataException(map["noInternetConnection"], 503);
     }
   }

@@ -15,7 +15,7 @@ class AssessmentsClient {
   Map<String, String> map;
 
   Lock lock;
-  AssessmentsClient(this.client, this.map,this.lock);
+  AssessmentsClient(this.client, this.map, this.lock);
   Future registerEvent(String data, String id) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('testuser:Admin@123'));
@@ -33,8 +33,7 @@ class AssessmentsClient {
 
   Future getAssessmentsOfChild(String key) async {
     try {
-     
-     await lock.synchronized( RefreshRepository().startRefreshing);
+      await lock.synchronized(RefreshRepository().startRefreshing);
     } catch (e) {
       throw e;
     }

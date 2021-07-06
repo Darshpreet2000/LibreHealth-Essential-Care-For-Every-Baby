@@ -11,7 +11,7 @@ class ListOfBabiesClient {
   http.Client client;
   Map<String, String> map;
   Lock lock;
-  ListOfBabiesClient(this.client, this.map,this.lock);
+  ListOfBabiesClient(this.client, this.map, this.lock);
   Future fetchListOfBabies(String username, String password) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
