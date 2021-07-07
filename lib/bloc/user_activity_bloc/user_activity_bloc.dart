@@ -32,12 +32,5 @@ class UserActivityBloc extends Bloc<UserActivityEvent, UserActivityState> {
         yield UserActivityLoaded(hiveStorageRepository.getNotificationsList());
       }
     }
-    if (event is UserActivityAddNotification) {
-      List<UserActivity> response =
-          hiveStorageRepository.getNotificationsList();
-      response.add(event.notifications);
-      hiveStorageRepository.storeNotifications(response);
-      yield UserActivityLoaded(response);
-    }
   }
 }

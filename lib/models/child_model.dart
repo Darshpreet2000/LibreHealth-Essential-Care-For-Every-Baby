@@ -1,7 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
-import 'package:uuid/uuid.dart';
 part 'auto_generate/child_model.g.dart';
 
 //flutter packages pub run build_runner build
@@ -34,7 +36,9 @@ class ChildModel {
 
   ChildModel(this.parent, this.ward, this.gender, this.color, this.darkColor,
       this.birthTime, this.trackedEntityID, this.key);
+
   factory ChildModel.fromJson(dynamic json) {
+    var map = HiveStorageRepository().getChildKeysMap();
     String? parent, ward;
     DateTime? birthTime;
     int? color, darkColor, gender;
@@ -74,7 +78,11 @@ class ChildModel {
           break;
       }
     });
+    Random random = new Random();
+    String key = (map.containsKey(trackedEntityID)
+        ? map[trackedEntityID]
+        : random.nextInt(100000000).toString());
     return new ChildModel(parent!, ward!, gender!, color!, darkColor!,
-        birthTime!, trackedEntityID, Uuid().v1());
+        birthTime!, trackedEntityID, key);
   }
 }

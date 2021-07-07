@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,14 +10,16 @@ import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
 import 'package:newborn_care/models/request_service_type.dart';
-import 'package:newborn_care/models/request_type.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/models/user_activity.dart';
+import 'package:newborn_care/repository/assessments_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/authentication_repository.dart';
 import 'package:newborn_care/repository/list_of_babies_repository.dart';
+import 'package:newborn_care/repository/notification_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/repository/register_baby_repository.dart';
+import 'package:newborn_care/screens/baby_assessments/baby_assessments.dart';
 import 'package:newborn_care/screens/base/base_class.dart';
 import 'package:newborn_care/screens/facility_login/facility_login.dart';
 import 'package:newborn_care/screens/individual_login/individual_login.dart';
@@ -26,6 +29,7 @@ import 'package:newborn_care/theme/theme_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:synchronized/synchronized.dart';
 
+import 'bloc/assessments_bloc/bloc/assessments_bloc.dart';
 import 'bloc/refresh_bloc/refresh_bloc.dart';
 import 'bloc/register_baby_bloc/register_baby_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -40,6 +44,7 @@ void main() async {
 }
 
 GlobalKey<ScaffoldState> drawerKey = new GlobalKey<ScaffoldState>();
+final navigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerGlobalKey =
     GlobalKey<ScaffoldMessengerState>(debugLabel: 'app_localization_key');
 late Box box;
@@ -50,7 +55,6 @@ Future registerHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProfileAdapter());
   Hive.registerAdapter(NetworkRequestAdapter());
-  Hive.registerAdapter(RequestTypeAdapter());
   Hive.registerAdapter(UserActivityAdapter());
   Hive.registerAdapter(ChildModelAdapter());
   Hive.registerAdapter(RequestServiceTypeAdapter());
@@ -73,6 +77,16 @@ class _MyAppState extends State<MyApp> {
     if (HiveStorageRepository().checkUserLoggedIn()) {
       initialAppRoute = '/Base';
     }
+    NotificationRepository.intialize();
+    AwesomeNotifications().actionStream.listen((receivedNotification) {
+      ChildModel childModel = HiveStorageRepository()
+          .getSingleChild(receivedNotification.id.toString());
+      navigatorKey.currentState!.push(MaterialPageRoute(
+          builder: (context) => BabyAssessments(
+              childModel,
+              AssessmentsBloc(NotificationRepository(), AssessmentsRepository(),
+                  childModel, HiveStorageRepository()))));
+    });
     super.initState();
   }
 
@@ -95,11 +109,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider<RegisterBabyBloc>(
           create: (BuildContext context) => RegisterBabyBloc(
-              RegisterBabyModel(), RegisterBabyRepositoryImpl()),
-        ),
-        BlocProvider<RegisterBabyBloc>(
-          create: (BuildContext context) => RegisterBabyBloc(
-              RegisterBabyModel(), RegisterBabyRepositoryImpl()),
+              RegisterBabyModel(),
+              RegisterBabyRepositoryImpl(),
+              NotificationRepository()),
         ),
         BlocProvider<AuthenticationBloc>(
           create: (BuildContext context) => AuthenticationBloc(
@@ -108,6 +120,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: Center(
         child: MaterialApp(
+          navigatorKey: navigatorKey,
           scaffoldMessengerKey: scaffoldMessengerGlobalKey,
           title: 'Newborn Care',
           localizationsDelegates: [

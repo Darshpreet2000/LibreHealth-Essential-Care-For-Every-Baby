@@ -9,39 +9,49 @@ class BabiesListViewRecentlyAdded extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ListOfBabiesBloc, ListOfBabiesState>(
-      builder: (context, state) {
-        if (state is ListOfBabiesLoading)
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        if (state is ListOfBabiesLoaded && state.childListRecently.isNotEmpty) {
-          return Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 4, 8, 0),
-                  child: Text(
-                    AppLocalizations.of(context)!.recentlyAdded,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: state.childListRecently.length,
-                  itemBuilder: (context, index) {
-                    return ListItem(state.childListRecently[index], true);
-                  },
-                ),
-              ],
-            ),
-          );
+    return BlocListener<ListOfBabiesBloc, ListOfBabiesState>(
+      listener: (context, state) {
+        if (state is ListOfBabiesErrorState) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(state.message)));
         }
-        return Container();
       },
+      child: BlocBuilder<ListOfBabiesBloc, ListOfBabiesState>(
+        builder: (context, state) {
+          if (state is ListOfBabiesLoading)
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          if (state is ListOfBabiesLoaded &&
+              state.childListRecently.isNotEmpty) {
+            return Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 4, 8, 0),
+                    child: Text(
+                      AppLocalizations.of(context)!.recentlyAdded,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: state.childListRecently.length,
+                    itemBuilder: (context, index) {
+                      return ListItem(state.childListRecently[index], true);
+                    },
+                  ),
+                ],
+              ),
+            );
+          }
+          return Container();
+        },
+      ),
     );
   }
 }

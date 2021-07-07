@@ -1,6 +1,5 @@
 import 'package:newborn_care/models/network_request.dart';
 import 'package:newborn_care/models/request_service_type.dart';
-import 'package:newborn_care/models/request_type.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/utils/api_config.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
@@ -15,8 +14,8 @@ class RegisterBabyAPIClient {
       'authorization': basicAuth,
       'Content-Type': 'application/json; charset=UTF-8',
     };
-    NetworkRequest request = NetworkRequest(RequestType.POST, url, data,
-        headers, key, RequestServiceType.RegisterBaby);
+    NetworkRequest request = NetworkRequest(
+        url, data, headers, key, RequestServiceType.RegisterBaby);
     HiveStorageRepository().storeNetworkRequest(request);
   }
 }

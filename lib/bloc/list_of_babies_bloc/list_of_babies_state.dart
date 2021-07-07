@@ -8,6 +8,12 @@ class ListOfBabiesInitial extends ListOfBabiesState {}
 
 class ListOfBabiesLoading extends ListOfBabiesState {}
 
+class ListOfBabiesErrorState extends ListOfBabiesState {
+  final String message;
+
+  ListOfBabiesErrorState(this.message);
+}
+
 class ListOfBabiesLoaded extends ListOfBabiesState {
   final List<ChildModel> childListRecently, childListPastRegistered;
 

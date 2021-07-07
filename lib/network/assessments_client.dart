@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:newborn_care/exceptions/custom_exceptions.dart';
 import 'package:newborn_care/models/network_request.dart';
 import 'package:newborn_care/models/request_service_type.dart';
-import 'package:newborn_care/models/request_type.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/utils/api_config.dart';
@@ -28,8 +27,8 @@ class AssessmentsClient {
       'authorization': basicAuth,
       'Content-Type': 'application/json; charset=UTF-8',
     };
-    NetworkRequest request = NetworkRequest(
-        RequestType.POST, url, data, headers, id, RequestServiceType.AddEvent);
+    NetworkRequest request =
+        NetworkRequest(url, data, headers, id, RequestServiceType.AddEvent);
     HiveStorageRepository().storeNetworkRequest(request);
   }
 

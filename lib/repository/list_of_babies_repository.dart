@@ -1,7 +1,7 @@
 import 'dart:convert';
 
+import 'package:newborn_care/exceptions/exception_messages.dart';
 import 'package:newborn_care/main.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/network/list_of_babies_client.dart';
@@ -10,39 +10,34 @@ import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:http/http.dart' as http;
 
 class ListOfBabiesRepository {
-  Map<String, String> m = new Map();
-  ListOfBabiesRepository() {
-    m.addAll({
-      "noInternetConnection":
-          AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-              .noInternetConnection,
-      "invalidRequest":
-          AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-              .invalidRequest,
-      "unauthorised":
-          AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-              .unauthorised,
-      "invalidInput":
-          AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-              .invalidInput,
-      "errorOccuredWhileCommunication":
-          AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-              .errorDuringCommunication,
-      "errorDuringCommunication":
-          AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-              .errorDuringCommunication
-    });
-  }
   Future fetchListOfBabies() async {
-    Profile profile = HiveStorageRepository().getProfile();
-    String response = await ListOfBabiesClient(http.Client(), m, lock)
-        .fetchListOfBabies(profile.username, profile.password);
-    Map<String, dynamic> res = jsonDecode(response);
-    List<ChildModel> result = [];
-    for (var item in res['trackedEntityInstances']) {
-      ChildModel childModel = ChildModel.fromJson(item);
-      result.add(childModel);
+    try {
+      Profile profile = HiveStorageRepository().getProfile();
+      String response = await ListOfBabiesClient(
+              http.Client(), ExceptionMessages.exceptionMessagesMap, lock)
+          .fetchListOfBabies(profile.username, profile.password);
+      Map<String, dynamic> res = jsonDecode(response);
+      List<ChildModel> result = [];
+      for (var item in res['trackedEntityInstances']) {
+        ChildModel childModel = ChildModel.fromJson(item);
+        result.add(childModel);
+      }
+      return result;
+    } catch (e) {
+      throw e;
     }
-    return result;
+  }
+
+  void seperateRecentAndPastRegistered(List<ChildModel> recentList,
+      List<ChildModel> pastRegistered, List<ChildModel> childListMap) {
+    childListMap.sort((a, b) => b.birthTime.compareTo(a.birthTime));
+
+    childListMap.forEach((element) {
+      if ((DateTime.now()).difference(element.birthTime).inHours < 24) {
+        recentList.add(element);
+      } else {
+        pastRegistered.add(element);
+      }
+    });
   }
 }

@@ -6,15 +6,17 @@ import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
+import 'package:newborn_care/repository/notification_repository.dart';
 part 'assessments_event.dart';
 part 'assessments_state.dart';
 
 class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
   AssessmentsRepository _assessmentsRepository;
   HiveStorageRepository hiveStorageRepository;
+  NotificationRepository notificationRepository;
   ChildModel childModel;
-  AssessmentsBloc(
-      this._assessmentsRepository, this.childModel, this.hiveStorageRepository)
+  AssessmentsBloc(this.notificationRepository, this._assessmentsRepository,
+      this.childModel, this.hiveStorageRepository)
       : super(AssessmentsInitial(childModel));
 
   @override
@@ -39,6 +41,7 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
         _assessmentsRepository
             .validatePhase1Assessments(childModel.assessmentsList[0] as Stage1);
 
+        notificationRepository.removeScheduledNotification(childModel.key);
         //push data to dhis2 using api
         _assessmentsRepository.registerStage1Details(
             childModel.assessmentsList[0] as Stage1, childModel.key);

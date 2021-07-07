@@ -4,6 +4,7 @@ import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
+import 'package:newborn_care/repository/notification_repository.dart';
 import 'package:newborn_care/screens/baby_assessments/baby_assessments.dart';
 
 class ListItem extends StatelessWidget {
@@ -29,7 +30,10 @@ class ListItem extends StatelessWidget {
                   MaterialPageRoute(
                       builder: (context) => BabyAssessments(
                           childModel,
-                          AssessmentsBloc(AssessmentsRepository(), childModel,
+                          AssessmentsBloc(
+                              NotificationRepository(),
+                              AssessmentsRepository(),
+                              childModel,
                               HiveStorageRepository()))));
           },
           child: Container(

@@ -203,5 +203,9 @@
     "continuedInpatientCare":"Continued inpatient care",
     "checkupAfter90Minutes":"Checkup After 90 Minutes",
 
-    "completeAssessments":"Please complete assessments"
+    "completeAssessments":"Please complete assessments",
+    "reminder":"Reminder",
+    "syncingDataWithDHIS2":"Syncing data with DHIS2",
+    "dataSynced":"Data synced"
+
  }

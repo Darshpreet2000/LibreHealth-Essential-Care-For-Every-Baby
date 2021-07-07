@@ -6,20 +6,51 @@ import 'package:newborn_care/models/user_activity.dart';
 
 class HiveStorageRepository {
   //List of child
-
   void storeSingleChild(ChildModel child) {
+    Map<String, dynamic> map = new Map();
+    if (box.containsKey('map')) {
+      map = new Map<String, dynamic>.from(box.get('map'));
+    }
+    map[child.trackedEntityID] = child.key;
+    box.put('map', map);
     mapBox.put(child.key, child);
   }
 
+  dynamic getChildKeysMap() {
+    var map = new Map();
+    if (box.containsKey('map')) {
+      map = new Map<String, dynamic>.from(box.get('map'));
+    }
+    return map;
+  }
+
   Future<void> storeListOfChild(List<ChildModel> childList) async {
+    //map TEI,key
+    Map<String, dynamic> map = new Map();
+    Map<String, dynamic> copy = new Map();
+
+    if (box.containsKey('map'))
+      map = new Map<String, dynamic>.from(box.get('map'));
     await mapBox.clear();
     childList.forEach((element) {
+      //use old key if same child TEI
+
       mapBox.put(element.key, element);
+      map[element.trackedEntityID] = element.key;
+      copy[element.trackedEntityID] = element.key;
     });
+    copy = map;
+    box.put('map', copy);
     print(mapBox.keys);
   }
 
   void updateChild(String key, ChildModel childModel) {
+    Map<String, dynamic> map = new Map();
+    if (box.containsKey('map')) {
+      map = new Map<String, dynamic>.from(box.get('map'));
+    }
+    map[childModel.trackedEntityID] = childModel.key;
+    box.put('map', map);
     mapBox.put(key, childModel);
   }
 
