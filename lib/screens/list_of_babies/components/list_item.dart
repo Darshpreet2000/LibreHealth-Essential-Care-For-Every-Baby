@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
 import 'package:newborn_care/main.dart';
@@ -32,10 +33,13 @@ class ListItem extends StatelessWidget {
                       builder: (context) => BabyAssessments(
                           childModel,
                           AssessmentsBloc(
-                              NotificationRepository(context),
-                              AssessmentsRepository(context, lock),
+                              RepositoryProvider.of<NotificationRepository>(
+                                  context),
+                              RepositoryProvider.of<AssessmentsRepository>(
+                                  context),
                               childModel,
-                              HiveStorageRepository()))));
+                              RepositoryProvider.of<HiveStorageRepository>(
+                                  context)))));
           },
           child: Container(
             margin: EdgeInsets.fromLTRB(16, 8, 16, 16),

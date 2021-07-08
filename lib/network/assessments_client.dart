@@ -16,12 +16,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AssessmentsClient {
   http.Client client;
   BuildContext context;
-
+  HiveStorageRepository hiveStorageRepository;
+  RefreshRepository refreshRepository;
   Lock lock;
-  AssessmentsClient(this.client, this.context, this.lock);
-  Future registerEvent(String data, String id) async {
+  AssessmentsClient(this.client, this.context, this.lock,
+      this.hiveStorageRepository, this.refreshRepository);
+  Future registerEvent(
+      String data, String id, String username, String password) async {
     String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('testuser:Admin@123'));
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
     String url = DHIS2Config.serverURL +
         APIConfig().getaddEventsAPI(
             DHIS2Config.orgUnit, DHIS2Config.programECEBID, id);
@@ -31,20 +34,21 @@ class AssessmentsClient {
     };
     NetworkRequest request =
         NetworkRequest(url, data, headers, id, RequestServiceType.AddEvent);
-    HiveStorageRepository().storeNetworkRequest(request);
+    hiveStorageRepository.storeNetworkRequest(request);
   }
 
-  Future getAssessmentsOfChild(String key) async {
+  Future getAssessmentsOfChild(
+      String key, String username, String password) async {
     try {
-      await lock.synchronized(RefreshRepository(context).startRefreshing);
+      await lock.synchronized(refreshRepository.startRefreshing);
     } catch (e) {
       throw e;
     }
     try {
       String trackedEntityID =
-          HiveStorageRepository().getSingleChild(key).trackedEntityID;
+          hiveStorageRepository.getSingleChild(key).trackedEntityID;
       String basicAuth =
-          'Basic ' + base64Encode(utf8.encode('testuser:Admin@123'));
+          'Basic ' + base64Encode(utf8.encode('$username:$password'));
       String url = DHIS2Config.serverURL +
           APIConfig().getaddEventsAPI(
               DHIS2Config.orgUnit, DHIS2Config.programECEBID, trackedEntityID);

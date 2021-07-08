@@ -15,13 +15,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ListOfBabiesClient {
   http.Client client;
   BuildContext context;
+  RefreshRepository refreshRepository;
   Lock lock;
-  ListOfBabiesClient(this.client, this.context, this.lock);
+  ListOfBabiesClient(
+      this.client, this.context, this.lock, this.refreshRepository);
   Future fetchListOfBabies(String username, String password) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     try {
-      await lock.synchronized(RefreshRepository(context).startRefreshing);
+      await lock.synchronized(refreshRepository.startRefreshing);
     } catch (e) {
       throw e;
     }

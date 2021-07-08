@@ -7,10 +7,15 @@ import 'package:newborn_care/repository/hive_storage_repository.dart';
 
 class AuthenticationRepository {
   BuildContext context;
-  AuthenticationRepository(this.context);
+  HiveStorageRepository hiveStorageRepository;
+  late AuthenticationClient authenticationClient;
+  AuthenticationRepository(this.context, this.hiveStorageRepository) {
+    authenticationClient = AuthenticationClient(http.Client(), context);
+  }
+  AuthenticationRepository.test(
+      this.context, this.hiveStorageRepository, this.authenticationClient);
   Future loginUser(String username, String password) async {
-    String response = await AuthenticationClient(http.Client(), context)
-        .loginUser(username, password);
+    String response = await authenticationClient.loginUser(username, password);
     Map<String, dynamic> res = jsonDecode(response);
     Profile profile = new Profile(res["name"],
         "***" + res['id'].substring(res['id'].length - 3), username, password);
@@ -18,6 +23,6 @@ class AuthenticationRepository {
   }
 
   bool checkUserLoggedIn() {
-    return HiveStorageRepository().checkUserLoggedIn();
+    return hiveStorageRepository.checkUserLoggedIn();
   }
 }

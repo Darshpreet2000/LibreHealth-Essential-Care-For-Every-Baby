@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:newborn_care/models/child_model.dart';
+import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:newborn_care/models/stage_1.dart';
@@ -12,7 +13,15 @@ import 'package:newborn_care/repository/notification_repository.dart';
 
 class RegisterBabyRepositoryImpl {
   final BuildContext context;
-  RegisterBabyRepositoryImpl(this.context);
+  late RegisterBabyAPIClient registerBabyAPIClient;
+  final HiveStorageRepository hiveStorageRepository;
+
+  RegisterBabyRepositoryImpl(this.context, this.hiveStorageRepository) {
+    registerBabyAPIClient = new RegisterBabyAPIClient(hiveStorageRepository);
+  }
+  RegisterBabyRepositoryImpl.test(
+      this.context, this.hiveStorageRepository, this.registerBabyAPIClient);
+
   Future checkDataEnteredCorrectly(RegisterBabyModel _registerBabyModel) async {
     if (_registerBabyModel.motherName.isEmpty)
       throw Exception(AppLocalizations.of(context)!.enterMothersName);
@@ -63,7 +72,7 @@ class RegisterBabyRepositoryImpl {
       //create stage 1 assessmens
       child.assessmentsList.add(Stage1());
       //save to hive storage
-      HiveStorageRepository().storeSingleChild(child);
+      hiveStorageRepository.storeSingleChild(child);
       //add/schedule stage 1 notifications
       await notificationRepository.showStage1Notification(
           key, _registerBabyModel.motherName);
@@ -75,9 +84,10 @@ class RegisterBabyRepositoryImpl {
 
   Future registerBabyDetails(
       RegisterBabyModel _registerBabyModel, String key) async {
-    RegisterBabyAPIClient registerBabyAPIClient = new RegisterBabyAPIClient();
     String json = convertToJson(_registerBabyModel);
-    registerBabyAPIClient.registerBabyDetailsAsTrackedEntity(json, key);
+    Profile profile = hiveStorageRepository.getProfile();
+    registerBabyAPIClient.registerBabyDetailsAsTrackedEntity(
+        json, key, profile.username, profile.password);
     return;
   }
 

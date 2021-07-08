@@ -1,16 +1,32 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:newborn_care/network/assessments_client.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
+import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
 import 'package:synchronized/synchronized.dart';
 
 class AssessmentsRepository {
   final BuildContext context;
   final Lock lock;
-  AssessmentsRepository(this.context, this.lock);
+  final HiveStorageRepository hiveStorageRepository;
+  final RefreshRepository refreshRepository;
+  late AssessmentsClient assessmentsClient;
+  AssessmentsRepository(this.context, this.lock, this.hiveStorageRepository,
+      this.refreshRepository) {
+    assessmentsClient = new AssessmentsClient(
+        http.Client(), context, lock, hiveStorageRepository, refreshRepository);
+  }
+  AssessmentsRepository.test(
+      this.context,
+      this.lock,
+      this.hiveStorageRepository,
+      this.refreshRepository,
+      this.assessmentsClient);
 
   void validatePhase1Assessments(Stage1 stage1) {
     if (stage1.ecebWardName.isEmpty)
@@ -32,19 +48,19 @@ class AssessmentsRepository {
   }
 
   Future registerStage1Details(Stage1 stage1, String id) async {
-    AssessmentsClient assessmentsClient =
-        new AssessmentsClient(http.Client(), context, lock);
+    Profile profile = hiveStorageRepository.getProfile();
+
     String json = jsonEncode(stage1);
-    assessmentsClient.registerEvent(json, id);
+    assessmentsClient.registerEvent(
+        json, id, profile.username, profile.password);
     return;
   }
 
   Future fetchAssessments(String key) async {
-    AssessmentsClient assessmentsClient =
-        new AssessmentsClient(http.Client(), context, lock);
+    Profile profile = hiveStorageRepository.getProfile();
     try {
-      Map<String, dynamic> response =
-          jsonDecode(await assessmentsClient.getAssessmentsOfChild(key));
+      Map<String, dynamic> response = jsonDecode(await assessmentsClient
+          .getAssessmentsOfChild(key, profile.username, profile.password));
       List<Object> result = [];
       for (var item in response['events']) {
         if (item['programStage'] == DHIS2Config.stage1ID &&

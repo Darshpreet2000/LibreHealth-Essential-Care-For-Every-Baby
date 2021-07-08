@@ -14,15 +14,16 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class UserActivityClient {
   http.Client client;
   BuildContext context;
-
+  RefreshRepository refreshRepository;
   Lock lock;
-  UserActivityClient(this.client, this.context, this.lock);
+  UserActivityClient(
+      this.client, this.context, this.lock, this.refreshRepository);
 
   Future fetchUserMessages(String username, String password) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     try {
-      await lock.synchronized(RefreshRepository(context).startRefreshing);
+      await lock.synchronized(refreshRepository.startRefreshing);
     } catch (e) {
       throw e;
     }
@@ -49,7 +50,7 @@ class UserActivityClient {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     try {
-      await lock.synchronized(RefreshRepository(context).startRefreshing);
+      await lock.synchronized(refreshRepository.startRefreshing);
     } catch (e) {
       throw e;
     }

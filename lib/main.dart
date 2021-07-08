@@ -1,4 +1,3 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -19,7 +18,6 @@ import 'package:newborn_care/repository/list_of_babies_repository.dart';
 import 'package:newborn_care/repository/notification_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/repository/register_baby_repository.dart';
-import 'package:newborn_care/screens/baby_assessments/baby_assessments.dart';
 import 'package:newborn_care/screens/base/base_class.dart';
 import 'package:newborn_care/screens/facility_login/facility_login.dart';
 import 'package:newborn_care/screens/individual_login/individual_login.dart';
@@ -28,8 +26,6 @@ import 'package:newborn_care/screens/register_a_baby/register_a_baby.dart';
 import 'package:newborn_care/theme/theme_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:synchronized/synchronized.dart';
-
-import 'bloc/assessments_bloc/bloc/assessments_bloc.dart';
 import 'bloc/refresh_bloc/refresh_bloc.dart';
 import 'bloc/register_baby_bloc/register_baby_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -74,19 +70,7 @@ class _MyAppState extends State<MyApp> {
     if (HiveStorageRepository().checkUserLoggedIn()) {
       initialAppRoute = '/Base';
     }
-    NotificationRepository.intialize();
-    AwesomeNotifications().actionStream.listen((receivedNotification) {
-      ChildModel childModel = HiveStorageRepository()
-          .getSingleChild(receivedNotification.id.toString());
-      navigatorKey.currentState!.push(MaterialPageRoute(
-          builder: (context) => BabyAssessments(
-              childModel,
-              AssessmentsBloc(
-                  NotificationRepository(navigatorKey.currentContext!),
-                  AssessmentsRepository(navigatorKey.currentContext!, lock),
-                  childModel,
-                  HiveStorageRepository()))));
-    });
+    NotificationRepository.intialize(navigatorKey, lock);
     super.initState();
   }
 
@@ -94,64 +78,111 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     GlobalKey globalKey = new GlobalKey(debugLabel: 'btm_app_bar');
 
-    return MultiBlocProvider(
-      child: Center(
-        child: MaterialApp(
-          navigatorKey: navigatorKey,
-          title: 'Newborn Care',
-          localizationsDelegates: [
-            AppLocalizations.delegate, // Add this line
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: [
-            const Locale('en', ''), // English, no country code
-            const Locale('hi', ''), // Hindi, no country code
-            const Locale('ar', ''), // Arabic, no country code
-            const Locale('de', ''), // German, no country code
-          ],
-          theme: MyTheme.lightTheme,
-          darkTheme: MyTheme.darkTheme,
-          routes: {
-            '/': (context) => InitialScreen(),
-            '/FacilityLoginScreen': (context) => FacilityLogin(),
-            '/IndividualLoginScreen': (context) => IndividualLogin(),
-            '/RegisterABaby': (context) => RegisterABaby(),
-            '/Base': (context) => BaseClass(
-                  globalKey: globalKey,
-                  drawerKey: drawerKey,
-                ),
-          },
-          initialRoute: initialAppRoute,
+    return MultiRepositoryProvider(
+      child: MultiBlocProvider(
+        child: Center(
+          child: MaterialApp(
+            navigatorKey: navigatorKey,
+            title: 'Newborn Care',
+            localizationsDelegates: [
+              AppLocalizations.delegate, // Add this line
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+              const Locale('en', ''), // English, no country code
+              const Locale('hi', ''), // Hindi, no country code
+              const Locale('ar', ''), // Arabic, no country code
+              const Locale('de', ''), // German, no country code
+            ],
+            theme: MyTheme.lightTheme,
+            darkTheme: MyTheme.darkTheme,
+            routes: {
+              '/': (context) => InitialScreen(),
+              '/FacilityLoginScreen': (context) => FacilityLogin(),
+              '/IndividualLoginScreen': (context) => IndividualLogin(),
+              '/RegisterABaby': (context) => RegisterABaby(),
+              '/Base': (context) => BaseClass(
+                    globalKey: globalKey,
+                    drawerKey: drawerKey,
+                  ),
+            },
+            initialRoute: initialAppRoute,
+          ),
         ),
+        providers: [
+          BlocProvider<ListOfBabiesBloc>(
+            create: (BuildContext context) => ListOfBabiesBloc(
+                context.read<ListOfBabiesRepository>(),
+                context.read<HiveStorageRepository>()),
+          ),
+          BlocProvider<UserActivityBloc>(
+            create: (BuildContext context) => UserActivityBloc(
+              context.read<UserActivityRepository>(),
+              context.read<HiveStorageRepository>(),
+            ),
+          ),
+          BlocProvider<RefreshBloc>(
+            create: (BuildContext context) =>
+                RefreshBloc(context.read<RefreshRepository>(), lock),
+          ),
+          BlocProvider<RegisterBabyBloc>(
+            create: (BuildContext context) => RegisterBabyBloc(
+              RegisterBabyModel(),
+              context.read<RegisterBabyRepositoryImpl>(),
+              context.read<NotificationRepository>(),
+            ),
+          ),
+          BlocProvider<AuthenticationBloc>(
+            create: (BuildContext context) => AuthenticationBloc(
+              context.read<AuthenticationRepository>(),
+              context.read<HiveStorageRepository>(),
+            ),
+          ),
+        ],
       ),
       providers: [
-        BlocProvider<ListOfBabiesBloc>(
-          create: (BuildContext context) => ListOfBabiesBloc(
-              ListOfBabiesRepository(navigatorKey.currentContext!, lock),
-              HiveStorageRepository()),
+        RepositoryProvider<RefreshRepository>(
+            create: (context) =>
+                RefreshRepository(navigatorKey.currentContext!)),
+        RepositoryProvider<HiveStorageRepository>(
+          create: (context) => HiveStorageRepository(),
         ),
-        BlocProvider<UserActivityBloc>(
-          create: (BuildContext context) => UserActivityBloc(
-              UserActivityRepository(navigatorKey.currentContext!, lock),
-              HiveStorageRepository()),
+        RepositoryProvider<AssessmentsRepository>(
+            create: (context) => AssessmentsRepository(
+                navigatorKey.currentContext!,
+                lock,
+                context.read<HiveStorageRepository>(),
+                context.read<RefreshRepository>())),
+        RepositoryProvider<ListOfBabiesRepository>(
+          create: (context) => ListOfBabiesRepository(
+              navigatorKey.currentContext!,
+              lock,
+              context.read<HiveStorageRepository>(),
+              context.read<RefreshRepository>()),
         ),
-        BlocProvider<RefreshBloc>(
-          create: (BuildContext context) => RefreshBloc(
-              RefreshRepository(navigatorKey.currentContext!), lock),
+        RepositoryProvider<UserActivityRepository>(
+          create: (context) => UserActivityRepository(
+              navigatorKey.currentContext!,
+              lock,
+              context.read<HiveStorageRepository>(),
+              context.read<RefreshRepository>()),
         ),
-        BlocProvider<RegisterBabyBloc>(
-          create: (BuildContext context) => RegisterBabyBloc(
-              RegisterBabyModel(),
-              RegisterBabyRepositoryImpl(navigatorKey.currentContext!),
-              NotificationRepository(navigatorKey.currentContext!)),
+        RepositoryProvider<RegisterBabyRepositoryImpl>(
+          create: (context) => RegisterBabyRepositoryImpl(
+              navigatorKey.currentContext!,
+              context.read<HiveStorageRepository>()),
         ),
-        BlocProvider<AuthenticationBloc>(
-          create: (BuildContext context) => AuthenticationBloc(
-              AuthenticationRepository(navigatorKey.currentContext!),
-              HiveStorageRepository()),
+        RepositoryProvider<AuthenticationRepository>(
+          create: (context) => AuthenticationRepository(
+            navigatorKey.currentContext!,
+            context.read<HiveStorageRepository>(),
+          ),
         ),
+        RepositoryProvider<NotificationRepository>(
+            create: (context) =>
+                NotificationRepository(navigatorKey.currentContext!)),
       ],
     );
   }

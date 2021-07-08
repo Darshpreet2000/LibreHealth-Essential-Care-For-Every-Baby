@@ -6,9 +6,12 @@ import 'package:newborn_care/utils/dhis2_config.dart';
 import 'dart:convert';
 
 class RegisterBabyAPIClient {
-  Future registerBabyDetailsAsTrackedEntity(String data, String key) async {
+  HiveStorageRepository hiveStorageRepository;
+  RegisterBabyAPIClient(this.hiveStorageRepository);
+  Future registerBabyDetailsAsTrackedEntity(
+      String data, String key, String username, String password) async {
     String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('testuser:Admin@123'));
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
     String url = DHIS2Config.serverURL + APIConfig().trackedEntityInstance;
     Map<String, String> headers = <String, String>{
       'authorization': basicAuth,
@@ -16,6 +19,6 @@ class RegisterBabyAPIClient {
     };
     NetworkRequest request = NetworkRequest(
         url, data, headers, key, RequestServiceType.RegisterBaby);
-    HiveStorageRepository().storeNetworkRequest(request);
+    hiveStorageRepository.storeNetworkRequest(request);
   }
 }

@@ -6,17 +6,32 @@ import 'package:newborn_care/network/list_of_babies_client.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:synchronized/synchronized.dart';
 
 class ListOfBabiesRepository {
   Lock lock;
   BuildContext context;
-  ListOfBabiesRepository(this.context, this.lock);
+  late ListOfBabiesClient listOfBabiesClient;
+  HiveStorageRepository hiveStorageRepository;
+  RefreshRepository refreshRepository;
+  ListOfBabiesRepository(this.context, this.lock, this.hiveStorageRepository,
+      this.refreshRepository) {
+    listOfBabiesClient =
+        ListOfBabiesClient(http.Client(), context, lock, refreshRepository);
+  }
+  ListOfBabiesRepository.test(
+      this.context,
+      this.lock,
+      this.hiveStorageRepository,
+      this.refreshRepository,
+      this.listOfBabiesClient);
+
   Future fetchListOfBabies() async {
     try {
-      Profile profile = HiveStorageRepository().getProfile();
-      String response = await ListOfBabiesClient(http.Client(), context, lock)
-          .fetchListOfBabies(profile.username, profile.password);
+      Profile profile = hiveStorageRepository.getProfile();
+      String response = await listOfBabiesClient.fetchListOfBabies(
+          profile.username, profile.password);
       Map<String, dynamic> res = jsonDecode(response);
       List<ChildModel> result = [];
       for (var item in res['trackedEntityInstances']) {
