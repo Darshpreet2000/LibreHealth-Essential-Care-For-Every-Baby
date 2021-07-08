@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:newborn_care/exceptions/custom_exceptions.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class RefreshClient {
   http.Client client;
-  Map<String, String> map;
-  RefreshClient(this.client, this.map);
+  BuildContext context;
+  RefreshClient(this.client, this.context);
   Future doNetworkRequest(dynamic request) async {
     try {
       var response;
@@ -20,9 +23,11 @@ class RefreshClient {
           .timeout(const Duration(seconds: 15));
       return _response(response);
     } on TimeoutException {
-      throw FetchDataException(map["noInternetConnection"], 503);
+      throw FetchDataException(
+          AppLocalizations.of(context)!.noInternetConnection, 503);
     } on SocketException {
-      throw FetchDataException(map["noInternetConnection"], 503);
+      throw FetchDataException(
+          AppLocalizations.of(context)!.noInternetConnection, 503);
     }
   }
 
@@ -32,14 +37,18 @@ class RefreshClient {
         var responseJson = response.body.toString();
         return responseJson;
       case 400:
-        throw BadRequestException(map["invalidRequest"], response.statusCode);
+        throw BadRequestException(
+            AppLocalizations.of(context)!.invalidRequest, response.statusCode);
       case 401:
-        throw UnauthorisedException(map["unauthorised"], response.statusCode);
+        throw UnauthorisedException(
+            AppLocalizations.of(context)!.unauthorised, response.statusCode);
       case 403:
-        throw UnauthorisedException(map["invalidInput"], response.statusCode);
+        throw UnauthorisedException(
+            AppLocalizations.of(context)!.invalidInput, response.statusCode);
       default:
         throw FetchDataException(
-            map["errorOccuredWhileCommunication"], response.statusCode);
+            AppLocalizations.of(context)!.errorDuringCommunication,
+            response.statusCode);
     }
   }
 }

@@ -24,4 +24,8 @@ class AssessmentsError extends AssessmentsState {
   AssessmentsError(this.message);
 }
 
-class AssessmentsLoading extends AssessmentsState {}
+class AssessmentsLoading extends AssessmentsState {
+  final ChildModel childModel;
+
+  AssessmentsLoading(this.childModel);
+}

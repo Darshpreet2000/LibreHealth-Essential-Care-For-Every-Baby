@@ -44,7 +44,9 @@ class _BodyState extends State<Body> {
       child: BlocBuilder<AssessmentsBloc, AssessmentsState>(
         bloc: widget.assessmentsBloc,
         builder: (context, state) {
-          if (state is AssessmentsInitial || state is AssessmentsAdded)
+          if (state is AssessmentsInitial ||
+              state is AssessmentsAdded ||
+              state is AssessmentsLoading)
             return Container(
               child: Column(
                 children: [
@@ -63,12 +65,13 @@ class _BodyState extends State<Body> {
                       return Container();
                     },
                   ),
+                  (state is AssessmentsLoading)
+                      ? CircularProgressIndicator()
+                      : Container()
                 ],
               ),
             );
-          return SizedBox(
-              height: MediaQuery.of(context).size.height / 1.5,
-              child: Center(child: CircularProgressIndicator()));
+          return Container();
         },
       ),
     );

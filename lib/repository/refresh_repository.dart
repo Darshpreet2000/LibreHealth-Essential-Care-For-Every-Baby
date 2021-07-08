@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:newborn_care/exceptions/exception_messages.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/network_request.dart';
 import 'package:newborn_care/models/request_service_type.dart';
@@ -10,6 +10,8 @@ import 'package:newborn_care/utils/api_config.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
 
 class RefreshRepository {
+  BuildContext context;
+  RefreshRepository(this.context);
   void startRefreshing() async {
     try {
       List<NetworkRequest> networkRequests =
@@ -20,8 +22,7 @@ class RefreshRepository {
         if (request.requestServiceType == RequestServiceType.AddEvent) {
           addTrackedEntityIDInRequest(request);
         }
-        var response = await RefreshClient(
-                http.Client(), ExceptionMessages.exceptionMessagesMap)
+        var response = await RefreshClient(http.Client(), context)
             .doNetworkRequest(request);
 
         if (request.requestServiceType == RequestServiceType.RegisterBaby) {

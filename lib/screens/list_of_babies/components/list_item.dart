@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
+import 'package:newborn_care/main.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
@@ -31,8 +32,8 @@ class ListItem extends StatelessWidget {
                       builder: (context) => BabyAssessments(
                           childModel,
                           AssessmentsBloc(
-                              NotificationRepository(),
-                              AssessmentsRepository(),
+                              NotificationRepository(context),
+                              AssessmentsRepository(context, lock),
                               childModel,
                               HiveStorageRepository()))));
           },

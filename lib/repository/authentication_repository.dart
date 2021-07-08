@@ -1,14 +1,15 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:newborn_care/exceptions/exception_messages.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/network/authentication_client.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 
 class AuthenticationRepository {
+  BuildContext context;
+  AuthenticationRepository(this.context);
   Future loginUser(String username, String password) async {
-    String response = await AuthenticationClient(
-            http.Client(), ExceptionMessages.exceptionMessagesMap)
+    String response = await AuthenticationClient(http.Client(), context)
         .loginUser(username, password);
     Map<String, dynamic> res = jsonDecode(response);
     Profile profile = new Profile(res["name"],

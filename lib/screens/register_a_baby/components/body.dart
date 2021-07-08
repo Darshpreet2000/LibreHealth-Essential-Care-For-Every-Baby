@@ -25,7 +25,7 @@ class Body extends StatelessWidget {
           BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
           // refresh list of babies screen
           BlocProvider.of<ListOfBabiesBloc>(context)
-              .add(ListOfBabiesFetchData());
+              .add(ListOfBabiesRefreshList());
 
           Navigator.pop(context);
         }

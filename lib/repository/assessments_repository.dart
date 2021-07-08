@@ -1,26 +1,25 @@
 import 'dart:convert';
-
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:newborn_care/exceptions/exception_messages.dart';
 import 'package:newborn_care/models/stage_1.dart';
-import 'package:newborn_care/main.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:newborn_care/network/assessments_client.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
+import 'package:synchronized/synchronized.dart';
 
 class AssessmentsRepository {
+  final BuildContext context;
+  final Lock lock;
+  AssessmentsRepository(this.context, this.lock);
+
   void validatePhase1Assessments(Stage1 stage1) {
     if (stage1.ecebWardName.isEmpty)
-      throw Exception(
-          AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-              .enterWardName);
+      throw Exception(AppLocalizations.of(context)!.enterWardName);
 
     if (stage1.ecebStage1InitiateBreastfeeding == false ||
         stage1.ecebStage1MonitorBreathing == false ||
         stage1.ecebStage1SkinToSkinCare == false)
-      throw Exception(
-          AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-              .completeAssessments);
+      throw Exception(AppLocalizations.of(context)!.completeAssessments);
 
     //marking stage as completed
     stage1.isCompleted = true;
@@ -33,16 +32,16 @@ class AssessmentsRepository {
   }
 
   Future registerStage1Details(Stage1 stage1, String id) async {
-    AssessmentsClient assessmentsClient = new AssessmentsClient(
-        http.Client(), ExceptionMessages.exceptionMessagesMap, lock);
+    AssessmentsClient assessmentsClient =
+        new AssessmentsClient(http.Client(), context, lock);
     String json = jsonEncode(stage1);
     assessmentsClient.registerEvent(json, id);
     return;
   }
 
   Future fetchAssessments(String key) async {
-    AssessmentsClient assessmentsClient = new AssessmentsClient(
-        http.Client(), ExceptionMessages.exceptionMessagesMap, lock);
+    AssessmentsClient assessmentsClient =
+        new AssessmentsClient(http.Client(), context, lock);
     try {
       Map<String, dynamic> response =
           jsonDecode(await assessmentsClient.getAssessmentsOfChild(key));

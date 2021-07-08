@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:newborn_care/main.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -12,39 +11,30 @@ import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/notification_repository.dart';
 
 class RegisterBabyRepositoryImpl {
+  final BuildContext context;
+  RegisterBabyRepositoryImpl(this.context);
   Future checkDataEnteredCorrectly(RegisterBabyModel _registerBabyModel) async {
     if (_registerBabyModel.motherName.isEmpty)
-      throw Exception(
-          AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-              .enterMothersName);
+      throw Exception(AppLocalizations.of(context)!.enterMothersName);
     if (_registerBabyModel.wardName.isEmpty)
-      throw Exception(
-          AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-              .enterWardName);
+      throw Exception(AppLocalizations.of(context)!.enterWardName);
     if (_registerBabyModel.babiesDelivered == null)
-      throw Exception(
-          AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-              .selectBabiesDelivered);
+      throw Exception(AppLocalizations.of(context)!.selectBabiesDelivered);
     if (_registerBabyModel.modeOfDelivery == null ||
         (_registerBabyModel.modeOfDelivery == false &&
             _registerBabyModel.modeOfDeliveryName.isEmpty))
-      throw Exception(
-          AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-              .selectModeOfDelivery);
+      throw Exception(AppLocalizations.of(context)!.selectModeOfDelivery);
     int index = 1;
     _registerBabyModel.children.forEach((element) {
       if (element.gender == null)
         throw Exception(
-            AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-                .selectGenderForChild(index));
+            AppLocalizations.of(context)!.selectGenderForChild(index));
       if (element.skinColorChanges == null)
-        throw Exception(
-            AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-                .selectSkinColorChangesForChild(index));
+        throw Exception(AppLocalizations.of(context)!
+            .selectSkinColorChangesForChild(index));
       if (element.traumasDuringBirth == null)
-        throw Exception(
-            AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-                .selectTraumasDuringBirthForChild(index));
+        throw Exception(AppLocalizations.of(context)!
+            .selectTraumasDuringBirthForChild(index));
       index++;
     });
   }

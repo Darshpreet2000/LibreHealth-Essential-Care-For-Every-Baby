@@ -38,7 +38,6 @@ class ChildModel {
       this.birthTime, this.trackedEntityID, this.key);
 
   factory ChildModel.fromJson(dynamic json) {
-    var map = HiveStorageRepository().getChildKeysMap();
     String? parent, ward;
     DateTime? birthTime;
     int? color, darkColor, gender;
@@ -79,9 +78,7 @@ class ChildModel {
       }
     });
     Random random = new Random();
-    String key = (map.containsKey(trackedEntityID)
-        ? map[trackedEntityID]
-        : random.nextInt(100000000).toString());
+    String key = random.nextInt(100000000).toString();
     return new ChildModel(parent!, ward!, gender!, color!, darkColor!,
         birthTime!, trackedEntityID, key);
   }

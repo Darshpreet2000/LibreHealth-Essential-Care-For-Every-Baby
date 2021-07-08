@@ -5,3 +5,5 @@ abstract class ListOfBabiesEvent {
 }
 
 class ListOfBabiesFetchData extends ListOfBabiesEvent {}
+
+class ListOfBabiesRefreshList extends ListOfBabiesEvent {}

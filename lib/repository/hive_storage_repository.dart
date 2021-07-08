@@ -7,55 +7,31 @@ import 'package:newborn_care/models/user_activity.dart';
 class HiveStorageRepository {
   //List of child
   void storeSingleChild(ChildModel child) {
-    Map<String, dynamic> map = new Map();
-    if (box.containsKey('map')) {
-      map = new Map<String, dynamic>.from(box.get('map'));
-    }
-    map[child.trackedEntityID] = child.key;
-    box.put('map', map);
     mapBox.put(child.key, child);
   }
 
-  dynamic getChildKeysMap() {
-    var map = new Map();
-    if (box.containsKey('map')) {
-      map = new Map<String, dynamic>.from(box.get('map'));
-    }
-    return map;
-  }
-
   Future<void> storeListOfChild(List<ChildModel> childList) async {
-    //map TEI,key
-    Map<String, dynamic> map = new Map();
-    Map<String, dynamic> copy = new Map();
-
-    if (box.containsKey('map'))
-      map = new Map<String, dynamic>.from(box.get('map'));
+    //get old list
+    List<ChildModel> oldList = getListOfAllChild();
     await mapBox.clear();
     childList.forEach((element) {
       //use old key if same child TEI
-
+      //check if this child already present in old list
+      oldList
+          .where((item) => item.trackedEntityID == element.trackedEntityID)
+          .forEach((item) {
+        element.assessmentsList = item.assessmentsList;
+        element.key = item.key;
+      });
       mapBox.put(element.key, element);
-      map[element.trackedEntityID] = element.key;
-      copy[element.trackedEntityID] = element.key;
     });
-    copy = map;
-    box.put('map', copy);
-    print(mapBox.keys);
   }
 
   void updateChild(String key, ChildModel childModel) {
-    Map<String, dynamic> map = new Map();
-    if (box.containsKey('map')) {
-      map = new Map<String, dynamic>.from(box.get('map'));
-    }
-    map[childModel.trackedEntityID] = childModel.key;
-    box.put('map', map);
     mapBox.put(key, childModel);
   }
 
   ChildModel getSingleChild(String key) {
-    print(mapBox.keys);
     return mapBox.get(key)!;
   }
 

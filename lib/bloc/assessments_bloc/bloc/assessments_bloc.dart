@@ -24,12 +24,13 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
     AssessmentsEvent event,
   ) async* {
     if (event is AssessmentsEventFetchData) {
-      yield AssessmentsLoading();
+      yield AssessmentsLoading(childModel);
       try {
         childModel.assessmentsList =
             await _assessmentsRepository.fetchAssessments(childModel.key);
         childModel.assessmentsList = _assessmentsRepository
             .addNextAssessment(childModel.assessmentsList);
+        hiveStorageRepository.updateChild(childModel.key, childModel);
         yield AssessmentsInitial(childModel);
       } catch (e) {
         yield AssessmentsError(e.toString());

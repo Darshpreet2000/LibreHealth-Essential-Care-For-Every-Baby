@@ -33,7 +33,6 @@ import 'bloc/assessments_bloc/bloc/assessments_bloc.dart';
 import 'bloc/refresh_bloc/refresh_bloc.dart';
 import 'bloc/register_baby_bloc/register_baby_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'models/network_request.dart';
 import 'repository/user_activity_repository.dart';
 
@@ -45,8 +44,6 @@ void main() async {
 
 GlobalKey<ScaffoldState> drawerKey = new GlobalKey<ScaffoldState>();
 final navigatorKey = GlobalKey<NavigatorState>();
-final GlobalKey<ScaffoldMessengerState> scaffoldMessengerGlobalKey =
-    GlobalKey<ScaffoldMessengerState>(debugLabel: 'app_localization_key');
 late Box box;
 late Box<List> listBox;
 late Box<ChildModel> mapBox;
@@ -84,8 +81,11 @@ class _MyAppState extends State<MyApp> {
       navigatorKey.currentState!.push(MaterialPageRoute(
           builder: (context) => BabyAssessments(
               childModel,
-              AssessmentsBloc(NotificationRepository(), AssessmentsRepository(),
-                  childModel, HiveStorageRepository()))));
+              AssessmentsBloc(
+                  NotificationRepository(navigatorKey.currentContext!),
+                  AssessmentsRepository(navigatorKey.currentContext!, lock),
+                  childModel,
+                  HiveStorageRepository()))));
     });
     super.initState();
   }
@@ -95,33 +95,9 @@ class _MyAppState extends State<MyApp> {
     GlobalKey globalKey = new GlobalKey(debugLabel: 'btm_app_bar');
 
     return MultiBlocProvider(
-      providers: [
-        BlocProvider<ListOfBabiesBloc>(
-          create: (BuildContext context) => ListOfBabiesBloc(
-              ListOfBabiesRepository(), HiveStorageRepository()),
-        ),
-        BlocProvider<UserActivityBloc>(
-          create: (BuildContext context) => UserActivityBloc(
-              UserActivityRepository(), HiveStorageRepository()),
-        ),
-        BlocProvider<RefreshBloc>(
-          create: (BuildContext context) => RefreshBloc(RefreshRepository()),
-        ),
-        BlocProvider<RegisterBabyBloc>(
-          create: (BuildContext context) => RegisterBabyBloc(
-              RegisterBabyModel(),
-              RegisterBabyRepositoryImpl(),
-              NotificationRepository()),
-        ),
-        BlocProvider<AuthenticationBloc>(
-          create: (BuildContext context) => AuthenticationBloc(
-              AuthenticationRepository(), HiveStorageRepository()),
-        ),
-      ],
       child: Center(
         child: MaterialApp(
           navigatorKey: navigatorKey,
-          scaffoldMessengerKey: scaffoldMessengerGlobalKey,
           title: 'Newborn Care',
           localizationsDelegates: [
             AppLocalizations.delegate, // Add this line
@@ -150,6 +126,33 @@ class _MyAppState extends State<MyApp> {
           initialRoute: initialAppRoute,
         ),
       ),
+      providers: [
+        BlocProvider<ListOfBabiesBloc>(
+          create: (BuildContext context) => ListOfBabiesBloc(
+              ListOfBabiesRepository(navigatorKey.currentContext!, lock),
+              HiveStorageRepository()),
+        ),
+        BlocProvider<UserActivityBloc>(
+          create: (BuildContext context) => UserActivityBloc(
+              UserActivityRepository(navigatorKey.currentContext!, lock),
+              HiveStorageRepository()),
+        ),
+        BlocProvider<RefreshBloc>(
+          create: (BuildContext context) => RefreshBloc(
+              RefreshRepository(navigatorKey.currentContext!), lock),
+        ),
+        BlocProvider<RegisterBabyBloc>(
+          create: (BuildContext context) => RegisterBabyBloc(
+              RegisterBabyModel(),
+              RegisterBabyRepositoryImpl(navigatorKey.currentContext!),
+              NotificationRepository(navigatorKey.currentContext!)),
+        ),
+        BlocProvider<AuthenticationBloc>(
+          create: (BuildContext context) => AuthenticationBloc(
+              AuthenticationRepository(navigatorKey.currentContext!),
+              HiveStorageRepository()),
+        ),
+      ],
     );
   }
 }

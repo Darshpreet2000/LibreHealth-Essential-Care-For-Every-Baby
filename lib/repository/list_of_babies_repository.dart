@@ -1,20 +1,21 @@
 import 'dart:convert';
-
-import 'package:newborn_care/exceptions/exception_messages.dart';
-import 'package:newborn_care/main.dart';
+import 'package:flutter/material.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/network/list_of_babies_client.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:synchronized/synchronized.dart';
 
 class ListOfBabiesRepository {
+  Lock lock;
+  BuildContext context;
+  ListOfBabiesRepository(this.context, this.lock);
   Future fetchListOfBabies() async {
     try {
       Profile profile = HiveStorageRepository().getProfile();
-      String response = await ListOfBabiesClient(
-              http.Client(), ExceptionMessages.exceptionMessagesMap, lock)
+      String response = await ListOfBabiesClient(http.Client(), context, lock)
           .fetchListOfBabies(profile.username, profile.password);
       Map<String, dynamic> res = jsonDecode(response);
       List<ChildModel> result = [];

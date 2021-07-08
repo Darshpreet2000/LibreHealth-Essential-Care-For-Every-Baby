@@ -1,10 +1,11 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:newborn_care/main.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotificationRepository {
+  final BuildContext context;
+  NotificationRepository(this.context);
   static intialize() async {
     AwesomeNotifications().initialize(
         // set the icon to null if you want to use the default app icon
@@ -30,10 +31,8 @@ class NotificationRepository {
         content: NotificationContent(
       id: int.parse(key),
       channelKey: 'eceb',
-      title: AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-          .babyOf(motherName),
-      body: AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-          .phase1,
+      title: AppLocalizations.of(context)!.babyOf(motherName),
+      body: AppLocalizations.of(context)!.phase1,
     ));
   }
 
@@ -43,14 +42,10 @@ class NotificationRepository {
         content: NotificationContent(
           id: int.parse(key),
           channelKey: 'eceb',
-          title: AppLocalizations.of(
-                      scaffoldMessengerGlobalKey.currentContext!)!
-                  .reminder +
+          title: AppLocalizations.of(context)!.reminder +
               ": " +
-              AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-                  .babyOf(motherName),
-          body: AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
-              .phase1,
+              AppLocalizations.of(context)!.babyOf(motherName),
+          body: AppLocalizations.of(context)!.phase1,
         ),
         schedule: NotificationCalendar.fromDate(
             date: DateTime.now().add(Duration(minutes: 60))));
