@@ -42,7 +42,7 @@
     "multiple":"multiple",
     "modeOfDelivery":"Mode Of Delivery",
     
-    "cSection":"Mode Of Delivery",
+    "cSection":"C-Section",
     "forcepsDelivery":"Forceps Delivery",
     "vacuumExtraction":"Vacuum Extraction",
     "other":"Other",
