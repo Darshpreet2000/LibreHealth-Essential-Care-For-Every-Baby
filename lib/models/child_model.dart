@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
@@ -86,5 +86,21 @@ class ChildModel {
     String key = random.nextInt(100000000).toString();
     return new ChildModel(parent!, ward!, gender!, color!, darkColor!,
         birthTime!, trackedEntityID, key, classification!);
+  }
+
+  compareTo(ChildModel b, BuildContext context) {
+    if (this.classification == AppLocalizations.of(context)!.danger) {
+      return 1;
+    }
+    if (b.classification == AppLocalizations.of(context)!.danger) {
+      return -1;
+    }
+    if (this.classification == AppLocalizations.of(context)!.problem) {
+      return 1;
+    }
+    if (b.classification == AppLocalizations.of(context)!.problem) {
+      return -1;
+    }
+    return 0;
   }
 }

@@ -50,10 +50,10 @@ class ListOfBabiesRepository {
     SortListEnum sortListEnum = hiveStorageRepository.getSortBy();
 
     if (sortListEnum == SortListEnum.status)
-      childListMap.sort((a, b) => b.classification.compareTo(a.classification));
-    else if (sortListEnum == SortListEnum.location)
-      childListMap.sort((a, b) => b.ward.compareTo(a.ward));
-    else
+      childListMap.sort((a, b) => b.compareTo(a, context));
+    else if (sortListEnum == SortListEnum.location) //sorting alphabetically
+      childListMap.sort((a, b) => a.ward.compareTo(b.ward));
+    else //getting recent child on top
       childListMap.sort((a, b) => b.birthTime.compareTo(a.birthTime));
 
     childListMap.forEach((element) {
