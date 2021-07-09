@@ -13,11 +13,12 @@ import 'package:http/src/response.dart' as _i2;
 import 'package:http/src/streamed_response.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:newborn_care/models/child_model.dart' as _i4;
-import 'package:newborn_care/models/network_request.dart' as _i14;
+import 'package:newborn_care/models/network_request.dart' as _i15;
 import 'package:newborn_care/models/profile.dart' as _i5;
-import 'package:newborn_care/models/user_activity.dart' as _i13;
+import 'package:newborn_care/models/sort_list_enum.dart' as _i13;
+import 'package:newborn_care/models/user_activity.dart' as _i14;
 import 'package:newborn_care/repository/hive_storage_repository.dart' as _i12;
-import 'package:newborn_care/repository/refresh_repository.dart' as _i15;
+import 'package:newborn_care/repository/refresh_repository.dart' as _i16;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: comment_references
@@ -125,6 +126,14 @@ class MockHiveStorageRepository extends _i1.Mock
   }
 
   @override
+  _i13.SortListEnum getSortBy() =>
+      (super.noSuchMethod(Invocation.method(#getSortBy, []),
+          returnValue: _i13.SortListEnum.time) as _i13.SortListEnum);
+  @override
+  void storeSortBy(_i13.SortListEnum? sortListEnum) =>
+      super.noSuchMethod(Invocation.method(#storeSortBy, [sortListEnum]),
+          returnValueForMissingStub: null);
+  @override
   void storeSingleChild(_i4.ChildModel? child) =>
       super.noSuchMethod(Invocation.method(#storeSingleChild, [child]),
           returnValueForMissingStub: null);
@@ -146,26 +155,26 @@ class MockHiveStorageRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#getListOfAllChild, []),
           returnValue: <_i4.ChildModel>[]) as List<_i4.ChildModel>);
   @override
-  void storeNotifications(List<_i13.UserActivity>? notificationsList) => super
+  void storeNotifications(List<_i14.UserActivity>? notificationsList) => super
       .noSuchMethod(Invocation.method(#storeNotifications, [notificationsList]),
           returnValueForMissingStub: null);
   @override
-  List<_i13.UserActivity> getNotificationsList() =>
+  List<_i14.UserActivity> getNotificationsList() =>
       (super.noSuchMethod(Invocation.method(#getNotificationsList, []),
-          returnValue: <_i13.UserActivity>[]) as List<_i13.UserActivity>);
+          returnValue: <_i14.UserActivity>[]) as List<_i14.UserActivity>);
   @override
-  void storeNetworkRequest(_i14.NetworkRequest? request) =>
+  void storeNetworkRequest(_i15.NetworkRequest? request) =>
       super.noSuchMethod(Invocation.method(#storeNetworkRequest, [request]),
           returnValueForMissingStub: null);
   @override
-  void storeNetworkRequestList(List<_i14.NetworkRequest>? networkRequests) =>
+  void storeNetworkRequestList(List<_i15.NetworkRequest>? networkRequests) =>
       super.noSuchMethod(
           Invocation.method(#storeNetworkRequestList, [networkRequests]),
           returnValueForMissingStub: null);
   @override
-  List<_i14.NetworkRequest> getNetworkRequests() =>
+  List<_i15.NetworkRequest> getNetworkRequests() =>
       (super.noSuchMethod(Invocation.method(#getNetworkRequests, []),
-          returnValue: <_i14.NetworkRequest>[]) as List<_i14.NetworkRequest>);
+          returnValue: <_i15.NetworkRequest>[]) as List<_i15.NetworkRequest>);
   @override
   void storeProfile(_i5.Profile? profile) =>
       super.noSuchMethod(Invocation.method(#storeProfile, [profile]),
@@ -191,7 +200,7 @@ class MockHiveStorageRepository extends _i1.Mock
 /// A class which mocks [RefreshRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRefreshRepository extends _i1.Mock implements _i15.RefreshRepository {
+class MockRefreshRepository extends _i1.Mock implements _i16.RefreshRepository {
   MockRefreshRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -209,7 +218,7 @@ class MockRefreshRepository extends _i1.Mock implements _i15.RefreshRepository {
       super.noSuchMethod(Invocation.method(#startRefreshing, []),
           returnValueForMissingStub: null);
   @override
-  void addTrackedEntityIDInRequest(_i14.NetworkRequest? request) => super
+  void addTrackedEntityIDInRequest(_i15.NetworkRequest? request) => super
       .noSuchMethod(Invocation.method(#addTrackedEntityIDInRequest, [request]),
           returnValueForMissingStub: null);
   @override

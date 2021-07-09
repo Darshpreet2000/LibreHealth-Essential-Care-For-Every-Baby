@@ -33,7 +33,7 @@ class AssessmentsClient {
       'Content-Type': 'application/json; charset=UTF-8',
     };
     NetworkRequest request =
-        NetworkRequest(url, data, headers, id, RequestServiceType.AddEvent);
+        NetworkRequest(url, data, headers, id, RequestServiceType.addEvent);
     hiveStorageRepository.storeNetworkRequest(request);
   }
 

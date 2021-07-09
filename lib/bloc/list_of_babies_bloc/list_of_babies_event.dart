@@ -7,3 +7,15 @@ abstract class ListOfBabiesEvent {
 class ListOfBabiesFetchData extends ListOfBabiesEvent {}
 
 class ListOfBabiesRefreshList extends ListOfBabiesEvent {}
+
+class ListOfBabiesSearchList extends ListOfBabiesEvent {
+  final String searchQuery;
+
+  ListOfBabiesSearchList(this.searchQuery);
+}
+
+class ListOfBabiesSortList extends ListOfBabiesEvent {
+  final SortListEnum sortListEnum;
+
+  ListOfBabiesSortList(this.sortListEnum);
+}

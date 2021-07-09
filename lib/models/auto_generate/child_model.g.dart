@@ -25,13 +25,14 @@ class ChildModelAdapter extends TypeAdapter<ChildModel> {
       fields[5] as DateTime,
       fields[6] as String,
       fields[8] as String,
+      fields[9] as String,
     )..assessmentsList = (fields[7] as List).cast<Object>();
   }
 
   @override
   void write(BinaryWriter writer, ChildModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.parent)
       ..writeByte(1)
@@ -49,7 +50,9 @@ class ChildModelAdapter extends TypeAdapter<ChildModel> {
       ..writeByte(7)
       ..write(obj.assessmentsList)
       ..writeByte(8)
-      ..write(obj.key);
+      ..write(obj.key)
+      ..writeByte(9)
+      ..write(obj.classification);
   }
 
   @override

@@ -1,35 +1,45 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../request_service_type.dart';
+part of '../sort_list_enum.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class RequestServiceTypeAdapter extends TypeAdapter<RequestServiceType> {
+class SortListEnumAdapter extends TypeAdapter<SortListEnum> {
   @override
-  final int typeId = 5;
+  final int typeId = 7;
 
   @override
-  RequestServiceType read(BinaryReader reader) {
+  SortListEnum read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return RequestServiceType.registerBaby;
+        return SortListEnum.time;
       case 1:
-        return RequestServiceType.addEvent;
+        return SortListEnum.status;
+      case 2:
+        return SortListEnum.location;
+      case 3:
+        return SortListEnum.none;
       default:
-        return RequestServiceType.registerBaby;
+        return SortListEnum.time;
     }
   }
 
   @override
-  void write(BinaryWriter writer, RequestServiceType obj) {
+  void write(BinaryWriter writer, SortListEnum obj) {
     switch (obj) {
-      case RequestServiceType.registerBaby:
+      case SortListEnum.time:
         writer.writeByte(0);
         break;
-      case RequestServiceType.addEvent:
+      case SortListEnum.status:
         writer.writeByte(1);
+        break;
+      case SortListEnum.location:
+        writer.writeByte(2);
+        break;
+      case SortListEnum.none:
+        writer.writeByte(3);
         break;
     }
   }
@@ -40,7 +50,7 @@ class RequestServiceTypeAdapter extends TypeAdapter<RequestServiceType> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is RequestServiceTypeAdapter &&
+      other is SortListEnumAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

@@ -9,6 +9,7 @@ import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
 import 'package:newborn_care/models/request_service_type.dart';
+import 'package:newborn_care/models/sort_list_enum.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/models/user_activity.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
@@ -52,6 +53,7 @@ Future registerHive() async {
   Hive.registerAdapter(ChildModelAdapter());
   Hive.registerAdapter(RequestServiceTypeAdapter());
   Hive.registerAdapter(Stage1Adapter());
+  Hive.registerAdapter(SortListEnumAdapter());
   box = await Hive.openBox('eceb');
   listBox = await Hive.openBox<List>('eceblist');
   mapBox = await Hive.openBox<ChildModel>('ecebMap');
