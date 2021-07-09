@@ -39,17 +39,16 @@ class DHIS2Config {
 
   //Stage - 2 Assessments
   static const String stage2ID = "neIkFKr6xO4";
-  static const String ecebCurrentLocation = "bPfXwTgGdkI";
   static const String ecebAssessTemperature = "zZpNiKcIMHA";
   static const String ecebSevereJaundice = "oIpUd9Up3CX";
   static const String ecebFastBreathing = "IDe2vwLt3EB";
   static const String ecebChestIndrawing = "HcG32VrK3Um";
-  static const String ecebNotFeeding = "VD9JO6bY2o1";
+  static const String ecebIsFeedingProperly = "VD9JO6bY2o1";
   static const String ecebConvulsions = "VqJL6KvxrKT";
-  static const String eceb_Stage_2_Assess_Exam = "jBnuHZPSOiX";
-  static const String eceb_Stage_2_Prevent_Disease_VitaminK = "XfdHyjVbRWo";
-  static const String eceb_Stage_2_Prevent_Disease_Cord_Care = "VsKyN9x1hZk";
-  static const String eceb_Stage_2_Prevent_Disease_Eye_Care = "y80qB17Dv8b";
+  static const String ecebStage2AssessExam = "jBnuHZPSOiX";
+  static const String ecebStage2PreventDiseaseVitaminK = "XfdHyjVbRWo";
+  static const String ecebStage2PreventDiseaseCordCare = "VsKyN9x1hZk";
+  static const String ecebStage2PreventDiseaseEyeCare = "y80qB17Dv8b";
 
   //Stage - 3 Assessments Normal
   static const String eceb_Stage_3_Normal_Maintain_Normal_Temperature =
