@@ -1,32 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
+import 'package:newborn_care/models/stage_2.dart';
 import 'package:newborn_care/screens/baby_assessments/components/toggle_buttons/swtich_yes_no.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Phase2 extends StatefulWidget {
-  const Phase2({Key? key}) : super(key: key);
-
+  final Stage2 stage2;
+  final AssessmentsBloc assessmentsBloc;
+  final TextEditingController _wardNameTextController =
+      new TextEditingController();
+  Phase2(this.stage2, this.assessmentsBloc) {
+    _wardNameTextController.text = stage2.ecebWardName;
+  }
   @override
   _Phase2State createState() => _Phase2State();
 }
 
 class _Phase2State extends State<Phase2> {
-  bool? checkedValue = false;
-  List<bool> fastBreathing = [];
-  List<bool> chestIndrawing = [];
-  List<bool> isFeeding = [];
-  List<bool> convulsions = [];
-  List<bool> jaundice = [];
+  List<bool?> toggleButtonsList = [];
   @override
   void initState() {
-    for (int i = 0; i < 2; i++) {
-      fastBreathing.addAll([false, false]);
-      chestIndrawing.addAll([false, false]);
-      isFeeding.addAll([false, false]);
-      convulsions.addAll([false, false]);
-      jaundice.addAll([false, false]);
-    }
+    toggleButtonsList.addAll([
+      widget.stage2.ecebFastBreathing,
+      widget.stage2.ecebChestIndrawing,
+      widget.stage2.ecebIsFeedingProperly,
+      widget.stage2.ecebConvulsions,
+      widget.stage2.ecebSevereJaundice,
+    ]);
     super.initState();
   }
 
@@ -79,7 +81,11 @@ class _Phase2State extends State<Phase2> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
-                        onChanged: (String _value) {},
+                        readOnly: widget.stage2.isCompleted,
+                        controller: widget._wardNameTextController,
+                        onChanged: (String _value) {
+                          widget.stage2.ecebWardName = _value;
+                        },
                         decoration: new InputDecoration(
                           isDense: true, // Added this
                           border: new OutlineInputBorder(
@@ -117,11 +123,13 @@ class _Phase2State extends State<Phase2> {
                     style: TextStyle(
                         color: Colors.blue[700], fontWeight: FontWeight.bold),
                   ),
-                  value: checkedValue,
+                  value: widget.stage2.ecebStage2PreventDiseaseEyeCare,
                   onChanged: (newValue) {
-                    setState(() {
-                      checkedValue = newValue;
-                    });
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebStage2PreventDiseaseEyeCare =
+                            newValue!;
+                      });
                   },
                   controlAffinity:
                       ListTileControlAffinity.leading, //  <-- leading Checkbox
@@ -132,11 +140,13 @@ class _Phase2State extends State<Phase2> {
                     style: TextStyle(
                         color: Colors.blue[700], fontWeight: FontWeight.bold),
                   ),
-                  value: checkedValue,
+                  value: widget.stage2.ecebStage2PreventDiseaseCordCare,
                   onChanged: (newValue) {
-                    setState(() {
-                      checkedValue = newValue;
-                    });
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebStage2PreventDiseaseCordCare =
+                            newValue!;
+                      });
                   },
                   controlAffinity:
                       ListTileControlAffinity.leading, //  <-- leading Checkbox
@@ -147,10 +157,12 @@ class _Phase2State extends State<Phase2> {
                     style: TextStyle(
                         color: Colors.blue[700], fontWeight: FontWeight.bold),
                   ),
-                  value: checkedValue,
+                  value: widget.stage2.ecebStage2PreventDiseaseVitaminK,
                   onChanged: (newValue) {
                     setState(() {
-                      checkedValue = newValue;
+                      if (widget.stage2.isCompleted == false)
+                        widget.stage2.ecebStage2PreventDiseaseVitaminK =
+                            newValue!;
                     });
                   },
                   controlAffinity:
@@ -175,7 +187,7 @@ class _Phase2State extends State<Phase2> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Center(child: WeightSlider()),
+                  child: Center(child: WeightSlider(widget.stage2)),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -186,11 +198,12 @@ class _Phase2State extends State<Phase2> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Center(child: TemperatureSlider()),
+                  child: Center(child: TemperatureSlider(widget.stage2)),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ExaminationsCheckBoxList(),
+                  child: ExaminationsCheckBoxList(
+                      widget.stage2),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -200,7 +213,7 @@ class _Phase2State extends State<Phase2> {
                   ),
                 ),
                 SwtichYesNo(AppLocalizations.of(context)!.yes,
-                    AppLocalizations.of(context)!.no, fastBreathing),
+                    AppLocalizations.of(context)!.no, toggleButtonsList, 0),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -209,7 +222,7 @@ class _Phase2State extends State<Phase2> {
                   ),
                 ),
                 SwtichYesNo(AppLocalizations.of(context)!.yes,
-                    AppLocalizations.of(context)!.no, chestIndrawing),
+                    AppLocalizations.of(context)!.no, toggleButtonsList, 1),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -218,7 +231,7 @@ class _Phase2State extends State<Phase2> {
                   ),
                 ),
                 SwtichYesNo(AppLocalizations.of(context)!.yes,
-                    AppLocalizations.of(context)!.no, isFeeding),
+                    AppLocalizations.of(context)!.no, toggleButtonsList, 2),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -227,7 +240,7 @@ class _Phase2State extends State<Phase2> {
                   ),
                 ),
                 SwtichYesNo(AppLocalizations.of(context)!.yes,
-                    AppLocalizations.of(context)!.no, convulsions),
+                    AppLocalizations.of(context)!.no, toggleButtonsList, 3),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -236,7 +249,7 @@ class _Phase2State extends State<Phase2> {
                   ),
                 ),
                 SwtichYesNo(AppLocalizations.of(context)!.yes,
-                    AppLocalizations.of(context)!.no, convulsions),
+                    AppLocalizations.of(context)!.no, toggleButtonsList, 4),
               ],
             ),
           ),
@@ -263,8 +276,8 @@ class _Phase2State extends State<Phase2> {
 }
 
 class ExaminationsCheckBoxList extends StatefulWidget {
-  const ExaminationsCheckBoxList({Key? key}) : super(key: key);
-
+  Stage2 stage2;
+  ExaminationsCheckBoxList(this.stage2);
   @override
   _ExaminationsCheckBoxListState createState() =>
       _ExaminationsCheckBoxListState();
@@ -361,6 +374,7 @@ class _ExaminationsCheckBoxListState extends State<ExaminationsCheckBoxList> {
                           checkBoxListState[index][1] =
                               !checkBoxListState[index][1];
                         });
+                        
                       },
                       controlAffinity: ListTileControlAffinity
                           .leading, //  <-- leading Checkbox
@@ -377,14 +391,14 @@ class _ExaminationsCheckBoxListState extends State<ExaminationsCheckBoxList> {
 }
 
 class WeightSlider extends StatefulWidget {
-  WeightSlider();
+  final Stage2 stage2;
+  WeightSlider(this.stage2);
 
   @override
   _WeightSliderState createState() => _WeightSliderState();
 }
 
 class _WeightSliderState extends State<WeightSlider> {
-  double weight = 1000;
   int calculateNumber(int number) {
     int a = number % 100;
 
@@ -411,13 +425,13 @@ class _WeightSliderState extends State<WeightSlider> {
         enableTooltip: true,
         minorTicksPerInterval: 5,
         tooltipShape: SfPaddleTooltipShape(),
-        value: weight,
+        value: widget.stage2.ecebWeight,
         onChanged: (dynamic newValue) {
           setState(() {
             double temp = newValue;
             int pass = temp.toInt();
             pass = calculateNumber(pass);
-            weight = pass.toDouble();
+            widget.stage2.ecebWeight = pass.toDouble();
           });
         },
       ),
@@ -426,15 +440,13 @@ class _WeightSliderState extends State<WeightSlider> {
 }
 
 class TemperatureSlider extends StatefulWidget {
-  const TemperatureSlider({Key? key}) : super(key: key);
-
+  final Stage2 stage2;
+  TemperatureSlider(this.stage2);
   @override
   _TemperatureSliderState createState() => _TemperatureSliderState();
 }
 
 class _TemperatureSliderState extends State<TemperatureSlider> {
-  double weight = 94;
-
   @override
   Widget build(BuildContext context) {
     return SfSliderTheme(
@@ -451,12 +463,12 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
         enableTooltip: true,
         minorTicksPerInterval: 1,
         tooltipShape: SfPaddleTooltipShape(),
-        value: weight,
+        value: widget.stage2.ecebAssessTemperature,
         onChanged: (dynamic newValue) {
           setState(() {
             double temp = newValue;
             int pass = temp.toInt();
-            weight = pass.toDouble();
+            widget.stage2.ecebAssessTemperature = pass.toDouble();
           });
         },
       ),

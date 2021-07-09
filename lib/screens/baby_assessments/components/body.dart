@@ -5,7 +5,9 @@ import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
 import 'package:newborn_care/bloc/refresh_bloc/refresh_bloc.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/stage_1.dart';
+import 'package:newborn_care/models/stage_2.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_1.dart';
+import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_2.dart';
 import 'package:newborn_care/screens/list_of_babies/components/list_item.dart';
 
 class Body extends StatefulWidget {
@@ -61,7 +63,11 @@ class _BodyState extends State<Body> {
                             state.childModel.assessmentsList[index] as Stage1,
                             widget.assessmentsBloc);
                       }
-
+                    else if (state.childModel.assessmentsList[index] is Stage2) {
+                        return Phase2(
+                            state.childModel.assessmentsList[index] as Stage2,
+                            widget.assessmentsBloc);
+                      }
                       return Container();
                     },
                   ),

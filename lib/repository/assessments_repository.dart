@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:newborn_care/models/stage_2.dart';
 import 'package:newborn_care/network/assessments_client.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
@@ -44,6 +45,7 @@ class AssessmentsRepository {
 
   List<Object> addNextAssessment(List<Object> assessments) {
     if (assessments.length == 0) assessments.add(Stage1());
+    else if (assessments.length == 1) assessments.add(Stage2());
     return assessments;
   }
 
