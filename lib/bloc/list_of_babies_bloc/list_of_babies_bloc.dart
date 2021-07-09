@@ -15,6 +15,7 @@ class ListOfBabiesBloc extends Bloc<ListOfBabiesEvent, ListOfBabiesState> {
       : super(ListOfBabiesLoading());
 
   List<ChildModel> childListMap = [];
+  String searchQuery = "";
   @override
   Stream<ListOfBabiesState> mapEventToState(
     ListOfBabiesEvent event,
@@ -44,16 +45,21 @@ class ListOfBabiesBloc extends Bloc<ListOfBabiesEvent, ListOfBabiesState> {
       yield ListOfBabiesLoaded(recentList, pastRegistered);
     } else if (event is ListOfBabiesSearchList) {
       //sort and seperate lists
+      searchQuery = event.searchQuery;
       List<ChildModel> recentList = [], pastRegistered = [];
       listOfBabiesRepository.searchQuery(
-          event.searchQuery, recentList, pastRegistered, childListMap);
+          searchQuery, recentList, pastRegistered, childListMap);
       yield ListOfBabiesLoaded(recentList, pastRegistered);
     } else if (event is ListOfBabiesSortList) {
       //sort and seperate lists
       List<ChildModel> recentList = [], pastRegistered = [];
       listOfBabiesRepository.saveSortBy(event.sortListEnum);
-      listOfBabiesRepository.seperateRecentAndPastRegistered(
-          recentList, pastRegistered, childListMap);
+      if (searchQuery.isEmpty)
+        listOfBabiesRepository.seperateRecentAndPastRegistered(
+            recentList, pastRegistered, childListMap);
+      else
+        listOfBabiesRepository.searchQuery(
+            searchQuery, recentList, pastRegistered, childListMap);
       yield ListOfBabiesLoaded(recentList, pastRegistered);
     }
   }

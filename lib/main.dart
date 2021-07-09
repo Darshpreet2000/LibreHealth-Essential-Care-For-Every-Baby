@@ -66,7 +66,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String initialAppRoute = '/';
+  String initialAppRoute = '/InitialScreen';
   @override
   void initState() {
     if (HiveStorageRepository().checkUserLoggedIn()) {
@@ -101,7 +101,7 @@ class _MyAppState extends State<MyApp> {
             theme: MyTheme.lightTheme,
             darkTheme: MyTheme.darkTheme,
             routes: {
-              '/': (context) => InitialScreen(),
+              '/InitialScreen': (context) => InitialScreen(),
               '/FacilityLoginScreen': (context) => FacilityLogin(),
               '/IndividualLoginScreen': (context) => IndividualLogin(),
               '/RegisterABaby': (context) => RegisterABaby(),
