@@ -23,7 +23,6 @@ void main() {
 
 void assessmentClientTest() {
   MockClient _mockHttpClient = MockClient();
-  ;
   MockHiveStorageRepository _mockHiveStorageRepository =
       MockHiveStorageRepository();
   MockRefreshRepository _mockRefreshRepository = MockRefreshRepository();
@@ -72,7 +71,6 @@ void assessmentClientTest() {
           localizationsDelegates: [
             AppLocalizations.delegate,
           ]));
-      String json = '';
       BuildContext context = tester.element(find.byType(Container));
       _assessmentsClient = new AssessmentsClient(_mockHttpClient, context,
           Lock(), _mockHiveStorageRepository, _mockRefreshRepository);

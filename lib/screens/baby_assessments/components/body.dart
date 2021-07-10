@@ -62,8 +62,8 @@ class _BodyState extends State<Body> {
                         return Phase1(
                             state.childModel.assessmentsList[index] as Stage1,
                             widget.assessmentsBloc);
-                      }
-                    else if (state.childModel.assessmentsList[index] is Stage2) {
+                      } else if (state.childModel.assessmentsList[index]
+                          is Stage2) {
                         return Phase2(
                             state.childModel.assessmentsList[index] as Stage2,
                             widget.assessmentsBloc);

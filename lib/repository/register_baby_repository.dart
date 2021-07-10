@@ -75,10 +75,14 @@ class RegisterBabyRepositoryImpl {
       //save to hive storage
       hiveStorageRepository.storeSingleChild(child);
       //add/schedule stage 1 notifications
-      await notificationRepository.showStage1Notification(
-          key, _registerBabyModel.motherName);
-      await notificationRepository.scheduledStage1Notification(
-          key, _registerBabyModel.motherName);
+
+      await notificationRepository.immediateNotification(key,
+          _registerBabyModel.motherName, AppLocalizations.of(context)!.phase1);
+      await notificationRepository.scheduledStageNotificationReminder(
+          key,
+          _registerBabyModel.motherName,
+          AppLocalizations.of(context)!.phase1,
+          child.birthTime.add(Duration(minutes: 60)));
     });
     return;
   }

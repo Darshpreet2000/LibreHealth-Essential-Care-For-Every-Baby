@@ -2,14 +2,17 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
+import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
+import 'package:newborn_care/repository/notification_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:synchronized/synchronized.dart';
 import 'phase_1_test.mocks.dart';
 
-@GenerateMocks([RefreshRepository, HiveStorageRepository])
+@GenerateMocks(
+    [RefreshRepository, HiveStorageRepository, NotificationRepository])
 void main() {
   mainBloc();
 }
@@ -18,6 +21,9 @@ void mainBloc() {
   MockHiveStorageRepository _mockHiveStorageRepository =
       MockHiveStorageRepository();
   MockRefreshRepository _mockRefreshRepository = MockRefreshRepository();
+
+  MockNotificationRepository _mockNotificationRepository =
+      MockNotificationRepository();
   // AssessmentsRepository testing
   //Test Cases
   //Throws exception if wardname is empty
@@ -36,7 +42,7 @@ void mainBloc() {
       var lock = Lock();
       try {
         AssessmentsRepository(context, lock, _mockHiveStorageRepository,
-                _mockRefreshRepository)
+                _mockRefreshRepository, _mockNotificationRepository)
             .validatePhase1Assessments(Stage1());
       } catch (e) {
         expect(e.toString(),
@@ -58,7 +64,7 @@ void mainBloc() {
         stage1.ecebWardName = "postnatal";
 
         AssessmentsRepository(context, lock, _mockHiveStorageRepository,
-                _mockRefreshRepository)
+                _mockRefreshRepository, _mockNotificationRepository)
             .validatePhase1Assessments(stage1);
       } catch (e) {
         expect(
@@ -85,7 +91,7 @@ void mainBloc() {
         stage1.ecebStage1SkinToSkinCare = true;
 
         AssessmentsRepository(context, lock, _mockHiveStorageRepository,
-                _mockRefreshRepository)
+                _mockRefreshRepository, _mockNotificationRepository)
             .validatePhase1Assessments(stage1);
       } catch (e) {}
       expect(stage1.isCompleted, true);
@@ -99,14 +105,14 @@ void mainBloc() {
           ]));
       BuildContext context = tester.element(find.byType(Container));
       var lock = Lock();
-      List<Object> assessmentsList = [];
-
+      ChildModel inputChildModel = new ChildModel("Oni", "postnatal", 1, 1234,
+          1234, DateTime.now(), "1234", "1234", 'None');
       try {
         AssessmentsRepository(context, lock, _mockHiveStorageRepository,
-                _mockRefreshRepository)
-            .addNextAssessment(assessmentsList);
+                _mockRefreshRepository, _mockNotificationRepository)
+            .addNextAssessment(inputChildModel);
       } catch (e) {}
-      expect(assessmentsList[0], isA<Stage1>());
+      expect(inputChildModel.assessmentsList[0], isA<Stage1>());
     });
   });
 }

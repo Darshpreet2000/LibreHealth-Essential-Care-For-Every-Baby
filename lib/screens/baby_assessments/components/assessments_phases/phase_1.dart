@@ -162,7 +162,7 @@ class _Phase1State extends State<Phase1> {
                       borderRadius: new BorderRadius.circular(30.0))),
               onPressed: () {
                 if (widget.stage1.isCompleted == false)
-                  widget.assessmentsBloc.add(AssessmentsEventAddStage1());
+                  widget.assessmentsBloc.add(AssessmentsEventCompleteStage1());
               },
               child: Text(
                 widget.stage1.isCompleted == false

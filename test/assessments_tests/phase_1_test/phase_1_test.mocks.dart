@@ -12,6 +12,7 @@ import 'package:newborn_care/models/profile.dart' as _i4;
 import 'package:newborn_care/models/sort_list_enum.dart' as _i8;
 import 'package:newborn_care/models/user_activity.dart' as _i10;
 import 'package:newborn_care/repository/hive_storage_repository.dart' as _i7;
+import 'package:newborn_care/repository/notification_repository.dart' as _i11;
 import 'package:newborn_care/repository/refresh_repository.dart' as _i5;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -135,4 +136,47 @@ class MockHiveStorageRepository extends _i1.Mock
   bool checkUserLoggedIn() =>
       (super.noSuchMethod(Invocation.method(#checkUserLoggedIn, []),
           returnValue: false) as bool);
+}
+
+/// A class which mocks [NotificationRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockNotificationRepository extends _i1.Mock
+    implements _i11.NotificationRepository {
+  MockNotificationRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.BuildContext get context =>
+      (super.noSuchMethod(Invocation.getter(#context),
+          returnValue: _FakeBuildContext()) as _i2.BuildContext);
+  @override
+  _i9.Future<void> immediateNotification(
+          String? key, String? motherName, String? body) =>
+      (super.noSuchMethod(
+          Invocation.method(#immediateNotification, [key, motherName, body]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future.value()) as _i9.Future<void>);
+  @override
+  _i9.Future<void> scheduledStageNotification(
+          String? key, String? motherName, String? body, DateTime? date) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #scheduledStageNotification, [key, motherName, body, date]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future.value()) as _i9.Future<void>);
+  @override
+  _i9.Future<void> scheduledStageNotificationReminder(
+          String? key, String? motherName, String? body, DateTime? date) =>
+      (super.noSuchMethod(
+          Invocation.method(#scheduledStageNotificationReminder,
+              [key, motherName, body, date]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future.value()) as _i9.Future<void>);
+  @override
+  _i9.Future<void> removeScheduledNotification(String? key) => (super
+      .noSuchMethod(Invocation.method(#removeScheduledNotification, [key]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future.value()) as _i9.Future<void>);
 }

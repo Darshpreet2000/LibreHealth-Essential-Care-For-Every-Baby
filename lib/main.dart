@@ -147,6 +147,9 @@ class _MyAppState extends State<MyApp> {
         ],
       ),
       providers: [
+        RepositoryProvider<NotificationRepository>(
+            create: (context) =>
+                NotificationRepository(navigatorKey.currentContext!)),
         RepositoryProvider<RefreshRepository>(
             create: (context) =>
                 RefreshRepository(navigatorKey.currentContext!)),
@@ -158,7 +161,8 @@ class _MyAppState extends State<MyApp> {
                 navigatorKey.currentContext!,
                 lock,
                 context.read<HiveStorageRepository>(),
-                context.read<RefreshRepository>())),
+                context.read<RefreshRepository>(),
+                context.read<NotificationRepository>())),
         RepositoryProvider<ListOfBabiesRepository>(
           create: (context) => ListOfBabiesRepository(
               navigatorKey.currentContext!,
@@ -184,9 +188,6 @@ class _MyAppState extends State<MyApp> {
             context.read<HiveStorageRepository>(),
           ),
         ),
-        RepositoryProvider<NotificationRepository>(
-            create: (context) =>
-                NotificationRepository(navigatorKey.currentContext!)),
       ],
     );
   }

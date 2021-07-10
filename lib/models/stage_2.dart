@@ -106,31 +106,31 @@ class Stage2 {
           ecebWardName = element['value'];
           break;
         case DHIS2Config.ecebWeight:
-          ecebWeight = element['value'];
+          ecebWeight = double.parse(element['value']);
           break;
         case DHIS2Config.ecebAssessTemperature:
-          ecebAssessTemperature = element['value'];
+          ecebAssessTemperature = double.parse(element['value']);
           break;
         case DHIS2Config.ecebStage2AssessExam:
-          ecebStage2AssessExam = element['value'];
+          ecebStage2AssessExam = element['value'] == 'true';
           break;
         case DHIS2Config.ecebFastBreathing:
-          ecebFastBreathing = element['value'];
+          ecebFastBreathing = element['value'] == 'true';
           break;
         case DHIS2Config.ecebChestIndrawing:
-          ecebChestIndrawing = element['value'];
+          ecebChestIndrawing = element['value'] == 'true';
           break;
         case DHIS2Config.ecebIsFeedingProperly:
-          ecebIsFeedingProperly = element['value'];
+          ecebIsFeedingProperly = element['value'] == 'true';
           break;
         case DHIS2Config.ecebChestIndrawing:
-          ecebChestIndrawing = element['value'];
+          ecebChestIndrawing = element['value'] == 'true';
           break;
         case DHIS2Config.ecebConvulsions:
-          ecebConvulsions = element['value'];
+          ecebConvulsions = element['value'] == 'true';
           break;
         case DHIS2Config.ecebSevereJaundice:
-          ecebSevereJaundice = element['value'];
+          ecebSevereJaundice = element['value'] == 'true';
           break;
       }
     });

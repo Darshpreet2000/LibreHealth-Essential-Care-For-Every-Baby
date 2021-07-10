@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,7 @@ class NotificationRepository {
               channelName: 'eceb',
               channelDescription: 'eceb',
               defaultColor: Color(0xFF9D50DD),
-              ledColor: Colors.white)
+              ledColor: Colors.white),
         ]);
     AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
       if (!isAllowed) {
@@ -34,9 +36,9 @@ class NotificationRepository {
     });
     AwesomeNotifications().actionStream.listen((receivedNotification) {
       navigatorKey.currentState!.push(MaterialPageRoute(builder: (context) {
-        ChildModel childModel =
-            RepositoryProvider.of<HiveStorageRepository>(context)
-                .getSingleChild(receivedNotification.id.toString());
+        ChildModel childModel = RepositoryProvider.of<HiveStorageRepository>(
+                context)
+            .getSingleChild(receivedNotification.payload!['key'].toString());
         return BabyAssessments(
             childModel,
             AssessmentsBloc(
@@ -46,6 +48,7 @@ class NotificationRepository {
                   lock,
                   RepositoryProvider.of<HiveStorageRepository>(context),
                   RepositoryProvider.of<RefreshRepository>(context),
+                  RepositoryProvider.of<NotificationRepository>(context),
                 ),
                 childModel,
                 RepositoryProvider.of<HiveStorageRepository>(context)));
@@ -53,29 +56,45 @@ class NotificationRepository {
     });
   }
 
-  Future<void> showStage1Notification(String key, String motherName) async {
-    AwesomeNotifications().createNotification(
-        content: NotificationContent(
-      id: int.parse(key),
-      channelKey: 'eceb',
-      title: AppLocalizations.of(context)!.babyOf(motherName),
-      body: AppLocalizations.of(context)!.phase1,
-    ));
+  Future<void> immediateNotification(
+      String key, String motherName, String body) async {
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: Random().nextInt(100000000),
+        payload: {'key': key},
+        channelKey: 'eceb',
+        title: AppLocalizations.of(context)!.babyOf(motherName),
+        body: body,
+      ),
+    );
   }
 
-  Future<void> scheduledStage1Notification(
-      String key, String motherName) async {
+  Future<void> scheduledStageNotification(
+      String key, String motherName, String body, DateTime date) async {
+    await AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: Random().nextInt(100000000),
+          payload: {'key': key},
+          channelKey: 'eceb',
+          title: AppLocalizations.of(context)!.babyOf(motherName),
+          body: body,
+        ),
+        schedule: NotificationCalendar.fromDate(date: date));
+  }
+
+  Future<void> scheduledStageNotificationReminder(
+      String key, String motherName, String body, DateTime date) async {
     await AwesomeNotifications().createNotification(
         content: NotificationContent(
           id: int.parse(key),
+          payload: {'key': key},
           channelKey: 'eceb',
           title: AppLocalizations.of(context)!.reminder +
               ": " +
               AppLocalizations.of(context)!.babyOf(motherName),
-          body: AppLocalizations.of(context)!.phase1,
+          body: body,
         ),
-        schedule: NotificationCalendar.fromDate(
-            date: DateTime.now().add(Duration(minutes: 60))));
+        schedule: NotificationCalendar.fromDate(date: date));
   }
 
   Future<void> removeScheduledNotification(String key) async {

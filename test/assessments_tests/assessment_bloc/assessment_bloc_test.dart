@@ -53,8 +53,7 @@ void mainBloc() {
           (_) async => Future.value(objectList),
         );
 
-        when(_mockAssessmentsRepo
-                .addNextAssessment(inputChildModel.assessmentsList))
+        when(_mockAssessmentsRepo.addNextAssessment(inputChildModel))
             .thenReturn([Stage1()]);
         return assessmentsBloc;
       },
@@ -75,8 +74,7 @@ void mainBloc() {
         when(_mockAssessmentsRepo.fetchAssessments(inputChildModel.key))
             .thenThrow(Exception("No Internet"));
 
-        when(_mockAssessmentsRepo
-                .addNextAssessment(inputChildModel.assessmentsList))
+        when(_mockAssessmentsRepo.addNextAssessment(inputChildModel))
             .thenReturn([Stage1()]);
         return assessmentsBloc;
       },
@@ -105,8 +103,7 @@ void mainBloc() {
         when(_mockNotificationRepo
                 .removeScheduledNotification(inputChildModel.key))
             .thenAnswer((realInvocation) => Future.value());
-        when(_mockAssessmentsRepo
-                .addNextAssessment(inputChildModel.assessmentsList))
+        when(_mockAssessmentsRepo.addNextAssessment(inputChildModel))
             .thenReturn([Stage1()]);
 
         when(_mockAssessmentsRepo.registerStage1Details(
@@ -121,7 +118,7 @@ void mainBloc() {
 
         return assessmentsBloc;
       },
-      act: (bloc) => bloc.add(AssessmentsEventAddStage1()),
+      act: (bloc) => bloc.add(AssessmentsEventCompleteStage1()),
       expect: () => [AssessmentsAdded(inputChildModel)],
     );
     blocTest<AssessmentsBloc, AssessmentsState>(
@@ -139,7 +136,7 @@ void mainBloc() {
             .thenThrow(Exception("Exception: Enter ward name"));
         return assessmentsBloc;
       },
-      act: (bloc) => bloc.add(AssessmentsEventAddStage1()),
+      act: (bloc) => bloc.add(AssessmentsEventCompleteStage1()),
       expect: () => [
         AssessmentsError("Exception: Enter ward name"),
         AssessmentsInitial(inputChildModel)
@@ -160,7 +157,7 @@ void mainBloc() {
             .thenThrow(Exception("Exception: Please complete assessments"));
         return assessmentsBloc;
       },
-      act: (bloc) => bloc.add(AssessmentsEventAddStage1()),
+      act: (bloc) => bloc.add(AssessmentsEventCompleteStage1()),
       expect: () => [
         AssessmentsError("Exception: Please complete assessments"),
         AssessmentsInitial(inputChildModel)
