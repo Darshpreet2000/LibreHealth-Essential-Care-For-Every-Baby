@@ -1,22 +1,25 @@
 class DHIS2Config {
-  String serverURL = "https://bmgfdev.soic.iupui.edu";
-  String programECEBID = "gC4kB3ulSJl";
-  String orgUnit = "yvWZnR3olFA";
+  static const String serverURL = "https://bmgfdev.soic.iupui.edu";
+  static const String programECEBID = "gC4kB3ulSJl";
+  static const String orgUnit = "yvWZnR3olFA";
+
   //Tracked Entity Instance
-  String trackedEntity = "gBy25NmwMRc";
-  String motherNameECEBID = "Q5el38rO0bG";
-  String genderECEBID = "wJU7PfVaK3U";
-  String babiesDeliveredECEBID = "IVNp5un0dGa";
-  String birthDateTimeECEBID = "ZEi7UfVy21n";
-  String modeOfDeliveryECEBID = "JH16XsPOvJr";
-  String teiWardname = "HKmbmXfiDJB";
+  static const String trackedEntity = "gBy25NmwMRc";
+  static const String ecebMotherName = "Q5el38rO0bG";
+  static const String ecebGender = "wJU7PfVaK3U";
+  static const String ecebBabiesDelivered = "IVNp5un0dGa";
+  static const String ecebBirthDateTime = "ZEi7UfVy21n";
+  static const String ecebModeOfDelivery = "JH16XsPOvJr";
+  static const String teiWardname = "HKmbmXfiDJB";
+  static const String classification = "ivo84s6Uv29";
 
   //Stage 0 Registering Babies
-  String stageRegisteringBabies = "e63FeH2EwPL";
-  String ecebWeight = "M8CLfn84QaV";
-  String ecebSkinColorChanges = "DXdXA90lOYK";
-  String ecebTraumasDuringBirth = "ERxsxYUAXXa";
-  String ecebWardName = "s6l1WJeNh0q";
-  String ecebskinColorChangesNotes = "bZ5hszY7Myn";
-  String ecebtraumasDuringBirthNotes = "kX6x2gghjPN";
+  static const String stageRegisteringBabies = "e63FeH2EwPL";
+  static const String ecebWeight = "M8CLfn84QaV";
+  static const String ecebSkinColorChanges = "DXdXA90lOYK";
+  static const String ecebTraumasDuringBirth = "ERxsxYUAXXa";
+  static const String ecebWardName = "s6l1WJeNh0q";
+  static const String ecebskinColorChangesNotes = "bZ5hszY7Myn";
+  static const String ecebtraumasDuringBirthNotes = "kX6x2gghjPN";
+
 }

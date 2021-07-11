@@ -4,7 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newborn_care/bloc/list_of_babies_bloc/list_of_babies_bloc.dart';
 import 'package:newborn_care/bloc/refresh_bloc/refresh_bloc.dart';
+import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
 import 'package:newborn_care/repository/register_baby_repository.dart';
 
@@ -36,6 +38,16 @@ class RegisterBabyBloc extends Bloc<RegisterBabyEvent, RegisterBabyState> {
         //push data to dhis2 using api
         await _registerBabyRepositoryImpl
             .registerBabyDetails(_registerBabyModel);
+        _registerBabyModel.children.forEach((element) {
+          BlocProvider.of<ListOfBabiesBloc>(event.context).add(
+              ListOfBabiesAddChild(new ChildModel(
+                  _registerBabyModel.motherName,
+                  _registerBabyModel.wardName,
+                  element.gender! ? 1 : 0,
+                  Colors.blue[100]!.value,
+                  Colors.white.value,
+                  element.birthDateTime)));
+        });
 
         BlocProvider.of<RefreshBloc>(event.context).add(RefreshEventStart());
         _registerBabyModel = new RegisterBabyModel();

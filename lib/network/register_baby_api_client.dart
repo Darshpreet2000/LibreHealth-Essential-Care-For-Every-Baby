@@ -9,7 +9,7 @@ class RegisterBabyAPIClient {
   Future registerBabyDetailsAsTrackedEntity(String data) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('testuser:Admin@123'));
-    String url = DHIS2Config().serverURL + APIConfig().trackedEntityInstance;
+    String url = DHIS2Config.serverURL + APIConfig().trackedEntityInstance;
     Map<String, String> headers = <String, String>{
       'authorization': basicAuth,
       'Content-Type': 'application/json; charset=UTF-8',

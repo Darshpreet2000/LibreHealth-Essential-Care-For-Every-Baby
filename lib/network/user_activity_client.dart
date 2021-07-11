@@ -21,7 +21,8 @@ class UserActivityClient {
     }
     try {
       final response = await http.get(
-        Uri.parse(DHIS2Config().serverURL + APIConfig().userMessages),
+        Uri.parse(
+            DHIS2Config.serverURL + APIConfig().userMessages + "?pageSize=10"),
         headers: <String, String>{
           'authorization': basicAuth,
         },
@@ -43,7 +44,7 @@ class UserActivityClient {
     }
     try {
       final response = await http.get(
-        Uri.parse(DHIS2Config().serverURL + APIConfig().userMessages + "/$id"),
+        Uri.parse(DHIS2Config.serverURL + APIConfig().userMessages + "/$id"),
         headers: <String, String>{
           'authorization': basicAuth,
         },

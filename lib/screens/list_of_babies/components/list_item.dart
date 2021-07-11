@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:newborn_care/models/child_model.dart';
 
 class ListItem extends StatelessWidget {
-  final String parent, ward, gender;
-  final Color? color, darkColor;
-
-  const ListItem(
-      this.parent, this.ward, this.gender, this.color, this.darkColor);
-
+  final ChildModel childModel;
+  final bool allowNavigate;
+  ListItem(this.childModel, this.allowNavigate);
   @override
   Widget build(BuildContext context) {
+    var time = DateTime.now().difference(childModel.birthTime).inHours >= 2
+        ? "${AppLocalizations.of(context)!.hoursFromBirth(DateTime.now().difference(childModel.birthTime).inHours)}"
+        : "${AppLocalizations.of(context)!.minutesFromBirth(DateTime.now().difference(childModel.birthTime).inMinutes)}";
     return Container(
-      margin: EdgeInsets.only(top: 12),
-      color: darkColor,
+      margin: EdgeInsets.only(bottom: 16),
+      color: Color(childModel.darkColor!),
       child: Material(
-        elevation: 20,
-        color: darkColor,
+        elevation: 10,
+        color: new Color(childModel.darkColor!),
         child: InkWell(
           onTap: () {
-            Navigator.pushNamed(context, '/BabyDetails');
+            if (allowNavigate)
+              Navigator.pushNamed(context, '/BabyDetails',
+                  arguments: childModel);
           },
           child: Container(
-            margin: EdgeInsets.all(16),
+            margin: EdgeInsets.fromLTRB(16, 8, 16, 16),
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -39,7 +42,7 @@ class ListItem extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: color,
+                      color: Color(childModel.color!),
                       borderRadius: BorderRadius.only(
                           bottomRight: Radius.circular(15),
                           bottomLeft: Radius.circular(15),
@@ -47,8 +50,7 @@ class ListItem extends StatelessWidget {
                           topRight: Radius.circular(20))),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                        "${AppLocalizations.of(context)!.minutesFromBirth("22")}",
+                    child: Text(time,
                         textAlign: TextAlign.start,
                         style: TextStyle(color: Colors.black, fontSize: 16)),
                   ),
@@ -78,7 +80,7 @@ class ListItem extends StatelessWidget {
                                   children: <TextSpan>[
                                     new TextSpan(
                                         text: AppLocalizations.of(context)!
-                                            .babyOf("Oni"),
+                                            .babyOf(childModel.parent),
                                         style: TextStyle(
                                             color: Theme.of(context)
                                                 .textTheme
@@ -109,7 +111,7 @@ class ListItem extends StatelessWidget {
                                             "${AppLocalizations.of(context)!.location}: ",
                                         style: new TextStyle()),
                                     new TextSpan(
-                                        text: ward,
+                                        text: childModel.ward,
                                         style: TextStyle(
                                             color: Theme.of(context)
                                                 .textTheme
@@ -130,7 +132,11 @@ class ListItem extends StatelessWidget {
                                     color: Theme.of(context).iconTheme.color,
                                     size: 24,
                                   ),
-                                  Text(gender,
+                                  Text(
+                                      childModel.gender == 1
+                                          ? AppLocalizations.of(context)!.male
+                                          : AppLocalizations.of(context)!
+                                              .female,
                                       style: TextStyle(
                                           color: Theme.of(context)
                                               .textTheme

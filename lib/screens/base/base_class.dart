@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newborn_care/bloc/list_of_babies_bloc/list_of_babies_bloc.dart';
 import 'package:newborn_care/bloc/refresh_bloc/refresh_bloc.dart';
 import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
 import 'package:newborn_care/screens/home/home_screen.dart';
@@ -24,7 +25,7 @@ class _BaseClassState extends State<BaseClass> {
   void initState() {
     BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
     BlocProvider.of<UserActivityBloc>(context).add(UserActivityFetch());
-
+    BlocProvider.of<ListOfBabiesBloc>(context).add(ListOfBabiesFetchData());
     super.initState();
   }
 

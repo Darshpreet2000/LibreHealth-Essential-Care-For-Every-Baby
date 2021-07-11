@@ -106,7 +106,7 @@ void mainBloc() {
       String basicAuth =
           'Basic ' + base64Encode(utf8.encode('testuser:Admin@123'));
       when(_mockHttpClient.get(
-        Uri.parse(DHIS2Config().serverURL + APIConfig().login),
+        Uri.parse(DHIS2Config.serverURL + APIConfig().login),
         headers: <String, String>{
           'authorization': basicAuth,
         },
@@ -122,7 +122,7 @@ void mainBloc() {
       String basicAuth =
           'Basic ' + base64Encode(utf8.encode('testuser:Admin@123'));
       when(_mockHttpClient.get(
-        Uri.parse(DHIS2Config().serverURL + APIConfig().login),
+        Uri.parse(DHIS2Config.serverURL + APIConfig().login),
         headers: <String, String>{
           'authorization': basicAuth,
         },
@@ -140,7 +140,7 @@ void mainBloc() {
       String basicAuth =
           'Basic ' + base64Encode(utf8.encode('testuser:Admin@123'));
       when(_mockHttpClient.get(
-        Uri.parse(DHIS2Config().serverURL + APIConfig().login),
+        Uri.parse(DHIS2Config.serverURL + APIConfig().login),
         headers: <String, String>{
           'authorization': basicAuth,
         },
