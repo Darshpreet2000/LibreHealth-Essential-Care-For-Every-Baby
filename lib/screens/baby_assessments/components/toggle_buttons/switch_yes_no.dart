@@ -54,7 +54,6 @@ Widget switchYesNo(
                             borderRadius: new BorderRadius.circular(30.0))),
                     onPressed: () {
                       if (readOnly == false) {
-                        
                         onChange(false);
                         state.didChange(false);
                       }
@@ -79,8 +78,7 @@ Widget switchYesNo(
       );
     },
     validator: (val) {
-      if (val == null)
-        return AppLocalizations.of(context)!.completeAssessments;
+      if (val == null) return AppLocalizations.of(context)!.completeAssessments;
     },
   );
 }

@@ -9,6 +9,9 @@ import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/models/stage_2.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_1.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_2.dart';
+import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_3_danger.dart';
+import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_3_normal.dart';
+import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_3_problem.dart';
 import 'package:newborn_care/screens/list_of_babies/components/list_item.dart';
 
 class Body extends StatefulWidget {
@@ -69,10 +72,24 @@ class _BodyState extends State<Body> {
                             state.childModel.color);
                       } else if (state.childModel.assessmentsList[index]
                           is Stage2) {
-                        return Phase2(
-                            state.childModel.assessmentsList[index] as Stage2,
-                            widget.assessmentsBloc,
-                            state.childModel.color);
+                        return Column(
+                          children: [
+                            Phase2(
+                                state.childModel.assessmentsList[index]
+                                    as Stage2,
+                                widget.assessmentsBloc,
+                                state.childModel.color),
+                            state.childModel.classification == 'Problem'
+                                ? Phase3Problem()
+                                : Container(),
+                            state.childModel.classification == 'Normal'
+                                ? Phase3Normal()
+                                : Container(),
+                            state.childModel.classification == 'Dnager'
+                                ? Phase3Danger()
+                                : Container(),
+                          ],
+                        );
                       }
                       return Container();
                     },

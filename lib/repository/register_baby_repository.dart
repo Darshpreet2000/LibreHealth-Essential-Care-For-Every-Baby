@@ -62,7 +62,7 @@ class RegisterBabyRepositoryImpl {
           _registerBabyModel.motherName,
           _registerBabyModel.wardName,
           element.gender! ? 1 : 0,
-          Colors.blue[100]!.value,
+          Colors.blue[50]!.value,
           Colors.white.value,
           element.birthDateTime,
           key,

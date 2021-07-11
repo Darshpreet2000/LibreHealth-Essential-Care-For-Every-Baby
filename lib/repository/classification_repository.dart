@@ -35,11 +35,10 @@ class ClassificationRepository {
       'ecebFastBreathing': ecebFastBreathing,
       'ecebConvulsions': ecebConvulsions,
     });
-    
-    if (evaluateString(programRuleProblem)) return "Problem";
-    
-    if (evaluateString(programRuleDanger)) return "Danger";
 
+    if (evaluateString(programRuleProblem)) return "Problem";
+
+    if (evaluateString(programRuleDanger)) return "Danger";
 
     return "Normal";
   }

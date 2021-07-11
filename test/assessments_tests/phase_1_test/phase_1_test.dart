@@ -106,7 +106,7 @@ void mainBloc() {
       BuildContext context = tester.element(find.byType(Container));
       var lock = Lock();
       ChildModel inputChildModel = new ChildModel("Oni", "postnatal", 1, 1234,
-          1234, DateTime.now(), "1234", "1234", 'None');
+          1234, DateTime.now(), "1234", "1234", 'None',1,'normal');
       try {
         AssessmentsRepository(context, lock, _mockHiveStorageRepository,
                 _mockRefreshRepository, _mockNotificationRepository)

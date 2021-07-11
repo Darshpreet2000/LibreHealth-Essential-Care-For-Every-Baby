@@ -20,11 +20,9 @@ class Phase2 extends StatefulWidget {
 }
 
 class _Phase2State extends State<Phase2> {
- 
-   GlobalKey<FormState>  _formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void dispose() {
-  
     widget.assessmentsBloc.close();
     super.dispose();
   }
@@ -283,7 +281,7 @@ class _Phase2State extends State<Phase2> {
                         borderRadius: new BorderRadius.circular(30.0))),
                 onPressed: () {
                   if (widget.stage2.isCompleted == false &&
-                      _formKey.currentState!.validate()) { 
+                      _formKey.currentState!.validate()) {
                     widget.assessmentsBloc
                         .add(AssessmentsEventCompleteStage2());
                   }

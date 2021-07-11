@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
+import 'package:newborn_care/bloc/assessments_bloc/assessments_bloc.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
@@ -35,9 +35,9 @@ void mainBloc() {
   // yields AssessmentsError when assessments are not completed while adding of phase 1 assessments
   group('AssessmentsBloc testing', () {
     ChildModel inputChildModel = new ChildModel("Oni", "postnatal", 1, 1234,
-        1234, DateTime.now(), "1234", "1234", 'None');
+        1234, DateTime.now(), "1234", "1234", 'None',1,'normal');
     ChildModel outputChildModel = new ChildModel("Oni", "postnatal", 1, 1234,
-        1234, DateTime.now(), "1234", "1234", 'None');
+        1234, DateTime.now(), "1234", "1234", 'None',1,'normal');
     outputChildModel.assessmentsList = [Stage1()];
     blocTest<AssessmentsBloc, AssessmentsState>(
       'yields AssessmentsInitial on successful fetching of data',
@@ -109,6 +109,12 @@ void mainBloc() {
         when(_mockAssessmentsRepo.registerStage1Details(
                 inputChildModel.assessmentsList[0] as Stage1,
                 inputChildModel.key))
+            .thenAnswer((realInvocation) => Future.value());
+            
+        when(_mockAssessmentsRepo.updateTrackedEntityInstance(
+            inputChildModel,
+            inputChildModel.key,
+            (inputChildModel.assessmentsList[0] as Stage1).ecebWardName))
             .thenAnswer((realInvocation) => Future.value());
 
         when(_mockHiveRepo.updateChild(inputChildModel.key, inputChildModel))
