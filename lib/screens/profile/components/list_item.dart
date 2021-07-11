@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ListItem extends StatelessWidget {
   final String? listHeading;
-
-  const ListItem({Key? key, this.listHeading}) : super(key: key);
+  final DateTime? dateTime;
+  const ListItem({Key? key, this.listHeading, this.dateTime}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,14 +36,14 @@ class ListItem extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "09/02/2021",
+                    DateFormat.yMMMd().format(dateTime!),
                     style: TextStyle(fontSize: 14),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "7:20 AM",
+                    DateFormat.jm().format(dateTime!),
                     style: TextStyle(fontSize: 14),
                   ),
                 ),
