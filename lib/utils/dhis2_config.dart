@@ -24,18 +24,19 @@ class DHIS2Config {
   static const String ecebtraumasDuringBirthNotes = "kX6x2gghjPN";
 
   // program Rules
-  static  String programRuleNormal =
-      "#{ecebWeight} >2000  && !#{ecebSevereJaundice} && #{ecebAssessTemperature}> 95.5 && #{ecebAssessTemperature} < 99.5  && !#{ecebChestIndrawing}  && !#{ecebNotFeeding} && !#{ecebFastBreathing}";
+  static String programRuleNormal =
+      "#{ecebWeight} >2000  && !#{ecebSevereJaundice} && #{ecebAssessTemperature}> 95.5 && #{ecebAssessTemperature} < 99.5  && !#{ecebChestIndrawing}  && !#{ecebFeedingProperly} && !#{ecebFastBreathing}";
   static String programRuleProblem =
-      "#{ecebWeight} < 2000  &&  (#{ecebAssessTemperature}> 95.5 && #{ecebAssessTemperature} < 99.5)  && !#{ecebFastBreathing}  && !#{ecebSevereJaundice}  && !#{ecebChestIndrawing}  && !#{ecebNotFeeding}";
-  static String programRuleDanger = "#{ecebSevereJaundice} ||#{ecebAssessTemperature}<= 95.9 || #{ecebAssessTemperature} >= 99.5  || #{ecebWeight} < 1500 || #{ecebChestIndrawing} || !#{ecebFeedingProperly} || #{ecebFastBreathing} || #{ecebConvulsions}";
-   
+      "#{ecebWeight} < 2000    &&  (#{ecebAssessTemperature}> 95.5 && #{ecebAssessTemperature} < 99.5)  && !#{ecebFastBreathing}  && !#{ecebSevereJaundice}  && !#{ecebChestIndrawing}  && !#{ecebFeedingProperly}";
+  static String programRuleDanger =
+      "#{ecebSevereJaundice} ||#{ecebAssessTemperature}<= 95.9 || #{ecebAssessTemperature} >= 99.5  || #{ecebWeight} < 1500 || #{ecebChestIndrawing} || !#{ecebFeedingProperly} || #{ecebFastBreathing} || #{ecebConvulsions}";
 
-  static setUpProgramRules(){
-     programRuleNormal.replaceAll('#', '');
-     programRuleProblem.replaceAll('#', '');
-     programRuleDanger.replaceAll('#', '');
-  }   
+  static setUpProgramRules() {
+    programRuleNormal = programRuleNormal.replaceAll('#', '');
+    programRuleProblem = programRuleProblem.replaceAll('#', '');
+    programRuleDanger = programRuleDanger.replaceAll('#', '');
+  }
+
   //Stage - 1 Assessments
   static const String stage1ID = "URydNJS8i3T";
   static const String eceb_Stage_1_Initiate_Breastfeeding = "Ya3AmFV6Yu9";
@@ -50,7 +51,18 @@ class DHIS2Config {
   static const String ecebChestIndrawing = "HcG32VrK3Um";
   static const String ecebIsFeedingProperly = "VD9JO6bY2o1";
   static const String ecebConvulsions = "VqJL6KvxrKT";
-  static const String ecebStage2AssessExam = "jBnuHZPSOiX";
+  static const String ecebExaminationHead = "jmPjlhUBtrD";
+  static const String ecebExaminationGenitalia = "d3jPHB6EGrA";
+  static const String ecebExaminationEyes = "glTBt2kk82C";
+  static const String ecebExaminationAnus = "Ko9E05aZlwN";
+  static const String ecebExaminationEarsNoseThroat = "DPQ5oPje1qs";
+  static const String ecebExaminationMuscoskeletal = "iwUAQFG2r1Y";
+  static const String ecebExaminationChest = "bDioHeuWrdS";
+  static const String ecebExaminationNeurology = "sktpcovPufD";
+  static const String ecebExaminationCardiovascular = "BzmzxKxssnM";
+  static const String ecebExaminationSkin = "Y6XSPZdgcyD";
+  static const String ecebExaminationAbdomen = "BYSHk05PoEo";
+  static const String ecebExaminationOverall = "GMDi3xPJZNr";
   static const String ecebStage2PreventDiseaseVitaminK = "XfdHyjVbRWo";
   static const String ecebStage2PreventDiseaseCordCare = "VsKyN9x1hZk";
   static const String ecebStage2PreventDiseaseEyeCare = "y80qB17Dv8b";

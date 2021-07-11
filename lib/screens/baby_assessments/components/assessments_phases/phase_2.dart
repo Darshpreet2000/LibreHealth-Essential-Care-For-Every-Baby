@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
+import 'package:newborn_care/bloc/assessments_bloc/assessments_bloc.dart';
 import 'package:newborn_care/models/stage_2.dart';
-import 'package:newborn_care/screens/baby_assessments/components/toggle_buttons/swtich_yes_no.dart';
+import 'package:newborn_care/screens/baby_assessments/components/toggle_buttons/switch_yes_no.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,7 +11,8 @@ class Phase2 extends StatefulWidget {
   final AssessmentsBloc assessmentsBloc;
   final TextEditingController _wardNameTextController =
       new TextEditingController();
-  Phase2(this.stage2, this.assessmentsBloc) {
+  final int color;
+  Phase2(this.stage2, this.assessmentsBloc, this.color) {
     _wardNameTextController.text = stage2.ecebWardName;
   }
   @override
@@ -19,19 +20,13 @@ class Phase2 extends StatefulWidget {
 }
 
 class _Phase2State extends State<Phase2> {
-  List<bool?> toggleButtonsList = [];
-  final _formKey = GlobalKey<FormState>();
-
+ 
+   GlobalKey<FormState>  _formKey = GlobalKey<FormState>();
   @override
-  void initState() {
-    toggleButtonsList.addAll([
-      widget.stage2.ecebFastBreathing,
-      widget.stage2.ecebChestIndrawing,
-      widget.stage2.ecebFeedingProperly,
-      widget.stage2.ecebConvulsions,
-      widget.stage2.ecebSevereJaundice,
-    ]);
-    super.initState();
+  void dispose() {
+  
+    widget.assessmentsBloc.close();
+    super.dispose();
   }
 
   @override
@@ -59,7 +54,7 @@ class _Phase2State extends State<Phase2> {
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.blue[100],
+                  color: Color(widget.color),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -113,52 +108,64 @@ class _Phase2State extends State<Phase2> {
             ),
             Container(
               decoration: BoxDecoration(
-                  color: Colors.blue[50],
+                  color: Color(widget.color),
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               padding:
                   const EdgeInsets.only(left: 0, top: 16, bottom: 8, right: 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    AppLocalizations.of(context)!.assessmentsPerformed,
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Text(
+                      AppLocalizations.of(context)!.assessmentsPerformed,
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  checkBoxFormWidget(
-                    AppLocalizations.of(context)!.eyeCareAdministered,
-                    widget.stage2.ecebStage2PreventDiseaseEyeCare,
-                    (newValue) {
-                      if (widget.stage2.isCompleted == false)
-                        setState(() {
-                          widget.stage2.ecebStage2PreventDiseaseEyeCare =
-                              newValue!;
-                        });
-                    },
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: checkBoxFormWidget(
+                      AppLocalizations.of(context)!.eyeCareAdministered,
+                      widget.stage2.ecebStage2PreventDiseaseEyeCare,
+                      (newValue) {
+                        if (widget.stage2.isCompleted == false)
+                          setState(() {
+                            widget.stage2.ecebStage2PreventDiseaseEyeCare =
+                                newValue!;
+                          });
+                      },
+                    ),
                   ),
-                  checkBoxFormWidget(
-                    AppLocalizations.of(context)!.cordCareAdministered,
-                    widget.stage2.ecebStage2PreventDiseaseCordCare,
-                    (newValue) {
-                      if (widget.stage2.isCompleted == false)
-                        setState(() {
-                          widget.stage2.ecebStage2PreventDiseaseCordCare =
-                              newValue!;
-                        });
-                    },
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: checkBoxFormWidget(
+                      AppLocalizations.of(context)!.cordCareAdministered,
+                      widget.stage2.ecebStage2PreventDiseaseCordCare,
+                      (newValue) {
+                        if (widget.stage2.isCompleted == false)
+                          setState(() {
+                            widget.stage2.ecebStage2PreventDiseaseCordCare =
+                                newValue!;
+                          });
+                      },
+                    ),
                   ),
-                  checkBoxFormWidget(
-                    AppLocalizations.of(context)!.vitaminKAdministered,
-                    widget.stage2.ecebStage2PreventDiseaseVitaminK,
-                    (newValue) {
-                      if (widget.stage2.isCompleted == false)
-                        setState(() {
-                          widget.stage2.ecebStage2PreventDiseaseVitaminK =
-                              newValue!;
-                        });
-                    },
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: checkBoxFormWidget(
+                      AppLocalizations.of(context)!.vitaminKAdministered,
+                      widget.stage2.ecebStage2PreventDiseaseVitaminK,
+                      (newValue) {
+                        if (widget.stage2.isCompleted == false)
+                          setState(() {
+                            widget.stage2.ecebStage2PreventDiseaseVitaminK =
+                                newValue!;
+                          });
+                      },
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -197,7 +204,7 @@ class _Phase2State extends State<Phase2> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ExaminationsCheckBoxList(widget.stage2),
+                    child: checkBoxExaminations(),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -207,12 +214,11 @@ class _Phase2State extends State<Phase2> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SwtichYesNo(
-                      AppLocalizations.of(context)!.yes,
-                      AppLocalizations.of(context)!.no,
-                      toggleButtonsList,
-                      0,
-                      widget.stage2.isCompleted),
+                  switchYesNo(widget.stage2.ecebFastBreathing, (newValue) {
+                    setState(() {
+                      widget.stage2.ecebFastBreathing = newValue!;
+                    });
+                  }, context, widget.stage2.isCompleted),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -221,12 +227,11 @@ class _Phase2State extends State<Phase2> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SwtichYesNo(
-                      AppLocalizations.of(context)!.yes,
-                      AppLocalizations.of(context)!.no,
-                      toggleButtonsList,
-                      1,
-                      widget.stage2.isCompleted),
+                  switchYesNo(widget.stage2.ecebChestIndrawing, (newValue) {
+                    setState(() {
+                      widget.stage2.ecebChestIndrawing = newValue!;
+                    });
+                  }, context, widget.stage2.isCompleted),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -235,12 +240,11 @@ class _Phase2State extends State<Phase2> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SwtichYesNo(
-                      AppLocalizations.of(context)!.yes,
-                      AppLocalizations.of(context)!.no,
-                      toggleButtonsList,
-                      2,
-                      widget.stage2.isCompleted),
+                  switchYesNo(widget.stage2.ecebFeedingProperly, (newValue) {
+                    setState(() {
+                      widget.stage2.ecebFeedingProperly = newValue!;
+                    });
+                  }, context, widget.stage2.isCompleted),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -249,12 +253,11 @@ class _Phase2State extends State<Phase2> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SwtichYesNo(
-                      AppLocalizations.of(context)!.yes,
-                      AppLocalizations.of(context)!.no,
-                      toggleButtonsList,
-                      3,
-                      widget.stage2.isCompleted),
+                  switchYesNo(widget.stage2.ecebConvulsions, (newValue) {
+                    setState(() {
+                      widget.stage2.ecebConvulsions = newValue!;
+                    });
+                  }, context, widget.stage2.isCompleted),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
@@ -263,12 +266,11 @@ class _Phase2State extends State<Phase2> {
                           TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  SwtichYesNo(
-                      AppLocalizations.of(context)!.yes,
-                      AppLocalizations.of(context)!.no,
-                      toggleButtonsList,
-                      4,
-                      widget.stage2.isCompleted),
+                  switchYesNo(widget.stage2.ecebSevereJaundice, (newValue) {
+                    setState(() {
+                      widget.stage2.ecebSevereJaundice = newValue!;
+                    });
+                  }, context, widget.stage2.isCompleted),
                 ],
               ),
             ),
@@ -281,12 +283,7 @@ class _Phase2State extends State<Phase2> {
                         borderRadius: new BorderRadius.circular(30.0))),
                 onPressed: () {
                   if (widget.stage2.isCompleted == false &&
-                      _formKey.currentState!.validate()) {
-                    widget.stage2.ecebFastBreathing = toggleButtonsList[0];
-                    widget.stage2.ecebChestIndrawing = toggleButtonsList[1];
-                    widget.stage2.ecebFeedingProperly = toggleButtonsList[2];
-                    widget.stage2.ecebConvulsions = toggleButtonsList[3];
-                    widget.stage2.ecebSevereJaundice = toggleButtonsList[4];
+                      _formKey.currentState!.validate()) { 
                     widget.assessmentsBloc
                         .add(AssessmentsEventCompleteStage2());
                   }
@@ -316,6 +313,8 @@ class _Phase2State extends State<Phase2> {
         return Column(
           children: [
             CheckboxListTile(
+              contentPadding: EdgeInsets.all(4),
+
               title: Text(
                 title,
                 style: TextStyle(
@@ -343,142 +342,190 @@ class _Phase2State extends State<Phase2> {
       },
     );
   }
-}
 
-class ExaminationsCheckBoxList extends StatefulWidget {
-  final Stage2 stage2;
-  ExaminationsCheckBoxList(this.stage2);
-  @override
-  _ExaminationsCheckBoxListState createState() =>
-      _ExaminationsCheckBoxListState();
-}
-
-class _ExaminationsCheckBoxListState extends State<ExaminationsCheckBoxList> {
-  List<List<bool>> checkBoxListState = [];
-
-  @override
-  void initState() {
-    var list;
-    for (int i = 0; i < 6; i++) {
-      if (widget.stage2.ecebStage2AssessExam == false)
-        list = [false, false];
-      else
-        list = [true, true];
-
-      checkBoxListState.add(list);
-    }
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var checkBoxListTitles = [
-      [
-        AppLocalizations.of(context)!.head,
-        AppLocalizations.of(context)!.genitals
-      ],
-      [AppLocalizations.of(context)!.eyes, AppLocalizations.of(context)!.anus],
-      [
-        AppLocalizations.of(context)!.earsnosethroat,
-        AppLocalizations.of(context)!.muscuoskeletal
-      ],
-      [
-        AppLocalizations.of(context)!.chest,
-        AppLocalizations.of(context)!.neurological
-      ],
-      [
-        AppLocalizations.of(context)!.cardiovascular,
-        AppLocalizations.of(context)!.skin
-      ],
-      [
-        AppLocalizations.of(context)!.abdomen,
-        AppLocalizations.of(context)!.overall
-      ]
-    ];
-    return FormField<bool?>(
-      initialValue: widget.stage2.ecebStage2AssessExam,
-      builder: (FormFieldState<bool?> state) {
-        return Container(
-          child: Column(
+  Widget checkBoxExaminations() {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.systematicExaminationsPerformed,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+          ),
+          Row(
             children: [
-              Text(
-                AppLocalizations.of(context)!.systematicExaminationsPerformed,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+              Expanded(
+                child: checkBoxFormWidget(
+                  AppLocalizations.of(context)!.head,
+                  widget.stage2.ecebExaminationHead,
+                  (newValue) {
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebExaminationHead = newValue!;
+                      });
+                  },
                 ),
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: checkBoxListTitles.length,
-                itemBuilder: (context, index) {
-                  return Row(
-                    children: [
-                      Expanded(
-                        child: CheckboxListTile(
-                          contentPadding: EdgeInsets.all(4),
-                          title: Text(
-                            checkBoxListTitles[index][0],
-                            style: TextStyle(
-                                color: Colors.blue[700],
-                                fontWeight: FontWeight.bold),
-                          ),
-                          value: checkBoxListState[index][0],
-                          onChanged: (newValue) {
-                            if (widget.stage2.isCompleted == false)
-                              setState(() {
-                                checkBoxListState[index][0] =
-                                    !checkBoxListState[index][0];
-                              });
-                          },
-                          controlAffinity: ListTileControlAffinity
-                              .leading, //  <-- leading Checkbox
-                        ),
-                      ),
-                      Expanded(
-                        child: CheckboxListTile(
-                          contentPadding: EdgeInsets.all(4),
-                          title: Text(
-                            checkBoxListTitles[index][1],
-                            style: TextStyle(
-                                color: Colors.blue[700],
-                                fontWeight: FontWeight.bold),
-                          ),
-                          value: checkBoxListState[index][1],
-                          onChanged: (newValue) {
-                            if (widget.stage2.isCompleted == false)
-                              setState(() {
-                                checkBoxListState[index][1] =
-                                    !checkBoxListState[index][1];
-                              });
-                          },
-                          controlAffinity: ListTileControlAffinity
-                              .leading, //  <-- leading Checkbox
-                        ),
-                      ),
-                    ],
-                  );
-                },
+              Expanded(
+                child: checkBoxFormWidget(
+                  AppLocalizations.of(context)!.genitals,
+                  widget.stage2.ecebExaminationGenitalia,
+                  (newValue) {
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebExaminationGenitalia = newValue!;
+                      });
+                  },
+                ),
               ),
-              state.errorText == null
-                  ? Container()
-                  : Text(state.errorText!, style: TextStyle(color: Colors.red)),
             ],
           ),
-        );
-      },
-      validator: (val) {
-        if (val == false) {
-          for (int i = 0; i < checkBoxListState.length; i++) {
-            for (int j = 0; j < checkBoxListState[i].length; j++) {
-              if (checkBoxListState[i][j] == false)
-                return AppLocalizations.of(context)!.completeAssessments;
-            }
-          }
-          widget.stage2.ecebStage2AssessExam = true;
-        }
-      },
+          Row(
+            children: [
+              Expanded(
+                child: checkBoxFormWidget(
+                  AppLocalizations.of(context)!.eyes,
+                  widget.stage2.ecebExaminationEyes,
+                  (newValue) {
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebExaminationEyes = newValue!;
+                      });
+                  },
+                ),
+              ),
+              Expanded(
+                child: checkBoxFormWidget(
+                  AppLocalizations.of(context)!.anus,
+                  widget.stage2.ecebExaminationAnus,
+                  (newValue) {
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebExaminationAnus = newValue!;
+                      });
+                  },
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: checkBoxFormWidget(
+                  AppLocalizations.of(context)!.earsnosethroat,
+                  widget.stage2.ecebExaminationEarsNoseThroat,
+                  (newValue) {
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebExaminationEarsNoseThroat = newValue!;
+                      });
+                  },
+                ),
+              ),
+              Expanded(
+                child: checkBoxFormWidget(
+                  AppLocalizations.of(context)!.muscuoskeletal,
+                  widget.stage2.ecebExaminationMuscoskeletal,
+                  (newValue) {
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebExaminationMuscoskeletal = newValue!;
+                      });
+                  },
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: checkBoxFormWidget(
+                  AppLocalizations.of(context)!.chest,
+                  widget.stage2.ecebExaminationChest,
+                  (newValue) {
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebExaminationChest = newValue!;
+                      });
+                  },
+                ),
+              ),
+              Expanded(
+                child: checkBoxFormWidget(
+                  AppLocalizations.of(context)!.neurological,
+                  widget.stage2.ecebExaminationNeurology,
+                  (newValue) {
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebExaminationNeurology = newValue!;
+                      });
+                  },
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: checkBoxFormWidget(
+                  AppLocalizations.of(context)!.cardiovascular,
+                  widget.stage2.ecebExaminationCardiovascular,
+                  (newValue) {
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebExaminationCardiovascular = newValue!;
+                      });
+                  },
+                ),
+              ),
+              Expanded(
+                child: checkBoxFormWidget(
+                  AppLocalizations.of(context)!.skin,
+                  widget.stage2.ecebExaminationSkin,
+                  (newValue) {
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebExaminationSkin = newValue!;
+                      });
+                  },
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: checkBoxFormWidget(
+                  AppLocalizations.of(context)!.abdomen,
+                  widget.stage2.ecebExaminationAbdomen,
+                  (newValue) {
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebExaminationAbdomen = newValue!;
+                      });
+                  },
+                ),
+              ),
+              Expanded(
+                child: checkBoxFormWidget(
+                  AppLocalizations.of(context)!.overall,
+                  widget.stage2.ecebExaminationOverall,
+                  (newValue) {
+                    if (widget.stage2.isCompleted == false)
+                      setState(() {
+                        widget.stage2.ecebExaminationOverall = newValue!;
+                      });
+                  },
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }

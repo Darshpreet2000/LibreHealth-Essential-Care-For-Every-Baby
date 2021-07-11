@@ -6,15 +6,13 @@ class ClassificationRepository {
   ClassificationRepository();
 
   String classifyBabyHealth(
-    {
-     required  bool? ecebSevereJaundice,
-     required double? ecebAssessTemperature,
-     required double? ecebWeight,
-     required bool? ecebChestIndrawing,
-     required bool? ecebFeedingProperly,
-     required bool? ecebFastBreathing,
-     required bool? ecebConvulsions
-    }) {
+      {required bool? ecebSevereJaundice,
+      required double? ecebAssessTemperature,
+      required double? ecebWeight,
+      required bool? ecebChestIndrawing,
+      required bool? ecebFeedingProperly,
+      required bool? ecebFastBreathing,
+      required bool? ecebConvulsions}) {
     DHIS2Config.setUpProgramRules();
 
     var interpolation = Interpolation();
@@ -37,9 +35,11 @@ class ClassificationRepository {
       'ecebFastBreathing': ecebFastBreathing,
       'ecebConvulsions': ecebConvulsions,
     });
+    
+    if (evaluateString(programRuleProblem)) return "Problem";
+    
     if (evaluateString(programRuleDanger)) return "Danger";
 
-    if (evaluateString(programRuleProblem)) return "Problem";
 
     return "Normal";
   }

@@ -108,10 +108,19 @@ class MockAssessmentsRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#addNextAssessment, [childModel]),
           returnValue: <Object>[]) as List<Object>);
   @override
+  void changeColorBasedOnClassification(_i8.ChildModel? childModel) =>
+      super.noSuchMethod(
+          Invocation.method(#changeColorBasedOnClassification, [childModel]),
+          returnValueForMissingStub: null);
+  @override
   _i15.Future<dynamic> registerStage1Details(_i13.Stage1? stage1, String? id) =>
       (super.noSuchMethod(
           Invocation.method(#registerStage1Details, [stage1, id]),
           returnValue: Future<dynamic>.value()) as _i15.Future<dynamic>);
+  @override
+  String classifyHealthAfterStage2(_i14.Stage2? stage2) => (super.noSuchMethod(
+      Invocation.method(#classifyHealthAfterStage2, [stage2]),
+      returnValue: '') as String);
   @override
   _i15.Future<dynamic> registerStage2Details(_i14.Stage2? stage2, String? id) =>
       (super.noSuchMethod(

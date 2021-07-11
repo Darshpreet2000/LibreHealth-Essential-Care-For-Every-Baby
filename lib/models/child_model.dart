@@ -35,21 +35,31 @@ class ChildModel {
   String key; //to uniquely store the child
 
   @HiveField(9)
-  String classification; 
+  String classification;
   @HiveField(10)
-  int children; 
-  
+  int children;
+
   @HiveField(11)
-  String modeOfDeliveryName;  
-  ChildModel(this.parent, this.ward, this.gender, this.color, this.darkColor,
-      this.birthTime, this.trackedEntityID, this.key, this.classification,this.children,this.modeOfDeliveryName);
+  String modeOfDeliveryName;
+  ChildModel(
+      this.parent,
+      this.ward,
+      this.gender,
+      this.color,
+      this.darkColor,
+      this.birthTime,
+      this.trackedEntityID,
+      this.key,
+      this.classification,
+      this.children,
+      this.modeOfDeliveryName);
 
   factory ChildModel.fromJson(dynamic json) {
-    String? parent, ward, modeOfDeliveryName,classification = 'None';
+    String? parent, ward, modeOfDeliveryName, classification = 'None';
     DateTime? birthTime;
-    int? color, darkColor, gender,children;
+    int? color, darkColor, gender, children;
     String trackedEntityID = json['trackedEntityInstance'];
-    color = Colors.blue[100]!.value;
+    color = Colors.blue[50]!.value;
     darkColor = Colors.white.value;
     var jsonList = json['attributes'];
     jsonList.forEach((element) {
@@ -95,34 +105,39 @@ class ChildModel {
     });
     Random random = new Random();
     String key = random.nextInt(100000000).toString();
-    return new ChildModel(parent!, ward!, gender!, color!, darkColor!,
-        birthTime!, trackedEntityID, key, classification!,children!,modeOfDeliveryName!);
+    return new ChildModel(
+        parent!,
+        ward!,
+        gender!,
+        color!,
+        darkColor!,
+        birthTime!,
+        trackedEntityID,
+        key,
+        classification!,
+        children!,
+        modeOfDeliveryName!);
   }
-    Map<String, dynamic> toJson() => {
-         "trackedEntityType": DHIS2Config.trackedEntity,
+  Map<String, dynamic> toJson() => {
+        "trackedEntityType": DHIS2Config.trackedEntity,
         "orgUnit": DHIS2Config.orgUnit,
         'attributes': [
           {"attribute": DHIS2Config.ecebMotherName, "value": parent},
-          {
-            "attribute": DHIS2Config.ecebGender,
-            "value": gender 
-          },
-          {
-            "attribute": DHIS2Config.ecebBabiesDelivered,
-            "value": children
-          },
+          {"attribute": DHIS2Config.ecebGender, "value": gender},
+          {"attribute": DHIS2Config.ecebBabiesDelivered, "value": children},
           {
             "attribute": DHIS2Config.ecebBirthDateTime,
-            "value": DateFormat("yyyy-MM-ddThh:mm")
-                .format(birthTime)
+            "value": DateFormat("yyyy-MM-ddThh:mm").format(birthTime)
           },
           {
             "attribute": DHIS2Config.ecebModeOfDelivery,
             "value": modeOfDeliveryName
           },
           {"attribute": DHIS2Config.teiWardname, "value": ward},
-          
-          {"attribute": DHIS2Config.ecebTeiClassification, "value": classification}
+          {
+            "attribute": DHIS2Config.ecebTeiClassification,
+            "value": classification
+          }
         ]
       };
 

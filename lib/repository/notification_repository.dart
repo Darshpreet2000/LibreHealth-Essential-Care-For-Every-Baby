@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
+import 'package:newborn_care/bloc/assessments_bloc/assessments_bloc.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
@@ -35,24 +35,25 @@ class NotificationRepository {
       }
     });
     AwesomeNotifications().actionStream.listen((receivedNotification) {
-      navigatorKey.currentState!.push(MaterialPageRoute(builder: (context) {
-        ChildModel childModel = RepositoryProvider.of<HiveStorageRepository>(
-                context)
-            .getSingleChild(receivedNotification.payload!['key'].toString());
-        return BabyAssessments(
-            childModel,
-            AssessmentsBloc(
-                NotificationRepository(navigatorKey.currentContext!),
-                AssessmentsRepository(
-                  navigatorKey.currentContext!,
-                  lock,
-                  RepositoryProvider.of<HiveStorageRepository>(context),
-                  RepositoryProvider.of<RefreshRepository>(context),
-                  RepositoryProvider.of<NotificationRepository>(context),
-                ),
-                childModel,
-                RepositoryProvider.of<HiveStorageRepository>(context)));
-      }));
+      if (receivedNotification.payload != null)
+        navigatorKey.currentState!.push(MaterialPageRoute(builder: (context) {
+          ChildModel childModel = RepositoryProvider.of<HiveStorageRepository>(
+                  context)
+              .getSingleChild(receivedNotification.payload!['key'].toString());
+          return BabyAssessments(
+              childModel,
+              AssessmentsBloc(
+                  NotificationRepository(navigatorKey.currentContext!),
+                  AssessmentsRepository(
+                    navigatorKey.currentContext!,
+                    lock,
+                    RepositoryProvider.of<HiveStorageRepository>(context),
+                    RepositoryProvider.of<RefreshRepository>(context),
+                    RepositoryProvider.of<NotificationRepository>(context),
+                  ),
+                  childModel,
+                  RepositoryProvider.of<HiveStorageRepository>(context)));
+        }));
     });
   }
 
@@ -61,7 +62,6 @@ class NotificationRepository {
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: Random().nextInt(100000000),
-        payload: {'key': key},
         channelKey: 'eceb',
         title: AppLocalizations.of(context)!.babyOf(motherName),
         body: body,

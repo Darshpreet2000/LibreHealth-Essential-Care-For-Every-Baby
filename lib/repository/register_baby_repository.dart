@@ -67,7 +67,9 @@ class RegisterBabyRepositoryImpl {
           element.birthDateTime,
           key,
           key,
-          'None',_registerBabyModel.children.length,_registerBabyModel.modeOfDeliveryName);
+          'None',
+          _registerBabyModel.children.length,
+          _registerBabyModel.modeOfDeliveryName);
       //push data using api
       await registerBabyDetails(_registerBabyModel, key);
       //create stage 1 assessmens
@@ -76,8 +78,11 @@ class RegisterBabyRepositoryImpl {
       hiveStorageRepository.storeSingleChild(child);
       //add/schedule stage 1 notifications
 
-      await notificationRepository.immediateNotification(key,
-          _registerBabyModel.motherName, AppLocalizations.of(context)!.phase1);
+      await notificationRepository.scheduledStageNotification(
+          key,
+          _registerBabyModel.motherName,
+          AppLocalizations.of(context)!.phase1,
+          DateTime.now().add(Duration(minutes: 1)));
       await notificationRepository.scheduledStageNotificationReminder(
           key,
           _registerBabyModel.motherName,

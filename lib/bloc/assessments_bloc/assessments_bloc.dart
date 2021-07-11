@@ -42,19 +42,20 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
         // check if data is filled correctly
         _assessmentsRepository
             .validatePhase1Assessments(childModel.assessmentsList[0] as Stage1);
-
+        //remove scheduled notifications
         notificationRepository.removeScheduledNotification(childModel.key);
         //push data to dhis2 using api
         _assessmentsRepository.registerStage1Details(
             childModel.assessmentsList[0] as Stage1, childModel.key);
-        //update Tracked Entity Instance
-        _assessmentsRepository.updateTrackedEntityInstance(
-            childModel, childModel.key);
 
         // add next stage assessments
         childModel.assessmentsList =
             _assessmentsRepository.addNextAssessment(childModel);
-
+        //update Tracked Entity Instance
+        _assessmentsRepository.updateTrackedEntityInstance(
+            childModel,
+            childModel.key,
+            (childModel.assessmentsList[0] as Stage1).ecebWardName);
         hiveStorageRepository.updateChild(childModel.key, childModel);
         yield AssessmentsAdded(childModel);
       } catch (e) {
@@ -71,13 +72,21 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
         //push data to dhis2 using api
         _assessmentsRepository.registerStage2Details(
             childModel.assessmentsList[1] as Stage2, childModel.key);
-        //update Tracked Entity Instance
-        _assessmentsRepository.updateTrackedEntityInstance(
-            childModel, childModel.key);
-
+        //classify baby
+        childModel.classification = _assessmentsRepository
+            .classifyHealthAfterStage2(childModel.assessmentsList[1] as Stage2);
+        //change color based on classification
+        _assessmentsRepository.changeColorBasedOnClassification(childModel);
         // add next stage assessments
         childModel.assessmentsList =
             _assessmentsRepository.addNextAssessment(childModel);
+
+        //update Tracked Entity Instance & push to dhis2
+        _assessmentsRepository.updateTrackedEntityInstance(
+            childModel,
+            childModel.key,
+            (childModel.assessmentsList[1] as Stage2).ecebWardName);
+        //update child data in local storage in phone
         hiveStorageRepository.updateChild(childModel.key, childModel);
         yield AssessmentsAdded(childModel);
       } catch (e) {

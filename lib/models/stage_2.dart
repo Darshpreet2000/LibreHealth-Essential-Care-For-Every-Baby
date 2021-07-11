@@ -19,18 +19,40 @@ class Stage2 {
   @HiveField(5)
   double ecebAssessTemperature = 94;
   @HiveField(6)
-  bool? ecebStage2AssessExam = false;
+  bool ecebExaminationHead = false;
   @HiveField(7)
-  bool? ecebFastBreathing;
+  bool ecebExaminationGenitalia = false;
   @HiveField(8)
-  bool? ecebChestIndrawing;
+  bool ecebExaminationEyes = false;
   @HiveField(9)
-  bool? ecebFeedingProperly;
+  bool ecebExaminationAnus = false;
   @HiveField(10)
-  bool? ecebConvulsions;
+  bool ecebExaminationEarsNoseThroat = false;
   @HiveField(11)
-  bool? ecebSevereJaundice;
+  bool ecebExaminationMuscoskeletal = false;
   @HiveField(12)
+  bool ecebExaminationChest = false;
+  @HiveField(13)
+  bool ecebExaminationNeurology = false;
+  @HiveField(14)
+  bool ecebExaminationCardiovascular = false;
+  @HiveField(15)
+  bool ecebExaminationSkin = false;
+  @HiveField(16)
+  bool ecebExaminationAbdomen = false;
+  @HiveField(17)
+  bool ecebExaminationOverall = false;
+  @HiveField(18)
+  bool? ecebFastBreathing;
+  @HiveField(19)
+  bool? ecebChestIndrawing;
+  @HiveField(20)
+  bool? ecebFeedingProperly;
+  @HiveField(21)
+  bool? ecebConvulsions;
+  @HiveField(22)
+  bool? ecebSevereJaundice;
+  @HiveField(23)
   bool isCompleted = false;
   Stage2();
 
@@ -62,16 +84,52 @@ class Stage2 {
             "value": ecebAssessTemperature
           },
           {
-            "dataElement": DHIS2Config.ecebStage2AssessExam,
-            "value": ecebStage2AssessExam
+            "dataElement": DHIS2Config.ecebExaminationHead,
+            "value": ecebExaminationHead
           },
           {
-            "dataElement": DHIS2Config.ecebFastBreathing,
-            "value": ecebFastBreathing
+            "dataElement": DHIS2Config.ecebExaminationGenitalia,
+            "value": ecebExaminationGenitalia
           },
           {
-            "dataElement": DHIS2Config.ecebChestIndrawing,
-            "value": ecebChestIndrawing
+            "dataElement": DHIS2Config.ecebExaminationEyes,
+            "value": ecebExaminationEyes
+          },
+          {
+            "dataElement": DHIS2Config.ecebExaminationAnus,
+            "value": ecebExaminationAnus
+          },
+          {
+            "dataElement": DHIS2Config.ecebExaminationEarsNoseThroat,
+            "value": ecebExaminationEarsNoseThroat
+          },
+          {
+            "dataElement": DHIS2Config.ecebExaminationMuscoskeletal,
+            "value": ecebExaminationMuscoskeletal
+          },
+          {
+            "dataElement": DHIS2Config.ecebExaminationChest,
+            "value": ecebExaminationChest
+          },
+          {
+            "dataElement": DHIS2Config.ecebExaminationNeurology,
+            "value": ecebExaminationNeurology
+          },
+          {
+            "dataElement": DHIS2Config.ecebExaminationCardiovascular,
+            "value": ecebExaminationCardiovascular
+          },
+          {
+            "dataElement": DHIS2Config.ecebExaminationSkin,
+            "value": ecebExaminationSkin
+          },
+          {
+            "dataElement": DHIS2Config.ecebExaminationAbdomen,
+            "value": ecebExaminationAbdomen
+          },
+          {
+            "dataElement": DHIS2Config.ecebExaminationOverall,
+            "value": ecebExaminationOverall
           },
           {
             "dataElement": DHIS2Config.ecebIsFeedingProperly,
@@ -111,9 +169,45 @@ class Stage2 {
         case DHIS2Config.ecebAssessTemperature:
           ecebAssessTemperature = double.parse(element['value']);
           break;
-        case DHIS2Config.ecebStage2AssessExam:
-          ecebStage2AssessExam = element['value'] == 'true';
+
+        case DHIS2Config.ecebExaminationHead:
+          ecebExaminationHead = element['value'] == 'true';
           break;
+        case DHIS2Config.ecebExaminationGenitalia:
+          ecebExaminationGenitalia = element['value'] == 'true';
+          break;
+        case DHIS2Config.ecebExaminationEyes:
+          ecebExaminationEyes = element['value'] == 'true';
+          break;
+        case DHIS2Config.ecebExaminationAnus:
+          ecebExaminationAnus = element['value'] == 'true';
+          break;
+        case DHIS2Config.ecebExaminationEarsNoseThroat:
+          ecebExaminationEarsNoseThroat = element['value'] == 'true';
+          break;
+        case DHIS2Config.ecebExaminationMuscoskeletal:
+          ecebExaminationMuscoskeletal = element['value'] == 'true';
+          break;
+        case DHIS2Config.ecebExaminationChest:
+          ecebExaminationChest = element['value'] == 'true';
+          break;
+        case DHIS2Config.ecebExaminationNeurology:
+          ecebExaminationNeurology = element['value'] == 'true';
+          break;
+        case DHIS2Config.ecebExaminationCardiovascular:
+          ecebExaminationCardiovascular = element['value'] == 'true';
+          break;
+        case DHIS2Config.ecebExaminationSkin:
+          ecebExaminationSkin = element['value'] == 'true';
+          break;
+        case DHIS2Config.ecebExaminationAbdomen:
+          ecebExaminationAbdomen = element['value'] == 'true';
+          break;
+
+        case DHIS2Config.ecebExaminationOverall:
+          ecebExaminationOverall = element['value'] == 'true';
+          break;
+
         case DHIS2Config.ecebFastBreathing:
           ecebFastBreathing = element['value'] == 'true';
           break;

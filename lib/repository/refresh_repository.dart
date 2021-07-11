@@ -20,14 +20,15 @@ class RefreshRepository {
       while (networkRequests.isNotEmpty) {
         NetworkRequest request = networkRequests.first;
 
-        if (request.requestServiceType == RequestServiceType.addEvent||request.requestServiceType == RequestServiceType.updateRequest) {
-           addTrackedEntityIDInRequest(request);
+        if (request.requestServiceType == RequestServiceType.addEvent ||
+            request.requestServiceType == RequestServiceType.updateRequest) {
+          addTrackedEntityIDInRequest(request);
         }
         var response;
-        if (request.requestServiceType == RequestServiceType.updateRequest) 
-          response =
-              await RefreshClient(http.Client(), context).doPutNetworkRequest(request);
-         else
+        if (request.requestServiceType == RequestServiceType.updateRequest)
+          response = await RefreshClient(http.Client(), context)
+              .doPutNetworkRequest(request);
+        else
           response = await RefreshClient(http.Client(), context)
               .doPostNetworkRequest(request);
 
@@ -45,14 +46,15 @@ class RefreshRepository {
   void addTrackedEntityIDInRequest(NetworkRequest request) {
     String trackedEntityId =
         HiveStorageRepository().getSingleChild(request.key).trackedEntityID;
-        if(request.requestServiceType==RequestServiceType.addEvent)
-    request.url = DHIS2Config.serverURL +
-        APIConfig().getaddEventsAPI(
-            DHIS2Config.orgUnit, DHIS2Config.programECEBID, trackedEntityId);
-        else if(request.requestServiceType==RequestServiceType.updateRequest)
-    request.url = DHIS2Config.serverURL +
-        APIConfig().trackedEntityInstance+"/$trackedEntityId";
-  
+    if (request.requestServiceType == RequestServiceType.addEvent)
+      request.url = DHIS2Config.serverURL +
+          APIConfig().getaddEventsAPI(
+              DHIS2Config.orgUnit, DHIS2Config.programECEBID, trackedEntityId);
+    else if (request.requestServiceType == RequestServiceType.updateRequest)
+      request.url = DHIS2Config.serverURL +
+          APIConfig().trackedEntityInstance +
+          "/$trackedEntityId";
+
     request.data =
         request.data.replaceAll(DHIS2Config.trackedEntity, trackedEntityId);
   }

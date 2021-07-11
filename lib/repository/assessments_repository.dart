@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/profile.dart';
@@ -59,7 +60,17 @@ class AssessmentsRepository {
     if (stage2.ecebStage2PreventDiseaseVitaminK == false ||
         stage2.ecebStage2PreventDiseaseCordCare == false ||
         stage2.ecebStage2PreventDiseaseEyeCare == false ||
-        stage2.ecebStage2AssessExam == false)
+        stage2.ecebExaminationHead == false ||
+        stage2.ecebExaminationGenitalia == false ||
+        stage2.ecebExaminationEyes == false ||
+        stage2.ecebExaminationAnus == false ||
+        stage2.ecebExaminationEarsNoseThroat == false ||
+        stage2.ecebExaminationMuscoskeletal == false ||
+        stage2.ecebExaminationChest == false ||
+        stage2.ecebExaminationCardiovascular == false ||
+        stage2.ecebExaminationSkin == false ||
+        stage2.ecebExaminationAbdomen == false ||
+        stage2.ecebExaminationOverall == false)
       throw Exception(AppLocalizations.of(context)!.completeAssessments);
     if (stage2.ecebFastBreathing == null ||
         stage2.ecebChestIndrawing == null ||
@@ -81,11 +92,24 @@ class AssessmentsRepository {
     } else if (assessments.length == 1) {
       assessments.add(Stage2());
       addStage2Notifications(childModel);
-    } else if (assessments.length == 2) {
-        childModel.classification=classifyHealthAfterStage2(assessments[1] as Stage2);
-
-    }
+    } else if (assessments.length == 2) {}
     return assessments;
+  }
+
+  void changeColorBasedOnClassification(ChildModel childModel) {
+    if (childModel.classification == "Normal") {
+      childModel.color = Colors.green[100]!.value;
+      childModel.darkColor = Colors.green[300]!.value;
+    } else if (childModel.classification == "Problem") {
+      childModel.color = Colors.yellow[100]!.value;
+      childModel.darkColor = Colors.yellow[300]!.value;
+    } else if (childModel.classification == "Danger") {
+      childModel.color = Colors.red[100]!.value;
+      childModel.darkColor = Colors.red[300]!.value;
+    } else {
+      childModel.color = Colors.blue[50]!.value;
+      childModel.darkColor = Colors.white.value;
+    }
   }
 
   Future registerStage1Details(Stage1 stage1, String id) async {
@@ -117,8 +141,10 @@ class AssessmentsRepository {
     return;
   }
 
-  Future updateTrackedEntityInstance(ChildModel childModel, String id) async {
+  Future updateTrackedEntityInstance(
+      ChildModel childModel, String id, String wardName) async {
     Profile profile = hiveStorageRepository.getProfile();
+    childModel.ward = wardName;
 
     String json = jsonEncode(childModel);
     assessmentsClient.updateTrackedEntity(

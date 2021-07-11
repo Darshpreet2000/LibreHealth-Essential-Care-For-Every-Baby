@@ -31,7 +31,7 @@ class RefreshClient {
     }
   }
 
- Future doPutNetworkRequest(dynamic request) async {
+  Future doPutNetworkRequest(dynamic request) async {
     try {
       var response;
 

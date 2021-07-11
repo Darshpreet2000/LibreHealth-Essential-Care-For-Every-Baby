@@ -48,8 +48,8 @@ class AssessmentsClient {
       'authorization': basicAuth,
       'Content-Type': 'application/json; charset=UTF-8',
     };
-    NetworkRequest request =
-        NetworkRequest(url, data, headers, id, RequestServiceType.addEvent);
+    NetworkRequest request = NetworkRequest(
+        url, data, headers, id, RequestServiceType.updateRequest);
     hiveStorageRepository.storeNetworkRequest(request);
   }
 
