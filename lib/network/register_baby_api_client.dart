@@ -14,8 +14,8 @@ class RegisterBabyAPIClient {
       'authorization': basicAuth,
       'Content-Type': 'application/json; charset=UTF-8',
     };
-     NetworkRequest request =
-          NetworkRequest(RequestType.POST, url, data, headers);
-      HiveStorageRepository().storeNetworkRequest(request);
+    NetworkRequest request =
+        NetworkRequest(RequestType.POST, url, data, headers);
+    HiveStorageRepository().storeNetworkRequest(request);
   }
 }

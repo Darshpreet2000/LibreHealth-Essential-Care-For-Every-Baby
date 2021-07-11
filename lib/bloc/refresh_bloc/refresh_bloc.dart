@@ -16,7 +16,7 @@ class RefreshBloc extends Bloc<RefreshEvent, RefreshState> {
       yield RefreshLoading();
       try {
         await refreshRepository.startRefreshing();
-        
+
         yield RefreshLoaded();
       } catch (e) {
         yield RefreshError(e.toString());

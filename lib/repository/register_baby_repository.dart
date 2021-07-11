@@ -19,7 +19,9 @@ class RegisterBabyRepositoryImpl {
       throw Exception(
           AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
               .selectBabiesDelivered);
-    if (_registerBabyModel.modeOfDelivery == null||(_registerBabyModel.modeOfDelivery==false&&_registerBabyModel.modeOfDeliveryName.isEmpty))
+    if (_registerBabyModel.modeOfDelivery == null ||
+        (_registerBabyModel.modeOfDelivery == false &&
+            _registerBabyModel.modeOfDeliveryName.isEmpty))
       throw Exception(
           AppLocalizations.of(scaffoldMessengerGlobalKey.currentContext!)!
               .selectModeOfDelivery);
@@ -40,7 +42,8 @@ class RegisterBabyRepositoryImpl {
       index++;
     });
   }
-   Future registerBabyDetails(RegisterBabyModel _registerBabyModel) async {
+
+  Future registerBabyDetails(RegisterBabyModel _registerBabyModel) async {
     RegisterBabyAPIClient registerBabyAPIClient = new RegisterBabyAPIClient();
     String json = convertToJson(_registerBabyModel);
     registerBabyAPIClient.registerBabyDetailsAsTrackedEntity(json);
