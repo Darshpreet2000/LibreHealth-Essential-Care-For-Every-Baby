@@ -7,6 +7,7 @@ import 'package:newborn_care/models/stage_1.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:newborn_care/models/stage_2.dart';
 import 'package:newborn_care/network/assessments_client.dart';
+import 'package:newborn_care/repository/classification_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/notification_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
@@ -62,7 +63,7 @@ class AssessmentsRepository {
       throw Exception(AppLocalizations.of(context)!.completeAssessments);
     if (stage2.ecebFastBreathing == null ||
         stage2.ecebChestIndrawing == null ||
-        stage2.ecebIsFeedingProperly == null ||
+        stage2.ecebFeedingProperly == null ||
         stage2.ecebConvulsions == null ||
         stage2.ecebSevereJaundice == null)
       throw Exception(AppLocalizations.of(context)!.completeAssessments);
@@ -80,6 +81,9 @@ class AssessmentsRepository {
     } else if (assessments.length == 1) {
       assessments.add(Stage2());
       addStage2Notifications(childModel);
+    } else if (assessments.length == 2) {
+        childModel.classification=classifyHealthAfterStage2(assessments[1] as Stage2);
+
     }
     return assessments;
   }
@@ -93,6 +97,17 @@ class AssessmentsRepository {
     return;
   }
 
+  String classifyHealthAfterStage2(Stage2 stage2) {
+    return ClassificationRepository().classifyBabyHealth(
+        ecebSevereJaundice: stage2.ecebSevereJaundice,
+        ecebAssessTemperature: stage2.ecebAssessTemperature,
+        ecebWeight: stage2.ecebWeight,
+        ecebChestIndrawing: stage2.ecebChestIndrawing,
+        ecebFeedingProperly: stage2.ecebFeedingProperly,
+        ecebFastBreathing: stage2.ecebFastBreathing,
+        ecebConvulsions: stage2.ecebConvulsions);
+  }
+
   Future registerStage2Details(Stage2 stage2, String id) async {
     Profile profile = hiveStorageRepository.getProfile();
 
@@ -100,6 +115,14 @@ class AssessmentsRepository {
     assessmentsClient.registerEvent(
         json, id, profile.username, profile.password);
     return;
+  }
+
+  Future updateTrackedEntityInstance(ChildModel childModel, String id) async {
+    Profile profile = hiveStorageRepository.getProfile();
+
+    String json = jsonEncode(childModel);
+    assessmentsClient.updateTrackedEntity(
+        json, id, profile.username, profile.password);
   }
 
   Future fetchAssessments(String key) async {
@@ -111,11 +134,11 @@ class AssessmentsRepository {
       for (var item in response['events']) {
         if (item['programStage'] == DHIS2Config.stage1ID &&
             item['status'] == 'COMPLETED') {
-          result.add(Stage1.fromJson(item));
+          result.insert(0, Stage1.fromJson(item));
         }
         if (item['programStage'] == DHIS2Config.stage2ID &&
             item['status'] == 'COMPLETED') {
-          result.add(Stage2.fromJson(item));
+          result.insert(0, Stage2.fromJson(item));
         }
       }
       return result;

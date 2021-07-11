@@ -47,6 +47,10 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
         //push data to dhis2 using api
         _assessmentsRepository.registerStage1Details(
             childModel.assessmentsList[0] as Stage1, childModel.key);
+        //update Tracked Entity Instance
+        _assessmentsRepository.updateTrackedEntityInstance(
+            childModel, childModel.key);
+
         // add next stage assessments
         childModel.assessmentsList =
             _assessmentsRepository.addNextAssessment(childModel);
@@ -67,6 +71,10 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
         //push data to dhis2 using api
         _assessmentsRepository.registerStage2Details(
             childModel.assessmentsList[1] as Stage2, childModel.key);
+        //update Tracked Entity Instance
+        _assessmentsRepository.updateTrackedEntityInstance(
+            childModel, childModel.key);
+
         // add next stage assessments
         childModel.assessmentsList =
             _assessmentsRepository.addNextAssessment(childModel);

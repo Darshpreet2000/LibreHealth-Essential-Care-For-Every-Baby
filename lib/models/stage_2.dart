@@ -25,7 +25,7 @@ class Stage2 {
   @HiveField(8)
   bool? ecebChestIndrawing;
   @HiveField(9)
-  bool? ecebIsFeedingProperly;
+  bool? ecebFeedingProperly;
   @HiveField(10)
   bool? ecebConvulsions;
   @HiveField(11)
@@ -75,7 +75,7 @@ class Stage2 {
           },
           {
             "dataElement": DHIS2Config.ecebIsFeedingProperly,
-            "value": ecebIsFeedingProperly
+            "value": ecebFeedingProperly
           },
           {
             "dataElement": DHIS2Config.ecebConvulsions,
@@ -121,7 +121,7 @@ class Stage2 {
           ecebChestIndrawing = element['value'] == 'true';
           break;
         case DHIS2Config.ecebIsFeedingProperly:
-          ecebIsFeedingProperly = element['value'] == 'true';
+          ecebFeedingProperly = element['value'] == 'true';
           break;
         case DHIS2Config.ecebChestIndrawing:
           ecebChestIndrawing = element['value'] == 'true';

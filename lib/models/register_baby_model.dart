@@ -35,7 +35,9 @@ class RegisterBabyModel {
             "attribute": DHIS2Config.ecebModeOfDelivery,
             "value": modeOfDeliveryName
           },
-          {"attribute": DHIS2Config.teiWardname, "value": wardName}
+          {"attribute": DHIS2Config.teiWardname, "value": wardName},
+          
+          {"attribute": DHIS2Config.ecebTeiClassification, "value": "None"}
         ],
         "enrollments": [
           {

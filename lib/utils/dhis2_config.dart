@@ -11,7 +11,7 @@ class DHIS2Config {
   static const String ecebBirthDateTime = "ZEi7UfVy21n";
   static const String ecebModeOfDelivery = "JH16XsPOvJr";
   static const String teiWardname = "HKmbmXfiDJB";
-  static const String classification = "ivo84s6Uv29";
+  static const String ecebTeiClassification = "ivo84s6Uv29";
 
   //Stage 0 Registering Babies
   static const String stage0ID = "e63FeH2EwPL";
@@ -24,13 +24,18 @@ class DHIS2Config {
   static const String ecebtraumasDuringBirthNotes = "kX6x2gghjPN";
 
   // program Rules
-  static const String programRuleNormal =
-      "#{ECEB_Weight} >2000  && !#{ECEB_Severe_Jaundice} && #{ECEB_Assess_Temperature}> 35.5 && #{ECEB_Assess_Temperature} < 37.5  && !#{ECEB_Chest_Indrawing}  && !#{ECEB_Not_Feeding} && !#{ECEB_Fast_Breathing}";
-  static const String programRuleProblem =
-      "#{ECEB_Weight} < 2000    &&  (#{ECEB_Assess_Temperature}> 35.5 && #{ECEB_Assess_Temperature} < 37.5)  && !#{ECEB_Fast_Breathing}  && !#{ECEB_Severe_Jaundice}  && !#{ECEB_Chest_Indrawing}  && !#{ECEB_Not_Feeding}";
-  static const String programRuleDanger =
-      "#{ECEB_Severe_Jaundice} || #{ECEB_Assess_Temperature}<= 35.5 || #{ECEB_Assess_Temperature} >= 37.5  || #{ECEB_Weight} < 1500 || #{ECEB_Chest_Indrawing} ||#{ECEB_Not_Feeding} || #{ECEB_Fast_Breathing} || #{ECEB_Convulsions}";
+  static  String programRuleNormal =
+      "#{ecebWeight} >2000  && !#{ecebSevereJaundice} && #{ecebAssessTemperature}> 95.5 && #{ecebAssessTemperature} < 99.5  && !#{ecebChestIndrawing}  && !#{ecebNotFeeding} && !#{ecebFastBreathing}";
+  static String programRuleProblem =
+      "#{ecebWeight} < 2000  &&  (#{ecebAssessTemperature}> 95.5 && #{ecebAssessTemperature} < 99.5)  && !#{ecebFastBreathing}  && !#{ecebSevereJaundice}  && !#{ecebChestIndrawing}  && !#{ecebNotFeeding}";
+  static String programRuleDanger = "#{ecebSevereJaundice} ||#{ecebAssessTemperature}<= 95.9 || #{ecebAssessTemperature} >= 99.5  || #{ecebWeight} < 1500 || #{ecebChestIndrawing} || !#{ecebFeedingProperly} || #{ecebFastBreathing} || #{ecebConvulsions}";
+   
 
+  static setUpProgramRules(){
+     programRuleNormal.replaceAll('#', '');
+     programRuleProblem.replaceAll('#', '');
+     programRuleDanger.replaceAll('#', '');
+  }   
   //Stage - 1 Assessments
   static const String stage1ID = "URydNJS8i3T";
   static const String eceb_Stage_1_Initiate_Breastfeeding = "Ya3AmFV6Yu9";

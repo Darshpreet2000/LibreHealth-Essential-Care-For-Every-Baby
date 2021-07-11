@@ -118,6 +118,12 @@ class MockAssessmentsRepository extends _i1.Mock
           Invocation.method(#registerStage2Details, [stage2, id]),
           returnValue: Future<dynamic>.value()) as _i15.Future<dynamic>);
   @override
+  _i15.Future<dynamic> updateTrackedEntityInstance(
+          _i8.ChildModel? childModel, String? id) =>
+      (super.noSuchMethod(
+          Invocation.method(#updateTrackedEntityInstance, [childModel, id]),
+          returnValue: Future<dynamic>.value()) as _i15.Future<dynamic>);
+  @override
   _i15.Future<dynamic> fetchAssessments(String? key) =>
       (super.noSuchMethod(Invocation.method(#fetchAssessments, [key]),
           returnValue: Future<dynamic>.value()) as _i15.Future<dynamic>);

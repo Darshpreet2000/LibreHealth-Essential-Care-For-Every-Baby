@@ -26,7 +26,7 @@ class Stage2Adapter extends TypeAdapter<Stage2> {
       ..ecebStage2AssessExam = fields[6] as bool?
       ..ecebFastBreathing = fields[7] as bool?
       ..ecebChestIndrawing = fields[8] as bool?
-      ..ecebIsFeedingProperly = fields[9] as bool?
+      ..ecebFeedingProperly = fields[9] as bool?
       ..ecebConvulsions = fields[10] as bool?
       ..ecebSevereJaundice = fields[11] as bool?
       ..isCompleted = fields[12] as bool;
@@ -55,7 +55,7 @@ class Stage2Adapter extends TypeAdapter<Stage2> {
       ..writeByte(8)
       ..write(obj.ecebChestIndrawing)
       ..writeByte(9)
-      ..write(obj.ecebIsFeedingProperly)
+      ..write(obj.ecebFeedingProperly)
       ..writeByte(10)
       ..write(obj.ecebConvulsions)
       ..writeByte(11)

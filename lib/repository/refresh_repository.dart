@@ -19,11 +19,17 @@ class RefreshRepository {
       //get map of list of child
       while (networkRequests.isNotEmpty) {
         NetworkRequest request = networkRequests.first;
-        if (request.requestServiceType == RequestServiceType.addEvent) {
-          addTrackedEntityIDInRequest(request);
+
+        if (request.requestServiceType == RequestServiceType.addEvent||request.requestServiceType == RequestServiceType.updateRequest) {
+           addTrackedEntityIDInRequest(request);
         }
-        var response = await RefreshClient(http.Client(), context)
-            .doNetworkRequest(request);
+        var response;
+        if (request.requestServiceType == RequestServiceType.updateRequest) 
+          response =
+              await RefreshClient(http.Client(), context).doPutNetworkRequest(request);
+         else
+          response = await RefreshClient(http.Client(), context)
+              .doPostNetworkRequest(request);
 
         if (request.requestServiceType == RequestServiceType.registerBaby) {
           updateChildTrackedEntityID(response, request.key);
@@ -39,9 +45,14 @@ class RefreshRepository {
   void addTrackedEntityIDInRequest(NetworkRequest request) {
     String trackedEntityId =
         HiveStorageRepository().getSingleChild(request.key).trackedEntityID;
+        if(request.requestServiceType==RequestServiceType.addEvent)
     request.url = DHIS2Config.serverURL +
         APIConfig().getaddEventsAPI(
             DHIS2Config.orgUnit, DHIS2Config.programECEBID, trackedEntityId);
+        else if(request.requestServiceType==RequestServiceType.updateRequest)
+    request.url = DHIS2Config.serverURL +
+        APIConfig().trackedEntityInstance+"/$trackedEntityId";
+  
     request.data =
         request.data.replaceAll(DHIS2Config.trackedEntity, trackedEntityId);
   }
@@ -52,7 +63,6 @@ class RefreshRepository {
     var importSummary = (response["importSummaries"]);
     var importArray = (importSummary[0]);
     String responseKey = (importArray["reference"]);
-
     //update trackedEntity id
     ChildModel child = HiveStorageRepository().getSingleChild(key);
     child.trackedEntityID = responseKey;

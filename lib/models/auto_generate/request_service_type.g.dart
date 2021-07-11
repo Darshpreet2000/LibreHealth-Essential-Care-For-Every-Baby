@@ -17,6 +17,8 @@ class RequestServiceTypeAdapter extends TypeAdapter<RequestServiceType> {
         return RequestServiceType.registerBaby;
       case 1:
         return RequestServiceType.addEvent;
+      case 2:
+        return RequestServiceType.updateRequest;
       default:
         return RequestServiceType.registerBaby;
     }
@@ -30,6 +32,9 @@ class RequestServiceTypeAdapter extends TypeAdapter<RequestServiceType> {
         break;
       case RequestServiceType.addEvent:
         writer.writeByte(1);
+        break;
+      case RequestServiceType.updateRequest:
+        writer.writeByte(2);
         break;
     }
   }

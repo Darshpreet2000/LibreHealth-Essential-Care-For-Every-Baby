@@ -67,7 +67,7 @@ class RegisterBabyRepositoryImpl {
           element.birthDateTime,
           key,
           key,
-          'None');
+          'None',_registerBabyModel.children.length,_registerBabyModel.modeOfDeliveryName);
       //push data using api
       await registerBabyDetails(_registerBabyModel, key);
       //create stage 1 assessmens

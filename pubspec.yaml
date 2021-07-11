@@ -8,6 +8,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  interpolation: ^2.0.0
+  expression_language: ^1.0.1  
   awesome_notifications: ^0.0.6+9
   flutter_localizations:
     sdk: flutter  

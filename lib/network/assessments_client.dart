@@ -37,6 +37,22 @@ class AssessmentsClient {
     hiveStorageRepository.storeNetworkRequest(request);
   }
 
+  Future updateTrackedEntity(
+      String data, String id, String username, String password) async {
+    String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+    String url = DHIS2Config.serverURL +
+        APIConfig().trackedEntityInstance +
+        "/${DHIS2Config.trackedEntity}";
+    Map<String, String> headers = <String, String>{
+      'authorization': basicAuth,
+      'Content-Type': 'application/json; charset=UTF-8',
+    };
+    NetworkRequest request =
+        NetworkRequest(url, data, headers, id, RequestServiceType.addEvent);
+    hiveStorageRepository.storeNetworkRequest(request);
+  }
+
   Future getAssessmentsOfChild(
       String key, String username, String password) async {
     try {

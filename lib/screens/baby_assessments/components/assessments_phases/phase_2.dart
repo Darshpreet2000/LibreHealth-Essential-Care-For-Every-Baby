@@ -27,7 +27,7 @@ class _Phase2State extends State<Phase2> {
     toggleButtonsList.addAll([
       widget.stage2.ecebFastBreathing,
       widget.stage2.ecebChestIndrawing,
-      widget.stage2.ecebIsFeedingProperly,
+      widget.stage2.ecebFeedingProperly,
       widget.stage2.ecebConvulsions,
       widget.stage2.ecebSevereJaundice,
     ]);
@@ -284,7 +284,7 @@ class _Phase2State extends State<Phase2> {
                       _formKey.currentState!.validate()) {
                     widget.stage2.ecebFastBreathing = toggleButtonsList[0];
                     widget.stage2.ecebChestIndrawing = toggleButtonsList[1];
-                    widget.stage2.ecebIsFeedingProperly = toggleButtonsList[2];
+                    widget.stage2.ecebFeedingProperly = toggleButtonsList[2];
                     widget.stage2.ecebConvulsions = toggleButtonsList[3];
                     widget.stage2.ecebSevereJaundice = toggleButtonsList[4];
                     widget.assessmentsBloc
