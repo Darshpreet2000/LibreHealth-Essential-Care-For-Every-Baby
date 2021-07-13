@@ -39,6 +39,8 @@ class _ModeOfDeliveryButtonState extends State<ModeOfDeliveryButton> {
                   onPressed: () {
                     setState(() {
                       widget._registerBabyModel.modeOfDelivery = true;
+                      widget._registerBabyModel.modeOfDeliveryName =
+                          AppLocalizations.of(context)!.normal;
                     });
                   },
                   child: Text(

@@ -85,7 +85,7 @@ class _BodyState extends State<Body> {
                             state.childModel.classification == 'Normal'
                                 ? Phase3Normal()
                                 : Container(),
-                            state.childModel.classification == 'Dnager'
+                            state.childModel.classification == 'Danger'
                                 ? Phase3Danger()
                                 : Container(),
                           ],

@@ -20,7 +20,7 @@ class AssessmentsAdded extends AssessmentsState {
   AssessmentsAdded(this.childModel);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [childModel];
 }
 
 class AssessmentsError extends AssessmentsState {

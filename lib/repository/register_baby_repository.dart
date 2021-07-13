@@ -30,8 +30,7 @@ class RegisterBabyRepositoryImpl {
     if (_registerBabyModel.babiesDelivered == null)
       throw Exception(AppLocalizations.of(context)!.selectBabiesDelivered);
     if (_registerBabyModel.modeOfDelivery == null ||
-        (_registerBabyModel.modeOfDelivery == false &&
-            _registerBabyModel.modeOfDeliveryName.isEmpty))
+        (_registerBabyModel.modeOfDeliveryName.isEmpty))
       throw Exception(AppLocalizations.of(context)!.selectModeOfDelivery);
     int index = 1;
     _registerBabyModel.children.forEach((element) {
