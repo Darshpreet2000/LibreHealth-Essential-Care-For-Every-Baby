@@ -8,9 +8,3 @@ abstract class UserActivityEvent extends Equatable {
 }
 
 class UserActivityFetch extends UserActivityEvent {}
-
-class UserActivityAddNotification extends UserActivityEvent {
-  final UserActivity notifications;
-
-  UserActivityAddNotification(this.notifications);
-}

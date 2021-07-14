@@ -1,34 +1,50 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
-part 'child_model.g.dart';
+part 'auto_generate/child_model.g.dart';
 
 //flutter packages pub run build_runner build
 @HiveType(typeId: 3)
 class ChildModel {
   @HiveField(0)
-  final String parent;
+  String parent;
   @HiveField(1)
-  final String ward;
+  String ward;
   @HiveField(2)
-  final int gender;
+  int gender;
 
   @HiveField(3)
-  final int? color;
+  int color;
 
   @HiveField(4)
-  final int? darkColor;
+  int darkColor;
 
   @HiveField(5)
-  final DateTime birthTime;
+  DateTime birthTime;
+
+  @HiveField(6)
+  String trackedEntityID;
+
+  @HiveField(7)
+  List<Object> assessmentsList = [];
+
+  @HiveField(8)
+  String key; //to uniquely store the child
+
   ChildModel(this.parent, this.ward, this.gender, this.color, this.darkColor,
-      this.birthTime);
-  factory ChildModel.fromJson(List<dynamic> jsonList) {
+      this.birthTime, this.trackedEntityID, this.key);
+
+  factory ChildModel.fromJson(dynamic json) {
     String? parent, ward;
     DateTime? birthTime;
     int? color, darkColor, gender;
+    String trackedEntityID = json['trackedEntityInstance'];
     color = Colors.blue[100]!.value;
     darkColor = Colors.white.value;
+    var jsonList = json['attributes'];
     jsonList.forEach((element) {
       switch (element['attribute']) {
         case DHIS2Config.ecebMotherName:
@@ -61,7 +77,9 @@ class ChildModel {
           break;
       }
     });
-    return new ChildModel(
-        parent!, ward!, gender!, color!, darkColor!, birthTime!);
+    Random random = new Random();
+    String key = random.nextInt(100000000).toString();
+    return new ChildModel(parent!, ward!, gender!, color!, darkColor!,
+        birthTime!, trackedEntityID, key);
   }
 }

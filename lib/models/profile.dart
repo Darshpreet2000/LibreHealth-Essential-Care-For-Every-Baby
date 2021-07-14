@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-part 'profile.g.dart';
+part 'auto_generate/profile.g.dart';
 
 //flutter packages pub run build_runner build
 

@@ -24,8 +24,8 @@ class _BaseClassState extends State<BaseClass> {
   @override
   void initState() {
     BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
-    BlocProvider.of<UserActivityBloc>(context).add(UserActivityFetch());
     BlocProvider.of<ListOfBabiesBloc>(context).add(ListOfBabiesFetchData());
+    BlocProvider.of<UserActivityBloc>(context).add(UserActivityFetch());
     super.initState();
   }
 
@@ -117,12 +117,13 @@ class _BaseClassState extends State<BaseClass> {
       body: BlocListener<RefreshBloc, RefreshState>(
         listener: (context, state) {
           if (state is RefreshLoading) {
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("Syncing data with DHIS2")));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content:
+                    Text(AppLocalizations.of(context)!.syncingDataWithDHIS2)));
           }
           if (state is RefreshLoaded) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text("Data synced")));
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(AppLocalizations.of(context)!.dataSynced)));
           }
           if (state is RefreshError) {
             ScaffoldMessenger.of(context)

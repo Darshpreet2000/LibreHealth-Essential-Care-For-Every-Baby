@@ -1,13 +1,10 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:newborn_care/bloc/list_of_babies_bloc/list_of_babies_bloc.dart';
-import 'package:newborn_care/bloc/refresh_bloc/refresh_bloc.dart';
-import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
+import 'package:newborn_care/repository/notification_repository.dart';
 import 'package:newborn_care/repository/register_baby_repository.dart';
 
 part 'register_baby_event.dart';
@@ -16,7 +13,9 @@ part 'register_baby_state.dart';
 class RegisterBabyBloc extends Bloc<RegisterBabyEvent, RegisterBabyState> {
   RegisterBabyModel _registerBabyModel;
   RegisterBabyRepositoryImpl _registerBabyRepositoryImpl;
-  RegisterBabyBloc(this._registerBabyModel, this._registerBabyRepositoryImpl)
+  NotificationRepository notificationRepository;
+  RegisterBabyBloc(this._registerBabyModel, this._registerBabyRepositoryImpl,
+      this.notificationRepository)
       : super(RegisterBabyInitialState(_registerBabyModel));
 
   @override
@@ -30,26 +29,14 @@ class RegisterBabyBloc extends Bloc<RegisterBabyEvent, RegisterBabyState> {
       }
       yield RegisterBabyInitialState(_registerBabyModel);
     } else if (event is RegisterBaby) {
-      // check if data is filled correctly
-      //yield RegisterBabyLoadingState();
       try {
+        // check if data is filled correctly
         await _registerBabyRepositoryImpl
             .checkDataEnteredCorrectly(_registerBabyModel);
-        //push data to dhis2 using api
-        await _registerBabyRepositoryImpl
-            .registerBabyDetails(_registerBabyModel);
-        _registerBabyModel.children.forEach((element) {
-          BlocProvider.of<ListOfBabiesBloc>(event.context).add(
-              ListOfBabiesAddChild(new ChildModel(
-                  _registerBabyModel.motherName,
-                  _registerBabyModel.wardName,
-                  element.gender! ? 1 : 0,
-                  Colors.blue[100]!.value,
-                  Colors.white.value,
-                  element.birthDateTime)));
-        });
+        // register each baby details
+        await _registerBabyRepositoryImpl.registerAllBabies(
+            _registerBabyModel, notificationRepository);
 
-        BlocProvider.of<RefreshBloc>(event.context).add(RefreshEventStart());
         _registerBabyModel = new RegisterBabyModel();
         yield RegisterBabyRegisteredState();
         yield RegisterBabyInitialState(_registerBabyModel);

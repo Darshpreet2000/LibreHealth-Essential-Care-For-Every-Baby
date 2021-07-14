@@ -98,23 +98,7 @@ class _ModeOfDeliveryButtonState extends State<ModeOfDeliveryButton> {
 class ModeOfDeliverySlider extends StatefulWidget {
   final RegisterBabyModel _registerBabyModel;
   final List<bool> modeOfDeliveryList = [false, false, false, false];
-  ModeOfDeliverySlider(this._registerBabyModel) {
-    switch (_registerBabyModel.modeOfDeliveryName) {
-      case "C-Section":
-        modeOfDeliveryList[0] = true;
-        break;
-      case "Forceps Delivery":
-        modeOfDeliveryList[1] = true;
-        break;
-      case "Vacuum Extraction":
-        modeOfDeliveryList[2] = true;
-        break;
-      case "Other":
-        modeOfDeliveryList[3] = true;
-        break;
-    }
-  }
-
+  ModeOfDeliverySlider(this._registerBabyModel);
   @override
   _ModeOfDeliverySliderState createState() => _ModeOfDeliverySliderState();
 }
@@ -129,16 +113,20 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
       widget.modeOfDeliveryList[index] = true;
       switch (index) {
         case 0:
-          widget._registerBabyModel.modeOfDeliveryName = "C-Section";
+          widget._registerBabyModel.modeOfDeliveryName =
+              AppLocalizations.of(context)!.cSection;
           break;
         case 1:
-          widget._registerBabyModel.modeOfDeliveryName = "Forceps Delivery";
+          widget._registerBabyModel.modeOfDeliveryName =
+              AppLocalizations.of(context)!.forcepsDelivery;
           break;
         case 2:
-          widget._registerBabyModel.modeOfDeliveryName = "Vacuum Extraction";
+          widget._registerBabyModel.modeOfDeliveryName =
+              AppLocalizations.of(context)!.vacuumExtraction;
           break;
         case 3:
-          widget._registerBabyModel.modeOfDeliveryName = "Other";
+          widget._registerBabyModel.modeOfDeliveryName =
+              AppLocalizations.of(context)!.other;
           break;
       }
     });
@@ -146,6 +134,19 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget._registerBabyModel.modeOfDeliveryName ==
+        AppLocalizations.of(context)!.cSection)
+      widget.modeOfDeliveryList[0] = true;
+    else if (widget._registerBabyModel.modeOfDeliveryName ==
+        AppLocalizations.of(context)!.forcepsDelivery)
+      widget.modeOfDeliveryList[1] = true;
+    else if (widget._registerBabyModel.modeOfDeliveryName ==
+        AppLocalizations.of(context)!.vacuumExtraction)
+      widget.modeOfDeliveryList[2] = true;
+    else if (widget._registerBabyModel.modeOfDeliveryName ==
+        AppLocalizations.of(context)!.other)
+      widget.modeOfDeliveryList[3] = true;
+
     return Container(
       margin: EdgeInsets.all(8),
       child: Stack(
@@ -163,144 +164,160 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InkWell(
-                    onTap: () => selectIndex(0),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 20,
-                          width: 20,
-                          decoration: BoxDecoration(
-                              color: widget.modeOfDeliveryList[0]
-                                  ? Colors.blue
-                                  : Colors.white,
-                              border: Border.all(color: Colors.blueAccent),
-                              shape: BoxShape.circle),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              color: widget.modeOfDeliveryList[0]
-                                  ? Colors.blue
-                                  : null,
-                              border: Border.all(color: Colors.blueAccent),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8))),
-                          child: Text(
-                            AppLocalizations.of(context)!.cSection,
-                            style: TextStyle(
-                              color: widget.modeOfDeliveryList[0]
-                                  ? Colors.white
-                                  : null,
-                            ),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width / 5),
+                    child: InkWell(
+                      onTap: () => selectIndex(0),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 20,
+                            width: 20,
+                            decoration: BoxDecoration(
+                                color: widget.modeOfDeliveryList[0]
+                                    ? Colors.blue
+                                    : Colors.white,
+                                border: Border.all(color: Colors.blueAccent),
+                                shape: BoxShape.circle),
                           ),
-                        )
-                      ],
+                          Container(
+                            padding: EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                                color: widget.modeOfDeliveryList[0]
+                                    ? Colors.blue
+                                    : null,
+                                border: Border.all(color: Colors.blueAccent),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))),
+                            child: Text(
+                              AppLocalizations.of(context)!.cSection,
+                              style: TextStyle(
+                                color: widget.modeOfDeliveryList[0]
+                                    ? Colors.white
+                                    : null,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () => selectIndex(1),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 20,
-                          width: 20,
-                          decoration: BoxDecoration(
-                              color: widget.modeOfDeliveryList[1]
-                                  ? Colors.blue
-                                  : Colors.white,
-                              border: Border.all(color: Colors.blueAccent),
-                              shape: BoxShape.circle),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              color: widget.modeOfDeliveryList[1]
-                                  ? Colors.blue
-                                  : null,
-                              border: Border.all(color: Colors.blueAccent),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8))),
-                          child: Text(
-                            AppLocalizations.of(context)!.forcepsDelivery,
-                            style: TextStyle(
-                              color: widget.modeOfDeliveryList[1]
-                                  ? Colors.white
-                                  : null,
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width / 5),
+                    child: InkWell(
+                      onTap: () => selectIndex(1),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 20,
+                            width: 20,
+                            decoration: BoxDecoration(
+                                color: widget.modeOfDeliveryList[1]
+                                    ? Colors.blue
+                                    : Colors.white,
+                                border: Border.all(color: Colors.blueAccent),
+                                shape: BoxShape.circle),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                                color: widget.modeOfDeliveryList[1]
+                                    ? Colors.blue
+                                    : null,
+                                border: Border.all(color: Colors.blueAccent),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))),
+                            child: Text(
+                              AppLocalizations.of(context)!.forcepsDelivery,
+                              style: TextStyle(
+                                color: widget.modeOfDeliveryList[1]
+                                    ? Colors.white
+                                    : null,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () => selectIndex(2),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 20,
-                          width: 20,
-                          decoration: BoxDecoration(
-                              color: widget.modeOfDeliveryList[2]
-                                  ? Colors.blue
-                                  : Colors.white,
-                              border: Border.all(color: Colors.blueAccent),
-                              shape: BoxShape.circle),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              color: widget.modeOfDeliveryList[2]
-                                  ? Colors.blue
-                                  : null,
-                              border: Border.all(color: Colors.blueAccent),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8))),
-                          child: Text(
-                            AppLocalizations.of(context)!.vacuumExtraction,
-                            style: TextStyle(
-                              color: widget.modeOfDeliveryList[2]
-                                  ? Colors.white
-                                  : null,
-                            ),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width / 5),
+                    child: InkWell(
+                      onTap: () => selectIndex(2),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 20,
+                            width: 20,
+                            decoration: BoxDecoration(
+                                color: widget.modeOfDeliveryList[2]
+                                    ? Colors.blue
+                                    : Colors.white,
+                                border: Border.all(color: Colors.blueAccent),
+                                shape: BoxShape.circle),
                           ),
-                        )
-                      ],
+                          Container(
+                            padding: EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                                color: widget.modeOfDeliveryList[2]
+                                    ? Colors.blue
+                                    : null,
+                                border: Border.all(color: Colors.blueAccent),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))),
+                            child: Text(
+                              AppLocalizations.of(context)!.vacuumExtraction,
+                              style: TextStyle(
+                                color: widget.modeOfDeliveryList[2]
+                                    ? Colors.white
+                                    : null,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () => selectIndex(3),
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 20,
-                          width: 20,
-                          decoration: BoxDecoration(
-                              color: widget.modeOfDeliveryList[3]
-                                  ? Colors.blue
-                                  : Colors.white,
-                              border: Border.all(color: Colors.blueAccent),
-                              shape: BoxShape.circle),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                              color: widget.modeOfDeliveryList[3]
-                                  ? Colors.blue
-                                  : null,
-                              border: Border.all(color: Colors.blueAccent),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8))),
-                          child: Text(
-                            AppLocalizations.of(context)!.other,
-                            style: TextStyle(
-                              color: widget.modeOfDeliveryList[3]
-                                  ? Colors.white
-                                  : null,
-                            ),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width / 5),
+                    child: InkWell(
+                      onTap: () => selectIndex(3),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 20,
+                            width: 20,
+                            decoration: BoxDecoration(
+                                color: widget.modeOfDeliveryList[3]
+                                    ? Colors.blue
+                                    : Colors.white,
+                                border: Border.all(color: Colors.blueAccent),
+                                shape: BoxShape.circle),
                           ),
-                        )
-                      ],
+                          Container(
+                            padding: EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                                color: widget.modeOfDeliveryList[3]
+                                    ? Colors.blue
+                                    : null,
+                                border: Border.all(color: Colors.blueAccent),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8))),
+                            child: Text(
+                              AppLocalizations.of(context)!.other,
+                              style: TextStyle(
+                                color: widget.modeOfDeliveryList[3]
+                                    ? Colors.white
+                                    : null,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],

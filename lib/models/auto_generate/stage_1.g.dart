@@ -1,47 +1,43 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'child_model.dart';
+part of '../stage_1.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ChildModelAdapter extends TypeAdapter<ChildModel> {
+class Stage1Adapter extends TypeAdapter<Stage1> {
   @override
-  final int typeId = 3;
+  final int typeId = 6;
 
   @override
-  ChildModel read(BinaryReader reader) {
+  Stage1 read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return ChildModel(
-      fields[0] as String,
-      fields[1] as String,
-      fields[2] as int,
-      fields[3] as int?,
-      fields[4] as int?,
-      fields[5] as DateTime,
-    );
+    return Stage1()
+      ..ecebStage1InitiateBreastfeeding = fields[0] as bool?
+      ..ecebStage1MonitorBreathing = fields[1] as bool?
+      ..ecebStage1SkinToSkinCare = fields[2] as bool?
+      ..ecebWardName = fields[3] as String
+      ..isCompleted = fields[4] as bool;
   }
 
   @override
-  void write(BinaryWriter writer, ChildModel obj) {
+  void write(BinaryWriter writer, Stage1 obj) {
     writer
-      ..writeByte(6)
-      ..writeByte(0)
-      ..write(obj.parent)
-      ..writeByte(1)
-      ..write(obj.ward)
-      ..writeByte(2)
-      ..write(obj.gender)
-      ..writeByte(3)
-      ..write(obj.color)
-      ..writeByte(4)
-      ..write(obj.darkColor)
       ..writeByte(5)
-      ..write(obj.birthTime);
+      ..writeByte(0)
+      ..write(obj.ecebStage1InitiateBreastfeeding)
+      ..writeByte(1)
+      ..write(obj.ecebStage1MonitorBreathing)
+      ..writeByte(2)
+      ..write(obj.ecebStage1SkinToSkinCare)
+      ..writeByte(3)
+      ..write(obj.ecebWardName)
+      ..writeByte(4)
+      ..write(obj.isCompleted);
   }
 
   @override
@@ -50,7 +46,7 @@ class ChildModelAdapter extends TypeAdapter<ChildModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ChildModelAdapter &&
+      other is Stage1Adapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

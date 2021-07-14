@@ -6,6 +6,8 @@ stages:
 
 
 build:
+  only:
+      - master
 
   stage: build
 

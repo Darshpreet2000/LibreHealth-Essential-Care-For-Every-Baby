@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
+import 'package:newborn_care/main.dart';
 import 'package:newborn_care/models/child_model.dart';
+import 'package:newborn_care/repository/assessments_repository.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
+import 'package:newborn_care/repository/notification_repository.dart';
+import 'package:newborn_care/screens/baby_assessments/baby_assessments.dart';
 
 class ListItem extends StatelessWidget {
   final ChildModel childModel;
@@ -13,15 +20,26 @@ class ListItem extends StatelessWidget {
         : "${AppLocalizations.of(context)!.minutesFromBirth(DateTime.now().difference(childModel.birthTime).inMinutes)}";
     return Container(
       margin: EdgeInsets.only(bottom: 16),
-      color: Color(childModel.darkColor!),
+      color: Color(childModel.darkColor),
       child: Material(
         elevation: 10,
-        color: new Color(childModel.darkColor!),
+        color: new Color(childModel.darkColor),
         child: InkWell(
           onTap: () {
             if (allowNavigate)
-              Navigator.pushNamed(context, '/BabyDetails',
-                  arguments: childModel);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BabyAssessments(
+                          childModel,
+                          AssessmentsBloc(
+                              RepositoryProvider.of<NotificationRepository>(
+                                  context),
+                              RepositoryProvider.of<AssessmentsRepository>(
+                                  context),
+                              childModel,
+                              RepositoryProvider.of<HiveStorageRepository>(
+                                  context)))));
           },
           child: Container(
             margin: EdgeInsets.fromLTRB(16, 8, 16, 16),
@@ -42,7 +60,7 @@ class ListItem extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: Color(childModel.color!),
+                      color: Color(childModel.color),
                       borderRadius: BorderRadius.only(
                           bottomRight: Radius.circular(15),
                           bottomLeft: Radius.circular(15),

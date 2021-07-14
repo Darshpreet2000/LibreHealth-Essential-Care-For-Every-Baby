@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:newborn_care/main.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/network_request.dart';
 import 'package:newborn_care/models/profile.dart';
@@ -6,27 +6,45 @@ import 'package:newborn_care/models/user_activity.dart';
 
 class HiveStorageRepository {
   //List of child
-  void storeListOfChild(List<ChildModel> list) {
-    Box<List> listBox = Hive.box<List>('eceblist');
-    listBox.put('listOfChild', list);
+  void storeSingleChild(ChildModel child) {
+    mapBox.put(child.key, child);
   }
 
-  List<ChildModel> getListOfChild() {
-    Box<List> listBox = Hive.box<List>('eceblist');
-    if (listBox.containsKey('listOfChild')) {
-      return listBox.get('listOfChild')!.cast<ChildModel>();
-    }
-    return [];
+  Future<void> storeListOfChild(List<ChildModel> childList) async {
+    //get old list
+    List<ChildModel> oldList = getListOfAllChild();
+    await mapBox.clear();
+    childList.forEach((element) {
+      //use old key if same child TEI
+      //check if this child already present in old list
+      oldList
+          .where((item) => item.trackedEntityID == element.trackedEntityID)
+          .forEach((item) {
+        element.assessmentsList = item.assessmentsList;
+        element.key = item.key;
+      });
+      mapBox.put(element.key, element);
+    });
+  }
+
+  void updateChild(String key, ChildModel childModel) {
+    mapBox.put(key, childModel);
+  }
+
+  ChildModel getSingleChild(String key) {
+    return mapBox.get(key)!;
+  }
+
+  List<ChildModel> getListOfAllChild() {
+    return mapBox.values.toList();
   }
 
   //User Activity Notification
   void storeNotifications(List<UserActivity> notificationsList) {
-    Box<List> listBox = Hive.box<List>('eceblist');
     listBox.put('listOfNotifications', notificationsList);
   }
 
   List<UserActivity> getNotificationsList() {
-    Box<List> listBox = Hive.box<List>('eceblist');
     if (listBox.containsKey('listOfNotifications')) {
       return listBox.get('listOfNotifications')!.cast<UserActivity>();
     }
@@ -35,7 +53,6 @@ class HiveStorageRepository {
 
   // Hive Storage Network Queue
   void storeNetworkRequest(NetworkRequest request) {
-    Box<List> listBox = Hive.box<List>('eceblist');
     List<NetworkRequest> networkRequests = [];
     if (listBox.containsKey('networkRequest'))
       networkRequests = listBox.get('networkRequest')!.cast<NetworkRequest>();
@@ -44,12 +61,10 @@ class HiveStorageRepository {
   }
 
   void storeNetworkRequestList(List<NetworkRequest> networkRequests) {
-    Box<List> listBox = Hive.box<List>('eceblist');
     listBox.put('networkRequest', networkRequests);
   }
 
   List<NetworkRequest> getNetworkRequests() {
-    Box<List> listBox = Hive.box<List>('eceblist');
     List<NetworkRequest> networkRequests = [];
     print(listBox.keys);
     if (listBox.containsKey('networkRequest'))
@@ -60,29 +75,24 @@ class HiveStorageRepository {
 
   //Profile
   void storeProfile(Profile profile) {
-    var box = Hive.box('eceb');
     box.put("user", profile);
     markUserAsLoggedIn();
   }
 
   Profile getProfile() {
-    var box = Hive.box('eceb');
     return box.get('user');
   }
 
   void markUserAsLoggedIn() {
-    var box = Hive.box('eceb');
     box.put('userLoggedIn', true);
   }
 
   void markUserAsLoggedOut() {
-    var box = Hive.box('eceb');
     box.put('userLoggedIn', false);
   }
 
   //Check User Logged In
   bool checkUserLoggedIn() {
-    var box = Hive.box('eceb');
     if (box.containsKey('userLoggedIn') && box.get('userLoggedIn') == true)
       return true;
 

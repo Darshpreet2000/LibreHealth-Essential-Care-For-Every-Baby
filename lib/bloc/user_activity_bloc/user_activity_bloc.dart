@@ -22,6 +22,7 @@ class UserActivityBloc extends Bloc<UserActivityEvent, UserActivityState> {
     yield UserActivityLoading();
     if (event is UserActivityFetch) {
       try {
+        yield UserActivityLoaded(hiveStorageRepository.getNotificationsList());
         List<UserActivity> response =
             await _userActivityRepository.fetchUsersMessages();
         hiveStorageRepository.storeNotifications(response);
@@ -30,13 +31,6 @@ class UserActivityBloc extends Bloc<UserActivityEvent, UserActivityState> {
         yield UserActivityError(e.toString());
         yield UserActivityLoaded(hiveStorageRepository.getNotificationsList());
       }
-    }
-    if (event is UserActivityAddNotification) {
-      List<UserActivity> response =
-          hiveStorageRepository.getNotificationsList();
-      response.add(event.notifications);
-      hiveStorageRepository.storeNotifications(response);
-      yield UserActivityLoaded(response);
     }
   }
 }

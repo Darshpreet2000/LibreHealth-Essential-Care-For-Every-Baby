@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:newborn_care/widgets/long_app_bar.dart';
-import 'package:newborn_care/widgets/short_app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:newborn_care/widgets/short_app_bar_login.dart';
 
 class InitialScreen extends StatelessWidget {
   @override
@@ -21,10 +21,9 @@ class InitialScreen extends StatelessWidget {
                       height: MediaQuery.of(context).size.height / 2,
                       child: LongAppBar())
                   : Container(
-                      child: ShortAppBar(
-                      title: AppLocalizations.of(context)!
-                          .essentialCareForEveryBaby,
-                    )),
+                      child: ShortAppBarLogin(
+                          title: AppLocalizations.of(context)!
+                              .essentialCareForEveryBaby)),
               loginButtons(context, orientation)
             ],
           ),
@@ -42,7 +41,7 @@ class InitialScreen extends StatelessWidget {
             Container(
               height: orientation == Orientation.portrait
                   ? MediaQuery.of(context).size.height / 6
-                  : MediaQuery.of(context).size.height / 5,
+                  : MediaQuery.of(context).size.height / 4,
               width: MediaQuery.of(context).size.width / 1.4,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
@@ -82,7 +81,7 @@ class InitialScreen extends StatelessWidget {
             Container(
               height: orientation == Orientation.portrait
                   ? MediaQuery.of(context).size.height / 6
-                  : MediaQuery.of(context).size.height / 5,
+                  : MediaQuery.of(context).size.height / 4,
               width: MediaQuery.of(context).size.width / 1.4,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),

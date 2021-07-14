@@ -1,34 +1,34 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'request_type.dart';
+part of '../request_service_type.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class RequestTypeAdapter extends TypeAdapter<RequestType> {
+class RequestServiceTypeAdapter extends TypeAdapter<RequestServiceType> {
   @override
-  final int typeId = 2;
+  final int typeId = 5;
 
   @override
-  RequestType read(BinaryReader reader) {
+  RequestServiceType read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return RequestType.GET;
+        return RequestServiceType.RegisterBaby;
       case 1:
-        return RequestType.POST;
+        return RequestServiceType.AddEvent;
       default:
-        return RequestType.GET;
+        return RequestServiceType.RegisterBaby;
     }
   }
 
   @override
-  void write(BinaryWriter writer, RequestType obj) {
+  void write(BinaryWriter writer, RequestServiceType obj) {
     switch (obj) {
-      case RequestType.GET:
+      case RequestServiceType.RegisterBaby:
         writer.writeByte(0);
         break;
-      case RequestType.POST:
+      case RequestServiceType.AddEvent:
         writer.writeByte(1);
         break;
     }
@@ -40,7 +40,7 @@ class RequestTypeAdapter extends TypeAdapter<RequestType> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is RequestTypeAdapter &&
+      other is RequestServiceTypeAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

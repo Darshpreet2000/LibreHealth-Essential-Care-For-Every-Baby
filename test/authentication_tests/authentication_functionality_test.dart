@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
@@ -11,9 +13,9 @@ import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/authentication_repository.dart';
 import 'package:newborn_care/utils/api_config.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
-import 'package:test/test.dart';
 import 'package:http/http.dart' as http;
 import 'authentication_functionality_test.mocks.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @GenerateMocks([AuthenticationRepository, HiveStorageRepository, http.Client])
 void main() {
@@ -102,7 +104,14 @@ void mainBloc() {
         401);
 
     var loggedInResponseJson = loggedInResponse.body.toString();
-    test('returns response with 200 code on successful login', () async {
+    testWidgets('returns response with 200 code on successful login',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(
+          home: Material(child: Container()),
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+          ]));
+      BuildContext context = tester.element(find.byType(Container));
       String basicAuth =
           'Basic ' + base64Encode(utf8.encode('testuser:Admin@123'));
       when(_mockHttpClient.get(
@@ -113,12 +122,19 @@ void mainBloc() {
       )).thenAnswer((_) async => loggedInResponse);
 
       expect(
-          await AuthenticationClient(_mockHttpClient, m)
+          await AuthenticationClient(_mockHttpClient, context)
               .loginUser("testuser", "Admin@123"),
           loggedInResponseJson);
     });
-    test('returns response with 401 code on login with incorrect credentials',
-        () async {
+    testWidgets(
+        'returns response with 401 code on login with incorrect credentials',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(
+          home: Material(child: Container()),
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+          ]));
+      BuildContext context = tester.element(find.byType(Container));
       String basicAuth =
           'Basic ' + base64Encode(utf8.encode('testuser:Admin@123'));
       when(_mockHttpClient.get(
@@ -128,15 +144,22 @@ void mainBloc() {
         },
       )).thenAnswer((_) async => unSuccessfulLoggedInResponse);
       try {
-        await AuthenticationClient(_mockHttpClient, m)
+        await AuthenticationClient(_mockHttpClient, context)
             .loginUser("testuser", "Admin@123");
         fail("exception not thrown");
       } catch (e) {
         expect(e, isA<UnauthorisedException>());
       }
     });
-    test('throws FetchDataException on no internet connection on login',
-        () async {
+
+    testWidgets('throws FetchDataException on no internet connection on login',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(
+          home: Material(child: Container()),
+          localizationsDelegates: [
+            AppLocalizations.delegate,
+          ]));
+      BuildContext context = tester.element(find.byType(Container));
       String basicAuth =
           'Basic ' + base64Encode(utf8.encode('testuser:Admin@123'));
       when(_mockHttpClient.get(
@@ -146,7 +169,7 @@ void mainBloc() {
         },
       )).thenThrow(SocketException("no internet"));
       try {
-        await AuthenticationClient(_mockHttpClient, m)
+        await AuthenticationClient(_mockHttpClient, context)
             .loginUser("testuser", "Admin@123");
         fail("exception not thrown");
       } catch (e) {

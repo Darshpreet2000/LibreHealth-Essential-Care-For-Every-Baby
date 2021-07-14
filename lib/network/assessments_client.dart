@@ -1,62 +1,60 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:newborn_care/exceptions/custom_exceptions.dart';
+import 'package:newborn_care/models/network_request.dart';
+import 'package:newborn_care/models/request_service_type.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/utils/api_config.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
 import 'package:synchronized/synchronized.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class UserActivityClient {
+class AssessmentsClient {
   http.Client client;
   BuildContext context;
+  HiveStorageRepository hiveStorageRepository;
   RefreshRepository refreshRepository;
   Lock lock;
-  UserActivityClient(
-      this.client, this.context, this.lock, this.refreshRepository);
-
-  Future fetchUserMessages(String username, String password) async {
+  AssessmentsClient(this.client, this.context, this.lock,
+      this.hiveStorageRepository, this.refreshRepository);
+  Future registerEvent(
+      String data, String id, String username, String password) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
-    try {
-      await lock.synchronized(refreshRepository.startRefreshing);
-    } catch (e) {
-      throw e;
-    }
-    try {
-      final response = await http.get(
-        Uri.parse(
-            DHIS2Config.serverURL + APIConfig().userMessages + "?pageSize=5"),
-        headers: <String, String>{
-          'authorization': basicAuth,
-        },
-      ).timeout(const Duration(seconds: 10));
-      return _response(response);
-    } on TimeoutException {
-      throw FetchDataException(
-          AppLocalizations.of(context)!.noInternetConnection, 503);
-    } on SocketException {
-      throw FetchDataException(
-          AppLocalizations.of(context)!.noInternetConnection, 503);
-    }
+    String url = DHIS2Config.serverURL +
+        APIConfig().getaddEventsAPI(
+            DHIS2Config.orgUnit, DHIS2Config.programECEBID, id);
+    Map<String, String> headers = <String, String>{
+      'authorization': basicAuth,
+      'Content-Type': 'application/json; charset=UTF-8',
+    };
+    NetworkRequest request =
+        NetworkRequest(url, data, headers, id, RequestServiceType.AddEvent);
+    hiveStorageRepository.storeNetworkRequest(request);
   }
 
-  Future fetchUserMessagesDetails(
-      String username, String password, String id) async {
-    String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+  Future getAssessmentsOfChild(
+      String key, String username, String password) async {
     try {
       await lock.synchronized(refreshRepository.startRefreshing);
     } catch (e) {
       throw e;
     }
     try {
-      final response = await http.get(
-        Uri.parse(DHIS2Config.serverURL + APIConfig().userMessages + "/$id"),
+      String trackedEntityID =
+          hiveStorageRepository.getSingleChild(key).trackedEntityID;
+      String basicAuth =
+          'Basic ' + base64Encode(utf8.encode('$username:$password'));
+      String url = DHIS2Config.serverURL +
+          APIConfig().getaddEventsAPI(
+              DHIS2Config.orgUnit, DHIS2Config.programECEBID, trackedEntityID);
+      final response = await client.get(
+        //get all tracked entites which were updated in 24 hours
+        Uri.parse(url),
         headers: <String, String>{
           'authorization': basicAuth,
         },
