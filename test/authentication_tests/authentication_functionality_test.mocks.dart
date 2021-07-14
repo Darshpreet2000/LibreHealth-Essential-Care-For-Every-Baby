@@ -2,21 +2,23 @@
 // in newborn_care/test/authentication_tests/authentication_functionality_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i7;
-import 'dart:convert' as _i12;
-import 'dart:typed_data' as _i13;
+import 'dart:async' as _i10;
+import 'dart:convert' as _i14;
+import 'dart:typed_data' as _i15;
 
-import 'package:http/src/base_request.dart' as _i14;
-import 'package:http/src/client.dart' as _i11;
-import 'package:http/src/response.dart' as _i4;
-import 'package:http/src/streamed_response.dart' as _i5;
+import 'package:flutter/src/widgets/framework.dart' as _i2;
+import 'package:http/src/base_request.dart' as _i16;
+import 'package:http/src/client.dart' as _i13;
+import 'package:http/src/response.dart' as _i7;
+import 'package:http/src/streamed_response.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:newborn_care/models/child_model.dart' as _i2;
-import 'package:newborn_care/models/network_request.dart' as _i10;
-import 'package:newborn_care/models/profile.dart' as _i3;
-import 'package:newborn_care/models/user_activity.dart' as _i9;
-import 'package:newborn_care/repository/authentication_repository.dart' as _i6;
-import 'package:newborn_care/repository/hive_storage_repository.dart' as _i8;
+import 'package:newborn_care/models/child_model.dart' as _i5;
+import 'package:newborn_care/models/network_request.dart' as _i12;
+import 'package:newborn_care/models/profile.dart' as _i6;
+import 'package:newborn_care/models/user_activity.dart' as _i11;
+import 'package:newborn_care/network/authentication_client.dart' as _i4;
+import 'package:newborn_care/repository/authentication_repository.dart' as _i9;
+import 'package:newborn_care/repository/hive_storage_repository.dart' as _i3;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: comment_references
@@ -24,33 +26,62 @@ import 'package:newborn_care/repository/hive_storage_repository.dart' as _i8;
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
-class _FakeChildModel extends _i1.Fake implements _i2.ChildModel {}
+class _FakeBuildContext extends _i1.Fake implements _i2.BuildContext {}
 
-class _FakeProfile extends _i1.Fake implements _i3.Profile {}
+class _FakeHiveStorageRepository extends _i1.Fake
+    implements _i3.HiveStorageRepository {}
 
-class _FakeResponse extends _i1.Fake implements _i4.Response {}
+class _FakeAuthenticationClient extends _i1.Fake
+    implements _i4.AuthenticationClient {}
 
-class _FakeStreamedResponse extends _i1.Fake implements _i5.StreamedResponse {}
+class _FakeChildModel extends _i1.Fake implements _i5.ChildModel {}
+
+class _FakeProfile extends _i1.Fake implements _i6.Profile {}
+
+class _FakeResponse extends _i1.Fake implements _i7.Response {}
+
+class _FakeStreamedResponse extends _i1.Fake implements _i8.StreamedResponse {}
 
 /// A class which mocks [AuthenticationRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthenticationRepository extends _i1.Mock
-    implements _i6.AuthenticationRepository {
+    implements _i9.AuthenticationRepository {
   MockAuthenticationRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  Map<String, String> get m => (super.noSuchMethod(Invocation.getter(#m),
-      returnValue: <String, String>{}) as Map<String, String>);
+  _i2.BuildContext get context =>
+      (super.noSuchMethod(Invocation.getter(#context),
+          returnValue: _FakeBuildContext()) as _i2.BuildContext);
   @override
-  set m(Map<String, String>? _m) => super
-      .noSuchMethod(Invocation.setter(#m, _m), returnValueForMissingStub: null);
+  set context(_i2.BuildContext? _context) =>
+      super.noSuchMethod(Invocation.setter(#context, _context),
+          returnValueForMissingStub: null);
   @override
-  _i7.Future<dynamic> loginUser(String? username, String? password) =>
+  _i3.HiveStorageRepository get hiveStorageRepository => (super.noSuchMethod(
+      Invocation.getter(#hiveStorageRepository),
+      returnValue: _FakeHiveStorageRepository()) as _i3.HiveStorageRepository);
+  @override
+  set hiveStorageRepository(
+          _i3.HiveStorageRepository? _hiveStorageRepository) =>
+      super.noSuchMethod(
+          Invocation.setter(#hiveStorageRepository, _hiveStorageRepository),
+          returnValueForMissingStub: null);
+  @override
+  _i4.AuthenticationClient get authenticationClient => (super.noSuchMethod(
+      Invocation.getter(#authenticationClient),
+      returnValue: _FakeAuthenticationClient()) as _i4.AuthenticationClient);
+  @override
+  set authenticationClient(_i4.AuthenticationClient? _authenticationClient) =>
+      super.noSuchMethod(
+          Invocation.setter(#authenticationClient, _authenticationClient),
+          returnValueForMissingStub: null);
+  @override
+  _i10.Future<dynamic> loginUser(String? username, String? password) =>
       (super.noSuchMethod(Invocation.method(#loginUser, [username, password]),
-          returnValue: Future<dynamic>.value()) as _i7.Future<dynamic>);
+          returnValue: Future<dynamic>.value()) as _i10.Future<dynamic>);
   @override
   bool checkUserLoggedIn() =>
       (super.noSuchMethod(Invocation.method(#checkUserLoggedIn, []),
@@ -61,61 +92,61 @@ class MockAuthenticationRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockHiveStorageRepository extends _i1.Mock
-    implements _i8.HiveStorageRepository {
+    implements _i3.HiveStorageRepository {
   MockHiveStorageRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  void storeSingleChild(_i2.ChildModel? child) =>
+  void storeSingleChild(_i5.ChildModel? child) =>
       super.noSuchMethod(Invocation.method(#storeSingleChild, [child]),
           returnValueForMissingStub: null);
   @override
-  _i7.Future<void> storeListOfChild(List<_i2.ChildModel>? childList) =>
+  _i10.Future<void> storeListOfChild(List<_i5.ChildModel>? childList) =>
       (super.noSuchMethod(Invocation.method(#storeListOfChild, [childList]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future.value()) as _i7.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i10.Future<void>);
   @override
-  void updateChild(String? key, _i2.ChildModel? childModel) =>
+  void updateChild(String? key, _i5.ChildModel? childModel) =>
       super.noSuchMethod(Invocation.method(#updateChild, [key, childModel]),
           returnValueForMissingStub: null);
   @override
-  _i2.ChildModel getSingleChild(String? key) =>
+  _i5.ChildModel getSingleChild(String? key) =>
       (super.noSuchMethod(Invocation.method(#getSingleChild, [key]),
-          returnValue: _FakeChildModel()) as _i2.ChildModel);
+          returnValue: _FakeChildModel()) as _i5.ChildModel);
   @override
-  List<_i2.ChildModel> getListOfAllChild() =>
+  List<_i5.ChildModel> getListOfAllChild() =>
       (super.noSuchMethod(Invocation.method(#getListOfAllChild, []),
-          returnValue: <_i2.ChildModel>[]) as List<_i2.ChildModel>);
+          returnValue: <_i5.ChildModel>[]) as List<_i5.ChildModel>);
   @override
-  void storeNotifications(List<_i9.UserActivity>? notificationsList) => super
+  void storeNotifications(List<_i11.UserActivity>? notificationsList) => super
       .noSuchMethod(Invocation.method(#storeNotifications, [notificationsList]),
           returnValueForMissingStub: null);
   @override
-  List<_i9.UserActivity> getNotificationsList() =>
+  List<_i11.UserActivity> getNotificationsList() =>
       (super.noSuchMethod(Invocation.method(#getNotificationsList, []),
-          returnValue: <_i9.UserActivity>[]) as List<_i9.UserActivity>);
+          returnValue: <_i11.UserActivity>[]) as List<_i11.UserActivity>);
   @override
-  void storeNetworkRequest(_i10.NetworkRequest? request) =>
+  void storeNetworkRequest(_i12.NetworkRequest? request) =>
       super.noSuchMethod(Invocation.method(#storeNetworkRequest, [request]),
           returnValueForMissingStub: null);
   @override
-  void storeNetworkRequestList(List<_i10.NetworkRequest>? networkRequests) =>
+  void storeNetworkRequestList(List<_i12.NetworkRequest>? networkRequests) =>
       super.noSuchMethod(
           Invocation.method(#storeNetworkRequestList, [networkRequests]),
           returnValueForMissingStub: null);
   @override
-  List<_i10.NetworkRequest> getNetworkRequests() =>
+  List<_i12.NetworkRequest> getNetworkRequests() =>
       (super.noSuchMethod(Invocation.method(#getNetworkRequests, []),
-          returnValue: <_i10.NetworkRequest>[]) as List<_i10.NetworkRequest>);
+          returnValue: <_i12.NetworkRequest>[]) as List<_i12.NetworkRequest>);
   @override
-  void storeProfile(_i3.Profile? profile) =>
+  void storeProfile(_i6.Profile? profile) =>
       super.noSuchMethod(Invocation.method(#storeProfile, [profile]),
           returnValueForMissingStub: null);
   @override
-  _i3.Profile getProfile() =>
+  _i6.Profile getProfile() =>
       (super.noSuchMethod(Invocation.method(#getProfile, []),
-          returnValue: _FakeProfile()) as _i3.Profile);
+          returnValue: _FakeProfile()) as _i6.Profile);
   @override
   void markUserAsLoggedIn() =>
       super.noSuchMethod(Invocation.method(#markUserAsLoggedIn, []),
@@ -133,78 +164,78 @@ class MockHiveStorageRepository extends _i1.Mock
 /// A class which mocks [Client].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockClient extends _i1.Mock implements _i11.Client {
+class MockClient extends _i1.Mock implements _i13.Client {
   MockClient() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i7.Future<_i4.Response> head(Uri? url, {Map<String, String>? headers}) =>
+  _i10.Future<_i7.Response> head(Uri? url, {Map<String, String>? headers}) =>
       (super.noSuchMethod(Invocation.method(#head, [url], {#headers: headers}),
-              returnValue: Future<_i4.Response>.value(_FakeResponse()))
-          as _i7.Future<_i4.Response>);
+              returnValue: Future<_i7.Response>.value(_FakeResponse()))
+          as _i10.Future<_i7.Response>);
   @override
-  _i7.Future<_i4.Response> get(Uri? url, {Map<String, String>? headers}) =>
+  _i10.Future<_i7.Response> get(Uri? url, {Map<String, String>? headers}) =>
       (super.noSuchMethod(Invocation.method(#get, [url], {#headers: headers}),
-              returnValue: Future<_i4.Response>.value(_FakeResponse()))
-          as _i7.Future<_i4.Response>);
+              returnValue: Future<_i7.Response>.value(_FakeResponse()))
+          as _i10.Future<_i7.Response>);
   @override
-  _i7.Future<_i4.Response> post(Uri? url,
+  _i10.Future<_i7.Response> post(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i12.Encoding? encoding}) =>
+          _i14.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#post, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
-              returnValue: Future<_i4.Response>.value(_FakeResponse()))
-          as _i7.Future<_i4.Response>);
+              returnValue: Future<_i7.Response>.value(_FakeResponse()))
+          as _i10.Future<_i7.Response>);
   @override
-  _i7.Future<_i4.Response> put(Uri? url,
+  _i10.Future<_i7.Response> put(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i12.Encoding? encoding}) =>
+          _i14.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#put, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
-              returnValue: Future<_i4.Response>.value(_FakeResponse()))
-          as _i7.Future<_i4.Response>);
+              returnValue: Future<_i7.Response>.value(_FakeResponse()))
+          as _i10.Future<_i7.Response>);
   @override
-  _i7.Future<_i4.Response> patch(Uri? url,
+  _i10.Future<_i7.Response> patch(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i12.Encoding? encoding}) =>
+          _i14.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#patch, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
-              returnValue: Future<_i4.Response>.value(_FakeResponse()))
-          as _i7.Future<_i4.Response>);
+              returnValue: Future<_i7.Response>.value(_FakeResponse()))
+          as _i10.Future<_i7.Response>);
   @override
-  _i7.Future<_i4.Response> delete(Uri? url,
+  _i10.Future<_i7.Response> delete(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i12.Encoding? encoding}) =>
+          _i14.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#delete, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
-              returnValue: Future<_i4.Response>.value(_FakeResponse()))
-          as _i7.Future<_i4.Response>);
+              returnValue: Future<_i7.Response>.value(_FakeResponse()))
+          as _i10.Future<_i7.Response>);
   @override
-  _i7.Future<String> read(Uri? url, {Map<String, String>? headers}) =>
+  _i10.Future<String> read(Uri? url, {Map<String, String>? headers}) =>
       (super.noSuchMethod(Invocation.method(#read, [url], {#headers: headers}),
-          returnValue: Future<String>.value('')) as _i7.Future<String>);
+          returnValue: Future<String>.value('')) as _i10.Future<String>);
   @override
-  _i7.Future<_i13.Uint8List> readBytes(Uri? url,
+  _i10.Future<_i15.Uint8List> readBytes(Uri? url,
           {Map<String, String>? headers}) =>
       (super.noSuchMethod(
               Invocation.method(#readBytes, [url], {#headers: headers}),
-              returnValue: Future<_i13.Uint8List>.value(_i13.Uint8List(0)))
-          as _i7.Future<_i13.Uint8List>);
+              returnValue: Future<_i15.Uint8List>.value(_i15.Uint8List(0)))
+          as _i10.Future<_i15.Uint8List>);
   @override
-  _i7.Future<_i5.StreamedResponse> send(_i14.BaseRequest? request) =>
+  _i10.Future<_i8.StreamedResponse> send(_i16.BaseRequest? request) =>
       (super.noSuchMethod(Invocation.method(#send, [request]),
               returnValue:
-                  Future<_i5.StreamedResponse>.value(_FakeStreamedResponse()))
-          as _i7.Future<_i5.StreamedResponse>);
+                  Future<_i8.StreamedResponse>.value(_FakeStreamedResponse()))
+          as _i10.Future<_i8.StreamedResponse>);
   @override
   void close() => super.noSuchMethod(Invocation.method(#close, []),
       returnValueForMissingStub: null);
