@@ -1,25 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:newborn_care/bloc/assessments_bloc/assessments_bloc.dart';
+import 'package:newborn_care/models/child_model.dart';
+import 'package:newborn_care/repository/assessments_repository.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
+import 'package:newborn_care/repository/notification_repository.dart';
+import 'package:newborn_care/screens/baby_assessments/baby_assessments.dart';
 
 class ListItem extends StatelessWidget {
-  final String parent, ward, gender;
-  final Color? color, darkColor;
-
-  ListItem(this.parent, this.ward, this.gender, this.color, this.darkColor);
-
+  final ChildModel childModel;
+  final bool allowNavigate;
+  ListItem(this.childModel, this.allowNavigate);
   @override
   Widget build(BuildContext context) {
+    var time = DateTime.now().difference(childModel.birthTime).inHours >= 2
+        ? "${AppLocalizations.of(context)!.hoursFromBirth(DateTime.now().difference(childModel.birthTime).inHours)}"
+        : "${AppLocalizations.of(context)!.minutesFromBirth(DateTime.now().difference(childModel.birthTime).inMinutes)}";
     return Container(
-      margin: EdgeInsets.only(top: 12),
-      color: darkColor,
+      margin: EdgeInsets.only(bottom: 16),
+      color: Color(childModel.darkColor),
       child: Material(
-        elevation: 20,
-        color: darkColor,
+        elevation: 10,
+        color: new Color(childModel.darkColor),
         child: InkWell(
           onTap: () {
-            Navigator.pushNamed(context, '/BabyDetails');
+            if (allowNavigate)
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BabyAssessments(
+                          childModel,
+                          AssessmentsBloc(
+                              RepositoryProvider.of<NotificationRepository>(
+                                  context),
+                              RepositoryProvider.of<AssessmentsRepository>(
+                                  context),
+                              childModel,
+                              RepositoryProvider.of<HiveStorageRepository>(
+                                  context)))));
           },
           child: Container(
-            margin: EdgeInsets.all(16),
+            margin: EdgeInsets.fromLTRB(16, 8, 16, 16),
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -29,7 +51,7 @@ class ListItem extends StatelessWidget {
                     offset: Offset(0, 3), // changes position of shadow
                   ),
                 ],
-                color: Colors.white,
+                color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +59,7 @@ class ListItem extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: color,
+                      color: Color(childModel.color),
                       borderRadius: BorderRadius.only(
                           bottomRight: Radius.circular(15),
                           bottomLeft: Radius.circular(15),
@@ -45,7 +67,7 @@ class ListItem extends StatelessWidget {
                           topRight: Radius.circular(20))),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("22 Minutes From Birth",
+                    child: Text(time,
                         textAlign: TextAlign.start,
                         style: TextStyle(color: Colors.black, fontSize: 16)),
                   ),
@@ -67,22 +89,20 @@ class ListItem extends StatelessWidget {
                                   // Child text spans will inherit styles from parent
                                   style: new TextStyle(
                                     fontSize: 14.0,
-                                    color: Colors.black,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .color,
                                   ),
                                   children: <TextSpan>[
                                     new TextSpan(
-                                        text: "Baby ",
+                                        text: AppLocalizations.of(context)!
+                                            .babyOf(childModel.parent),
                                         style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20)),
-                                    new TextSpan(
-                                        text: "of ",
-                                        style: new TextStyle(fontSize: 16)),
-                                    new TextSpan(
-                                        text: parent,
-                                        style: TextStyle(
-                                            color: Colors.black,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .color,
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20)),
                                   ],
@@ -97,16 +117,23 @@ class ListItem extends StatelessWidget {
                                   // Child text spans will inherit styles from parent
                                   style: new TextStyle(
                                     fontSize: 14.0,
-                                    color: Colors.black,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .color,
                                   ),
                                   children: <TextSpan>[
                                     new TextSpan(
-                                        text: "Location: ",
+                                        text:
+                                            "${AppLocalizations.of(context)!.location}: ",
                                         style: new TextStyle()),
                                     new TextSpan(
-                                        text: ward,
+                                        text: childModel.ward,
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .color,
                                             fontWeight: FontWeight.bold)),
                                   ],
                                 ),
@@ -119,12 +146,19 @@ class ListItem extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.person,
-                                    color: Colors.black,
+                                    color: Theme.of(context).iconTheme.color,
                                     size: 24,
                                   ),
-                                  Text(gender,
+                                  Text(
+                                      childModel.gender == 1
+                                          ? AppLocalizations.of(context)!.male
+                                          : AppLocalizations.of(context)!
+                                              .female,
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .color,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16)),
                                 ],
@@ -134,7 +168,7 @@ class ListItem extends StatelessWidget {
                               ),
                               Icon(
                                 Icons.chevron_right_sharp,
-                                color: Colors.black,
+                                color: Theme.of(context).iconTheme.color,
                                 size: 30,
                               )
                             ],

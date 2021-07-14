@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newborn_care/widgets/short_app_bar.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'components/body.dart';
 
 class Profile extends StatefulWidget {
@@ -19,25 +19,36 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80.0),
-        child: MediaQuery.of(context).orientation == Orientation.portrait
-            ? ShortAppBar(
-                title: "ECEB",
-                showDrawer: true,
-              )
-            : ShortAppBar(
-                title: "Essential Care For Every Baby",
-                showDrawer: true,
-              ),
-      ),
-      body: SingleChildScrollView(
+      body: CustomScrollView(
         physics: scrollEnabled
             ? AlwaysScrollableScrollPhysics()
             : NeverScrollableScrollPhysics(),
-        child: Container(
-          child: Body(enableDisableScroll),
-        ),
+        slivers: [
+          SliverAppBar(
+            floating: true,
+            automaticallyImplyLeading: false,
+            elevation: 20,
+            forceElevated: true,
+            pinned: true,
+            toolbarHeight: 80,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: MediaQuery.of(context).orientation ==
+                    Orientation.portrait
+                ? ShortAppBar(
+                    title: AppLocalizations.of(context)!.eceb,
+                    showDrawer: true,
+                  )
+                : ShortAppBar(
+                    title:
+                        AppLocalizations.of(context)!.essentialCareForEveryBaby,
+                    showDrawer: true,
+                  ),
+          ),
+          SliverList(
+              delegate: SliverChildListDelegate([
+            Body(enableDisableScroll),
+          ]))
+        ],
       ),
     );
   }

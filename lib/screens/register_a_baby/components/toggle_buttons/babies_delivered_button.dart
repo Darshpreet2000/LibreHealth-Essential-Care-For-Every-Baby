@@ -40,12 +40,16 @@ class _BabiesDeliveredButtonState extends State<BabiesDeliveredButton> {
                   onPressed: () {
                     setState(() {
                       widget._registerBabyModel.babiesDelivered = true;
+                      BlocProvider.of<RegisterBabyBloc>(context)
+                          .add(ChangeChildrenCount(1));
                     });
                   },
                   child: Text(
                     widget.first,
                     style: TextStyle(
-                      color: widget._registerBabyModel.babiesDelivered!=null&&widget._registerBabyModel.babiesDelivered==true
+                      color: widget._registerBabyModel.babiesDelivered !=
+                                  null &&
+                              widget._registerBabyModel.babiesDelivered == true
                           ? Colors.white
                           : Theme.of(context).textTheme.subtitle1!.color,
                     ),
@@ -60,18 +64,24 @@ class _BabiesDeliveredButtonState extends State<BabiesDeliveredButton> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       side: BorderSide(color: Colors.blue, width: 2.5),
-                      primary: widget._registerBabyModel.babiesDelivered!=null&&widget._registerBabyModel.babiesDelivered==false? Colors.blue : null,
+                      primary: widget._registerBabyModel.babiesDelivered !=
+                                  null &&
+                              widget._registerBabyModel.babiesDelivered == false
+                          ? Colors.blue
+                          : null,
                       shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0))),
                   onPressed: () {
                     setState(() {
-                      widget._registerBabyModel.babiesDelivered=false;
+                      widget._registerBabyModel.babiesDelivered = false;
                     });
                   },
                   child: Text(
                     widget.second,
                     style: TextStyle(
-                      color: widget._registerBabyModel.babiesDelivered!=null&&widget._registerBabyModel.babiesDelivered==false
+                      color: widget._registerBabyModel.babiesDelivered !=
+                                  null &&
+                              widget._registerBabyModel.babiesDelivered == false
                           ? Colors.white
                           : Theme.of(context).textTheme.subtitle1!.color,
                     ),
@@ -81,7 +91,8 @@ class _BabiesDeliveredButtonState extends State<BabiesDeliveredButton> {
             ),
           ],
         ),
-        widget._registerBabyModel.babiesDelivered!=null&&widget._registerBabyModel.babiesDelivered==false
+        widget._registerBabyModel.babiesDelivered != null &&
+                widget._registerBabyModel.babiesDelivered == false
             ? Center(child: ChildrenSlider(widget._registerBabyModel))
             : Container()
       ],
@@ -118,7 +129,7 @@ class _ChildrenSliderState extends State<ChildrenSlider> {
         onChanged: (dynamic newValue) {
           setState(() {
             double temp = newValue;
-            int pass = temp.round().toInt(); 
+            int pass = temp.round().toInt();
             BlocProvider.of<RegisterBabyBloc>(context)
                 .add(ChangeChildrenCount(pass));
           });

@@ -76,7 +76,7 @@ class _SkinColorChangesButtonState extends State<SkinColorChangesButton> {
                   child: Text(
                     widget.second,
                     style: TextStyle(
-                      color:  widget._babyDetailsModel.skinColorChangesNotes !=
+                      color: widget._babyDetailsModel.skinColorChangesNotes !=
                                   null &&
                               widget._babyDetailsModel.skinColorChanges == false
                           ? Colors.white
@@ -88,9 +88,8 @@ class _SkinColorChangesButtonState extends State<SkinColorChangesButton> {
             ),
           ],
         ),
-         widget._babyDetailsModel.skinColorChangesNotes !=
-                                  null &&
-                              widget._babyDetailsModel.skinColorChanges == true
+        widget._babyDetailsModel.skinColorChangesNotes != null &&
+                widget._babyDetailsModel.skinColorChanges == true
             ? Container(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -99,8 +98,7 @@ class _SkinColorChangesButtonState extends State<SkinColorChangesButton> {
                       onChanged: (String text) {
                         widget._babyDetailsModel.skinColorChangesNotes = text;
                       },
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 4,
+                      maxLines: null,
                       textAlign: TextAlign.left,
                       decoration: new InputDecoration(
                         border: new OutlineInputBorder(

@@ -7,7 +7,6 @@ class MyTheme {
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         primary: Colors.white, // This is a custom color variable
-        
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -23,15 +22,12 @@ class MyTheme {
 
   static final lightTheme = ThemeData(
       scaffoldBackgroundColor: Colors.white,
-    
       primaryColor: Color(0xff82A0C8),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        primary: Colors.black, // This is a custom color variable
-        
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          primary: Colors.black, // This is a custom color variable
+        ),
       ),
-    ),
-
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           primary: Colors.white,

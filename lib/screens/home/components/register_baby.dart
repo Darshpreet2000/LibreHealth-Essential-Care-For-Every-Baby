@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Widget registerBaby(BuildContext context) {
   final color = const Color(0xff82A0C8);
@@ -13,13 +14,6 @@ Widget registerBaby(BuildContext context) {
         Container(
           height: 90,
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white, // background
-              onPrimary: Colors.white, // foreground
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
-              ),
-            ),
             onPressed: () {
               Navigator.pushNamed(context, '/RegisterABaby');
             },
@@ -35,11 +29,12 @@ Widget registerBaby(BuildContext context) {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "To Register a Baby",
+                    AppLocalizations.of(context)!.toRegisterABaby,
                     style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                      fontSize: 18,
+                      color: Theme.of(context).textTheme.subtitle1!.color,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 )
               ],

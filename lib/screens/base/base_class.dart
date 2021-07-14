@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newborn_care/bloc/list_of_babies_bloc/list_of_babies_bloc.dart';
+import 'package:newborn_care/bloc/refresh_bloc/refresh_bloc.dart';
+import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
 import 'package:newborn_care/screens/home/home_screen.dart';
 import 'package:newborn_care/screens/list_of_babies/list_of_babies_screen.dart';
 import 'package:newborn_care/screens/notifications/notification_screen.dart';
 import 'package:newborn_care/screens/profile/profile_screen.dart';
 import 'package:package_info/package_info.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BaseClass extends StatefulWidget {
   final GlobalKey? globalKey;
@@ -16,126 +21,168 @@ class BaseClass extends StatefulWidget {
 
 class _BaseClassState extends State<BaseClass> {
   int selectedIndex = 0;
+  @override
+  void initState() {
+    BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
+    BlocProvider.of<ListOfBabiesBloc>(context).add(ListOfBabiesFetchData());
+    BlocProvider.of<UserActivityBloc>(context).add(UserActivityFetch());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    print(widget.drawerKey);
-    return Scaffold(
-      key: widget.drawerKey,
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            _createHeader(),
-            ListTile(
-              leading: Icon(Icons.schedule,
-                  color: Theme.of(context).iconTheme.color),
-              title: Text('Doctor\'s Schedule'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              leading:
-                  Icon(Icons.message, color: Theme.of(context).iconTheme.color),
-              title: Text('Messages'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.info_rounded,
-                  color: Theme.of(context).iconTheme.color),
-              title: Text('About'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              leading:
-                  Icon(Icons.share, color: Theme.of(context).iconTheme.color),
-              title: Text('Share App'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.bug_report,
-                  color: Theme.of(context).iconTheme.color),
-              title: Text('Report a bug'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: FutureBuilder(
-                future: getAppInfo(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                  if (snapshot.hasData) {
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        key: widget.drawerKey,
+        drawer: Drawer(
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              _createHeader(),
+              ListTile(
+                leading: Icon(Icons.schedule,
+                    color: Theme.of(context).iconTheme.color),
+                title: Text(
+                  AppLocalizations.of(context)!.doctorsSchedule,
+                ),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.message,
+                    color: Theme.of(context).iconTheme.color),
+                title: Text(AppLocalizations.of(context)!.messages),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.info_rounded,
+                    color: Theme.of(context).iconTheme.color),
+                title: Text(AppLocalizations.of(context)!.about),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                leading:
+                    Icon(Icons.share, color: Theme.of(context).iconTheme.color),
+                title: Text(AppLocalizations.of(context)!.shareApp),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.bug_report,
+                    color: Theme.of(context).iconTheme.color),
+                title: Text(AppLocalizations.of(context)!.reportABug),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                title: FutureBuilder(
+                  future: getAppInfo(),
+                  builder:
+                      (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                    if (snapshot.hasData) {
+                      return Text(
+                        "v " + snapshot.data,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    }
                     return Text(
-                      "v " + snapshot.data,
+                      "v 1.0.0",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     );
-                  }
-                  return Text(
-                    "v 1.0.0",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  );
-                },
-              ),
-            )
-          ],
-        ),
-      ),
-      body: IndexedStack(
-        index: selectedIndex,
-        children: <Widget>[
-          Home(
-            globalKey: widget.globalKey,
+                  },
+                ),
+              )
+            ],
           ),
-          ListOfBabies(),
-          Notifications(),
-          Profile()
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        key: widget.globalKey,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
+        ),
+        body: BlocListener<RefreshBloc, RefreshState>(
+          listener: (context, state) {
+            if (state is RefreshLoading) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(
+                      AppLocalizations.of(context)!.syncingDataWithDHIS2)));
+            }
+            if (state is RefreshLoaded) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(AppLocalizations.of(context)!.dataSynced)));
+            }
+            if (state is RefreshError) {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(SnackBar(content: Text(state.message)));
+            }
+          },
+          child: RefreshIndicator(
+            onRefresh: () async {
+              BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
+            },
+            child: IndexedStack(
+              index: selectedIndex,
+              children: <Widget>[
+                Home(
+                  globalKey: widget.globalKey,
+                ),
+                ListOfBabies(),
+                Notifications(),
+                Profile()
+              ],
+            ),
+          ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          key: widget.globalKey,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: AppLocalizations.of(context)!.home,
+            ),
+            BottomNavigationBarItem(
               icon: Icon(
                 Icons.list,
                 size: 25,
               ),
-              label: 'List of Babies'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notifications), label: 'Notifications'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded), label: 'Profile'),
-        ],
-        currentIndex: selectedIndex,
-        fixedColor: Colors.blue[800],
-        onTap: onItemTapped,
-        type: BottomNavigationBarType.fixed,
+              label: AppLocalizations.of(context)!.listOfBabies,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.notifications),
+              label: AppLocalizations.of(context)!.notifications,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_rounded),
+              label: AppLocalizations.of(context)!.profile,
+            ),
+          ],
+          currentIndex: selectedIndex,
+          fixedColor: Colors.blue[800],
+          onTap: onItemTapped,
+          type: BottomNavigationBarType.fixed,
+        ),
       ),
     );
   }
 
   void onItemTapped(int index) {
+    FocusManager.instance.primaryFocus?.unfocus();
     setState(() {
       selectedIndex = index;
     });
@@ -174,7 +221,7 @@ class _BaseClassState extends State<BaseClass> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 4),
               child: Text(
-                'Helping Babies Survive',
+                AppLocalizations.of(context)!.helpingBabiesSurvive,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,

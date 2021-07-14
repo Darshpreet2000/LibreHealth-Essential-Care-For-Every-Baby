@@ -6,14 +6,15 @@ stages:
 
 
 build:
+  only:
+      - master
+      - develop
 
   stage: build
 
   script:
     - flutter pub get
     - flutter clean
-    - flutter build apk --debug
-    - flutter build apk --profile
     - flutter build apk --release
 
   artifacts:
