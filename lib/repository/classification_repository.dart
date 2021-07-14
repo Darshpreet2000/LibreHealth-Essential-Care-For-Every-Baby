@@ -1,9 +1,12 @@
 import 'package:expression_language/expression_language.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:interpolation/interpolation.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ClassificationRepository {
-  ClassificationRepository();
+  BuildContext context;
+  ClassificationRepository(this.context);
 
   String classifyBabyHealth(
       {required bool? ecebSevereJaundice,
@@ -36,11 +39,13 @@ class ClassificationRepository {
       'ecebConvulsions': ecebConvulsions,
     });
 
-    if (evaluateString(programRuleProblem)) return "Problem";
+    if (evaluateString(programRuleProblem))
+      return AppLocalizations.of(context)!.problem;
 
-    if (evaluateString(programRuleDanger)) return "Danger";
+    if (evaluateString(programRuleDanger))
+      return AppLocalizations.of(context)!.danger;
 
-    return "Normal";
+    return AppLocalizations.of(context)!.normal;
   }
 
   bool evaluateString(String str) {

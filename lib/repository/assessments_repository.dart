@@ -97,13 +97,15 @@ class AssessmentsRepository {
   }
 
   void changeColorBasedOnClassification(ChildModel childModel) {
-    if (childModel.classification == "Normal") {
+    if (childModel.classification == AppLocalizations.of(context)!.normal) {
       childModel.color = Colors.green[100]!.value;
       childModel.darkColor = Colors.green[300]!.value;
-    } else if (childModel.classification == "Problem") {
+    } else if (childModel.classification ==
+        AppLocalizations.of(context)!.problem) {
       childModel.color = Colors.yellow[100]!.value;
       childModel.darkColor = Colors.yellow[300]!.value;
-    } else if (childModel.classification == "Danger") {
+    } else if (childModel.classification ==
+        AppLocalizations.of(context)!.danger) {
       childModel.color = Colors.red[100]!.value;
       childModel.darkColor = Colors.red[300]!.value;
     } else {
@@ -122,7 +124,7 @@ class AssessmentsRepository {
   }
 
   String classifyHealthAfterStage2(Stage2 stage2) {
-    return ClassificationRepository().classifyBabyHealth(
+    return ClassificationRepository(context).classifyBabyHealth(
         ecebSevereJaundice: stage2.ecebSevereJaundice,
         ecebAssessTemperature: stage2.ecebAssessTemperature,
         ecebWeight: stage2.ecebWeight,
@@ -146,7 +148,7 @@ class AssessmentsRepository {
     Profile profile = hiveStorageRepository.getProfile();
     childModel.ward = wardName;
 
-    String json = jsonEncode(childModel);
+    String json = jsonEncode(childModel.childModeltoJson(context));
     assessmentsClient.updateTrackedEntity(
         json, id, profile.username, profile.password);
   }

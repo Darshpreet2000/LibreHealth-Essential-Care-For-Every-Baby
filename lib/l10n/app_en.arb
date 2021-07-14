@@ -106,6 +106,7 @@
     "riskAssessments":"Risk Assessments",
     "problem":"Problem",
     "danger":"Danger",
+    "none":"None",
     "statusChanged":"Status changed {from} to {to}",
     "@statusChanged": {
         "placeholders":{

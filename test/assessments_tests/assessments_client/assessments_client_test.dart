@@ -50,8 +50,8 @@ void assessmentClientTest() {
           APIConfig().getaddEventsAPI(
               DHIS2Config.orgUnit, DHIS2Config.programECEBID, 'key');
       when(_mockHiveStorageRepository.getSingleChild('key')).thenReturn(
-          ChildModel(
-              'parent', 'ward', 1, 1, 1, DateTime.now(), 'key', 'key', 'None',1,'normal'));
+          ChildModel('parent', 'ward', 1, 1, 1, DateTime.now(), 'key', 'key',
+              'None', 1, 'normal'));
       when(_mockHttpClient.get(
         Uri.parse(url),
         headers: <String, String>{
@@ -80,8 +80,8 @@ void assessmentClientTest() {
           APIConfig().getaddEventsAPI(
               DHIS2Config.orgUnit, DHIS2Config.programECEBID, 'key');
       when(_mockHiveStorageRepository.getSingleChild('key')).thenReturn(
-          ChildModel(
-              'parent', 'ward', 1, 1, 1, DateTime.now(), 'key', 'key', 'None',1,'normal'));
+          ChildModel('parent', 'ward', 1, 1, 1, DateTime.now(), 'key', 'key',
+              'None', 1, 'normal'));
       when(_mockHttpClient.get(
         Uri.parse(url),
         headers: <String, String>{

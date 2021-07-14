@@ -86,6 +86,7 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
             childModel,
             childModel.key,
             (childModel.assessmentsList[1] as Stage2).ecebWardName);
+
         //update child data in local storage in phone
         hiveStorageRepository.updateChild(childModel.key, childModel);
         yield AssessmentsAdded(childModel);

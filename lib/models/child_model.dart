@@ -54,8 +54,11 @@ class ChildModel {
       this.children,
       this.modeOfDeliveryName);
 
-  factory ChildModel.fromJson(dynamic json) {
-    String? parent, ward, modeOfDeliveryName, classification = 'None';
+  factory ChildModel.fromJson(dynamic json, BuildContext context) {
+    String? parent,
+        ward,
+        modeOfDeliveryName,
+        classification = AppLocalizations.of(context)!.none;
     DateTime? birthTime;
     int? color, darkColor, gender, children;
     String trackedEntityID = json['trackedEntityInstance'];
@@ -77,18 +80,18 @@ class ChildModel {
           gender = int.parse(element['value']);
           break;
         case DHIS2Config.ecebTeiClassification:
-          if (element['value'].toString() == "Normal") {
+          if (element['value'].toString() == "1") {
             color = Colors.green[100]!.value;
             darkColor = Colors.green[300]!.value;
-            classification = 'Normal';
-          } else if (element['value'].toString() == "Problem") {
+            classification = AppLocalizations.of(context)!.normal;
+          } else if (element['value'].toString() == "2") {
             color = Colors.yellow[100]!.value;
             darkColor = Colors.yellow[300]!.value;
-            classification = 'Problem';
-          } else if (element['value'].toString() == "Danger") {
+            classification = AppLocalizations.of(context)!.problem;
+          } else if (element['value'].toString() == "3") {
             color = Colors.red[100]!.value;
             darkColor = Colors.red[300]!.value;
-            classification = 'Danger';
+            classification = AppLocalizations.of(context)!.danger;
           }
           break;
         case DHIS2Config.ecebBabiesDelivered:
@@ -118,7 +121,8 @@ class ChildModel {
         children!,
         modeOfDeliveryName!);
   }
-  Map<String, dynamic> toJson() => {
+
+  Map<String, dynamic> childModeltoJson(BuildContext context) => {
         "trackedEntityType": DHIS2Config.trackedEntity,
         "orgUnit": DHIS2Config.orgUnit,
         'attributes': [
@@ -136,10 +140,16 @@ class ChildModel {
           {"attribute": DHIS2Config.teiWardname, "value": ward},
           {
             "attribute": DHIS2Config.ecebTeiClassification,
-            "value": classification
+            "value": getClassificationValue(classification, context)
           }
         ]
       };
+  int getClassificationValue(String classification, BuildContext context) {
+    if (classification == AppLocalizations.of(context)!.normal) return 1;
+    if (classification == AppLocalizations.of(context)!.problem) return 2;
+    if (classification == AppLocalizations.of(context)!.danger) return 3;
+    return 0;
+  }
 
   compareTo(ChildModel b, BuildContext context) {
     if (this.classification == AppLocalizations.of(context)!.danger) {

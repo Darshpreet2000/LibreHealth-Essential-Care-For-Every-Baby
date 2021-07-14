@@ -13,6 +13,7 @@ import 'package:newborn_care/screens/baby_assessments/components/assessments_pha
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_3_normal.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_3_problem.dart';
 import 'package:newborn_care/screens/list_of_babies/components/list_item.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Body extends StatefulWidget {
   final ChildModel childModel;
@@ -79,13 +80,16 @@ class _BodyState extends State<Body> {
                                     as Stage2,
                                 widget.assessmentsBloc,
                                 state.childModel.color),
-                            state.childModel.classification == 'Problem'
+                            state.childModel.classification ==
+                                    AppLocalizations.of(context)!.problem
                                 ? Phase3Problem()
                                 : Container(),
-                            state.childModel.classification == 'Normal'
+                            state.childModel.classification ==
+                                    AppLocalizations.of(context)!.normal
                                 ? Phase3Normal()
                                 : Container(),
-                            state.childModel.classification == 'Danger'
+                            state.childModel.classification ==
+                                    AppLocalizations.of(context)!.danger
                                 ? Phase3Danger()
                                 : Container(),
                           ],

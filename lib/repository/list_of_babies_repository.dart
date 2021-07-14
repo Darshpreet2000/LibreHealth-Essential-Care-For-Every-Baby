@@ -36,7 +36,7 @@ class ListOfBabiesRepository {
       Map<String, dynamic> res = jsonDecode(response);
       List<ChildModel> result = [];
       for (var item in res['trackedEntityInstances']) {
-        ChildModel childModel = ChildModel.fromJson(item);
+        ChildModel childModel = ChildModel.fromJson(item, context);
         result.add(childModel);
       }
       return result;
