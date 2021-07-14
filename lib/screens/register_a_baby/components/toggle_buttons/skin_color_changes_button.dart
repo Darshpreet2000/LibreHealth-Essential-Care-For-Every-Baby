@@ -98,8 +98,7 @@ class _SkinColorChangesButtonState extends State<SkinColorChangesButton> {
                       onChanged: (String text) {
                         widget._babyDetailsModel.skinColorChangesNotes = text;
                       },
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 4,
+                      maxLines: null,
                       textAlign: TextAlign.left,
                       decoration: new InputDecoration(
                         border: new OutlineInputBorder(

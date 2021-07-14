@@ -132,6 +132,14 @@ class Stage2 {
             "value": ecebExaminationOverall
           },
           {
+            "dataElement": DHIS2Config.ecebFastBreathing,
+            "value": ecebFastBreathing
+          },
+          {
+            "dataElement": DHIS2Config.ecebChestIndrawing,
+            "value": ecebChestIndrawing
+          },
+          {
             "dataElement": DHIS2Config.ecebIsFeedingProperly,
             "value": ecebFeedingProperly
           },

@@ -168,7 +168,7 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
                 children: [
                   ConstrainedBox(
                     constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width / 5),
+                        maxWidth: MediaQuery.of(context).size.width / 4),
                     child: InkWell(
                       onTap: () => selectIndex(0),
                       child: Column(
@@ -194,6 +194,7 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
                                     BorderRadius.all(Radius.circular(8))),
                             child: Text(
                               AppLocalizations.of(context)!.cSection,
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: widget.modeOfDeliveryList[0]
                                     ? Colors.white
@@ -207,7 +208,7 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
                   ),
                   ConstrainedBox(
                     constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width / 5),
+                        maxWidth: MediaQuery.of(context).size.width / 4),
                     child: InkWell(
                       onTap: () => selectIndex(1),
                       child: Column(
@@ -233,6 +234,7 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
                                     BorderRadius.all(Radius.circular(8))),
                             child: Text(
                               AppLocalizations.of(context)!.forcepsDelivery,
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: widget.modeOfDeliveryList[1]
                                     ? Colors.white
@@ -246,7 +248,7 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
                   ),
                   ConstrainedBox(
                     constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width / 5),
+                        maxWidth: MediaQuery.of(context).size.width / 4),
                     child: InkWell(
                       onTap: () => selectIndex(2),
                       child: Column(
@@ -272,6 +274,7 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
                                     BorderRadius.all(Radius.circular(8))),
                             child: Text(
                               AppLocalizations.of(context)!.vacuumExtraction,
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: widget.modeOfDeliveryList[2]
                                     ? Colors.white
@@ -285,7 +288,7 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
                   ),
                   ConstrainedBox(
                     constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width / 5),
+                        maxWidth: MediaQuery.of(context).size.width / 4),
                     child: InkWell(
                       onTap: () => selectIndex(3),
                       child: Column(
@@ -311,6 +314,7 @@ class _ModeOfDeliverySliderState extends State<ModeOfDeliverySlider> {
                                     BorderRadius.all(Radius.circular(8))),
                             child: Text(
                               AppLocalizations.of(context)!.other,
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: widget.modeOfDeliveryList[3]
                                     ? Colors.white

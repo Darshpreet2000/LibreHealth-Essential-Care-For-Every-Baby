@@ -187,9 +187,6 @@ class AssessmentsRepository {
           childModel.parent,
           AppLocalizations.of(context)!.phase2,
           childModel.birthTime.add(Duration(minutes: 60)));
-    } else {
-      notificationRepository.immediateNotification(childModel.key,
-          childModel.parent, AppLocalizations.of(context)!.phase2);
     }
   }
 
@@ -207,9 +204,6 @@ class AssessmentsRepository {
           childModel.parent,
           AppLocalizations.of(context)!.phase2,
           childModel.birthTime.add(Duration(minutes: 90)));
-    } else {
-      notificationRepository.immediateNotification(childModel.key,
-          childModel.parent, AppLocalizations.of(context)!.phase2);
     }
   }
 }

@@ -40,6 +40,8 @@ class _BabiesDeliveredButtonState extends State<BabiesDeliveredButton> {
                   onPressed: () {
                     setState(() {
                       widget._registerBabyModel.babiesDelivered = true;
+                      BlocProvider.of<RegisterBabyBloc>(context)
+                          .add(ChangeChildrenCount(1));
                     });
                   },
                   child: Text(

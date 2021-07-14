@@ -1,6 +1,6 @@
 part of 'assessments_bloc.dart';
 
-abstract class AssessmentsState  {
+abstract class AssessmentsState {
   const AssessmentsState();
 
   ChildModel get childModel;
@@ -16,7 +16,6 @@ class AssessmentsAdded extends AssessmentsState {
   final ChildModel childModel;
 
   AssessmentsAdded(this.childModel);
-
 }
 
 class AssessmentsError extends AssessmentsState {
@@ -32,5 +31,4 @@ class AssessmentsLoading extends AssessmentsState {
   final ChildModel childModel;
 
   AssessmentsLoading(this.childModel);
-
 }
