@@ -28,8 +28,8 @@ void assessmentClientTest() {
       MockHiveStorageRepository();
   MockRefreshRepository _mockRefreshRepository = MockRefreshRepository();
   AssessmentsClient _assessmentsClient;
-   //Assessment Client Test
-   //Test Cases
+  //Assessment Client Test
+  //Test Cases
   //returns response with 200 code on successful fetching of assessments
   //throws fetch data exception on no internet connection
   group('Assessment Client', () {
@@ -51,7 +51,8 @@ void assessmentClientTest() {
           APIConfig().getaddEventsAPI(
               DHIS2Config.orgUnit, DHIS2Config.programECEBID, 'key');
       when(_mockHiveStorageRepository.getSingleChild('key')).thenReturn(
-          ChildModel('parent', 'ward', 1, 1, 1, DateTime.now(), 'key', 'key'));
+          ChildModel(
+              'parent', 'ward', 1, 1, 1, DateTime.now(), 'key', 'key', 'None'));
       when(_mockHttpClient.get(
         Uri.parse(url),
         headers: <String, String>{
@@ -64,8 +65,7 @@ void assessmentClientTest() {
               'key', 'username', 'password'),
           json);
     });
-    testWidgets(
-        'throws fetch data exception on no internet connection',
+    testWidgets('throws fetch data exception on no internet connection',
         (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
           home: Material(child: Container()),
@@ -82,7 +82,8 @@ void assessmentClientTest() {
           APIConfig().getaddEventsAPI(
               DHIS2Config.orgUnit, DHIS2Config.programECEBID, 'key');
       when(_mockHiveStorageRepository.getSingleChild('key')).thenReturn(
-          ChildModel('parent', 'ward', 1, 1, 1, DateTime.now(), 'key', 'key'));
+          ChildModel(
+              'parent', 'ward', 1, 1, 1, DateTime.now(), 'key', 'key', 'None'));
       when(_mockHttpClient.get(
         Uri.parse(url),
         headers: <String, String>{
@@ -91,7 +92,7 @@ void assessmentClientTest() {
       )).thenThrow(SocketException("message"));
 
       expect(
-           _assessmentsClient.getAssessmentsOfChild(
+          _assessmentsClient.getAssessmentsOfChild(
               'key', 'username', 'password'),
           throwsA(isInstanceOf<FetchDataException>()));
     });

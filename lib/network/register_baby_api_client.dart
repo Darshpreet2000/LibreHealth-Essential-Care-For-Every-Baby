@@ -18,7 +18,7 @@ class RegisterBabyAPIClient {
       'Content-Type': 'application/json; charset=UTF-8',
     };
     NetworkRequest request = NetworkRequest(
-        url, data, headers, key, RequestServiceType.RegisterBaby);
+        url, data, headers, key, RequestServiceType.registerBaby);
     hiveStorageRepository.storeNetworkRequest(request);
   }
 }

@@ -1,6 +1,6 @@
 part of 'assessments_bloc.dart';
 
-abstract class AssessmentsState extends Equatable{
+abstract class AssessmentsState extends Equatable {
   const AssessmentsState();
 
   get childModel => null;

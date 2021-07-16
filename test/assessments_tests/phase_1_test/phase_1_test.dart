@@ -14,8 +14,9 @@ void main() {
   mainBloc();
 }
 
-void mainBloc() { 
-  MockHiveStorageRepository _mockHiveStorageRepository =MockHiveStorageRepository();
+void mainBloc() {
+  MockHiveStorageRepository _mockHiveStorageRepository =
+      MockHiveStorageRepository();
   MockRefreshRepository _mockRefreshRepository = MockRefreshRepository();
   // AssessmentsRepository testing
   //Test Cases
@@ -34,7 +35,8 @@ void mainBloc() {
       BuildContext context = tester.element(find.byType(Container));
       var lock = Lock();
       try {
-        AssessmentsRepository(context, lock,_mockHiveStorageRepository,_mockRefreshRepository)
+        AssessmentsRepository(context, lock, _mockHiveStorageRepository,
+                _mockRefreshRepository)
             .validatePhase1Assessments(Stage1());
       } catch (e) {
         expect(e.toString(),
@@ -54,8 +56,10 @@ void mainBloc() {
       try {
         Stage1 stage1 = new Stage1();
         stage1.ecebWardName = "postnatal";
-       
-        AssessmentsRepository(context, lock,_mockHiveStorageRepository,_mockRefreshRepository).validatePhase1Assessments(stage1);
+
+        AssessmentsRepository(context, lock, _mockHiveStorageRepository,
+                _mockRefreshRepository)
+            .validatePhase1Assessments(stage1);
       } catch (e) {
         expect(
             e.toString(),
@@ -79,8 +83,10 @@ void mainBloc() {
         stage1.ecebStage1InitiateBreastfeeding = true;
         stage1.ecebStage1MonitorBreathing = true;
         stage1.ecebStage1SkinToSkinCare = true;
-       
-        AssessmentsRepository(context, lock,_mockHiveStorageRepository,_mockRefreshRepository).validatePhase1Assessments(stage1);
+
+        AssessmentsRepository(context, lock, _mockHiveStorageRepository,
+                _mockRefreshRepository)
+            .validatePhase1Assessments(stage1);
       } catch (e) {}
       expect(stage1.isCompleted, true);
     });
@@ -96,8 +102,9 @@ void mainBloc() {
       List<Object> assessmentsList = [];
 
       try {
-        
-        AssessmentsRepository(context, lock,_mockHiveStorageRepository,_mockRefreshRepository).addNextAssessment(assessmentsList);
+        AssessmentsRepository(context, lock, _mockHiveStorageRepository,
+                _mockRefreshRepository)
+            .addNextAssessment(assessmentsList);
       } catch (e) {}
       expect(assessmentsList[0], isA<Stage1>());
     });

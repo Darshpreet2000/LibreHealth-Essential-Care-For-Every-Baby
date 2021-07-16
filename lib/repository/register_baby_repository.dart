@@ -66,7 +66,8 @@ class RegisterBabyRepositoryImpl {
           Colors.white.value,
           element.birthDateTime,
           key,
-          key);
+          key,
+          'None');
       //push data using api
       await registerBabyDetails(_registerBabyModel, key);
       //create stage 1 assessmens

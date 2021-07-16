@@ -2,9 +2,20 @@ import 'package:newborn_care/main.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/network_request.dart';
 import 'package:newborn_care/models/profile.dart';
+import 'package:newborn_care/models/sort_list_enum.dart';
 import 'package:newborn_care/models/user_activity.dart';
 
 class HiveStorageRepository {
+  //Sort By type saving in box
+  SortListEnum getSortBy() {
+    if (box.containsKey('sortListEnum')) return box.get('sortListEnum');
+    return SortListEnum.none;
+  }
+
+  void storeSortBy(SortListEnum sortListEnum) {
+    box.put('sortListEnum', sortListEnum);
+  }
+
   //List of child
   void storeSingleChild(ChildModel child) {
     mapBox.put(child.key, child);

@@ -19,13 +19,13 @@ class RefreshRepository {
       //get map of list of child
       while (networkRequests.isNotEmpty) {
         NetworkRequest request = networkRequests.first;
-        if (request.requestServiceType == RequestServiceType.AddEvent) {
+        if (request.requestServiceType == RequestServiceType.addEvent) {
           addTrackedEntityIDInRequest(request);
         }
         var response = await RefreshClient(http.Client(), context)
             .doNetworkRequest(request);
 
-        if (request.requestServiceType == RequestServiceType.RegisterBaby) {
+        if (request.requestServiceType == RequestServiceType.registerBaby) {
           updateChildTrackedEntityID(response, request.key);
         }
         networkRequests.removeAt(0);
