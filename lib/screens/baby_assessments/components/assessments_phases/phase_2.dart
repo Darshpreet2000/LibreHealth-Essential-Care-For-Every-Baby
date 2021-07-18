@@ -170,6 +170,7 @@ class _Phase2State extends State<Phase2> {
                     child: Text(
                       AppLocalizations.of(context)!.examinations,
                       style: TextStyle(
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
@@ -179,8 +180,10 @@ class _Phase2State extends State<Phase2> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       AppLocalizations.of(context)!.weightOfBabyInGrams,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding(
@@ -192,8 +195,10 @@ class _Phase2State extends State<Phase2> {
                     child: Text(
                       AppLocalizations.of(context)!
                           .temperatureOfBabyInFarenheit,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding(
@@ -208,8 +213,10 @@ class _Phase2State extends State<Phase2> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       AppLocalizations.of(context)!.fastBreathing,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   switchYesNo(widget.stage2.ecebFastBreathing, (newValue) {
@@ -221,8 +228,10 @@ class _Phase2State extends State<Phase2> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       AppLocalizations.of(context)!.chestIndrawing,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   switchYesNo(widget.stage2.ecebChestIndrawing, (newValue) {
@@ -234,8 +243,10 @@ class _Phase2State extends State<Phase2> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       AppLocalizations.of(context)!.isBabyFeedingProperly,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   switchYesNo(widget.stage2.ecebFeedingProperly, (newValue) {
@@ -247,8 +258,10 @@ class _Phase2State extends State<Phase2> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       AppLocalizations.of(context)!.convulsionsSigns,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   switchYesNo(widget.stage2.ecebConvulsions, (newValue) {
@@ -260,8 +273,10 @@ class _Phase2State extends State<Phase2> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       AppLocalizations.of(context)!.jaundiceSigns,
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                   switchYesNo(widget.stage2.ecebSevereJaundice, (newValue) {
@@ -350,6 +365,7 @@ class _Phase2State extends State<Phase2> {
           Text(
             AppLocalizations.of(context)!.systematicExaminationsPerformed,
             style: TextStyle(
+              color: Colors.black,
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
