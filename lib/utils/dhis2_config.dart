@@ -68,31 +68,31 @@ class DHIS2Config {
   static const String ecebStage2PreventDiseaseEyeCare = "y80qB17Dv8b";
 
   //Stage - 3 Assessments Normal
-  static const String eceb_Stage_3_Normal_Maintain_Normal_Temperature =
+  static const String ecebStage3NormalMaintainNormalTemperature =
       "gF9Jgs3BYud";
-  static const String eceb_Stage_3_Normal_Support_Breastfeeding = "zu7IjXzfoul";
-  static const String eceb_Stage_3_Normal_Advise_About_Breast_Feeding_Problems =
+  static const String ecebStage3NormalSupportBreastfeeding = "zu7IjXzfoul";
+  static const String ecebStage3NormalAdviseAboutBreastFeedingProblems =
       "PH2GfTJAdUx";
-  static const String eceb_Stage_3_Normal_Immunize = "Pc6UmgYQUEF";
+  static const String ecebStage3NormalImmunize = "Pc6UmgYQUEF";
 
   //Stage - 3 Assessments Problem
   static const String
-      eceb_Stage_3_Problem_Under_2000g_Prolong_skin_to_skin_care =
+      ecebStage3ProblemUnder2000gProlongSkinToSkinCare =
       "maGPaup2xXT";
   static const String
-      eceb_Stage_3_Problem_Abnormal_Temperature_Improve_Thermal_Care =
+      ecebStage3ProblemAbnormalTemperatureImproveThermalCare =
       "RCV6TgQyYhD";
-  static const String eceb_Stage_3_Problem_Continue_Inpatient_Care =
+  static const String ecebStage3ProblemContinueInpatientCare =
       "KxDE46h1ERH";
-  static const String eceb_Stage_3_Problem_Poor_Feeding_Express_Breast_Milk =
+  static const String ecebStage3ProblemPoorFeedingExpressBreastMilk =
       "j5j0FVVMiBZ";
   static const String
-      eceb_Stage_3_Problem_Poor_Feeding_Use_Alternative_Feeding_Method =
+      ecebStage3ProblemPoorFeedingUseAlternativeFeedingMethod =
       "IYAaEwlnfOm";
 
   //Stage - 3 Assessments Danger
-  static const String eceb_Stage_3_Give_Antibiotics = "JLSf9WjMeKR";
-  static const String eceb_Stage_3_Seek_Advanced_Care = "cdFkGwVUKhK";
+  static const String ecebStage3GiveAntibiotics = "JLSf9WjMeKR";
+  static const String ecebStage3SeekAdvancedCare = "cdFkGwVUKhK";
 
   //Stage - 5 Discharge
   static const String eceb_Stage_5_Normal_Reassess_baby_for_discharge =
