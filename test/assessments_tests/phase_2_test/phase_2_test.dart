@@ -49,8 +49,11 @@ void mainBloc() {
                 _mockRefreshRepository, _mockNotificationRepository)
             .validatePhase2Assessments(Stage2(), DateTime.now());
       } catch (e) {
-        expect(e.toString(),
-            Exception(AppLocalizations.of(context)!.phase2AssessmentsToBeDoneOnlyAfter60MinutesFromBirth).toString());
+        expect(
+            e.toString(),
+            Exception(AppLocalizations.of(context)!
+                    .phase2AssessmentsToBeDoneOnlyAfter60MinutesFromBirth)
+                .toString());
       }
     });
     testWidgets('Throws exception if wardname is empty',

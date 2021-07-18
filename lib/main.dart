@@ -72,12 +72,11 @@ class _MyAppState extends State<MyApp> {
   String initialAppRoute = '/InitialScreen';
   @override
   void initState() {
-
     if (HiveStorageRepository().checkUserLoggedIn()) {
       initialAppRoute = '/Base';
     }
-     NotificationRepository.intialize(
-                    navigatorKey, lock, HiveStorageRepository());
+    NotificationRepository.intialize(
+        navigatorKey, lock, HiveStorageRepository());
     super.initState();
   }
 
@@ -94,7 +93,7 @@ class _MyAppState extends State<MyApp> {
               builder: (context, state) {
                 NotificationRepository.updateNotificationChannel(
                     HiveStorageRepository());
-               
+
                 return MaterialApp(
                   navigatorKey: navigatorKey,
                   title: 'Newborn Care',

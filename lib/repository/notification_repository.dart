@@ -16,8 +16,9 @@ import 'package:synchronized/synchronized.dart';
 class NotificationRepository {
   final BuildContext context;
   NotificationRepository(this.context);
-  static updateNotificationChannel(HiveStorageRepository hiveStorageRepository) {
-         NotificationImportance notificationImportance;
+  static updateNotificationChannel(
+      HiveStorageRepository hiveStorageRepository) {
+    NotificationImportance notificationImportance;
     if (hiveStorageRepository.getNotificationEnabled() &&
         hiveStorageRepository.getNotificationSoundEnabled()) {
       notificationImportance = NotificationImportance.Max;
@@ -25,9 +26,8 @@ class NotificationRepository {
       notificationImportance = NotificationImportance.Low;
     } else
       notificationImportance = NotificationImportance.None;
-    
-  
-         AwesomeNotifications().initialize(
+
+    AwesomeNotifications().initialize(
         // set the icon to null if you want to use the default app icon
         null,
         [
@@ -44,8 +44,8 @@ class NotificationRepository {
         AwesomeNotifications().requestPermissionToSendNotifications();
       }
     });
-
   }
+
   static intialize(GlobalKey<NavigatorState> navigatorKey, Lock lock,
       HiveStorageRepository hiveStorageRepository) async {
     AwesomeNotifications().actionStream.listen((receivedNotification) {

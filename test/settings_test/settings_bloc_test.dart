@@ -29,10 +29,12 @@ void mainBloc() {
         isDarkModeEnabled = true;
         isNotificationSoundEnabled = false;
         isNotificationEnabled = false;
-       
+
         when(_mockHiveRepo.getThemeData()).thenReturn(isDarkModeEnabled);
-        when(_mockHiveRepo.getNotificationSoundEnabled()).thenReturn(isNotificationSoundEnabled);
-        when(_mockHiveRepo.getNotificationEnabled()).thenReturn(isNotificationEnabled);
+        when(_mockHiveRepo.getNotificationSoundEnabled())
+            .thenReturn(isNotificationSoundEnabled);
+        when(_mockHiveRepo.getNotificationEnabled())
+            .thenReturn(isNotificationEnabled);
         SettingsBloc settingsBloc = new SettingsBloc(_mockHiveRepo);
         when(_mockHiveRepo.storeThemeData(isDarkModeEnabled)).thenReturn(null);
 
@@ -58,8 +60,10 @@ void mainBloc() {
         isNotificationSoundEnabled = true;
         isNotificationEnabled = false;
         when(_mockHiveRepo.getThemeData()).thenReturn(isDarkModeEnabled);
-        when(_mockHiveRepo.getNotificationSoundEnabled()).thenReturn(isNotificationSoundEnabled);
-        when(_mockHiveRepo.getNotificationEnabled()).thenReturn(isNotificationEnabled);
+        when(_mockHiveRepo.getNotificationSoundEnabled())
+            .thenReturn(isNotificationSoundEnabled);
+        when(_mockHiveRepo.getNotificationEnabled())
+            .thenReturn(isNotificationEnabled);
         SettingsBloc settingsBloc = new SettingsBloc(_mockHiveRepo);
         when(_mockHiveRepo.storeThemeData(isDarkModeEnabled)).thenReturn(null);
 
@@ -85,8 +89,10 @@ void mainBloc() {
         isNotificationSoundEnabled = false;
         isNotificationEnabled = true;
         when(_mockHiveRepo.getThemeData()).thenReturn(isDarkModeEnabled);
-        when(_mockHiveRepo.getNotificationSoundEnabled()).thenReturn(isNotificationSoundEnabled);
-        when(_mockHiveRepo.getNotificationEnabled()).thenReturn(isNotificationEnabled);
+        when(_mockHiveRepo.getNotificationSoundEnabled())
+            .thenReturn(isNotificationSoundEnabled);
+        when(_mockHiveRepo.getNotificationEnabled())
+            .thenReturn(isNotificationEnabled);
 
         SettingsBloc settingsBloc = new SettingsBloc(_mockHiveRepo);
         when(_mockHiveRepo.storeThemeData(isDarkModeEnabled)).thenReturn(null);
