@@ -68,29 +68,29 @@ class DHIS2Config {
   static const String ecebStage2PreventDiseaseEyeCare = "y80qB17Dv8b";
 
   //Stage - 3 Assessments Normal
-  static const String ecebStage3NormalMaintainNormalTemperature =
-      "gF9Jgs3BYud";
+
+  static const String stage3IDNormal = "RWkBApJAsxL";
+  static const String ecebStage3NormalMaintainNormalTemperature = "gF9Jgs3BYud";
   static const String ecebStage3NormalSupportBreastfeeding = "zu7IjXzfoul";
   static const String ecebStage3NormalAdviseAboutBreastFeedingProblems =
       "PH2GfTJAdUx";
   static const String ecebStage3NormalImmunize = "Pc6UmgYQUEF";
 
   //Stage - 3 Assessments Problem
-  static const String
-      ecebStage3ProblemUnder2000gProlongSkinToSkinCare =
+
+  static const String stage3IDProblem = "uNXO52qU0Ci";
+  static const String ecebStage3ProblemUnder2000gProlongSkinToSkinCare =
       "maGPaup2xXT";
-  static const String
-      ecebStage3ProblemAbnormalTemperatureImproveThermalCare =
+  static const String ecebStage3ProblemAbnormalTemperatureImproveThermalCare =
       "RCV6TgQyYhD";
-  static const String ecebStage3ProblemContinueInpatientCare =
-      "KxDE46h1ERH";
+  static const String ecebStage3ProblemContinueInpatientCare = "KxDE46h1ERH";
   static const String ecebStage3ProblemPoorFeedingExpressBreastMilk =
       "j5j0FVVMiBZ";
-  static const String
-      ecebStage3ProblemPoorFeedingUseAlternativeFeedingMethod =
+  static const String ecebStage3ProblemPoorFeedingUseAlternativeFeedingMethod =
       "IYAaEwlnfOm";
 
   //Stage - 3 Assessments Danger
+  static const String stage3IDDanger = "VV6B9ZbVTMD";
   static const String ecebStage3GiveAntibiotics = "JLSf9WjMeKR";
   static const String ecebStage3SeekAdvancedCare = "cdFkGwVUKhK";
 
