@@ -1,10 +1,17 @@
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
+part 'auto_generate/stage_3_danger.g.dart';
 
+@HiveType(typeId: 11)
 class Stage3Danger {
+  @HiveField(0)
   bool ecebStage3GiveAntibiotics = false;
+  @HiveField(1)
   bool ecebStage3SeekAdvancedCare = false;
+  @HiveField(2)
   bool isCompleted = false;
+  Stage3Danger();
   Map<String, dynamic> toJson() => {
         "program": DHIS2Config.programECEBID,
         "orgUnit": DHIS2Config.orgUnit,
