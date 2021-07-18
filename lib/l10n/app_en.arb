@@ -208,6 +208,9 @@
     "completeAssessments":"Please complete assessments",
     "reminder":"Reminder",
     "syncingDataWithDHIS2":"Syncing data with DHIS2",
-    "dataSynced":"Data synced"
+    "dataSynced":"Data synced",
+    "settings":"Settings",
+    "notificationsSound":"Notifications sound",
+    "nightMode":"Night mode"
 
  }

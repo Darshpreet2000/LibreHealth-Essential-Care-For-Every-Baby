@@ -99,6 +99,30 @@ class MockHiveStorageRepository extends _i1.Mock
   }
 
   @override
+  bool getNotificationEnabled() =>
+      (super.noSuchMethod(Invocation.method(#getNotificationEnabled, []),
+          returnValue: false) as bool);
+  @override
+  void storeNotificationEnabled(bool? value) =>
+      super.noSuchMethod(Invocation.method(#storeNotificationEnabled, [value]),
+          returnValueForMissingStub: null);
+  @override
+  bool getNotificationSoundEnabled() =>
+      (super.noSuchMethod(Invocation.method(#getNotificationSoundEnabled, []),
+          returnValue: false) as bool);
+  @override
+  void storeNotificationSoundEnabled(bool? value) => super.noSuchMethod(
+      Invocation.method(#storeNotificationSoundEnabled, [value]),
+      returnValueForMissingStub: null);
+  @override
+  bool getThemeData() =>
+      (super.noSuchMethod(Invocation.method(#getThemeData, []),
+          returnValue: false) as bool);
+  @override
+  void storeThemeData(bool? value) =>
+      super.noSuchMethod(Invocation.method(#storeThemeData, [value]),
+          returnValueForMissingStub: null);
+  @override
   _i11.SortListEnum getSortBy() =>
       (super.noSuchMethod(Invocation.method(#getSortBy, []),
           returnValue: _i11.SortListEnum.time) as _i11.SortListEnum);

@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:newborn_care/bloc/list_of_babies_bloc/list_of_babies_bloc.dart';
+import 'package:newborn_care/bloc/settings_bloc/settings_bloc.dart';
 import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/profile.dart';
@@ -71,10 +72,12 @@ class _MyAppState extends State<MyApp> {
   String initialAppRoute = '/InitialScreen';
   @override
   void initState() {
+
     if (HiveStorageRepository().checkUserLoggedIn()) {
       initialAppRoute = '/Base';
     }
-    NotificationRepository.intialize(navigatorKey, lock);
+     NotificationRepository.intialize(
+                    navigatorKey, lock, HiveStorageRepository());
     super.initState();
   }
 
@@ -85,34 +88,46 @@ class _MyAppState extends State<MyApp> {
     return MultiRepositoryProvider(
       child: MultiBlocProvider(
         child: Center(
-          child: MaterialApp(
-            navigatorKey: navigatorKey,
-            title: 'Newborn Care',
-            localizationsDelegates: [
-              AppLocalizations.delegate, // Add this line
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: [
-              const Locale('en', ''), // English, no country code
-              const Locale('hi', ''), // Hindi, no country code
-              const Locale('ar', ''), // Arabic, no country code
-              const Locale('de', ''), // German, no country code
-            ],
-            theme: MyTheme.lightTheme,
-            darkTheme: MyTheme.darkTheme,
-            routes: {
-              '/InitialScreen': (context) => InitialScreen(),
-              '/FacilityLoginScreen': (context) => FacilityLogin(),
-              '/IndividualLoginScreen': (context) => IndividualLogin(),
-              '/RegisterABaby': (context) => RegisterABaby(),
-              '/Base': (context) => BaseClass(
-                    globalKey: globalKey,
-                    drawerKey: drawerKey,
-                  ),
-            },
-            initialRoute: initialAppRoute,
+          child: BlocProvider(
+            create: (context) => SettingsBloc(HiveStorageRepository()),
+            child: BlocBuilder<SettingsBloc, SettingsState>(
+              builder: (context, state) {
+                NotificationRepository.updateNotificationChannel(
+                    HiveStorageRepository());
+               
+                return MaterialApp(
+                  navigatorKey: navigatorKey,
+                  title: 'Newborn Care',
+                  localizationsDelegates: [
+                    AppLocalizations.delegate, // Add this line
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: [
+                    const Locale('en', ''), // English, no country code
+                    const Locale('hi', ''), // Hindi, no country code
+                    const Locale('ar', ''), // Arabic, no country code
+                    const Locale('de', ''), // German, no country code
+                  ],
+                  theme: state.isDarkModeEnabled
+                      ? MyTheme.darkTheme
+                      : MyTheme.lightTheme,
+                  darkTheme: MyTheme.darkTheme,
+                  routes: {
+                    '/InitialScreen': (context) => InitialScreen(),
+                    '/FacilityLoginScreen': (context) => FacilityLogin(),
+                    '/IndividualLoginScreen': (context) => IndividualLogin(),
+                    '/RegisterABaby': (context) => RegisterABaby(),
+                    '/Base': (context) => BaseClass(
+                          globalKey: globalKey,
+                          drawerKey: drawerKey,
+                        ),
+                  },
+                  initialRoute: initialAppRoute,
+                );
+              },
+            ),
           ),
         ),
         providers: [

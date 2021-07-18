@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newborn_care/screens/profile/components/settings_drawer.dart';
 import 'package:newborn_care/widgets/short_app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'components/body.dart';
@@ -19,12 +20,14 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: SafeArea(child: SettingsDrawer()),
       body: CustomScrollView(
         physics: scrollEnabled
             ? AlwaysScrollableScrollPhysics()
             : NeverScrollableScrollPhysics(),
         slivers: [
           SliverAppBar(
+            actions: <Widget>[Container()],
             floating: true,
             automaticallyImplyLeading: false,
             elevation: 20,

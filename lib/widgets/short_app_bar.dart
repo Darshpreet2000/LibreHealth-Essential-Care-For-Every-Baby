@@ -13,6 +13,9 @@ class ShortAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      actions: <Widget>[
+        new Container(),
+      ],
       brightness: Brightness.dark,
       iconTheme: IconThemeData(
         color: Colors.white, //change your color here
