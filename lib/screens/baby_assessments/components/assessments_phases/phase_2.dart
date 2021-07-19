@@ -567,9 +567,7 @@ class _WeightSliderState extends State<WeightSlider> {
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
-        
-        textTheme: TextTheme(bodyText1: TextStyle(color: Colors.black))
-      ),
+          textTheme: TextTheme(bodyText1: TextStyle(color: Colors.black))),
       child: SfSliderTheme(
         data: SfSliderThemeData(
           activeMinorTickColor: Colors.red,
@@ -612,9 +610,7 @@ class _TemperatureSliderState extends State<TemperatureSlider> {
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
-        
-        textTheme: TextTheme(bodyText1: TextStyle(color: Colors.black))
-      ),
+          textTheme: TextTheme(bodyText1: TextStyle(color: Colors.black))),
       child: SfSliderTheme(
         data: SfSliderThemeData(
           activeMinorTickColor: Colors.red,
