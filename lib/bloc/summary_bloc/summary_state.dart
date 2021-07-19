@@ -1,6 +1,6 @@
 part of 'summary_bloc.dart';
 
-abstract class SummaryState {
+abstract class SummaryState  extends Equatable{
   const SummaryState();
 
   int get admitted;
@@ -15,4 +15,7 @@ class SummaryInitial extends SummaryState {
   final int danger;
 
   SummaryInitial(this.admitted, this.discharged, this.danger);
+
+  @override
+  List<Object?> get props => [admitted,danger,discharged];
 }

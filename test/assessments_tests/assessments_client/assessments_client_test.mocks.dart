@@ -126,6 +126,14 @@ class MockHiveStorageRepository extends _i1.Mock
   }
 
   @override
+  void saveSummaryOf24Hours(List<int>? summary) =>
+      super.noSuchMethod(Invocation.method(#saveSummaryOf24Hours, [summary]),
+          returnValueForMissingStub: null);
+  @override
+  List<int> getSummaryOf24Hours() =>
+      (super.noSuchMethod(Invocation.method(#getSummaryOf24Hours, []),
+          returnValue: <int>[]) as List<int>);
+  @override
   bool getNotificationEnabled() =>
       (super.noSuchMethod(Invocation.method(#getNotificationEnabled, []),
           returnValue: false) as bool);
