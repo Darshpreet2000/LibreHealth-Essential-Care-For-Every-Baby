@@ -24,7 +24,7 @@ class SummaryRepository {
     Map<String, dynamic> res = json.decode(response);
     for (var item in res['enrollments']) {
       admitted++;
-      if (item["status"] == "COMPLETE") complete++;
+      if (item["status"] == "COMPLETED") complete++;
     }
     List<ChildModel> childList = hiveStorageRepository.getListOfAllChild();
     childList.forEach((element) {
