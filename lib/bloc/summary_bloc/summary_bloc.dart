@@ -11,7 +11,7 @@ class SummaryBloc extends Bloc<SummaryEvent, SummaryState> {
   SummaryRepository summaryRepository;
   HiveStorageRepository hiveStorageRepository;
   SummaryBloc(this.summaryRepository, this.hiveStorageRepository)
-      : super(SummaryInitial(0,0,0));
+      : super(SummaryInitial(0, 0, 0));
 
   @override
   Stream<SummaryState> mapEventToState(
@@ -19,7 +19,8 @@ class SummaryBloc extends Bloc<SummaryEvent, SummaryState> {
   ) async* {
     if (event is FetchSummaryOf24Hours) {
       try {
-        var res = await summaryRepository.fetchSummaryOf24Hours();
+        List<int> res = await summaryRepository.fetchSummaryOf24Hours();
+        hiveStorageRepository.saveSummaryOf24Hours(res);
         yield SummaryInitial(res[0], res[1], res[2]);
       } catch (e) {
         List<int> list = hiveStorageRepository.getSummaryOf24Hours();

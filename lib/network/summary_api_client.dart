@@ -12,12 +12,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SummaryApiClient {
   http.Client client;
   BuildContext context;
-  SummaryApiClient(
-      this.client, this.context);
+  SummaryApiClient(this.client, this.context);
   Future fetchSummaryOf24Hours(String username, String password) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
-  
+
     try {
       final response = await client.get(
         //get all enrollments  which were updated in 24 hours
@@ -27,7 +26,7 @@ class SummaryApiClient {
         headers: <String, String>{
           'authorization': basicAuth,
         },
-      );
+      ).timeout(Duration(seconds: 15));
       return _response(response);
     } on TimeoutException {
       throw FetchDataException(

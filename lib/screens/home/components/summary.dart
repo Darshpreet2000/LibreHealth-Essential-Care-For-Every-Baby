@@ -43,8 +43,11 @@ Widget summary(BuildContext context, GlobalKey globalKey) {
                           onTap: () {
                             navigationBar!.onTap!(1);
                           },
-                          child: rowItem(AppLocalizations.of(context)!.admitted,
-                              state.admitted.toString(), "assets/blue.png", context)),
+                          child: rowItem(
+                              AppLocalizations.of(context)!.admitted,
+                              state.admitted.toString(),
+                              "assets/blue.png",
+                              context)),
                     ),
                     Material(
                       child: InkWell(
@@ -62,8 +65,11 @@ Widget summary(BuildContext context, GlobalKey globalKey) {
                           onTap: () {
                             navigationBar!.onTap!(1);
                           },
-                          child: rowItem(AppLocalizations.of(context)!.highRisk,
-                                state.danger.toString(), "assets/red.png", context)),
+                          child: rowItem(
+                              AppLocalizations.of(context)!.highRisk,
+                              state.danger.toString(),
+                              "assets/red.png",
+                              context)),
                     ),
                   ],
                 ),

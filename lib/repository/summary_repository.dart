@@ -21,11 +21,10 @@ class SummaryRepository {
     Profile profile = hiveStorageRepository.getProfile();
     var response = await summaryApiClient.fetchSummaryOf24Hours(
         profile.username, profile.password);
-    Map<String, dynamic> res = jsonDecode(response);
+    Map<String, dynamic> res = json.decode(response);
     for (var item in res['enrollments']) {
       admitted++;
-      item = jsonDecode(item);
-      if (item['status'] == "COMPLETE") complete++;
+      if (item["status"] == "COMPLETE") complete++;
     }
     List<ChildModel> childList = hiveStorageRepository.getListOfAllChild();
     childList.forEach((element) {
@@ -33,6 +32,6 @@ class SummaryRepository {
         danger++;
       }
     });
-    return {admitted, complete, danger};
+    return [admitted, complete, danger];
   }
 }

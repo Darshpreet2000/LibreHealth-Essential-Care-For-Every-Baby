@@ -6,6 +6,5 @@ abstract class SummaryEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
-class FetchSummaryOf24Hours extends SummaryEvent{
-  
-}
+
+class FetchSummaryOf24Hours extends SummaryEvent {}

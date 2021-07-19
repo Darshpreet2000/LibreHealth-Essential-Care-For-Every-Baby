@@ -1,6 +1,6 @@
 part of 'summary_bloc.dart';
 
-abstract class SummaryState  {
+abstract class SummaryState {
   const SummaryState();
 
   int get admitted;
@@ -10,9 +10,9 @@ abstract class SummaryState  {
 }
 
 class SummaryInitial extends SummaryState {
- final int admitted;
- final int discharged;
- final int danger;
+  final int admitted;
+  final int discharged;
+  final int danger;
 
   SummaryInitial(this.admitted, this.discharged, this.danger);
 }
