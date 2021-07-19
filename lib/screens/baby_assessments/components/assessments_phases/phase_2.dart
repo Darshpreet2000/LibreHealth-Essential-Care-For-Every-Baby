@@ -565,30 +565,36 @@ class _WeightSliderState extends State<WeightSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return SfSliderTheme(
-      data: SfSliderThemeData(
-        activeMinorTickColor: Colors.red,
-        inactiveMinorTickColor: Colors.red[200],
+    return Theme(
+      data: ThemeData(
+        
+        textTheme: TextTheme(bodyText1: TextStyle(color: Colors.black))
       ),
-      child: SfSlider(
-        min: 1000.0,
-        max: 4000.0,
-        interval: 1000,
-        showTicks: true,
-        showLabels: true,
-        enableTooltip: true,
-        minorTicksPerInterval: 5,
-        tooltipShape: SfPaddleTooltipShape(),
-        value: widget.stage2.ecebWeight,
-        onChanged: (dynamic newValue) {
-          if (widget.stage2.isCompleted == false)
-            setState(() {
-              double temp = newValue;
-              int pass = temp.toInt();
-              pass = calculateNumber(pass);
-              widget.stage2.ecebWeight = pass.toDouble();
-            });
-        },
+      child: SfSliderTheme(
+        data: SfSliderThemeData(
+          activeMinorTickColor: Colors.red,
+          inactiveMinorTickColor: Colors.red[200],
+        ),
+        child: SfSlider(
+          min: 1000.0,
+          max: 4000.0,
+          interval: 1000,
+          showTicks: true,
+          showLabels: true,
+          enableTooltip: true,
+          minorTicksPerInterval: 5,
+          tooltipShape: SfPaddleTooltipShape(),
+          value: widget.stage2.ecebWeight,
+          onChanged: (dynamic newValue) {
+            if (widget.stage2.isCompleted == false)
+              setState(() {
+                double temp = newValue;
+                int pass = temp.toInt();
+                pass = calculateNumber(pass);
+                widget.stage2.ecebWeight = pass.toDouble();
+              });
+          },
+        ),
       ),
     );
   }
@@ -604,29 +610,35 @@ class TemperatureSlider extends StatefulWidget {
 class _TemperatureSliderState extends State<TemperatureSlider> {
   @override
   Widget build(BuildContext context) {
-    return SfSliderTheme(
-      data: SfSliderThemeData(
-        activeMinorTickColor: Colors.red,
-        inactiveMinorTickColor: Colors.red[200],
+    return Theme(
+      data: ThemeData(
+        
+        textTheme: TextTheme(bodyText1: TextStyle(color: Colors.black))
       ),
-      child: SfSlider(
-        min: 94.0,
-        max: 106.0,
-        interval: 2,
-        showTicks: true,
-        showLabels: true,
-        enableTooltip: true,
-        minorTicksPerInterval: 1,
-        tooltipShape: SfPaddleTooltipShape(),
-        value: widget.stage2.ecebAssessTemperature,
-        onChanged: (dynamic newValue) {
-          if (widget.stage2.isCompleted == false)
-            setState(() {
-              double temp = newValue;
-              int pass = temp.toInt();
-              widget.stage2.ecebAssessTemperature = pass.toDouble();
-            });
-        },
+      child: SfSliderTheme(
+        data: SfSliderThemeData(
+          activeMinorTickColor: Colors.red,
+          inactiveMinorTickColor: Colors.red[200],
+        ),
+        child: SfSlider(
+          min: 94.0,
+          max: 106.0,
+          interval: 2,
+          showTicks: true,
+          showLabels: true,
+          enableTooltip: true,
+          minorTicksPerInterval: 1,
+          tooltipShape: SfPaddleTooltipShape(),
+          value: widget.stage2.ecebAssessTemperature,
+          onChanged: (dynamic newValue) {
+            if (widget.stage2.isCompleted == false)
+              setState(() {
+                double temp = newValue;
+                int pass = temp.toInt();
+                widget.stage2.ecebAssessTemperature = pass.toDouble();
+              });
+          },
+        ),
       ),
     );
   }
