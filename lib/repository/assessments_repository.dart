@@ -87,7 +87,7 @@ class AssessmentsRepository {
     return;
   }
 
-  void validatePhase3Assessments(Object obj, DateTime birthTime) {
+  void validatePhase3Assessments(Object obj) {
     if (obj is Stage3Normal) {
       //validate stage3Normal
       if (obj.ecebStage3NormalMaintainNormalTemperature == false)

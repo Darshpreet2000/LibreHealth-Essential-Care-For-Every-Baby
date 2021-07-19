@@ -97,8 +97,8 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
     } else if (event is AssessmentsEventCompleteStage3) {
       try {
         // check if data is filled correctly
-        _assessmentsRepository.validatePhase3Assessments(
-            childModel.assessmentsList[2], childModel.birthTime);
+        _assessmentsRepository
+            .validatePhase3Assessments(childModel.assessmentsList[2]);
 
         notificationRepository.removeScheduledNotification(childModel.key);
         //push data to dhis2 using api
