@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:newborn_care/bloc/list_of_babies_bloc/list_of_babies_bloc.dart';
 import 'package:newborn_care/bloc/settings_bloc/settings_bloc.dart';
+import 'package:newborn_care/bloc/summary_bloc/summary_bloc.dart';
 import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/profile.dart';
@@ -24,6 +25,7 @@ import 'package:newborn_care/repository/list_of_babies_repository.dart';
 import 'package:newborn_care/repository/notification_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/repository/register_baby_repository.dart';
+import 'package:newborn_care/repository/summary_repository.dart';
 import 'package:newborn_care/screens/base/base_class.dart';
 import 'package:newborn_care/screens/facility_login/facility_login.dart';
 import 'package:newborn_care/screens/individual_login/individual_login.dart';
@@ -136,6 +138,11 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         providers: [
+          BlocProvider<SummaryBloc>(
+            create: (BuildContext context) => SummaryBloc(
+                context.read<SummaryRepository>(),
+                context.read<HiveStorageRepository>()),
+          ),
           BlocProvider<ListOfBabiesBloc>(
             create: (BuildContext context) => ListOfBabiesBloc(
                 context.read<ListOfBabiesRepository>(),
@@ -189,6 +196,11 @@ class _MyAppState extends State<MyApp> {
               lock,
               context.read<HiveStorageRepository>(),
               context.read<RefreshRepository>()),
+        ),
+        RepositoryProvider<SummaryRepository>(
+          create: (context) => SummaryRepository(
+              context.read<HiveStorageRepository>(),
+              navigatorKey.currentContext!),
         ),
         RepositoryProvider<UserActivityRepository>(
           create: (context) => UserActivityRepository(

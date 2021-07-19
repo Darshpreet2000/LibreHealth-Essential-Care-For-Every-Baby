@@ -6,6 +6,18 @@ import 'package:newborn_care/models/sort_list_enum.dart';
 import 'package:newborn_care/models/user_activity.dart';
 
 class HiveStorageRepository {
+  // Summary of 24 hours
+  void saveSummaryOf24Hours(List<int> summary) {
+    box.put("summary", summary);
+  }
+
+  List<int> getSummaryOf24Hours() {
+    if (box.containsKey('summary'))
+      return box.get('summary');
+    else
+      return [0, 0, 0];
+  }
+
   // Settings storage
   bool getNotificationEnabled() {
     if (box.containsKey('notificationEnabled'))

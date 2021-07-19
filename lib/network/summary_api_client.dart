@@ -4,20 +4,16 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:newborn_care/exceptions/custom_exceptions.dart';
-import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/utils/api_config.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
-import 'package:synchronized/synchronized.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SummaryApiClient {
   http.Client client;
   BuildContext context;
-  RefreshRepository refreshRepository;
-  Lock lock;
   SummaryApiClient(
-      this.client, this.context, this.lock, this.refreshRepository);
+      this.client, this.context);
   Future fetchSummaryOf24Hours(String username, String password) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
