@@ -76,8 +76,8 @@ void mainBloc() {
       },
       act: (bloc) => bloc.add(AssessmentsEventFetchData()),
       expect: () => [
-        AssessmentsLoading(inputChildModel),
-        AssessmentsInitial(outputChildModel)
+        isA<AssessmentsLoading>(),
+        isA<AssessmentsInitial>()
       ],
     );
     blocTest<AssessmentsBloc, AssessmentsState>(
@@ -97,9 +97,9 @@ void mainBloc() {
       },
       act: (bloc) => bloc.add(AssessmentsEventFetchData()),
       expect: () => [
-        AssessmentsLoading(inputChildModel),
-        AssessmentsError("Exception: No Internet"),
-        AssessmentsInitial(inputChildModel)
+        isA<AssessmentsLoading>(),
+        isA<AssessmentsError>(),
+        isA<AssessmentsInitial>()
       ],
     );
     blocTest<AssessmentsBloc, AssessmentsState>(
@@ -142,7 +142,7 @@ void mainBloc() {
         return assessmentsBloc;
       },
       act: (bloc) => bloc.add(AssessmentsEventCompleteStage1()),
-      expect: () => [AssessmentsAdded(inputChildModel)],
+      expect: () => [isA<AssessmentsAdded>()],
     );
     blocTest<AssessmentsBloc, AssessmentsState>(
       'yields AssessmentsError when ward name is empty while adding of phase 1 assessments',
@@ -161,8 +161,8 @@ void mainBloc() {
       },
       act: (bloc) => bloc.add(AssessmentsEventCompleteStage1()),
       expect: () => [
-        AssessmentsError("Exception: Enter ward name"),
-        AssessmentsInitial(inputChildModel)
+        isA<AssessmentsError>(),
+        isA<AssessmentsInitial>()
       ],
     );
     blocTest<AssessmentsBloc, AssessmentsState>(
@@ -182,8 +182,8 @@ void mainBloc() {
       },
       act: (bloc) => bloc.add(AssessmentsEventCompleteStage1()),
       expect: () => [
-        AssessmentsError("Exception: Please complete assessments"),
-        AssessmentsInitial(inputChildModel)
+        isA<AssessmentsError>(),
+       isA<AssessmentsInitial>()
       ],
     );
 
@@ -260,7 +260,7 @@ void mainBloc() {
         return assessmentsBloc;
       },
       act: (bloc) => bloc.add(AssessmentsEventCompleteStage2()),
-      expect: () => [AssessmentsAdded(inputChildModel)],
+      expect: () => [isA<AssessmentsAdded>()],
     );
     blocTest<AssessmentsBloc, AssessmentsState>(
       'yields AssessmentsError when ward name is empty while adding of phase 2 assessments',
@@ -280,8 +280,8 @@ void mainBloc() {
       },
       act: (bloc) => bloc.add(AssessmentsEventCompleteStage1()),
       expect: () => [
-        AssessmentsError("Exception: Enter ward name"),
-        AssessmentsInitial(inputChildModel)
+        isA<AssessmentsError>(),
+        isA<AssessmentsInitial>()
       ],
     );
     blocTest<AssessmentsBloc, AssessmentsState>(
@@ -302,8 +302,8 @@ void mainBloc() {
       },
       act: (bloc) => bloc.add(AssessmentsEventCompleteStage1()),
       expect: () => [
-        AssessmentsError("Exception: Please complete assessments"),
-        AssessmentsInitial(inputChildModel)
+        isA<AssessmentsError>(),
+    isA<AssessmentsInitial>()
       ],
     );
 
@@ -345,7 +345,7 @@ void mainBloc() {
         return assessmentsBloc;
       },
       act: (bloc) => bloc.add(AssessmentsEventCompleteStage3()),
-      expect: () => [AssessmentsAdded(inputChildModel)],
+      expect: () => [isA<AssessmentsAdded>()],
     );
 
     blocTest<AssessmentsBloc, AssessmentsState>(
@@ -363,8 +363,8 @@ void mainBloc() {
       },
       act: (bloc) => bloc.add(AssessmentsEventCompleteStage3()),
       expect: () => [
-        AssessmentsError("Exception: Please complete assessments"),
-        AssessmentsInitial(inputChildModel)
+        isA<AssessmentsError>(),
+        isA<AssessmentsInitial>()
       ],
     );
   });
