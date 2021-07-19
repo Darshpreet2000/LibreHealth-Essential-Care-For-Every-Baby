@@ -94,6 +94,27 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
         yield AssessmentsError(e.toString());
         yield AssessmentsInitial(childModel);
       }
+    } else if (event is AssessmentsEventCompleteStage3) {
+      try {
+        // check if data is filled correctly
+        _assessmentsRepository.validatePhase3Assessments(
+            childModel.assessmentsList[2], childModel.birthTime);
+
+        notificationRepository.removeScheduledNotification(childModel.key);
+        //push data to dhis2 using api
+        _assessmentsRepository.registerStage3Details(
+            childModel.assessmentsList[2], childModel.key);
+
+        childModel.assessmentsList =
+            _assessmentsRepository.addNextAssessment(childModel);
+
+        //update child data in local storage in phone
+        hiveStorageRepository.updateChild(childModel.key, childModel);
+        yield AssessmentsAdded(childModel);
+      } catch (e) {
+        yield AssessmentsError(e.toString());
+        yield AssessmentsInitial(childModel);
+      }
     }
   }
 }

@@ -1,11 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:newborn_care/bloc/assessments_bloc/assessments_bloc.dart';
+import 'package:newborn_care/models/stage_3_danger.dart';
 
-class Phase3Danger extends StatelessWidget {
-  const Phase3Danger({Key? key}) : super(key: key);
+class Phase3Danger extends StatefulWidget {
+  final Stage3Danger stage3danger;
+  final AssessmentsBloc assessmentsBloc;
 
+  const Phase3Danger(this.stage3danger, this.assessmentsBloc);
+
+  @override
+  _Phase3DangerState createState() => _Phase3DangerState();
+}
+
+class _Phase3DangerState extends State<Phase3Danger> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,8 +55,14 @@ class Phase3Danger extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
-                  value: false,
-                  onChanged: (newValue) {},
+                  value: widget.stage3danger.ecebStage3GiveAntibiotics,
+                  onChanged: (newValue) {
+                    setState(() {
+                      if (widget.stage3danger.isCompleted == false) {
+                        widget.stage3danger.ecebStage3GiveAntibiotics = true;
+                      }
+                    });
+                  },
                   controlAffinity: ListTileControlAffinity.trailing,
                 ),
               ),
@@ -64,9 +79,40 @@ class Phase3Danger extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
-                  value: false,
-                  onChanged: (newValue) {},
+                  value: widget.stage3danger.ecebStage3SeekAdvancedCare,
+                  onChanged: (newValue) {
+                    setState(() {
+                      if (widget.stage3danger.isCompleted == false) {
+                        widget.stage3danger.ecebStage3SeekAdvancedCare = true;
+                      }
+                    });
+                  },
                   controlAffinity: ListTileControlAffinity.trailing,
+                ),
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    side: BorderSide(color: Colors.blue, width: 2.5),
+                    primary: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0))),
+                onPressed: () {
+                  if (widget.stage3danger.isCompleted == false) {
+                    widget.assessmentsBloc
+                        .add(AssessmentsEventCompleteStage3());
+                  }
+                },
+                child: Text(
+                  widget.stage3danger.isCompleted == false
+                      ? AppLocalizations.of(context)!.saveAssessments
+                      : AppLocalizations.of(context)!.assessmentsSaved,
+                  style: TextStyle(
+                    color: widget.stage3danger.isCompleted == false
+                        ? Colors.white
+                        : Colors.white70,
+                  ),
                 ),
               ),
             ),

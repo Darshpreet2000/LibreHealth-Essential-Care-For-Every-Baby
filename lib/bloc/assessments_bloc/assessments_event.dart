@@ -12,3 +12,5 @@ class AssessmentsEventCompleteStage1 extends AssessmentsEvent {}
 class AssessmentsEventFetchData extends AssessmentsEvent {}
 
 class AssessmentsEventCompleteStage2 extends AssessmentsEvent {}
+
+class AssessmentsEventCompleteStage3 extends AssessmentsEvent {}

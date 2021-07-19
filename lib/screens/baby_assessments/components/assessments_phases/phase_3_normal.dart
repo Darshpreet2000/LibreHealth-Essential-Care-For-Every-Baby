@@ -1,10 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:newborn_care/bloc/assessments_bloc/assessments_bloc.dart';
+import 'package:newborn_care/models/stage_3_normal.dart';
 
-class Phase3Normal extends StatelessWidget {
-  const Phase3Normal({Key? key}) : super(key: key);
+class Phase3Normal extends StatefulWidget {
+  final Stage3Normal stage3normal;
+  final AssessmentsBloc assessmentsBloc;
 
+  const Phase3Normal(this.stage3normal, this.assessmentsBloc);
+
+  @override
+  _Phase3NormalState createState() => _Phase3NormalState();
+}
+
+class _Phase3NormalState extends State<Phase3Normal> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,8 +55,16 @@ class Phase3Normal extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
-                  value: false,
-                  onChanged: (newValue) {},
+                  value: widget
+                      .stage3normal.ecebStage3NormalMaintainNormalTemperature,
+                  onChanged: (newValue) {
+                    setState(() {
+                      if (widget.stage3normal.isCompleted == false) {
+                        widget.stage3normal
+                            .ecebStage3NormalMaintainNormalTemperature = true;
+                      }
+                    });
+                  },
                   controlAffinity: ListTileControlAffinity.trailing,
                 ),
               ),
@@ -63,8 +81,16 @@ class Phase3Normal extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
-                  value: false,
-                  onChanged: (newValue) {},
+                  value:
+                      widget.stage3normal.ecebStage3NormalSupportBreastfeeding,
+                  onChanged: (newValue) {
+                    setState(() {
+                      if (widget.stage3normal.isCompleted == false) {
+                        widget.stage3normal
+                            .ecebStage3NormalSupportBreastfeeding = true;
+                      }
+                    });
+                  },
                   controlAffinity: ListTileControlAffinity.trailing,
                 ),
               ),
@@ -82,8 +108,17 @@ class Phase3Normal extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
-                  value: false,
-                  onChanged: (newValue) {},
+                  value: widget.stage3normal
+                      .ecebStage3NormalAdviseAboutBreastFeedingProblems,
+                  onChanged: (newValue) {
+                    setState(() {
+                      if (widget.stage3normal.isCompleted == false) {
+                        widget.stage3normal
+                                .ecebStage3NormalAdviseAboutBreastFeedingProblems =
+                            true;
+                      }
+                    });
+                  },
                   controlAffinity: ListTileControlAffinity.trailing,
                 ),
               ),
@@ -100,9 +135,40 @@ class Phase3Normal extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
-                  value: false,
-                  onChanged: (newValue) {},
+                  value: widget.stage3normal.ecebStage3NormalImmunize,
+                  onChanged: (newValue) {
+                    setState(() {
+                      if (widget.stage3normal.isCompleted == false) {
+                        widget.stage3normal.ecebStage3NormalImmunize = true;
+                      }
+                    });
+                  },
                   controlAffinity: ListTileControlAffinity.trailing,
+                ),
+              ),
+            ),
+            Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    side: BorderSide(color: Colors.blue, width: 2.5),
+                    primary: Colors.blue,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0))),
+                onPressed: () {
+                  if (widget.stage3normal.isCompleted == false) {
+                    widget.assessmentsBloc
+                        .add(AssessmentsEventCompleteStage3());
+                  }
+                },
+                child: Text(
+                  widget.stage3normal.isCompleted == false
+                      ? AppLocalizations.of(context)!.saveAssessments
+                      : AppLocalizations.of(context)!.assessmentsSaved,
+                  style: TextStyle(
+                    color: widget.stage3normal.isCompleted == false
+                        ? Colors.white
+                        : Colors.white70,
+                  ),
                 ),
               ),
             ),

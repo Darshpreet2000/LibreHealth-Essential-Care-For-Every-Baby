@@ -7,6 +7,9 @@ import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:newborn_care/models/stage_2.dart';
+import 'package:newborn_care/models/stage_3_danger.dart';
+import 'package:newborn_care/models/stage_3_normal.dart';
+import 'package:newborn_care/models/stage_3_problem.dart';
 import 'package:newborn_care/network/assessments_client.dart';
 import 'package:newborn_care/repository/classification_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
@@ -84,6 +87,41 @@ class AssessmentsRepository {
     return;
   }
 
+  void validatePhase3Assessments(Object obj, DateTime birthTime) {
+    if (obj is Stage3Normal) {
+      //validate stage3Normal
+      if (obj.ecebStage3NormalMaintainNormalTemperature == false)
+        throw Exception(AppLocalizations.of(context)!.completeAssessments);
+      if (obj.ecebStage3NormalSupportBreastfeeding == false)
+        throw Exception(AppLocalizations.of(context)!.completeAssessments);
+      if (obj.ecebStage3NormalAdviseAboutBreastFeedingProblems == false)
+        throw Exception(AppLocalizations.of(context)!.completeAssessments);
+      if (obj.ecebStage3NormalImmunize == false)
+        throw Exception(AppLocalizations.of(context)!.completeAssessments);
+      obj.isCompleted = true;
+    } else if (obj is Stage3Problem) {
+      //validate stage3Normal
+      if (obj.ecebStage3ProblemUnder2000gProlongSkinToSkinCare == false)
+        throw Exception(AppLocalizations.of(context)!.completeAssessments);
+      if (obj.ecebStage3ProblemAbnormalTemperatureImproveThermalCare == false)
+        throw Exception(AppLocalizations.of(context)!.completeAssessments);
+      if (obj.ecebStage3ProblemContinueInpatientCare == false)
+        throw Exception(AppLocalizations.of(context)!.completeAssessments);
+      if (obj.ecebStage3ProblemPoorFeedingExpressBreastMilk == false)
+        throw Exception(AppLocalizations.of(context)!.completeAssessments);
+      if (obj.ecebStage3ProblemPoorFeedingUseAlternativeFeedingMethod == false)
+        throw Exception(AppLocalizations.of(context)!.completeAssessments);
+      obj.isCompleted = true;
+    } else if (obj is Stage3Danger) {
+      //validate Stage3Danger
+      if (obj.ecebStage3GiveAntibiotics == false)
+        throw Exception(AppLocalizations.of(context)!.completeAssessments);
+      if (obj.ecebStage3SeekAdvancedCare == false)
+        throw Exception(AppLocalizations.of(context)!.completeAssessments);
+      obj.isCompleted = true;
+    }
+  }
+
   List<Object> addNextAssessment(ChildModel childModel) {
     List<Object> assessments = childModel.assessmentsList;
     if (assessments.length == 0) {
@@ -92,7 +130,17 @@ class AssessmentsRepository {
     } else if (assessments.length == 1) {
       assessments.add(Stage2());
       addStage2Notifications(childModel);
-    } else if (assessments.length == 2) {}
+    } else if (assessments.length == 2) {
+      if (childModel.classification == AppLocalizations.of(context)!.normal) {
+        assessments.add(Stage3Normal());
+      }
+      if (childModel.classification == AppLocalizations.of(context)!.problem) {
+        assessments.add(Stage3Problem());
+      }
+      if (childModel.classification == AppLocalizations.of(context)!.danger) {
+        assessments.add(Stage3Danger());
+      }
+    }
     return assessments;
   }
 
@@ -143,6 +191,15 @@ class AssessmentsRepository {
     return;
   }
 
+  Future registerStage3Details(Object obj, String id) async {
+    Profile profile = hiveStorageRepository.getProfile();
+
+    String json = jsonEncode(obj);
+    assessmentsClient.registerEvent(
+        json, id, profile.username, profile.password);
+    return;
+  }
+
   Future updateTrackedEntityInstance(
       ChildModel childModel, String id, String wardName) async {
     Profile profile = hiveStorageRepository.getProfile();
@@ -163,10 +220,18 @@ class AssessmentsRepository {
         if (item['programStage'] == DHIS2Config.stage1ID &&
             item['status'] == 'COMPLETED') {
           result.insert(0, Stage1.fromJson(item));
-        }
-        if (item['programStage'] == DHIS2Config.stage2ID &&
+        } else if (item['programStage'] == DHIS2Config.stage2ID &&
             item['status'] == 'COMPLETED') {
           result.insert(0, Stage2.fromJson(item));
+        } else if (item['programStage'] == DHIS2Config.stage3IDNormal &&
+            item['status'] == 'COMPLETED') {
+          result.insert(0, Stage3Normal.fromJson(item));
+        } else if (item['programStage'] == DHIS2Config.stage3IDProblem &&
+            item['status'] == 'COMPLETED') {
+          result.insert(0, Stage3Problem.fromJson(item));
+        } else if (item['programStage'] == DHIS2Config.stage3IDDanger &&
+            item['status'] == 'COMPLETED') {
+          result.insert(0, Stage3Danger.fromJson(item));
         }
       }
       return result;
