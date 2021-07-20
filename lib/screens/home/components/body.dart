@@ -14,11 +14,12 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Column( 
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         summary(context, globalKey!),
         registerBaby(context),
-        onCallDoctors(context),
+        OnCallDoctors(),
       ],
     );
   }

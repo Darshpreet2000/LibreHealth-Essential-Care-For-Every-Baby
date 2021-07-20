@@ -104,4 +104,11 @@ class DHIS2Config {
       "CW6Uob7rOVY";
   static const String eceb_Stage_5_Normal_Give_parents_guidance_for_home_care =
       "IAhrpxprLlq";
+
+  // On Call Doctor's program
+    static const String onCallDoctorName = "BVoLpS71Tov";    
+    static const String onCallDoctorImage = "VAo8jLZZQ2g";    
+    static const String onCallDoctorScheduleDate = "clmwvjupPBX";    
+    static const String onCallDoctorShiftEndTime = "QW33PCFSrhh";    
+    static const String onCallDoctorShiftStartTime = "SfNYwfKeMcK";  
 }

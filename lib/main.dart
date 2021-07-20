@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:newborn_care/bloc/list_of_babies_bloc/list_of_babies_bloc.dart';
+import 'package:newborn_care/bloc/on_call_doctor_bloc/on_call_doctor_bloc.dart';
 import 'package:newborn_care/bloc/settings_bloc/settings_bloc.dart';
 import 'package:newborn_care/bloc/summary_bloc/summary_bloc.dart';
 import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
@@ -24,6 +25,7 @@ import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/authentication_repository.dart';
 import 'package:newborn_care/repository/list_of_babies_repository.dart';
 import 'package:newborn_care/repository/notification_repository.dart';
+import 'package:newborn_care/repository/on_call_doctor_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/repository/register_baby_repository.dart';
 import 'package:newborn_care/repository/summary_repository.dart';
@@ -159,6 +161,9 @@ class _MyAppState extends State<MyApp> {
           BlocProvider<RefreshBloc>(
             create: (BuildContext context) =>
                 RefreshBloc(context.read<RefreshRepository>(), lock),
+          ),  BlocProvider<OnCallDoctorBloc>(
+            create: (BuildContext context) =>
+                OnCallDoctorBloc(context.read<OnCallDoctorRepository>()),
           ),
           BlocProvider<RegisterBabyBloc>(
             create: (BuildContext context) => RegisterBabyBloc(
@@ -198,6 +203,16 @@ class _MyAppState extends State<MyApp> {
               lock,
               context.read<HiveStorageRepository>(),
               context.read<RefreshRepository>()),
+        ),
+        RepositoryProvider<OnCallDoctorRepository>(
+          create: (context) => OnCallDoctorRepository(
+              navigatorKey.currentContext!,
+              context.read<HiveStorageRepository>(),
+        ),),
+        RepositoryProvider<SummaryRepository>(
+          create: (context) => SummaryRepository(
+              context.read<HiveStorageRepository>(),
+              navigatorKey.currentContext!),
         ),
         RepositoryProvider<SummaryRepository>(
           create: (context) => SummaryRepository(
