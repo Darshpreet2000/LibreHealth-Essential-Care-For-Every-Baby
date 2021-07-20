@@ -1,6 +1,9 @@
+import 'dhis2_config.dart';
+
 class APIConfig {
   String login = "/api/me";
   String trackedEntityInstance = "/api/trackedEntityInstances";
+  String onCallDoctors = "/api/events.json?orgUnit=${DHIS2Config.orgUnit}&program=${DHIS2Config.programOnCallDoctorsID}";
   String userMessages = "/api/messageConversations";
   String enrollments = "/api/enrollments";
   String getaddEventsAPI(
