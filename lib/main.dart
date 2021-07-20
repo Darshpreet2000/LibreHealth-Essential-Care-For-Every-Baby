@@ -166,7 +166,7 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider<OnCallDoctorBloc>(
             create: (BuildContext context) =>
-                OnCallDoctorBloc(context.read<OnCallDoctorRepository>()),
+                OnCallDoctorBloc(context.read<OnCallDoctorRepository>(),context.read<HiveStorageRepository>()),
           ),
           BlocProvider<RegisterBabyBloc>(
             create: (BuildContext context) => RegisterBabyBloc(

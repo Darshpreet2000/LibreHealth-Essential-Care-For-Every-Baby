@@ -19,8 +19,6 @@ void main() {
 
 void assessmentClientTest() {
   MockClient _mockHttpClient = MockClient();
-  MockHiveStorageRepository _mockHiveStorageRepository =
-      MockHiveStorageRepository();
 
   //Assessment Client Test
   //Test Cases
@@ -63,7 +61,6 @@ void assessmentClientTest() {
           localizationsDelegates: [
             AppLocalizations.delegate,
           ]));
-      String json = '';
       BuildContext context = tester.element(find.byType(Container));
       onCallDoctorClient = new OnCallDoctorClient(_mockHttpClient, context);
       String basicAuth =

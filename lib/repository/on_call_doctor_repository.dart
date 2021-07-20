@@ -18,7 +18,7 @@ class OnCallDoctorRepository {
     );
   }
   Future getListOfOnCallDoctors() async {
-    try {
+  
       Profile profile = hiveStorageRepository.getProfile();
       String response = await onCallDoctorClient.fetchOnCallDoctors(
           profile.username, profile.password);
@@ -30,10 +30,7 @@ class OnCallDoctorRepository {
       }
       hiveStorageRepository.saveOnCallDoctors(result);
       return seperateDoctorsOnCall(result);
-    } catch (e) {
-      List<OnCallDoctorModel> result = hiveStorageRepository.getOnCallDoctors();
-      return seperateDoctorsOnCall(result);
-    }
+    
   }
 
   List<OnCallDoctorModel> seperateDoctorsOnCall(List<OnCallDoctorModel> list) {
