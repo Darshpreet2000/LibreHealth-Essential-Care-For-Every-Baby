@@ -94,6 +94,10 @@ class DHIS2Config {
   static const String ecebStage3GiveAntibiotics = "JLSf9WjMeKR";
   static const String ecebStage3SeekAdvancedCare = "cdFkGwVUKhK";
 
+  //Stage - 4 Checkup after 90 minutes
+
+  static const String stage4ID = "Uxfx1kGDzhH";
+
   //Stage - 5 Discharge
   static const String eceb_Stage_5_Normal_Reassess_baby_for_discharge =
       "CW6Uob7rOVY";
