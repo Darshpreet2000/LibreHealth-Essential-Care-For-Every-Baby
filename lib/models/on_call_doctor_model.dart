@@ -1,11 +1,18 @@
-import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
+part 'auto_generate/on_call_doctor_model.g.dart';
 
+@HiveType(typeId: 13)
 class OnCallDoctorModel {
+  @HiveField(0)
   String? onCallDoctorName;
+  @HiveField(1)
   DateTime? onCallDoctorScheduleDate;
-  TimeOfDay? onCallDoctorShiftStartTime;
-  TimeOfDay? onCallDoctorShiftEndTime;
+  @HiveField(2)
+  DateTime? onCallDoctorShiftStartTime;
+  @HiveField(3)
+  DateTime? onCallDoctorShiftEndTime;
+  @HiveField(4)
   String? eventID;
 
   OnCallDoctorModel(
@@ -29,13 +36,21 @@ class OnCallDoctorModel {
           break;
         case DHIS2Config.onCallDoctorShiftStartTime:
           var parts = element['value'].toString().split(":");
-          onCallDoctorShiftStartTime =
-              TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
+          onCallDoctorShiftStartTime = DateTime(
+              onCallDoctorScheduleDate!.year,
+              onCallDoctorScheduleDate!.month,
+              onCallDoctorScheduleDate!.day,
+              int.parse(parts[0]),
+              int.parse(parts[1]));
           break;
         case DHIS2Config.onCallDoctorShiftEndTime:
           var parts = element['value'].toString().split(":");
-          onCallDoctorShiftEndTime =
-              TimeOfDay(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
+          onCallDoctorShiftEndTime = DateTime(
+              onCallDoctorScheduleDate!.year,
+              onCallDoctorScheduleDate!.month,
+              onCallDoctorScheduleDate!.day,
+              int.parse(parts[0]),
+              int.parse(parts[1]));
           break;
       }
     });

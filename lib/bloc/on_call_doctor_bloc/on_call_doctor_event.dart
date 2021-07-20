@@ -6,4 +6,5 @@ abstract class OnCallDoctorEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
-class FetchOnCallDoctors extends OnCallDoctorEvent{}
+
+class FetchOnCallDoctors extends OnCallDoctorEvent {}

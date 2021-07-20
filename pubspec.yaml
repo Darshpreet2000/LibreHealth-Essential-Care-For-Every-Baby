@@ -28,7 +28,6 @@ dependencies:
   hive: ^2.0.4
   hive_flutter: ^1.0.0
   bloc_test: ^8.0.2
-  shimmer: ^2.0.0
   cached_network_image: ^3.1.0
  
 

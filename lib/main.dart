@@ -9,6 +9,7 @@ import 'package:newborn_care/bloc/settings_bloc/settings_bloc.dart';
 import 'package:newborn_care/bloc/summary_bloc/summary_bloc.dart';
 import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
 import 'package:newborn_care/models/child_model.dart';
+import 'package:newborn_care/models/on_call_doctor_model.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/register_baby_model.dart';
 import 'package:newborn_care/models/request_service_type.dart';
@@ -69,6 +70,7 @@ Future registerHive() async {
   Hive.registerAdapter(Stage3ProblemAdapter());
   Hive.registerAdapter(Stage3DangerAdapter());
   Hive.registerAdapter(Stage4Adapter());
+  Hive.registerAdapter(OnCallDoctorModelAdapter());
   box = await Hive.openBox('eceb');
   listBox = await Hive.openBox<List>('eceblist');
   mapBox = await Hive.openBox<ChildModel>('ecebMap');
@@ -161,7 +163,8 @@ class _MyAppState extends State<MyApp> {
           BlocProvider<RefreshBloc>(
             create: (BuildContext context) =>
                 RefreshBloc(context.read<RefreshRepository>(), lock),
-          ),  BlocProvider<OnCallDoctorBloc>(
+          ),
+          BlocProvider<OnCallDoctorBloc>(
             create: (BuildContext context) =>
                 OnCallDoctorBloc(context.read<OnCallDoctorRepository>()),
           ),
@@ -206,9 +209,10 @@ class _MyAppState extends State<MyApp> {
         ),
         RepositoryProvider<OnCallDoctorRepository>(
           create: (context) => OnCallDoctorRepository(
-              navigatorKey.currentContext!,
-              context.read<HiveStorageRepository>(),
-        ),),
+            navigatorKey.currentContext!,
+            context.read<HiveStorageRepository>(),
+          ),
+        ),
         RepositoryProvider<SummaryRepository>(
           create: (context) => SummaryRepository(
               context.read<HiveStorageRepository>(),

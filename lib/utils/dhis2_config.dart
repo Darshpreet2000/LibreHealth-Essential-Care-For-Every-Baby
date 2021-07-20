@@ -106,9 +106,9 @@ class DHIS2Config {
       "IAhrpxprLlq";
 
   // On Call Doctor's program
-    static const String onCallDoctorName = "BVoLpS71Tov";    
-    static const String onCallDoctorImage = "VAo8jLZZQ2g";    
-    static const String onCallDoctorScheduleDate = "clmwvjupPBX";    
-    static const String onCallDoctorShiftEndTime = "QW33PCFSrhh";    
-    static const String onCallDoctorShiftStartTime = "SfNYwfKeMcK";  
+  static const String onCallDoctorName = "BVoLpS71Tov";
+  static const String onCallDoctorImage = "VAo8jLZZQ2g";
+  static const String onCallDoctorScheduleDate = "clmwvjupPBX";
+  static const String onCallDoctorShiftEndTime = "QW33PCFSrhh";
+  static const String onCallDoctorShiftStartTime = "SfNYwfKeMcK";
 }

@@ -28,12 +28,25 @@ class OnCallDoctorRepository {
         OnCallDoctorModel onCallDoctorModel = OnCallDoctorModel.fromJson(item);
         result.add(onCallDoctorModel);
       }
-      return result;
+      hiveStorageRepository.saveOnCallDoctors(result);
+      return seperateDoctorsOnCall(result);
     } catch (e) {
       List<OnCallDoctorModel> result = hiveStorageRepository.getOnCallDoctors();
-      return result;
+      return seperateDoctorsOnCall(result);
     }
   }
-  
 
+  List<OnCallDoctorModel> seperateDoctorsOnCall(List<OnCallDoctorModel> list) {
+    List<OnCallDoctorModel> doctorsonCall = [];
+    list.forEach((element) {
+      final currentTime = DateTime.now();
+
+      if (currentTime.isAfter(element.onCallDoctorShiftStartTime!) &&
+          currentTime.isBefore(element.onCallDoctorShiftEndTime!)) {
+        doctorsonCall.add(element);
+      }
+    });
+
+    return doctorsonCall;
+  }
 }

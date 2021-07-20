@@ -7,7 +7,7 @@ import 'package:newborn_care/models/sort_list_enum.dart';
 import 'package:newborn_care/models/user_activity.dart';
 
 class HiveStorageRepository {
-  // On Call Doctor 
+  // On Call Doctor
   void saveOnCallDoctors(List<OnCallDoctorModel> list) {
     listBox.put('onCallDoctorsList', list);
   }

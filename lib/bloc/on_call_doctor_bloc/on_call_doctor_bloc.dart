@@ -18,10 +18,9 @@ class OnCallDoctorBloc extends Bloc<OnCallDoctorEvent, OnCallDoctorState> {
   ) async* {
     if (event is FetchOnCallDoctors) {
       yield OnCallDoctorLoading();
-            List<OnCallDoctorModel> list =
-            await onCallDoctorRepository.getListOfOnCallDoctors();
-          yield OnCallDoctorLoaded(list);
-     
+      List<OnCallDoctorModel> list =
+          await onCallDoctorRepository.getListOfOnCallDoctors();
+      yield OnCallDoctorLoaded(list);
     }
   }
 }

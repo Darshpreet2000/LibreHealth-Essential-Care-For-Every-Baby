@@ -7,10 +7,11 @@ import 'dart:async' as _i8;
 import 'package:flutter/src/widgets/framework.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:newborn_care/models/child_model.dart' as _i5;
-import 'package:newborn_care/models/network_request.dart' as _i11;
+import 'package:newborn_care/models/network_request.dart' as _i12;
+import 'package:newborn_care/models/on_call_doctor_model.dart' as _i9;
 import 'package:newborn_care/models/profile.dart' as _i6;
-import 'package:newborn_care/models/sort_list_enum.dart' as _i9;
-import 'package:newborn_care/models/user_activity.dart' as _i10;
+import 'package:newborn_care/models/sort_list_enum.dart' as _i10;
+import 'package:newborn_care/models/user_activity.dart' as _i11;
 import 'package:newborn_care/network/summary_api_client.dart' as _i4;
 import 'package:newborn_care/repository/hive_storage_repository.dart' as _i3;
 import 'package:newborn_care/repository/summary_repository.dart' as _i7;
@@ -82,6 +83,14 @@ class MockHiveStorageRepository extends _i1.Mock
   }
 
   @override
+  void saveOnCallDoctors(List<_i9.OnCallDoctorModel>? list) =>
+      super.noSuchMethod(Invocation.method(#saveOnCallDoctors, [list]),
+          returnValueForMissingStub: null);
+  @override
+  List<_i9.OnCallDoctorModel> getOnCallDoctors() => (super.noSuchMethod(
+      Invocation.method(#getOnCallDoctors, []),
+      returnValue: <_i9.OnCallDoctorModel>[]) as List<_i9.OnCallDoctorModel>);
+  @override
   void saveSummaryOf24Hours(List<int>? summary) =>
       super.noSuchMethod(Invocation.method(#saveSummaryOf24Hours, [summary]),
           returnValueForMissingStub: null);
@@ -114,11 +123,11 @@ class MockHiveStorageRepository extends _i1.Mock
       super.noSuchMethod(Invocation.method(#storeThemeData, [value]),
           returnValueForMissingStub: null);
   @override
-  _i9.SortListEnum getSortBy() =>
+  _i10.SortListEnum getSortBy() =>
       (super.noSuchMethod(Invocation.method(#getSortBy, []),
-          returnValue: _i9.SortListEnum.time) as _i9.SortListEnum);
+          returnValue: _i10.SortListEnum.time) as _i10.SortListEnum);
   @override
-  void storeSortBy(_i9.SortListEnum? sortListEnum) =>
+  void storeSortBy(_i10.SortListEnum? sortListEnum) =>
       super.noSuchMethod(Invocation.method(#storeSortBy, [sortListEnum]),
           returnValueForMissingStub: null);
   @override
@@ -143,26 +152,26 @@ class MockHiveStorageRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#getListOfAllChild, []),
           returnValue: <_i5.ChildModel>[]) as List<_i5.ChildModel>);
   @override
-  void storeNotifications(List<_i10.UserActivity>? notificationsList) => super
+  void storeNotifications(List<_i11.UserActivity>? notificationsList) => super
       .noSuchMethod(Invocation.method(#storeNotifications, [notificationsList]),
           returnValueForMissingStub: null);
   @override
-  List<_i10.UserActivity> getNotificationsList() =>
+  List<_i11.UserActivity> getNotificationsList() =>
       (super.noSuchMethod(Invocation.method(#getNotificationsList, []),
-          returnValue: <_i10.UserActivity>[]) as List<_i10.UserActivity>);
+          returnValue: <_i11.UserActivity>[]) as List<_i11.UserActivity>);
   @override
-  void storeNetworkRequest(_i11.NetworkRequest? request) =>
+  void storeNetworkRequest(_i12.NetworkRequest? request) =>
       super.noSuchMethod(Invocation.method(#storeNetworkRequest, [request]),
           returnValueForMissingStub: null);
   @override
-  void storeNetworkRequestList(List<_i11.NetworkRequest>? networkRequests) =>
+  void storeNetworkRequestList(List<_i12.NetworkRequest>? networkRequests) =>
       super.noSuchMethod(
           Invocation.method(#storeNetworkRequestList, [networkRequests]),
           returnValueForMissingStub: null);
   @override
-  List<_i11.NetworkRequest> getNetworkRequests() =>
+  List<_i12.NetworkRequest> getNetworkRequests() =>
       (super.noSuchMethod(Invocation.method(#getNetworkRequests, []),
-          returnValue: <_i11.NetworkRequest>[]) as List<_i11.NetworkRequest>);
+          returnValue: <_i12.NetworkRequest>[]) as List<_i12.NetworkRequest>);
   @override
   void storeProfile(_i6.Profile? profile) =>
       super.noSuchMethod(Invocation.method(#storeProfile, [profile]),
