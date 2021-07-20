@@ -123,7 +123,7 @@ void mainBloc() {
         when(_mockAssessmentsRepo.addNextAssessment(inputChildModel))
             .thenReturn([Stage1()]);
 
-        when(_mockAssessmentsRepo.registerStage1Details(
+        when(_mockAssessmentsRepo.registerStageDetails(
                 inputChildModel.assessmentsList[0] as Stage1,
                 inputChildModel.key))
             .thenAnswer((realInvocation) => Future.value());
@@ -241,7 +241,7 @@ void mainBloc() {
         when(_mockAssessmentsRepo.addNextAssessment(inputChildModel))
             .thenReturn([Stage1(), stage2]);
 
-        when(_mockAssessmentsRepo.registerStage2Details(
+        when(_mockAssessmentsRepo.registerStageDetails(
                 inputChildModel.assessmentsList[1] as Stage2,
                 inputChildModel.key))
             .thenAnswer((realInvocation) => Future.value());
@@ -333,7 +333,7 @@ void mainBloc() {
         when(_mockAssessmentsRepo.addNextAssessment(inputChildModel))
             .thenReturn([Stage1(), Stage2(), stage3]);
 
-        when(_mockAssessmentsRepo.registerStage3Details(
+        when(_mockAssessmentsRepo.registerStageDetails(
                 inputChildModel.assessmentsList[2], inputChildModel.key))
             .thenAnswer((realInvocation) => Future.value());
 

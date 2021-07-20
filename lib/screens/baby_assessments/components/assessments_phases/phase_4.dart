@@ -59,69 +59,69 @@ class _Phase4State extends State<Phase4> {
               ),
             ),
             Container(
-               padding: EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                color: new Color(widget.color),
-                borderRadius: BorderRadius.all(Radius.circular(20))),
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                  color: new Color(widget.color),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
               child: Column(
-                
-          crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                 Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                AppLocalizations.of(context)!.examinations,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                AppLocalizations.of(context)!.weightOfBabyInGrams,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(child: WeightSlider(widget.stage4)),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                AppLocalizations.of(context)!.temperatureOfBabyInFarenheit,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(child: TemperatureSlider(widget.stage4)),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                AppLocalizations.of(context)!.fastBreathing,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            switchYesNo(widget.stage4.ecebFastBreathing, (newValue) {
-              setState(() {
-                widget.stage4.ecebFastBreathing = newValue!;
-              });
-            }, context, widget.stage4.isCompleted),
-          Padding(
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.examinations,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.weightOfBabyInGrams,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(child: WeightSlider(widget.stage4)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      AppLocalizations.of(context)!
+                          .temperatureOfBabyInFarenheit,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(child: TemperatureSlider(widget.stage4)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.fastBreathing,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  switchYesNo(widget.stage4.ecebFastBreathing, (newValue) {
+                    setState(() {
+                      widget.stage4.ecebFastBreathing = newValue!;
+                    });
+                  }, context, widget.stage4.isCompleted),
+                  Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       AppLocalizations.of(context)!.chestIndrawing,
@@ -136,7 +136,7 @@ class _Phase4State extends State<Phase4> {
                       widget.stage4.ecebChestIndrawing = newValue!;
                     });
                   }, context, widget.stage4.isCompleted),
-                   Padding(
+                  Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       AppLocalizations.of(context)!.convulsionsSigns,
@@ -151,38 +151,38 @@ class _Phase4State extends State<Phase4> {
                       widget.stage4.ecebConvulsions = newValue!;
                     });
                   }, context, widget.stage4.isCompleted),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                AppLocalizations.of(context)!.isBabyFeedingProperly,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.isBabyFeedingProperly,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  switchYesNo(widget.stage4.ecebFeedingProperly, (newValue) {
+                    setState(() {
+                      widget.stage4.ecebFeedingProperly = newValue!;
+                    });
+                  }, context, widget.stage4.isCompleted),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.jaundiceSigns,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  switchYesNo(widget.stage4.ecebSevereJaundice, (newValue) {
+                    setState(() {
+                      widget.stage4.ecebSevereJaundice = newValue!;
+                    });
+                  }, context, widget.stage4.isCompleted),
+                ],
               ),
-            ),
-            switchYesNo(widget.stage4.ecebFeedingProperly, (newValue) {
-              setState(() {
-                widget.stage4.ecebFeedingProperly = newValue!;
-              });
-            }, context, widget.stage4.isCompleted),
-           
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                AppLocalizations.of(context)!.jaundiceSigns,
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            switchYesNo(widget.stage4.ecebSevereJaundice, (newValue) {
-              setState(() {
-                widget.stage4.ecebSevereJaundice = newValue!;
-              });
-            }, context, widget.stage4.isCompleted),
-              ],),
             ),
             Center(
               child: ElevatedButton(
@@ -195,7 +195,7 @@ class _Phase4State extends State<Phase4> {
                   if (widget.stage4.isCompleted == false &&
                       _formKey.currentState!.validate()) {
                     widget.assessmentsBloc
-                        .add(AssessmentsEventCompleteStage2());
+                        .add(AssessmentsEventCompleteStage4());
                   }
                 },
                 child: Text(

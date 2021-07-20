@@ -108,15 +108,12 @@ class _BodyState extends State<Body> {
                               as Stage3Danger,
                           widget.assessmentsBloc,
                         );
-                      }
-                      else if (state.childModel.assessmentsList[index]
+                      } else if (state.childModel.assessmentsList[index]
                           is Stage4) {
                         return Phase4(
-                          state.childModel.assessmentsList[index]
-                              as Stage4,
-                          widget.assessmentsBloc,
-                          state.childModel.color
-                        );
+                            state.childModel.assessmentsList[index] as Stage4,
+                            widget.assessmentsBloc,
+                            state.childModel.color);
                       }
                       return Container();
                     },

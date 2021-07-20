@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/models/stage_2.dart';
+import 'package:newborn_care/models/stage_4.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/notification_repository.dart';
@@ -44,8 +45,8 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
         //remove scheduled notifications
         notificationRepository.removeScheduledNotification(childModel.key);
         //push data to dhis2 using api
-        _assessmentsRepository.registerStage1Details(
-            childModel.assessmentsList[0] as Stage1, childModel.key);
+        _assessmentsRepository.registerStageDetails(
+            childModel.assessmentsList[0], childModel.key);
 
         // add next stage assessments
         childModel.assessmentsList =
@@ -69,8 +70,8 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
 
         notificationRepository.removeScheduledNotification(childModel.key);
         //push data to dhis2 using api
-        _assessmentsRepository.registerStage2Details(
-            childModel.assessmentsList[1] as Stage2, childModel.key);
+        _assessmentsRepository.registerStageDetails(
+            childModel.assessmentsList[1], childModel.key);
         //classify baby
         childModel.classification = _assessmentsRepository
             .classifyHealthAfterStage2(childModel.assessmentsList[1] as Stage2);
@@ -101,8 +102,29 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
 
         notificationRepository.removeScheduledNotification(childModel.key);
         //push data to dhis2 using api
-        _assessmentsRepository.registerStage3Details(
+        _assessmentsRepository.registerStageDetails(
             childModel.assessmentsList[2], childModel.key);
+
+        childModel.assessmentsList =
+            _assessmentsRepository.addNextAssessment(childModel);
+
+        //update child data in local storage in phone
+        hiveStorageRepository.updateChild(childModel.key, childModel);
+        yield AssessmentsAdded(childModel);
+      } catch (e) {
+        yield AssessmentsError(e.toString());
+        yield AssessmentsInitial(childModel);
+      }
+    } else if (event is AssessmentsEventCompleteStage4) {
+      try {
+        // check if data is filled correctly
+        _assessmentsRepository.validatePhase4Assessments(
+            childModel.assessmentsList[3] as Stage4, childModel.birthTime);
+
+        notificationRepository.removeScheduledNotification(childModel.key);
+        //push data to dhis2 using api
+        _assessmentsRepository.registerStageDetails(
+            childModel.assessmentsList[3], childModel.key);
 
         childModel.assessmentsList =
             _assessmentsRepository.addNextAssessment(childModel);

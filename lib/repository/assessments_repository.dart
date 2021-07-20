@@ -123,6 +123,25 @@ class AssessmentsRepository {
     }
   }
 
+  void validatePhase4Assessments(Stage4 stage4, DateTime birthTime) {
+    //check if 180 minutes from birth has passed
+    if (DateTime.now().difference(birthTime).inMinutes < 180) {
+      throw Exception(AppLocalizations.of(context)!
+          .phase4AssessmentsToBeDoneOnlyAfter180MinutesFromBirth);
+    }
+
+    if (stage4.ecebFastBreathing == null ||
+        stage4.ecebChestIndrawing == null ||
+        stage4.ecebFeedingProperly == null ||
+        stage4.ecebConvulsions == null ||
+        stage4.ecebSevereJaundice == null)
+      throw Exception(AppLocalizations.of(context)!.completeAssessments);
+
+    //marking stage as completed
+    stage4.isCompleted = true;
+    return;
+  }
+
   List<Object> addNextAssessment(ChildModel childModel) {
     List<Object> assessments = childModel.assessmentsList;
     if (assessments.length == 0) {
@@ -143,6 +162,7 @@ class AssessmentsRepository {
       }
     } else if (assessments.length == 3) {
       assessments.add(Stage4());
+      addStage4Notifications(childModel);
     }
     return assessments;
   }
@@ -165,10 +185,10 @@ class AssessmentsRepository {
     }
   }
 
-  Future registerStage1Details(Stage1 stage1, String id) async {
+  Future registerStageDetails(Object obj, String id) async {
     Profile profile = hiveStorageRepository.getProfile();
 
-    String json = jsonEncode(stage1);
+    String json = jsonEncode(obj);
     assessmentsClient.registerEvent(
         json, id, profile.username, profile.password);
     return;
@@ -183,24 +203,6 @@ class AssessmentsRepository {
         ecebFeedingProperly: stage2.ecebFeedingProperly,
         ecebFastBreathing: stage2.ecebFastBreathing,
         ecebConvulsions: stage2.ecebConvulsions);
-  }
-
-  Future registerStage2Details(Stage2 stage2, String id) async {
-    Profile profile = hiveStorageRepository.getProfile();
-
-    String json = jsonEncode(stage2);
-    assessmentsClient.registerEvent(
-        json, id, profile.username, profile.password);
-    return;
-  }
-
-  Future registerStage3Details(Object obj, String id) async {
-    Profile profile = hiveStorageRepository.getProfile();
-
-    String json = jsonEncode(obj);
-    assessmentsClient.registerEvent(
-        json, id, profile.username, profile.password);
-    return;
   }
 
   Future updateTrackedEntityInstance(
@@ -235,6 +237,9 @@ class AssessmentsRepository {
         } else if (item['programStage'] == DHIS2Config.stage3IDDanger &&
             item['status'] == 'COMPLETED') {
           result.insert(0, Stage3Danger.fromJson(item));
+        } else if (item['programStage'] == DHIS2Config.stage4ID &&
+            item['status'] == 'COMPLETED') {
+          result.insert(0, Stage4.fromJson(item));
         }
       }
       return result;
@@ -272,6 +277,23 @@ class AssessmentsRepository {
           childModel.parent,
           AppLocalizations.of(context)!.phase2,
           childModel.birthTime.add(Duration(minutes: 90)));
+    }
+  }
+
+  void addStage4Notifications(ChildModel childModel) {
+    int minutesPassed =
+        DateTime.now().difference(childModel.birthTime).inMinutes;
+    if (minutesPassed < 180) {
+      notificationRepository.scheduledStageNotification(
+          childModel.key,
+          childModel.parent,
+          AppLocalizations.of(context)!.phase2,
+          childModel.birthTime.add(Duration(minutes: 180)));
+      notificationRepository.scheduledStageNotificationReminder(
+          childModel.key,
+          childModel.parent,
+          AppLocalizations.of(context)!.phase2,
+          childModel.birthTime.add(Duration(minutes: 240)));
     }
   }
 }
