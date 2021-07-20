@@ -22,13 +22,15 @@ class Stage4Adapter extends TypeAdapter<Stage4> {
       ..ecebFastBreathing = fields[2] as bool?
       ..ecebFeedingProperly = fields[3] as bool?
       ..ecebSevereJaundice = fields[4] as bool?
-      ..isCompleted = fields[5] as bool;
+      ..ecebChestIndrawing = fields[5] as bool?
+      ..ecebConvulsions = fields[6] as bool?
+      ..isCompleted = fields[7] as bool;
   }
 
   @override
   void write(BinaryWriter writer, Stage4 obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.ecebWeight)
       ..writeByte(1)
@@ -40,6 +42,10 @@ class Stage4Adapter extends TypeAdapter<Stage4> {
       ..writeByte(4)
       ..write(obj.ecebSevereJaundice)
       ..writeByte(5)
+      ..write(obj.ecebChestIndrawing)
+      ..writeByte(6)
+      ..write(obj.ecebConvulsions)
+      ..writeByte(7)
       ..write(obj.isCompleted);
   }
 

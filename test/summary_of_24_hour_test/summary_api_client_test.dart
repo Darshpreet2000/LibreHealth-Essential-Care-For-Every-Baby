@@ -59,7 +59,6 @@ void assessmentClientTest() {
           localizationsDelegates: [
             AppLocalizations.delegate,
           ]));
-      String json = '';
       BuildContext context = tester.element(find.byType(Container));
       summaryApiClient = new SummaryApiClient(_mockHttpClient, context);
       String basicAuth =

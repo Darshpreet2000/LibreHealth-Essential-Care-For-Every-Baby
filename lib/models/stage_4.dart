@@ -17,6 +17,10 @@ class Stage4 {
   @HiveField(4)
   bool? ecebSevereJaundice;
   @HiveField(5)
+  bool? ecebChestIndrawing;
+  @HiveField(6)
+  bool? ecebConvulsions;
+  @HiveField(7)
   bool isCompleted = false;
   Stage4();
 

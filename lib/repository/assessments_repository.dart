@@ -10,6 +10,7 @@ import 'package:newborn_care/models/stage_2.dart';
 import 'package:newborn_care/models/stage_3_danger.dart';
 import 'package:newborn_care/models/stage_3_normal.dart';
 import 'package:newborn_care/models/stage_3_problem.dart';
+import 'package:newborn_care/models/stage_4.dart';
 import 'package:newborn_care/network/assessments_client.dart';
 import 'package:newborn_care/repository/classification_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
@@ -140,6 +141,8 @@ class AssessmentsRepository {
       if (childModel.classification == AppLocalizations.of(context)!.danger) {
         assessments.add(Stage3Danger());
       }
+    } else if (assessments.length == 3) {
+      assessments.add(Stage4());
     }
     return assessments;
   }
