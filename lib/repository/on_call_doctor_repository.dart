@@ -18,19 +18,17 @@ class OnCallDoctorRepository {
     );
   }
   Future getListOfOnCallDoctors() async {
-  
-      Profile profile = hiveStorageRepository.getProfile();
-      String response = await onCallDoctorClient.fetchOnCallDoctors(
-          profile.username, profile.password);
-      Map<String, dynamic> res = jsonDecode(response);
-      List<OnCallDoctorModel> result = [];
-      for (var item in res['events']) {
-        OnCallDoctorModel onCallDoctorModel = OnCallDoctorModel.fromJson(item);
-        result.add(onCallDoctorModel);
-      }
-      hiveStorageRepository.saveOnCallDoctors(result);
-      return seperateDoctorsOnCall(result);
-    
+    Profile profile = hiveStorageRepository.getProfile();
+    String response = await onCallDoctorClient.fetchOnCallDoctors(
+        profile.username, profile.password);
+    Map<String, dynamic> res = jsonDecode(response);
+    List<OnCallDoctorModel> result = [];
+    for (var item in res['events']) {
+      OnCallDoctorModel onCallDoctorModel = OnCallDoctorModel.fromJson(item);
+      result.add(onCallDoctorModel);
+    }
+    hiveStorageRepository.saveOnCallDoctors(result);
+    return seperateDoctorsOnCall(result);
   }
 
   List<OnCallDoctorModel> seperateDoctorsOnCall(List<OnCallDoctorModel> list) {
