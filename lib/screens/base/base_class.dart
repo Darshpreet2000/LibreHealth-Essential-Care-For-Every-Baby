@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newborn_care/bloc/list_of_babies_bloc/list_of_babies_bloc.dart';
+import 'package:newborn_care/bloc/notification_bloc/notification_bloc.dart';
 import 'package:newborn_care/bloc/refresh_bloc/refresh_bloc.dart';
 import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
 import 'package:newborn_care/screens/home/home_screen.dart';
@@ -182,6 +183,9 @@ class _BaseClassState extends State<BaseClass> {
   }
 
   void onItemTapped(int index) {
+    if (index == 2)
+      BlocProvider.of<NotificationBloc>(context)
+          .add(FetchNofiticationOfBabies());
     FocusManager.instance.primaryFocus?.unfocus();
     setState(() {
       selectedIndex = index;

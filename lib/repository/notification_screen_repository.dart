@@ -22,7 +22,8 @@ class NotificationScreenRepository {
     children.forEach((element) {
       NotificationModel? notificationModel;
 
-      if (element.classification == danger) {
+      if (element.classification == danger &&
+          element.assessmentsList.length > 0) {
         notificationModel = new NotificationModel(element,
             AppLocalizations.of(context)!.statusChanged(normal, danger));
 
@@ -33,7 +34,8 @@ class NotificationScreenRepository {
             break;
           }
         }
-      } else if (element.classification == problem) {
+      } else if (element.classification == problem &&
+          element.assessmentsList.length > 0) {
         notificationModel = new NotificationModel(element,
             AppLocalizations.of(context)!.statusChanged(normal, problem));
 
@@ -53,23 +55,25 @@ class NotificationScreenRepository {
   }
 
   List<NotificationModel> fetchMonitoringAlerts() {
-   
     String problem = AppLocalizations.of(context)!.problem;
     String danger = AppLocalizations.of(context)!.danger;
     List<ChildModel> children = hiveStorageRepository.getListOfAllChild();
     List<NotificationModel> monitoringAlertsNotifications = [];
     children.forEach((element) {
-      NotificationModel? notificationModel;
+      if (element.assessmentsList.length > 0) {
+        NotificationModel? notificationModel;
 
-      if (element.classification == danger ||
-          element.classification == problem) {
-        Object lastAssessment = element.assessmentsList.last;
-         if(lastAssessment is Stage4){
-               notificationModel = new NotificationModel(element,AppLocalizations.of(context)!.phase4);
-         }
+        if (element.classification == danger ||
+            element.classification == problem) {
+          Object lastAssessment = element.assessmentsList.last;
+          if (lastAssessment is Stage4&&lastAssessment.isCompleted==false) {
+            notificationModel = new NotificationModel(
+                element, AppLocalizations.of(context)!.phase4);
+          }
+        }
+        if (notificationModel != null)
+          monitoringAlertsNotifications.add(notificationModel);
       }
-      if (notificationModel != null)
-        monitoringAlertsNotifications.add(notificationModel);
     });
     return monitoringAlertsNotifications;
   }

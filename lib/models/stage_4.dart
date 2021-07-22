@@ -50,6 +50,14 @@ class Stage4 {
             "dataElement": DHIS2Config.ecebSevereJaundice,
             "value": ecebSevereJaundice
           },
+          {
+            "dataElement": DHIS2Config.ecebConvulsions,
+            "value": ecebConvulsions
+          },
+          {
+            "dataElement": DHIS2Config.ecebChestIndrawing,
+            "value": ecebChestIndrawing
+          },
         ]
       };
 
@@ -75,6 +83,12 @@ class Stage4 {
 
         case DHIS2Config.ecebSevereJaundice:
           ecebSevereJaundice = element['value'] == 'true';
+          break;
+        case DHIS2Config.ecebConvulsions:
+          ecebConvulsions = element['value'] == 'true';
+          break;
+        case DHIS2Config.ecebChestIndrawing:
+          ecebChestIndrawing = element['value'] == 'true';
           break;
       }
     });
