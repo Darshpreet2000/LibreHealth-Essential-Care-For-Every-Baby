@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 import 'package:newborn_care/bloc/assessments_bloc/assessments_bloc.dart';
 import 'package:newborn_care/models/notification_model.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
@@ -84,7 +85,7 @@ class ListItemRiskMonitoringAlert extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 2),
                         child: Text(
-                            notificationModel!.childModel.birthTime.toString()),
+                             DateFormat.yMd().add_jm().format(notificationModel!.childModel.birthTime)),
                       ),
                     ],
                   ),
