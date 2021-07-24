@@ -56,6 +56,9 @@ class RefreshClient {
     switch (response.statusCode) {
       case 200:
         var responseJson = response.body.toString();
+        return responseJson;  
+      case 201:
+        var responseJson = response.body.toString();
         return responseJson;
       case 400:
         throw BadRequestException(
