@@ -7,13 +7,18 @@ import 'package:newborn_care/network/on_call_doctor_client.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:newborn_care/repository/refresh_repository.dart';
+import 'package:synchronized/synchronized.dart';
 
 class OnCallDoctorRepository {
   BuildContext context;
+  Lock lock;
   late OnCallDoctorClient onCallDoctorClient;
   late MessageClient messageClient;
   HiveStorageRepository hiveStorageRepository;
-  OnCallDoctorRepository(this.context, this.hiveStorageRepository) {
+  RefreshRepository refreshRepository;
+  OnCallDoctorRepository(this.context, this.lock, this.hiveStorageRepository,
+      this.refreshRepository) {
     onCallDoctorClient = OnCallDoctorClient(
       http.Client(),
       context,
@@ -29,8 +34,13 @@ class OnCallDoctorRepository {
         {"id": "$userIdOfOtherDoctor"},
       ],
     };
-    messageClient.sendMessage(
+    await messageClient.sendMessage(
         jsonEncode(jsonObject), profile.username, profile.password);
+     try {
+      await lock.synchronized(refreshRepository.startRefreshing);
+    } catch (e) {
+      throw e;
+    }
   }
 
   Future getListOfOnCallDoctors() async {
