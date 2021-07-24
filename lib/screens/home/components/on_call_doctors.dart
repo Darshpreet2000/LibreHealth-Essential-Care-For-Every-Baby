@@ -68,8 +68,10 @@ class _OnCallDoctorsState extends State<OnCallDoctors> {
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
-                                RepositoryProvider.of<OnCallDoctorRepository>(context)
-                                    .sendMessageToDoctor(state.onCallDoctorsList[index].doctorID!);
+                                RepositoryProvider.of<OnCallDoctorRepository>(
+                                        context)
+                                    .sendMessageToDoctor(state
+                                        .onCallDoctorsList[index].doctorID!);
                                 setState(() {
                                   isActive[index] = true;
                                   Future.delayed(Duration(seconds: 6))

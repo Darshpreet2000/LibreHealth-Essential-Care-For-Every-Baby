@@ -24,13 +24,13 @@ class OnCallDoctorRepository {
     Profile profile = hiveStorageRepository.getProfile();
     var jsonObject = {
       "subject": AppLocalizations.of(context)!.onCallDoctorAlertMessage,
-      "text":  AppLocalizations.of(context)!.youHaveBeenAlertedBy(profile.name),
+      "text": AppLocalizations.of(context)!.youHaveBeenAlertedBy(profile.name),
       "users": [
         {"id": "$userIdOfOtherDoctor"},
       ],
     };
-    messageClient.sendMessage(jsonEncode(jsonObject),
-        profile.username, profile.password);
+    messageClient.sendMessage(
+        jsonEncode(jsonObject), profile.username, profile.password);
   }
 
   Future getListOfOnCallDoctors() async {

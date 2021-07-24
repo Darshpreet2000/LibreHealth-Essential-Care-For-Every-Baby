@@ -6,11 +6,10 @@ import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/utils/api_config.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
 
-class MessageClient{ 
-   HiveStorageRepository hiveStorageRepository;
+class MessageClient {
+  HiveStorageRepository hiveStorageRepository;
   MessageClient(this.hiveStorageRepository);
-  Future sendMessage(
-      String data, String username, String password) async {
+  Future sendMessage(String data, String username, String password) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     String url = DHIS2Config.serverURL + APIConfig().userMessages;
