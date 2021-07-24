@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:newborn_care/bloc/on_call_doctor_bloc/on_call_doctor_bloc.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
+import 'package:newborn_care/repository/on_call_doctor_repository.dart';
 import 'package:newborn_care/utils/api_config.dart';
 
 class OnCallDoctors extends StatefulWidget {
@@ -67,6 +68,8 @@ class _OnCallDoctorsState extends State<OnCallDoctors> {
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
+                                RepositoryProvider.of<OnCallDoctorRepository>(context)
+                                    .sendMessageToDoctor(state.onCallDoctorsList[index].doctorID!);
                                 setState(() {
                                   isActive[index] = true;
                                   Future.delayed(Duration(seconds: 6))
@@ -83,7 +86,7 @@ class _OnCallDoctorsState extends State<OnCallDoctors> {
                                   Column(
                                     children: [
                                       Container(
-                                        height: 100, 
+                                        height: 100,
                                         decoration: new BoxDecoration(
                                           shape: BoxShape.circle,
                                           border: new Border.all(
@@ -95,14 +98,16 @@ class _OnCallDoctorsState extends State<OnCallDoctors> {
                                             httpHeaders: <String, String>{
                                               'authorization': basicAuth!,
                                             },
-                                            imageBuilder: (context,
-                                                    imageProvider) =>
-                                                CircleAvatar(
-                                                  radius: 65,
-                                                  backgroundImage: imageProvider,
-                                                ),
-                                            imageUrl: APIConfig().getImageApi(state
-                                                .onCallDoctorsList[index].eventID!),
+                                            imageBuilder:
+                                                (context, imageProvider) =>
+                                                    CircleAvatar(
+                                                      radius: 65,
+                                                      backgroundImage:
+                                                          imageProvider,
+                                                    ),
+                                            imageUrl: APIConfig().getImageApi(
+                                                state.onCallDoctorsList[index]
+                                                    .eventID!),
                                             placeholder: (context, url) =>
                                                 Container(
                                                     margin: EdgeInsets.only(
@@ -114,13 +119,15 @@ class _OnCallDoctorsState extends State<OnCallDoctors> {
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.all(
-                                                              Radius.circular(10)),
+                                                              Radius.circular(
+                                                                  10)),
                                                     ),
                                                     child: Center(
                                                       child:
                                                           CircularProgressIndicator(),
                                                     )),
-                                            errorWidget: (context, url, error) =>
+                                            errorWidget: (context, url,
+                                                    error) =>
                                                 CircleAvatar(
                                                     radius: 65,
                                                     backgroundImage: AssetImage(
@@ -135,22 +142,21 @@ class _OnCallDoctorsState extends State<OnCallDoctors> {
                                         ),
                                       ),
                                       Text(
-                                       AppLocalizations.of(context)!.online,
+                                        AppLocalizations.of(context)!.online,
                                         style: TextStyle(
                                           color: color,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
                                         ),
                                       ),
-                                      
                                     ],
                                   ),
-                                    isActive[index]
-                                        ? alertWidget(
-                                            state.onCallDoctorsList[index]
-                                                .onCallDoctorName!,context
-                                          )
-                                        : Container()
+                                  isActive[index]
+                                      ? alertWidget(
+                                          state.onCallDoctorsList[index]
+                                              .onCallDoctorName!,
+                                          context)
+                                      : Container()
                                 ],
                               ),
                             );
@@ -172,7 +178,7 @@ class _OnCallDoctorsState extends State<OnCallDoctors> {
     );
   }
 
-  Widget alertWidget(String name,BuildContext context) {
+  Widget alertWidget(String name, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 32),
       child: Container(
@@ -181,24 +187,32 @@ class _OnCallDoctorsState extends State<OnCallDoctors> {
             border: Border.all(color: Colors.white),
             borderRadius: BorderRadius.all(Radius.circular(10))),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(children: [
-
-            Text(
-            AppLocalizations.of(context)!.hasBeenAlerted(name),
-            style: TextStyle(color: Colors.white, fontSize: 14,fontWeight: FontWeight.bold),
-          ),
-          SizedBox(width: 8,),
-          Container(
-         decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 2,
-                  )),
-            child: Icon(Icons.check,color: Colors.white,)),
-          ],)
-        ),
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.hasBeenAlerted(name),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Container(
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 2,
+                        )),
+                    child: Icon(
+                      Icons.check,
+                      color: Colors.white,
+                    )),
+              ],
+            )),
       ),
     );
   }

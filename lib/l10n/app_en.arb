@@ -220,5 +220,13 @@
         "placeholders":{
             "name":{}
         }
+    },
+    "onCallDoctorAlertMessage":"On Call Doctors Alert Message",
+    
+    "youHaveBeenAlertedBy":"You have been alerted by {name}",
+     "@youHaveBeenAlertedBy" :{
+        "placeholders":{
+            "name":{}
+        }
     }
  }

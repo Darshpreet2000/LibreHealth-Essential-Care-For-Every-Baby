@@ -111,4 +111,5 @@ class DHIS2Config {
   static const String onCallDoctorScheduleDate = "clmwvjupPBX";
   static const String onCallDoctorShiftEndTime = "QW33PCFSrhh";
   static const String onCallDoctorShiftStartTime = "SfNYwfKeMcK";
+  static const String onCallDoctorID = "zukzDA9kqiv";
 }
