@@ -21,7 +21,6 @@ void main() {
 }
 
 void mainBloc() {
-  final _mockNotifcationScreenRepo = MockNotificationScreenRepository();
   final _mockHive = MockHiveStorageRepository();
   //Flutter Notifcation Repository test
   //Test Cases
@@ -46,7 +45,6 @@ void mainBloc() {
           ]));
       BuildContext context = tester.element(find.byType(Container));
       String normal = AppLocalizations.of(context)!.normal;
-      String problem = AppLocalizations.of(context)!.problem;
       String danger = AppLocalizations.of(context)!.danger;
 
       ChildModel childModel = ChildModel("Oni", "postnatal", 1, 1234, 1234,
@@ -76,7 +74,6 @@ void mainBloc() {
       BuildContext context = tester.element(find.byType(Container));
       String normal = AppLocalizations.of(context)!.normal;
       String problem = AppLocalizations.of(context)!.problem;
-      String danger = AppLocalizations.of(context)!.danger;
 
       ChildModel childModel = ChildModel("Oni", "postnatal", 1, 1234, 1234,
           DateTime.now(), "1234", "1234", 'Problem', 1, 'normal');
@@ -105,7 +102,6 @@ void mainBloc() {
       BuildContext context = tester.element(find.byType(Container));
       String normal = AppLocalizations.of(context)!.normal;
       String problem = AppLocalizations.of(context)!.problem;
-      String danger = AppLocalizations.of(context)!.danger;
 
       ChildModel childModel = ChildModel("Oni", "postnatal", 1, 1234, 1234,
           DateTime.now(), "1234", "1234", 'Problem', 1, 'normal');
@@ -132,7 +128,6 @@ void mainBloc() {
             AppLocalizations.delegate,
           ]));
       BuildContext context = tester.element(find.byType(Container));
-      String normal = AppLocalizations.of(context)!.normal;
       String problem = AppLocalizations.of(context)!.problem;
       String danger = AppLocalizations.of(context)!.danger;
 
@@ -160,9 +155,6 @@ void mainBloc() {
             AppLocalizations.delegate,
           ]));
       BuildContext context = tester.element(find.byType(Container));
-      String normal = AppLocalizations.of(context)!.normal;
-      String problem = AppLocalizations.of(context)!.problem;
-      String danger = AppLocalizations.of(context)!.danger;
 
       ChildModel childModel = ChildModel("Oni", "postnatal", 1, 1234, 1234,
           DateTime.now(), "1234", "1234", 'Problem', 1, 'normal');
