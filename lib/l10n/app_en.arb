@@ -228,5 +228,6 @@
         "placeholders":{
             "name":{}
         }
-    }
+    },
+    "discharge":"Discharge"
  }
