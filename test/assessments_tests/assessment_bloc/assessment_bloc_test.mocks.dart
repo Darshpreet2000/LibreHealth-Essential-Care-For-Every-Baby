@@ -119,6 +119,14 @@ class MockAssessmentsRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#addNextAssessment, [childModel]),
           returnValue: <Object>[]) as List<Object>);
   @override
+  List<Object> removeLastAssessment(_i8.ChildModel? childModel) => (super
+      .noSuchMethod(Invocation.method(#removeLastAssessment, [childModel]),
+          returnValue: <Object>[]) as List<Object>);
+  @override
+  List<Object> addDischargeAssessments(_i8.ChildModel? childModel) => (super
+      .noSuchMethod(Invocation.method(#addDischargeAssessments, [childModel]),
+          returnValue: <Object>[]) as List<Object>);
+  @override
   void changeColorBasedOnClassification(_i8.ChildModel? childModel) =>
       super.noSuchMethod(
           Invocation.method(#changeColorBasedOnClassification, [childModel]),

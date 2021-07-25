@@ -136,6 +136,15 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
         yield AssessmentsError(e.toString());
         yield AssessmentsInitial(childModel);
       }
+    } else if (event is DischargeButtonClick) {
+      childModel.assessmentsList =
+          _assessmentsRepository.removeLastAssessment(childModel);
+        notificationRepository.removeScheduledNotification(childModel.key);
+     
+      childModel.assessmentsList =
+          _assessmentsRepository.addDischargeAssessments(childModel);
+       hiveStorageRepository.updateChild(childModel.key, childModel);
+        yield AssessmentsAdded(childModel);
     }
   }
 }

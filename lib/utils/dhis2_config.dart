@@ -100,9 +100,12 @@ class DHIS2Config {
   static const String stage4ID = "Uxfx1kGDzhH";
 
   //Stage - 5 Discharge
-  static const String eceb_Stage_5_Normal_Reassess_baby_for_discharge =
+  
+  static const String stage5ID = "Uxfx1kGDzhH";
+
+  static const String ecebStage5NormalReassessBabyfordischarge =
       "CW6Uob7rOVY";
-  static const String eceb_Stage_5_Normal_Give_parents_guidance_for_home_care =
+  static const String ecebStage5NormalGiveparentsguidanceforhomecare =
       "IAhrpxprLlq";
 
   // On Call Doctor's program

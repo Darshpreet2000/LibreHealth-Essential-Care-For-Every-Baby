@@ -167,6 +167,16 @@ class AssessmentsRepository {
     return assessments;
   }
 
+  List<Object> removeLastAssessment(ChildModel childModel) {
+    List<Object> assessments = childModel.assessmentsList;
+    assessments.removeLast();
+    return assessments;
+  }
+  List<Object> addDischargeAssessments(ChildModel childModel) {
+    List<Object> assessments = childModel.assessmentsList;
+   
+    return assessments;
+  }
   void changeColorBasedOnClassification(ChildModel childModel) {
     if (childModel.classification == AppLocalizations.of(context)!.normal) {
       childModel.color = Colors.green[100]!.value;
