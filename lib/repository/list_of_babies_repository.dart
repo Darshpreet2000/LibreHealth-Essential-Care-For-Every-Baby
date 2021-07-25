@@ -36,7 +36,7 @@ class ListOfBabiesRepository {
       Map<String, dynamic> res = jsonDecode(response);
       List<ChildModel> result = [];
       for (var item in res['trackedEntityInstances']) {
-        ChildModel childModel = ChildModel.fromJson(item);
+        ChildModel childModel = ChildModel.fromJson(item, context);
         result.add(childModel);
       }
       return result;
@@ -52,7 +52,8 @@ class ListOfBabiesRepository {
     if (sortListEnum == SortListEnum.status)
       childListMap.sort((a, b) => b.compareTo(a, context));
     else if (sortListEnum == SortListEnum.location) //sorting alphabetically
-      childListMap.sort((a, b) => a.ward.toLowerCase().compareTo(b.ward.toLowerCase()));
+      childListMap
+          .sort((a, b) => a.ward.toLowerCase().compareTo(b.ward.toLowerCase()));
     else //getting recent child on top
       childListMap.sort((a, b) => b.birthTime.compareTo(a.birthTime));
 

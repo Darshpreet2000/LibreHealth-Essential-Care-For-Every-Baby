@@ -6,5 +6,7 @@ enum RequestServiceType {
   @HiveField(0)
   registerBaby,
   @HiveField(1)
-  addEvent
+  addEvent,
+  @HiveField(2)
+  updateRequest
 }

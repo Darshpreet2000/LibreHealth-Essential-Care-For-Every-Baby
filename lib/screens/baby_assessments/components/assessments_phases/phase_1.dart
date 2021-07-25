@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:newborn_care/bloc/assessments_bloc/bloc/assessments_bloc.dart';
+import 'package:newborn_care/bloc/assessments_bloc/assessments_bloc.dart';
 import 'package:newborn_care/models/stage_1.dart';
 
 class Phase1 extends StatefulWidget {
@@ -9,7 +9,8 @@ class Phase1 extends StatefulWidget {
   final AssessmentsBloc assessmentsBloc;
   final TextEditingController _wardNameTextController =
       new TextEditingController();
-  Phase1(this.stage1, this.assessmentsBloc) {
+  final int color;
+  Phase1(this.stage1, this.assessmentsBloc, this.color) {
     _wardNameTextController.text = stage1.ecebWardName;
   }
   @override
@@ -40,7 +41,7 @@ class _Phase1State extends State<Phase1> {
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.blue[100],
+                color: new Color(widget.color),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -89,7 +90,7 @@ class _Phase1State extends State<Phase1> {
           Container(
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
-                color: Colors.blue[50],
+                color: new Color(widget.color),
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,7 +163,7 @@ class _Phase1State extends State<Phase1> {
                       borderRadius: new BorderRadius.circular(30.0))),
               onPressed: () {
                 if (widget.stage1.isCompleted == false)
-                  widget.assessmentsBloc.add(AssessmentsEventAddStage1());
+                  widget.assessmentsBloc.add(AssessmentsEventCompleteStage1());
               },
               child: Text(
                 widget.stage1.isCompleted == false

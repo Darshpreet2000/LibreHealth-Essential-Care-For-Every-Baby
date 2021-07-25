@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/stage_1.dart';
+import 'package:newborn_care/models/stage_2.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/notification_repository.dart';
@@ -28,24 +29,65 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
       try {
         childModel.assessmentsList =
             await _assessmentsRepository.fetchAssessments(childModel.key);
-        childModel.assessmentsList = _assessmentsRepository
-            .addNextAssessment(childModel.assessmentsList);
+        childModel.assessmentsList =
+            _assessmentsRepository.addNextAssessment(childModel);
         hiveStorageRepository.updateChild(childModel.key, childModel);
         yield AssessmentsInitial(childModel);
       } catch (e) {
         yield AssessmentsError(e.toString());
         yield AssessmentsInitial(childModel);
       }
-    } else if (event is AssessmentsEventAddStage1) {
+    } else if (event is AssessmentsEventCompleteStage1) {
       try {
         // check if data is filled correctly
         _assessmentsRepository
             .validatePhase1Assessments(childModel.assessmentsList[0] as Stage1);
-
+        //remove scheduled notifications
         notificationRepository.removeScheduledNotification(childModel.key);
         //push data to dhis2 using api
         _assessmentsRepository.registerStage1Details(
             childModel.assessmentsList[0] as Stage1, childModel.key);
+
+        // add next stage assessments
+        childModel.assessmentsList =
+            _assessmentsRepository.addNextAssessment(childModel);
+        //update Tracked Entity Instance
+        _assessmentsRepository.updateTrackedEntityInstance(
+            childModel,
+            childModel.key,
+            (childModel.assessmentsList[0] as Stage1).ecebWardName);
+        hiveStorageRepository.updateChild(childModel.key, childModel);
+        yield AssessmentsAdded(childModel);
+      } catch (e) {
+        yield AssessmentsError(e.toString());
+        yield AssessmentsInitial(childModel);
+      }
+    } else if (event is AssessmentsEventCompleteStage2) {
+      try {
+        // check if data is filled correctly
+        _assessmentsRepository.validatePhase2Assessments(
+            childModel.assessmentsList[1] as Stage2, childModel.birthTime);
+
+        notificationRepository.removeScheduledNotification(childModel.key);
+        //push data to dhis2 using api
+        _assessmentsRepository.registerStage2Details(
+            childModel.assessmentsList[1] as Stage2, childModel.key);
+        //classify baby
+        childModel.classification = _assessmentsRepository
+            .classifyHealthAfterStage2(childModel.assessmentsList[1] as Stage2);
+        //change color based on classification
+        _assessmentsRepository.changeColorBasedOnClassification(childModel);
+        // add next stage assessments
+        childModel.assessmentsList =
+            _assessmentsRepository.addNextAssessment(childModel);
+
+        //update Tracked Entity Instance & push to dhis2
+        _assessmentsRepository.updateTrackedEntityInstance(
+            childModel,
+            childModel.key,
+            (childModel.assessmentsList[1] as Stage2).ecebWardName);
+
+        //update child data in local storage in phone
         hiveStorageRepository.updateChild(childModel.key, childModel);
         yield AssessmentsAdded(childModel);
       } catch (e) {

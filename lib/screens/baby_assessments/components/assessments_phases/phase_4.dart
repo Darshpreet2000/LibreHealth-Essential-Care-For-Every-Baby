@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:newborn_care/screens/baby_assessments/components/toggle_buttons/swtich_yes_no.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -134,44 +133,44 @@ class _Phase4State extends State<Phase4> {
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
-                SwtichYesNo(AppLocalizations.of(context)!.yes,
-                    AppLocalizations.of(context)!.no, fastBreathing),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    AppLocalizations.of(context)!.chestIndrawing,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SwtichYesNo(AppLocalizations.of(context)!.yes,
-                    AppLocalizations.of(context)!.no, chestIndrawing),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    AppLocalizations.of(context)!.isBabyFeedingProperly,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SwtichYesNo(AppLocalizations.of(context)!.yes,
-                    AppLocalizations.of(context)!.no, isFeeding),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    AppLocalizations.of(context)!.convulsionsSigns,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SwtichYesNo(AppLocalizations.of(context)!.yes,
-                    AppLocalizations.of(context)!.no, convulsions),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    AppLocalizations.of(context)!.jaundiceSigns,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SwtichYesNo(AppLocalizations.of(context)!.yes,
-                    AppLocalizations.of(context)!.no, convulsions),
+                // SwtichYesNo(AppLocalizations.of(context)!.yes,
+                //     AppLocalizations.of(context)!.no, fastBreathing),
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: Text(
+                //     AppLocalizations.of(context)!.chestIndrawing,
+                //     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                //   ),
+                // ),
+                // SwtichYesNo(AppLocalizations.of(context)!.yes,
+                //     AppLocalizations.of(context)!.no, chestIndrawing),
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: Text(
+                //     AppLocalizations.of(context)!.isBabyFeedingProperly,
+                //     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                //   ),
+                // ),
+                // SwtichYesNo(AppLocalizations.of(context)!.yes,
+                //     AppLocalizations.of(context)!.no, isFeeding),
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: Text(
+                //     AppLocalizations.of(context)!.convulsionsSigns,
+                //     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                //   ),
+                // ),
+                // SwtichYesNo(AppLocalizations.of(context)!.yes,
+                //     AppLocalizations.of(context)!.no, convulsions),
+                // Padding(
+                //   padding: const EdgeInsets.all(8.0),
+                //   child: Text(
+                //     AppLocalizations.of(context)!.jaundiceSigns,
+                //     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                //   ),
+                // ),
+                // SwtichYesNo(AppLocalizations.of(context)!.yes,
+                //     AppLocalizations.of(context)!.no, convulsions),
               ],
             ),
           ),

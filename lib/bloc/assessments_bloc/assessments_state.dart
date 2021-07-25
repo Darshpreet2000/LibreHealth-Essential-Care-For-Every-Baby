@@ -1,27 +1,21 @@
 part of 'assessments_bloc.dart';
 
-abstract class AssessmentsState extends Equatable {
+abstract class AssessmentsState {
   const AssessmentsState();
 
-  get childModel => null;
+  ChildModel get childModel;
 }
 
 class AssessmentsInitial extends AssessmentsState {
   final ChildModel childModel;
 
   AssessmentsInitial(this.childModel);
-
-  @override
-  List<Object?> get props => [];
 }
 
 class AssessmentsAdded extends AssessmentsState {
   final ChildModel childModel;
 
   AssessmentsAdded(this.childModel);
-
-  @override
-  List<Object?> get props => [];
 }
 
 class AssessmentsError extends AssessmentsState {
@@ -30,14 +24,11 @@ class AssessmentsError extends AssessmentsState {
   AssessmentsError(this.message);
 
   @override
-  List<Object?> get props => [];
+  ChildModel get childModel => throw UnimplementedError();
 }
 
 class AssessmentsLoading extends AssessmentsState {
   final ChildModel childModel;
 
   AssessmentsLoading(this.childModel);
-
-  @override
-  List<Object?> get props => [];
 }

@@ -10,12 +10,33 @@ class RefreshClient {
   http.Client client;
   BuildContext context;
   RefreshClient(this.client, this.context);
-  Future doNetworkRequest(dynamic request) async {
+  Future doPostNetworkRequest(dynamic request) async {
     try {
       var response;
 
       response = await http
           .post(
+            Uri.parse(request.url),
+            headers: request.headers,
+            body: request.data,
+          )
+          .timeout(const Duration(seconds: 15));
+      return _response(response);
+    } on TimeoutException {
+      throw FetchDataException(
+          AppLocalizations.of(context)!.noInternetConnection, 503);
+    } on SocketException {
+      throw FetchDataException(
+          AppLocalizations.of(context)!.noInternetConnection, 503);
+    }
+  }
+
+  Future doPutNetworkRequest(dynamic request) async {
+    try {
+      var response;
+
+      response = await http
+          .put(
             Uri.parse(request.url),
             headers: request.headers,
             body: request.data,

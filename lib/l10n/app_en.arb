@@ -106,6 +106,7 @@
     "riskAssessments":"Risk Assessments",
     "problem":"Problem",
     "danger":"Danger",
+    "none":"None",
     "statusChanged":"Status changed {from} to {to}",
     "@statusChanged": {
         "placeholders":{
@@ -163,6 +164,7 @@
     "saveAssessments":  "Save Assessments",
     "assessmentsSaved":  "Assessments Saved",
     "phase2":"60-90 minutes From Birth (Phase-2)",
+    "phase2AssessmentsToBeDoneOnlyAfter60MinutesFromBirth":"Phase - 2 assessments to be done only after 60 minutes from birth",
     "eyeCareAdministered": "Eye Care Administered",
     "cordCareAdministered":"Cord Care Administered",
     "vitaminKAdministered":  "Vitamin K Administered",

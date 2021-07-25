@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
 part 'auto_generate/child_model.g.dart';
 
@@ -34,17 +35,34 @@ class ChildModel {
   String key; //to uniquely store the child
 
   @HiveField(9)
-  String classification; //to uniquely store the child
+  String classification;
+  @HiveField(10)
+  int children;
 
-  ChildModel(this.parent, this.ward, this.gender, this.color, this.darkColor,
-      this.birthTime, this.trackedEntityID, this.key, this.classification);
+  @HiveField(11)
+  String modeOfDeliveryName;
+  ChildModel(
+      this.parent,
+      this.ward,
+      this.gender,
+      this.color,
+      this.darkColor,
+      this.birthTime,
+      this.trackedEntityID,
+      this.key,
+      this.classification,
+      this.children,
+      this.modeOfDeliveryName);
 
-  factory ChildModel.fromJson(dynamic json) {
-    String? parent, ward, classification = 'None';
+  factory ChildModel.fromJson(dynamic json, BuildContext context) {
+    String? parent,
+        ward,
+        modeOfDeliveryName,
+        classification = AppLocalizations.of(context)!.none;
     DateTime? birthTime;
-    int? color, darkColor, gender;
+    int? color, darkColor, gender, children;
     String trackedEntityID = json['trackedEntityInstance'];
-    color = Colors.blue[100]!.value;
+    color = Colors.blue[50]!.value;
     darkColor = Colors.white.value;
     var jsonList = json['attributes'];
     jsonList.forEach((element) {
@@ -52,22 +70,28 @@ class ChildModel {
         case DHIS2Config.ecebMotherName:
           parent = element['value'];
           break;
+        case DHIS2Config.ecebModeOfDelivery:
+          modeOfDeliveryName = element['value'];
+          break;
+        case DHIS2Config.ecebBabiesDelivered:
+          children = int.parse(element['value']);
+          break;
         case DHIS2Config.ecebGender:
           gender = int.parse(element['value']);
           break;
-        case DHIS2Config.classification:
-          if (element['value'].toString() == "Normal") {
+        case DHIS2Config.ecebTeiClassification:
+          if (element['value'].toString() == "1") {
             color = Colors.green[100]!.value;
             darkColor = Colors.green[300]!.value;
-            classification = 'Normal';
-          } else if (element['value'].toString() == "Problem") {
+            classification = AppLocalizations.of(context)!.normal;
+          } else if (element['value'].toString() == "2") {
             color = Colors.yellow[100]!.value;
             darkColor = Colors.yellow[300]!.value;
-            classification = 'Problem';
-          } else if (element['value'].toString() == "Danger") {
+            classification = AppLocalizations.of(context)!.problem;
+          } else if (element['value'].toString() == "3") {
             color = Colors.red[100]!.value;
             darkColor = Colors.red[300]!.value;
-            classification = 'Danger';
+            classification = AppLocalizations.of(context)!.danger;
           }
           break;
         case DHIS2Config.ecebBabiesDelivered:
@@ -84,8 +108,47 @@ class ChildModel {
     });
     Random random = new Random();
     String key = random.nextInt(100000000).toString();
-    return new ChildModel(parent!, ward!, gender!, color!, darkColor!,
-        birthTime!, trackedEntityID, key, classification!);
+    return new ChildModel(
+        parent!,
+        ward!,
+        gender!,
+        color!,
+        darkColor!,
+        birthTime!,
+        trackedEntityID,
+        key,
+        classification!,
+        children!,
+        modeOfDeliveryName!);
+  }
+
+  Map<String, dynamic> childModeltoJson(BuildContext context) => {
+        "trackedEntityType": DHIS2Config.trackedEntity,
+        "orgUnit": DHIS2Config.orgUnit,
+        'attributes': [
+          {"attribute": DHIS2Config.ecebMotherName, "value": parent},
+          {"attribute": DHIS2Config.ecebGender, "value": gender},
+          {"attribute": DHIS2Config.ecebBabiesDelivered, "value": children},
+          {
+            "attribute": DHIS2Config.ecebBirthDateTime,
+            "value": DateFormat("yyyy-MM-ddThh:mm").format(birthTime)
+          },
+          {
+            "attribute": DHIS2Config.ecebModeOfDelivery,
+            "value": modeOfDeliveryName
+          },
+          {"attribute": DHIS2Config.teiWardname, "value": ward},
+          {
+            "attribute": DHIS2Config.ecebTeiClassification,
+            "value": getClassificationValue(classification, context)
+          }
+        ]
+      };
+  int getClassificationValue(String classification, BuildContext context) {
+    if (classification == AppLocalizations.of(context)!.normal) return 1;
+    if (classification == AppLocalizations.of(context)!.problem) return 2;
+    if (classification == AppLocalizations.of(context)!.danger) return 3;
+    return 0;
   }
 
   compareTo(ChildModel b, BuildContext context) {

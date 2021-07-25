@@ -27,7 +27,7 @@ class Phase3Problem extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              AppLocalizations.of(context)!.problem,
+              AppLocalizations.of(context)!.theBabyHasBeenClassifiedProblem,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             Text(

@@ -30,8 +30,7 @@ class RegisterBabyRepositoryImpl {
     if (_registerBabyModel.babiesDelivered == null)
       throw Exception(AppLocalizations.of(context)!.selectBabiesDelivered);
     if (_registerBabyModel.modeOfDelivery == null ||
-        (_registerBabyModel.modeOfDelivery == false &&
-            _registerBabyModel.modeOfDeliveryName.isEmpty))
+        (_registerBabyModel.modeOfDeliveryName.isEmpty))
       throw Exception(AppLocalizations.of(context)!.selectModeOfDelivery);
     int index = 1;
     _registerBabyModel.children.forEach((element) {
@@ -62,12 +61,14 @@ class RegisterBabyRepositoryImpl {
           _registerBabyModel.motherName,
           _registerBabyModel.wardName,
           element.gender! ? 1 : 0,
-          Colors.blue[100]!.value,
+          Colors.blue[50]!.value,
           Colors.white.value,
           element.birthDateTime,
           key,
           key,
-          'None');
+          'None',
+          _registerBabyModel.children.length,
+          _registerBabyModel.modeOfDeliveryName);
       //push data using api
       await registerBabyDetails(_registerBabyModel, key);
       //create stage 1 assessmens
@@ -75,10 +76,14 @@ class RegisterBabyRepositoryImpl {
       //save to hive storage
       hiveStorageRepository.storeSingleChild(child);
       //add/schedule stage 1 notifications
-      await notificationRepository.showStage1Notification(
-          key, _registerBabyModel.motherName);
-      await notificationRepository.scheduledStage1Notification(
-          key, _registerBabyModel.motherName);
+      await notificationRepository.immediateNotification(key,
+          _registerBabyModel.motherName, AppLocalizations.of(context)!.phase1);
+
+      await notificationRepository.scheduledStageNotificationReminder(
+          key,
+          _registerBabyModel.motherName,
+          AppLocalizations.of(context)!.phase1,
+          child.birthTime.add(Duration(minutes: 60)));
     });
     return;
   }

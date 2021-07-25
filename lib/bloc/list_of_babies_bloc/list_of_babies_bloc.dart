@@ -36,7 +36,7 @@ class ListOfBabiesBloc extends Bloc<ListOfBabiesEvent, ListOfBabiesState> {
           recentList, pastRegistered, childListMap);
       yield ListOfBabiesLoaded(recentList, pastRegistered);
     } else if (event is ListOfBabiesRefreshList) {
-      //refresh list after registering a child
+      //refresh list after registering a child/after doing assessments
       childListMap = hiveStorageRepository.getListOfAllChild();
       //sort and seperate lists
       List<ChildModel> recentList = [], pastRegistered = [];

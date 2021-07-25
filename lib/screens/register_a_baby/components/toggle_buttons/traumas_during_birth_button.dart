@@ -101,8 +101,7 @@ class _TraumasDuringBirthButtonState extends State<TraumasDuringBirthButton> {
                       onChanged: (String text) {
                         widget._babyDetailsModel.traumasDuringBirthNotes = text;
                       },
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 4,
+                      maxLines: null,
                       textAlign: TextAlign.left,
                       decoration: new InputDecoration(
                         border: new OutlineInputBorder(

@@ -23,7 +23,6 @@ void main() {
 
 void assessmentClientTest() {
   MockClient _mockHttpClient = MockClient();
-  ;
   MockHiveStorageRepository _mockHiveStorageRepository =
       MockHiveStorageRepository();
   MockRefreshRepository _mockRefreshRepository = MockRefreshRepository();
@@ -51,8 +50,8 @@ void assessmentClientTest() {
           APIConfig().getaddEventsAPI(
               DHIS2Config.orgUnit, DHIS2Config.programECEBID, 'key');
       when(_mockHiveStorageRepository.getSingleChild('key')).thenReturn(
-          ChildModel(
-              'parent', 'ward', 1, 1, 1, DateTime.now(), 'key', 'key', 'None'));
+          ChildModel('parent', 'ward', 1, 1, 1, DateTime.now(), 'key', 'key',
+              'None', 1, 'normal'));
       when(_mockHttpClient.get(
         Uri.parse(url),
         headers: <String, String>{
@@ -72,7 +71,6 @@ void assessmentClientTest() {
           localizationsDelegates: [
             AppLocalizations.delegate,
           ]));
-      String json = '';
       BuildContext context = tester.element(find.byType(Container));
       _assessmentsClient = new AssessmentsClient(_mockHttpClient, context,
           Lock(), _mockHiveStorageRepository, _mockRefreshRepository);
@@ -82,8 +80,8 @@ void assessmentClientTest() {
           APIConfig().getaddEventsAPI(
               DHIS2Config.orgUnit, DHIS2Config.programECEBID, 'key');
       when(_mockHiveStorageRepository.getSingleChild('key')).thenReturn(
-          ChildModel(
-              'parent', 'ward', 1, 1, 1, DateTime.now(), 'key', 'key', 'None'));
+          ChildModel('parent', 'ward', 1, 1, 1, DateTime.now(), 'key', 'key',
+              'None', 1, 'normal'));
       when(_mockHttpClient.get(
         Uri.parse(url),
         headers: <String, String>{
