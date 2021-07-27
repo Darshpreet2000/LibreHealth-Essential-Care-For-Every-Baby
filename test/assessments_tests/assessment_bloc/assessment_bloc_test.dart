@@ -58,9 +58,9 @@ void mainBloc() {
   // yields AssessmentsError when assessments are incomplete while adding of phase 4 assessments
   group('AssessmentsBloc testing', () {
     ChildModel inputChildModel = new ChildModel("Oni", "postnatal", 1, 1234,
-        1234, DateTime.now(), "1234", "1234", 'None', 1, 'normal');
+        1234, DateTime.now(), "1234", "1234", 'None', "", false);
     ChildModel outputChildModel = new ChildModel("Oni", "postnatal", 1, 1234,
-        1234, DateTime.now(), "1234", "1234", 'None', 1, 'normal');
+        1234, DateTime.now(), "1234", "1234", 'None', "", false);
     outputChildModel.assessmentsList = [Stage1()];
     blocTest<AssessmentsBloc, AssessmentsState>(
       'yields AssessmentsInitial on successful fetching of data',

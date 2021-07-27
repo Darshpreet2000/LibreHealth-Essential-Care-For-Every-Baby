@@ -26,8 +26,8 @@ class ChildModelAdapter extends TypeAdapter<ChildModel> {
       fields[6] as String,
       fields[8] as String,
       fields[9] as String,
-      fields[10] as int,
-      fields[11] as String,
+      fields[10] as String,
+      fields[11] as bool,
     )..assessmentsList = (fields[7] as List).cast<Object>();
   }
 
@@ -56,9 +56,9 @@ class ChildModelAdapter extends TypeAdapter<ChildModel> {
       ..writeByte(9)
       ..write(obj.classification)
       ..writeByte(10)
-      ..write(obj.children)
+      ..write(obj.enrollmentID)
       ..writeByte(11)
-      ..write(obj.modeOfDeliveryName);
+      ..write(obj.isCompleted);
   }
 
   @override

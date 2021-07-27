@@ -11,6 +11,7 @@ import 'package:newborn_care/models/stage_3_danger.dart';
 import 'package:newborn_care/models/stage_3_normal.dart';
 import 'package:newborn_care/models/stage_3_problem.dart';
 import 'package:newborn_care/models/stage_4.dart';
+import 'package:newborn_care/models/stage_5.dart';
 import 'package:newborn_care/network/assessments_client.dart';
 import 'package:newborn_care/repository/classification_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
@@ -142,8 +143,19 @@ class AssessmentsRepository {
     return;
   }
 
+  void validatePhase5Assessments(Stage5 stage5) {
+    if (stage5.ecebStage5NormalGiveparentsguidanceforhomecare == false ||
+        stage5.ecebStage5NormalReassessBabyfordischarge == false)
+      throw Exception(AppLocalizations.of(context)!.completeAssessments);
+
+    //marking stage as completed
+    stage5.isCompleted = true;
+    return;
+  }
+
   List<Object> addNextAssessment(ChildModel childModel) {
     List<Object> assessments = childModel.assessmentsList;
+    if (childModel.isCompleted) return assessments;
     if (assessments.length == 0) {
       assessments.add(Stage1());
       addStage1Notifications(childModel);
@@ -167,16 +179,20 @@ class AssessmentsRepository {
     return assessments;
   }
 
-  List<Object> removeLastAssessment(ChildModel childModel) {
+  List<Object> removeLastUncompletedAssessment(ChildModel childModel) {
     List<Object> assessments = childModel.assessmentsList;
-    assessments.removeLast();
+    if ((assessments.last is Stage4) &&
+        (assessments.last as Stage4).isCompleted == false)
+      assessments.removeLast();
     return assessments;
   }
+
   List<Object> addDischargeAssessments(ChildModel childModel) {
-    List<Object> assessments = childModel.assessmentsList;
-   
-    return assessments;
+    if (!(childModel.assessmentsList.last is Stage5))
+      childModel.assessmentsList.add(Stage5());
+    return childModel.assessmentsList;
   }
+
   void changeColorBasedOnClassification(ChildModel childModel) {
     if (childModel.classification == AppLocalizations.of(context)!.normal) {
       childModel.color = Colors.green[100]!.value;
@@ -202,6 +218,12 @@ class AssessmentsRepository {
     assessmentsClient.registerEvent(
         json, id, profile.username, profile.password);
     return;
+  }
+
+  Future updateEnrollmentStatus(String key) async {
+    Profile profile = hiveStorageRepository.getProfile();
+    assessmentsClient.updateEnrollmentStatus(
+        profile.username, profile.password, key);
   }
 
   String classifyHealthAfterStage2(Stage2 stage2) {
@@ -250,6 +272,9 @@ class AssessmentsRepository {
         } else if (item['programStage'] == DHIS2Config.stage4ID &&
             item['status'] == 'COMPLETED') {
           result.insert(0, Stage4.fromJson(item));
+        } else if (item['programStage'] == DHIS2Config.stage5ID &&
+            item['status'] == 'COMPLETED') {
+          result.insert(0, Stage5.fromJson(item));
         }
       }
       return result;

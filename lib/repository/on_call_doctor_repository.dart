@@ -36,7 +36,7 @@ class OnCallDoctorRepository {
     };
     await messageClient.sendMessage(
         jsonEncode(jsonObject), profile.username, profile.password);
-     try {
+    try {
       await lock.synchronized(refreshRepository.startRefreshing);
     } catch (e) {
       throw e;

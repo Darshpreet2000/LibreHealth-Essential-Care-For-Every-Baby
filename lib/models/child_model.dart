@@ -36,11 +36,12 @@ class ChildModel {
 
   @HiveField(9)
   String classification;
+
   @HiveField(10)
-  int children;
+  String enrollmentID;
 
   @HiveField(11)
-  String modeOfDeliveryName;
+  bool isCompleted;
   ChildModel(
       this.parent,
       this.ward,
@@ -51,16 +52,14 @@ class ChildModel {
       this.trackedEntityID,
       this.key,
       this.classification,
-      this.children,
-      this.modeOfDeliveryName);
+      this.enrollmentID,
+      this.isCompleted);
 
-  factory ChildModel.fromJson(dynamic json, BuildContext context) {
-    String? parent,
-        ward,
-        modeOfDeliveryName,
-        classification = AppLocalizations.of(context)!.none;
+  factory ChildModel.fromJson(dynamic json, BuildContext context,
+      String enrollmentID, bool isCompleted) {
+    String? parent, ward, classification = AppLocalizations.of(context)!.none;
     DateTime? birthTime;
-    int? color, darkColor, gender, children;
+    int? color, darkColor, gender;
     String trackedEntityID = json['trackedEntityInstance'];
     color = Colors.blue[50]!.value;
     darkColor = Colors.white.value;
@@ -69,12 +68,6 @@ class ChildModel {
       switch (element['attribute']) {
         case DHIS2Config.ecebMotherName:
           parent = element['value'];
-          break;
-        case DHIS2Config.ecebModeOfDelivery:
-          modeOfDeliveryName = element['value'];
-          break;
-        case DHIS2Config.ecebBabiesDelivered:
-          children = int.parse(element['value']);
           break;
         case DHIS2Config.ecebGender:
           gender = int.parse(element['value']);
@@ -118,8 +111,8 @@ class ChildModel {
         trackedEntityID,
         key,
         classification!,
-        children!,
-        modeOfDeliveryName!);
+        enrollmentID,
+        isCompleted);
   }
 
   Map<String, dynamic> childModeltoJson(BuildContext context) => {
@@ -128,14 +121,9 @@ class ChildModel {
         'attributes': [
           {"attribute": DHIS2Config.ecebMotherName, "value": parent},
           {"attribute": DHIS2Config.ecebGender, "value": gender},
-          {"attribute": DHIS2Config.ecebBabiesDelivered, "value": children},
           {
             "attribute": DHIS2Config.ecebBirthDateTime,
             "value": DateFormat("yyyy-MM-ddThh:mm").format(birthTime)
-          },
-          {
-            "attribute": DHIS2Config.ecebModeOfDelivery,
-            "value": modeOfDeliveryName
           },
           {"attribute": DHIS2Config.teiWardname, "value": ward},
           {

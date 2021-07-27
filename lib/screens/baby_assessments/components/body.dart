@@ -11,9 +11,11 @@ import 'package:newborn_care/models/stage_3_danger.dart';
 import 'package:newborn_care/models/stage_3_normal.dart';
 import 'package:newborn_care/models/stage_3_problem.dart';
 import 'package:newborn_care/models/stage_4.dart';
+import 'package:newborn_care/models/stage_5.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_1.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_2.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_3_normal.dart';
+import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_5.dart';
 import 'package:newborn_care/screens/list_of_babies/components/list_item.dart';
 
 import 'assessments_phases/phase_3_danger.dart';
@@ -59,9 +61,14 @@ class _BodyState extends State<Body> {
       child: BlocBuilder<AssessmentsBloc, AssessmentsState>(
         bloc: widget.assessmentsBloc,
         builder: (context, state) {
-          if (state is AssessmentsInitial ||
-              state is AssessmentsAdded ||
-              state is AssessmentsLoading)
+          if (state is AssessmentsLoading)
+            return SizedBox(
+              height: MediaQuery.of(context).size.height / 1.3,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          if (state is AssessmentsInitial || state is AssessmentsAdded)
             return Container(
               child: Column(
                 children: [
@@ -114,14 +121,15 @@ class _BodyState extends State<Body> {
                             state.childModel.assessmentsList[index] as Stage4,
                             widget.assessmentsBloc,
                             state.childModel.color);
+                      } else if (state.childModel.assessmentsList[index]
+                          is Stage5) {
+                        return Phase5(
+                            state.childModel.assessmentsList[index] as Stage5,
+                            widget.assessmentsBloc);
                       }
                       return Container();
                     },
                   ),
-                  (state is AssessmentsLoading)
-                      ? CircularProgressIndicator()
-                      : Container()
-                   
                 ],
               ),
             );

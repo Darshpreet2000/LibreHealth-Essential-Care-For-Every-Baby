@@ -22,13 +22,13 @@ class OnCallDoctorModelAdapter extends TypeAdapter<OnCallDoctorModel> {
       fields[2] as DateTime?,
       fields[3] as DateTime?,
       fields[4] as String?,
-    );
+    )..doctorID = fields[5] as String?;
   }
 
   @override
   void write(BinaryWriter writer, OnCallDoctorModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.onCallDoctorName)
       ..writeByte(1)
@@ -38,7 +38,9 @@ class OnCallDoctorModelAdapter extends TypeAdapter<OnCallDoctorModel> {
       ..writeByte(3)
       ..write(obj.onCallDoctorShiftEndTime)
       ..writeByte(4)
-      ..write(obj.eventID);
+      ..write(obj.eventID)
+      ..writeByte(5)
+      ..write(obj.doctorID);
   }
 
   @override

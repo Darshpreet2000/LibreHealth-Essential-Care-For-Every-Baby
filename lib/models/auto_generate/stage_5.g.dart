@@ -8,7 +8,7 @@ part of '../stage_5.dart';
 
 class Stage5Adapter extends TypeAdapter<Stage5> {
   @override
-  final int typeId = 13;
+  final int typeId = 14;
 
   @override
   Stage5 read(BinaryReader reader) {
@@ -17,8 +17,8 @@ class Stage5Adapter extends TypeAdapter<Stage5> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Stage5()
-      ..ecebStage5NormalReassessBabyfordischarge = fields[0] as String?
-      ..ecebStage5NormalGiveparentsguidanceforhomecare = fields[1] as String?
+      ..ecebStage5NormalReassessBabyfordischarge = fields[0] as bool
+      ..ecebStage5NormalGiveparentsguidanceforhomecare = fields[1] as bool
       ..isCompleted = fields[2] as bool;
   }
 

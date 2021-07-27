@@ -183,7 +183,7 @@ void mainBloc() {
       BuildContext context = tester.element(find.byType(Container));
       var lock = Lock();
       ChildModel inputChildModel = new ChildModel("Oni", "postnatal", 1, 1234,
-          1234, DateTime.now(), "1234", "1234", 'None', 1, 'Normal');
+          1234, DateTime.now(), "1234", "1234", 'None', "123", false);
       inputChildModel.assessmentsList = [Stage1(), Stage2()];
       try {
         AssessmentsRepository(context, lock, _mockHiveStorageRepository,
@@ -203,7 +203,7 @@ void mainBloc() {
       BuildContext context = tester.element(find.byType(Container));
       var lock = Lock();
       ChildModel inputChildModel = new ChildModel("Oni", "postnatal", 1, 1234,
-          1234, DateTime.now(), "1234", "1234", 'None', 1, 'Problem');
+          1234, DateTime.now(), "1234", "1234", 'None', "123", false);
       inputChildModel.assessmentsList = [Stage1(), Stage2()];
       try {
         AssessmentsRepository(context, lock, _mockHiveStorageRepository,
@@ -223,7 +223,7 @@ void mainBloc() {
       BuildContext context = tester.element(find.byType(Container));
       var lock = Lock();
       ChildModel inputChildModel = new ChildModel("Oni", "postnatal", 1, 1234,
-          1234, DateTime.now(), "1234", "1234", 'None', 1, 'Danger');
+          1234, DateTime.now(), "1234", "1234", 'None', "123", false);
       inputChildModel.assessmentsList = [Stage1(), Stage2()];
       try {
         AssessmentsRepository(context, lock, _mockHiveStorageRepository,

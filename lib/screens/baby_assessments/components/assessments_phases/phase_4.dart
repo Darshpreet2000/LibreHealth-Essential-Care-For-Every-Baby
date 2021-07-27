@@ -17,11 +17,6 @@ class Phase4 extends StatefulWidget {
 
 class _Phase4State extends State<Phase4> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  @override
-  void dispose() {
-    widget.assessmentsBloc.close();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -21,6 +21,7 @@ import 'package:newborn_care/models/stage_3_danger.dart';
 import 'package:newborn_care/models/stage_3_normal.dart';
 import 'package:newborn_care/models/stage_3_problem.dart';
 import 'package:newborn_care/models/stage_4.dart';
+import 'package:newborn_care/models/stage_5.dart';
 import 'package:newborn_care/models/user_activity.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
@@ -73,6 +74,7 @@ Future registerHive() async {
   Hive.registerAdapter(Stage3DangerAdapter());
   Hive.registerAdapter(Stage4Adapter());
   Hive.registerAdapter(OnCallDoctorModelAdapter());
+  Hive.registerAdapter(Stage5Adapter());
   box = await Hive.openBox('eceb');
   listBox = await Hive.openBox<List>('eceblist');
   mapBox = await Hive.openBox<ChildModel>('ecebMap');
@@ -150,6 +152,10 @@ class _MyAppState extends State<MyApp> {
             create: (BuildContext context) =>
                 NotificationBloc(context.read<NotificationScreenRepository>()),
           ),
+          BlocProvider<NotificationBloc>(
+            create: (BuildContext context) =>
+                NotificationBloc(context.read<NotificationScreenRepository>()),
+          ),
           BlocProvider<SummaryBloc>(
             create: (BuildContext context) => SummaryBloc(
                 context.read<SummaryRepository>(),
@@ -222,7 +228,8 @@ class _MyAppState extends State<MyApp> {
         ),
         RepositoryProvider<OnCallDoctorRepository>(
           create: (context) => OnCallDoctorRepository(
-            navigatorKey.currentContext!,lock,
+            navigatorKey.currentContext!,
+            lock,
             context.read<HiveStorageRepository>(),
             context.read<RefreshRepository>(),
           ),

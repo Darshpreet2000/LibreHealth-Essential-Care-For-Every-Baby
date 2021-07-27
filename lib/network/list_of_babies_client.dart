@@ -18,7 +18,32 @@ class ListOfBabiesClient {
   Lock lock;
   ListOfBabiesClient(
       this.client, this.context, this.lock, this.refreshRepository);
-  Future fetchListOfBabies(String username, String password) async {
+  Future fetchEnrollments(String username, String password) async {
+    String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+
+    try {
+      final response = await client.get(
+        //get all enrollments  which were updated in 24 hours
+        Uri.parse(DHIS2Config.serverURL +
+            APIConfig().enrollments +
+            "?ou=${DHIS2Config.orgUnit}&program=${DHIS2Config.programECEBID}&lastUpdatedDuration=1d"),
+        headers: <String, String>{
+          'authorization': basicAuth,
+        },
+      ).timeout(Duration(seconds: 15));
+      return _response(response);
+    } on TimeoutException {
+      throw FetchDataException(
+          AppLocalizations.of(context)!.noInternetConnection, 503);
+    } on SocketException {
+      throw FetchDataException(
+          AppLocalizations.of(context)!.noInternetConnection, 503);
+    }
+  }
+
+  Future fetchSingleChildByTrackedEntityID(
+      String username, String password, String id) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     try {
@@ -29,9 +54,8 @@ class ListOfBabiesClient {
     try {
       final response = await client.get(
         //get all tracked entites which were updated in 24 hours
-        Uri.parse(DHIS2Config.serverURL +
-            APIConfig().trackedEntityInstance +
-            "?ou=${DHIS2Config.orgUnit}&program=${DHIS2Config.programECEBID}&lastUpdatedDuration=1d"),
+        Uri.parse(
+            DHIS2Config.serverURL + APIConfig().trackedEntityInstance + "/$id"),
         headers: <String, String>{
           'authorization': basicAuth,
         },

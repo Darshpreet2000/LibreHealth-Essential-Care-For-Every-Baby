@@ -4,12 +4,12 @@ import 'package:newborn_care/utils/dhis2_config.dart';
 
 part 'auto_generate/stage_5.g.dart';
 
-@HiveType(typeId: 13)
+@HiveType(typeId: 14)
 class Stage5 {
   @HiveField(0)
-  String? ecebStage5NormalReassessBabyfordischarge;
+  bool ecebStage5NormalReassessBabyfordischarge = false;
   @HiveField(1)
-  String? ecebStage5NormalGiveparentsguidanceforhomecare;
+  bool ecebStage5NormalGiveparentsguidanceforhomecare = false;
   @HiveField(2)
   bool isCompleted = false;
   Stage5();
@@ -23,9 +23,13 @@ class Stage5 {
         "status": "COMPLETED",
         "completedDate": DateFormat("yyyy-MM-ddThh:mm").format(DateTime.now()),
         "dataValues": [
-          {"dataElement": DHIS2Config.ecebStage5NormalReassessBabyfordischarge, "value": ecebStage5NormalReassessBabyfordischarge},
           {
-            "dataElement": DHIS2Config.ecebStage5NormalGiveparentsguidanceforhomecare,
+            "dataElement": DHIS2Config.ecebStage5NormalReassessBabyfordischarge,
+            "value": ecebStage5NormalReassessBabyfordischarge
+          },
+          {
+            "dataElement":
+                DHIS2Config.ecebStage5NormalGiveparentsguidanceforhomecare,
             "value": ecebStage5NormalGiveparentsguidanceforhomecare
           },
         ]
@@ -37,10 +41,11 @@ class Stage5 {
     jsonList.forEach((element) {
       switch (element['dataElement']) {
         case DHIS2Config.ecebStage5NormalReassessBabyfordischarge:
-          ecebStage5NormalReassessBabyfordischarge = (element['value']);
+          ecebStage5NormalReassessBabyfordischarge = element['value'] == 'true';
           break;
         case DHIS2Config.ecebStage5NormalGiveparentsguidanceforhomecare:
-          ecebStage5NormalGiveparentsguidanceforhomecare = (element['value']);
+          ecebStage5NormalGiveparentsguidanceforhomecare =
+              element['value'] == 'true';
           break;
       }
     });

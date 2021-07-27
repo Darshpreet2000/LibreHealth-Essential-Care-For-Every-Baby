@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-part 'auto_generate/request_service_type.g.dart';
+part 'request_service_type.g.dart';
 
 @HiveType(typeId: 5)
 enum RequestServiceType {
@@ -10,5 +10,7 @@ enum RequestServiceType {
   @HiveField(2)
   updateRequest,
   @HiveField(3)
-  sendMessage
+  sendMessage,
+  @HiveField(4)
+  updateEnrollmentStatusRequest
 }

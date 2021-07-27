@@ -14,4 +14,6 @@ class AssessmentsEventCompleteStage3 extends AssessmentsEvent {}
 
 class AssessmentsEventCompleteStage4 extends AssessmentsEvent {}
 
+class AssessmentsEventCompleteStage5 extends AssessmentsEvent {}
+
 class DischargeButtonClick extends AssessmentsEvent {}

@@ -29,16 +29,26 @@ class ListOfBabiesRepository {
       this.listOfBabiesClient);
 
   Future fetchListOfBabies() async {
+    List<ChildModel> result = [];
     try {
       Profile profile = hiveStorageRepository.getProfile();
-      String response = await listOfBabiesClient.fetchListOfBabies(
+
+      var response = await listOfBabiesClient.fetchEnrollments(
           profile.username, profile.password);
-      Map<String, dynamic> res = jsonDecode(response);
-      List<ChildModel> result = [];
-      for (var item in res['trackedEntityInstances']) {
-        ChildModel childModel = ChildModel.fromJson(item, context);
+      Map<String, dynamic> res = json.decode(response);
+      for (var item in res['enrollments']) {
+        String enrollmentID = item["enrollment"];
+        String trackedEntityInstanceID = item["trackedEntityInstance"];
+        bool isCompleted = (item["status"] == "COMPLETED");
+        var childResponse =
+            await listOfBabiesClient.fetchSingleChildByTrackedEntityID(
+                profile.username, profile.password, trackedEntityInstanceID);
+        Map<String, dynamic> res = jsonDecode(childResponse);
+        ChildModel childModel =
+            ChildModel.fromJson(res, context, enrollmentID, isCompleted);
         result.add(childModel);
       }
+
       return result;
     } catch (e) {
       throw e;

@@ -5,6 +5,7 @@ import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/models/stage_2.dart';
 import 'package:newborn_care/models/stage_4.dart';
+import 'package:newborn_care/models/stage_5.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/notification_repository.dart';
@@ -138,13 +139,32 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
       }
     } else if (event is DischargeButtonClick) {
       childModel.assessmentsList =
-          _assessmentsRepository.removeLastAssessment(childModel);
-        notificationRepository.removeScheduledNotification(childModel.key);
-     
+          _assessmentsRepository.removeLastUncompletedAssessment(childModel);
+      notificationRepository.removeScheduledNotification(childModel.key);
+
       childModel.assessmentsList =
           _assessmentsRepository.addDischargeAssessments(childModel);
-       hiveStorageRepository.updateChild(childModel.key, childModel);
+      hiveStorageRepository.updateChild(childModel.key, childModel);
+      yield AssessmentsInitial(childModel);
+    } else if (event is AssessmentsEventCompleteStage5) {
+      try {
+        // check if data is filled correctly
+        _assessmentsRepository.validatePhase5Assessments(
+            childModel.assessmentsList.last as Stage5);
+        //mark child as discharged
+        childModel.isCompleted = true;
+        //push data to dhis2 using api
+        _assessmentsRepository.registerStageDetails(
+            childModel.assessmentsList.last, childModel.key);
+        //mark enrollment as completed
+        _assessmentsRepository.updateEnrollmentStatus(childModel.key);
+        //update child data in local storage in phone
+        hiveStorageRepository.updateChild(childModel.key, childModel);
         yield AssessmentsAdded(childModel);
+      } catch (e) {
+        yield AssessmentsError(e.toString());
+        yield AssessmentsInitial(childModel);
+      }
     }
   }
 }
