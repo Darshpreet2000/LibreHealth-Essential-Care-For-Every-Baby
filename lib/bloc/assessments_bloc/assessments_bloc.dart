@@ -99,12 +99,12 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
       try {
         // check if data is filled correctly
         _assessmentsRepository
-            .validatePhase3Assessments(childModel.assessmentsList[2]);
+            .validatePhase3Assessments(childModel.assessmentsList[event.index]);
 
         notificationRepository.removeScheduledNotification(childModel.key);
         //push data to dhis2 using api
         _assessmentsRepository.registerStageDetails(
-            childModel.assessmentsList[2], childModel.key);
+            childModel.assessmentsList[event.index], childModel.key);
 
         childModel.assessmentsList =
             _assessmentsRepository.addNextAssessment(childModel);
@@ -120,15 +120,27 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
       try {
         // check if data is filled correctly
         _assessmentsRepository.validatePhase4Assessments(
-            childModel.assessmentsList[3] as Stage4, childModel.birthTime);
+            childModel.assessmentsList[event.index] as Stage4);
 
         notificationRepository.removeScheduledNotification(childModel.key);
         //push data to dhis2 using api
         _assessmentsRepository.registerStageDetails(
-            childModel.assessmentsList[3], childModel.key);
-
+            childModel.assessmentsList[event.index], childModel.key);
+        //classify baby
+        childModel.classification =
+            _assessmentsRepository.classifyHealthAfterStage4(
+                childModel.assessmentsList[event.index] as Stage4);
+        //change color based on classification
+        _assessmentsRepository.changeColorBasedOnClassification(childModel);
+        // add next stage assessments
         childModel.assessmentsList =
             _assessmentsRepository.addNextAssessment(childModel);
+
+        //update Tracked Entity Instance & push to dhis2
+        _assessmentsRepository.updateTrackedEntityInstance(
+            childModel,
+            childModel.key,
+            (childModel.assessmentsList[1] as Stage2).ecebWardName);
 
         //update child data in local storage in phone
         hiveStorageRepository.updateChild(childModel.key, childModel);

@@ -124,11 +124,12 @@ class AssessmentsRepository {
     }
   }
 
-  void validatePhase4Assessments(Stage4 stage4, DateTime birthTime) {
-    //check if 180 minutes from birth has passed
-    if (DateTime.now().difference(birthTime).inMinutes < 180) {
+  void validatePhase4Assessments(Stage4 stage4) {
+    //check if time is before scheduled time
+    if (DateTime.now().isBefore(stage4.scheduledTime)) {
       throw Exception(AppLocalizations.of(context)!
-          .phase4AssessmentsToBeDoneOnlyAfter180MinutesFromBirth);
+          .assessmentToBeDoneAfterMinutes(
+              stage4.scheduledTime.difference(DateTime.now()).inMinutes));
     }
 
     if (stage4.ecebFastBreathing == null ||
@@ -172,9 +173,33 @@ class AssessmentsRepository {
       if (childModel.classification == AppLocalizations.of(context)!.danger) {
         assessments.add(Stage3Danger());
       }
-    } else if (assessments.length == 3) {
-      assessments.add(Stage4());
-      addStage4Notifications(childModel);
+    } else {
+      if (assessments.last is Stage4) {
+        if (childModel.classification == AppLocalizations.of(context)!.normal) {
+          assessments.add(Stage3Normal());
+        }
+        if (childModel.classification ==
+            AppLocalizations.of(context)!.problem) {
+          assessments.add(Stage3Problem());
+        }
+        if (childModel.classification == AppLocalizations.of(context)!.danger) {
+          assessments.add(Stage3Danger());
+        }
+      } else {
+        //check how many times stage 4 was done and schedule from birth time + (n+1)*180 minutes
+        // n is number of times stage 4 was done
+        int numberOfStage4Done = 1;
+        assessments.forEach((element) {
+          if (element is Stage4) numberOfStage4Done++;
+        });
+        DateTime nextScheduleTime = childModel.birthTime;
+        nextScheduleTime =
+            nextScheduleTime.add(Duration(minutes: numberOfStage4Done * 180));
+        Stage4 stage4 = Stage4();
+        stage4.scheduledTime = nextScheduleTime;
+        assessments.add(stage4);
+        addStage4Notifications(childModel, nextScheduleTime);
+      }
     }
     return assessments;
   }
@@ -237,6 +262,17 @@ class AssessmentsRepository {
         ecebConvulsions: stage2.ecebConvulsions);
   }
 
+  String classifyHealthAfterStage4(Stage4 stage4) {
+    return ClassificationRepository(context).classifyBabyHealth(
+        ecebSevereJaundice: stage4.ecebSevereJaundice,
+        ecebAssessTemperature: stage4.ecebAssessTemperature,
+        ecebWeight: stage4.ecebWeight,
+        ecebChestIndrawing: stage4.ecebChestIndrawing,
+        ecebFeedingProperly: stage4.ecebFeedingProperly,
+        ecebFastBreathing: stage4.ecebFastBreathing,
+        ecebConvulsions: stage4.ecebConvulsions);
+  }
+
   Future updateTrackedEntityInstance(
       ChildModel childModel, String id, String wardName) async {
     Profile profile = hiveStorageRepository.getProfile();
@@ -284,51 +320,36 @@ class AssessmentsRepository {
   }
 
   void addStage1Notifications(ChildModel childModel) {
-    int minutesPassed =
-        DateTime.now().difference(childModel.birthTime).inMinutes;
-    if (minutesPassed < 60) {
-      notificationRepository.immediateNotification(childModel.key,
-          childModel.parent, AppLocalizations.of(context)!.phase2);
+    notificationRepository.immediateNotification(childModel.key,
+        childModel.parent, AppLocalizations.of(context)!.phase1);
 
-      notificationRepository.scheduledStageNotificationReminder(
-          childModel.key,
-          childModel.parent,
-          AppLocalizations.of(context)!.phase2,
-          childModel.birthTime.add(Duration(minutes: 60)));
-    }
+    notificationRepository.scheduledStageNotificationReminder(
+        childModel.key,
+        childModel.parent,
+        AppLocalizations.of(context)!.phase1,
+        childModel.birthTime.add(Duration(minutes: 60)));
   }
 
   void addStage2Notifications(ChildModel childModel) {
-    int minutesPassed =
-        DateTime.now().difference(childModel.birthTime).inMinutes;
-    if (minutesPassed < 90) {
-      notificationRepository.scheduledStageNotification(
-          childModel.key,
-          childModel.parent,
-          AppLocalizations.of(context)!.phase2,
-          childModel.birthTime.add(Duration(minutes: 60)));
-      notificationRepository.scheduledStageNotificationReminder(
-          childModel.key,
-          childModel.parent,
-          AppLocalizations.of(context)!.phase2,
-          childModel.birthTime.add(Duration(minutes: 90)));
-    }
+    notificationRepository.scheduledStageNotification(
+        childModel.key,
+        childModel.parent,
+        AppLocalizations.of(context)!.phase2,
+        childModel.birthTime.add(Duration(minutes: 60)));
+    notificationRepository.scheduledStageNotificationReminder(
+        childModel.key,
+        childModel.parent,
+        AppLocalizations.of(context)!.phase2,
+        childModel.birthTime.add(Duration(minutes: 90)));
   }
 
-  void addStage4Notifications(ChildModel childModel) {
-    int minutesPassed =
-        DateTime.now().difference(childModel.birthTime).inMinutes;
-    if (minutesPassed < 180) {
-      notificationRepository.scheduledStageNotification(
-          childModel.key,
-          childModel.parent,
-          AppLocalizations.of(context)!.phase2,
-          childModel.birthTime.add(Duration(minutes: 180)));
-      notificationRepository.scheduledStageNotificationReminder(
-          childModel.key,
-          childModel.parent,
-          AppLocalizations.of(context)!.phase2,
-          childModel.birthTime.add(Duration(minutes: 240)));
-    }
+  void addStage4Notifications(ChildModel childModel, DateTime time) {
+    notificationRepository.scheduledStageNotification(childModel.key,
+        childModel.parent, AppLocalizations.of(context)!.phase4, time);
+    notificationRepository.scheduledStageNotificationReminder(
+        childModel.key,
+        childModel.parent,
+        AppLocalizations.of(context)!.phase4,
+        time.add(Duration(minutes: 180)));
   }
 }

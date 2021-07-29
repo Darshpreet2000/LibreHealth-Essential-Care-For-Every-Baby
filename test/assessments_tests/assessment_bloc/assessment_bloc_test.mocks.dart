@@ -111,10 +111,9 @@ class MockAssessmentsRepository extends _i1.Mock
       super.noSuchMethod(Invocation.method(#validatePhase3Assessments, [obj]),
           returnValueForMissingStub: null);
   @override
-  void validatePhase4Assessments(_i15.Stage4? stage4, DateTime? birthTime) =>
-      super.noSuchMethod(
-          Invocation.method(#validatePhase4Assessments, [stage4, birthTime]),
-          returnValueForMissingStub: null);
+  void validatePhase4Assessments(_i15.Stage4? stage4) => super.noSuchMethod(
+      Invocation.method(#validatePhase4Assessments, [stage4]),
+      returnValueForMissingStub: null);
   @override
   void validatePhase5Assessments(_i16.Stage5? stage5) => super.noSuchMethod(
       Invocation.method(#validatePhase5Assessments, [stage5]),
@@ -150,6 +149,10 @@ class MockAssessmentsRepository extends _i1.Mock
       Invocation.method(#classifyHealthAfterStage2, [stage2]),
       returnValue: '') as String);
   @override
+  String classifyHealthAfterStage4(_i15.Stage4? stage4) => (super.noSuchMethod(
+      Invocation.method(#classifyHealthAfterStage4, [stage4]),
+      returnValue: '') as String);
+  @override
   _i17.Future<dynamic> updateTrackedEntityInstance(
           _i8.ChildModel? childModel, String? id, String? wardName) =>
       (super.noSuchMethod(
@@ -169,9 +172,10 @@ class MockAssessmentsRepository extends _i1.Mock
       Invocation.method(#addStage2Notifications, [childModel]),
       returnValueForMissingStub: null);
   @override
-  void addStage4Notifications(_i8.ChildModel? childModel) => super.noSuchMethod(
-      Invocation.method(#addStage4Notifications, [childModel]),
-      returnValueForMissingStub: null);
+  void addStage4Notifications(_i8.ChildModel? childModel, DateTime? time) =>
+      super.noSuchMethod(
+          Invocation.method(#addStage4Notifications, [childModel, time]),
+          returnValueForMissingStub: null);
 }
 
 /// A class which mocks [NotificationRepository].

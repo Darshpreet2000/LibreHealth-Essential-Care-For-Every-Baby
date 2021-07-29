@@ -8,8 +8,8 @@ import 'package:newborn_care/models/stage_3_problem.dart';
 class Phase3Problem extends StatefulWidget {
   final Stage3Problem stage3problem;
   final AssessmentsBloc assessmentsBloc;
-
-  const Phase3Problem(this.stage3problem, this.assessmentsBloc);
+  final int index;
+  const Phase3Problem(this.stage3problem, this.assessmentsBloc, this.index);
 
   @override
   _Phase3ProblemState createState() => _Phase3ProblemState();
@@ -188,7 +188,7 @@ class _Phase3ProblemState extends State<Phase3Problem> {
                 onPressed: () {
                   if (widget.stage3problem.isCompleted == false) {
                     widget.assessmentsBloc
-                        .add(AssessmentsEventCompleteStage3());
+                        .add(AssessmentsEventCompleteStage3(widget.index));
                   }
                 },
                 child: Text(

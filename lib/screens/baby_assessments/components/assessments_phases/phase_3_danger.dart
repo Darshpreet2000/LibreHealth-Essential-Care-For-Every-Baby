@@ -7,8 +7,8 @@ import 'package:newborn_care/models/stage_3_danger.dart';
 class Phase3Danger extends StatefulWidget {
   final Stage3Danger stage3danger;
   final AssessmentsBloc assessmentsBloc;
-
-  const Phase3Danger(this.stage3danger, this.assessmentsBloc);
+  final int index;
+  const Phase3Danger(this.stage3danger, this.assessmentsBloc, this.index);
 
   @override
   _Phase3DangerState createState() => _Phase3DangerState();
@@ -101,7 +101,7 @@ class _Phase3DangerState extends State<Phase3Danger> {
                 onPressed: () {
                   if (widget.stage3danger.isCompleted == false) {
                     widget.assessmentsBloc
-                        .add(AssessmentsEventCompleteStage3());
+                        .add(AssessmentsEventCompleteStage3(widget.index));
                   }
                 },
                 child: Text(

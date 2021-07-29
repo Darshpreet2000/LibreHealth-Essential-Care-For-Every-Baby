@@ -10,9 +10,16 @@ class AssessmentsEventFetchData extends AssessmentsEvent {}
 
 class AssessmentsEventCompleteStage2 extends AssessmentsEvent {}
 
-class AssessmentsEventCompleteStage3 extends AssessmentsEvent {}
+class AssessmentsEventCompleteStage3 extends AssessmentsEvent {
+  final int index;
+  AssessmentsEventCompleteStage3(this.index);
+}
 
-class AssessmentsEventCompleteStage4 extends AssessmentsEvent {}
+class AssessmentsEventCompleteStage4 extends AssessmentsEvent {
+  final int index;
+
+  AssessmentsEventCompleteStage4(this.index);
+}
 
 class AssessmentsEventCompleteStage5 extends AssessmentsEvent {}
 

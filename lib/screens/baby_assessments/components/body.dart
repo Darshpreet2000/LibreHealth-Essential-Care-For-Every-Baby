@@ -97,30 +97,31 @@ class _BodyState extends State<Body> {
                       } else if (state.childModel.assessmentsList[index]
                           is Stage3Normal) {
                         return Phase3Normal(
-                          state.childModel.assessmentsList[index]
-                              as Stage3Normal,
-                          widget.assessmentsBloc,
-                        );
+                            state.childModel.assessmentsList[index]
+                                as Stage3Normal,
+                            widget.assessmentsBloc,
+                            index);
                       } else if (state.childModel.assessmentsList[index]
                           is Stage3Problem) {
                         return Phase3Problem(
-                          state.childModel.assessmentsList[index]
-                              as Stage3Problem,
-                          widget.assessmentsBloc,
-                        );
+                            state.childModel.assessmentsList[index]
+                                as Stage3Problem,
+                            widget.assessmentsBloc,
+                            index);
                       } else if (state.childModel.assessmentsList[index]
                           is Stage3Danger) {
                         return Phase3Danger(
-                          state.childModel.assessmentsList[index]
-                              as Stage3Danger,
-                          widget.assessmentsBloc,
-                        );
+                            state.childModel.assessmentsList[index]
+                                as Stage3Danger,
+                            widget.assessmentsBloc,
+                            index);
                       } else if (state.childModel.assessmentsList[index]
                           is Stage4) {
                         return Phase4(
                             state.childModel.assessmentsList[index] as Stage4,
                             widget.assessmentsBloc,
-                            state.childModel.color);
+                            state.childModel.color,
+                            index);
                       } else if (state.childModel.assessmentsList[index]
                           is Stage5) {
                         return Phase5(

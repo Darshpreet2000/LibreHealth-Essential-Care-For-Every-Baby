@@ -10,7 +10,8 @@ class Phase4 extends StatefulWidget {
   final Stage4 stage4;
   final AssessmentsBloc assessmentsBloc;
   final int color;
-  Phase4(this.stage4, this.assessmentsBloc, this.color);
+  final int index;
+  Phase4(this.stage4, this.assessmentsBloc, this.color, this.index);
   @override
   _Phase4State createState() => _Phase4State();
 }
@@ -190,7 +191,7 @@ class _Phase4State extends State<Phase4> {
                   if (widget.stage4.isCompleted == false &&
                       _formKey.currentState!.validate()) {
                     widget.assessmentsBloc
-                        .add(AssessmentsEventCompleteStage4());
+                        .add(AssessmentsEventCompleteStage4(widget.index));
                   }
                 },
                 child: Text(

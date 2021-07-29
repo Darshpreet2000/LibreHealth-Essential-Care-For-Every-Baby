@@ -7,6 +7,7 @@ import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/models/stage_2.dart';
 import 'package:newborn_care/models/stage_3_danger.dart';
 import 'package:newborn_care/models/stage_4.dart';
+import 'package:newborn_care/models/stage_5.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/notification_repository.dart';
@@ -56,6 +57,11 @@ void mainBloc() {
 
   // yields AssessmentsAdded on successful adding of phase 4
   // yields AssessmentsError when assessments are incomplete while adding of phase 4 assessments
+
+  // Stage - 5
+
+  // yields AssessmentsAdded on successful adding of phase 5
+  // yields AssessmentsError when assessments are incomplete while adding of phase 5 assessments
   group('AssessmentsBloc testing', () {
     ChildModel inputChildModel = new ChildModel("Oni", "postnatal", 1, 1234,
         1234, DateTime.now(), "1234", "1234", 'None', "", false);
@@ -335,7 +341,7 @@ void mainBloc() {
 
         return assessmentsBloc;
       },
-      act: (bloc) => bloc.add(AssessmentsEventCompleteStage3()),
+      act: (bloc) => bloc.add(AssessmentsEventCompleteStage3(2)),
       expect: () => [isA<AssessmentsAdded>()],
     );
 
@@ -352,7 +358,7 @@ void mainBloc() {
 
         return assessmentsBloc;
       },
-      act: (bloc) => bloc.add(AssessmentsEventCompleteStage3()),
+      act: (bloc) => bloc.add(AssessmentsEventCompleteStage3(3)),
       expect: () => [isA<AssessmentsError>(), isA<AssessmentsInitial>()],
     );
 
@@ -365,6 +371,8 @@ void mainBloc() {
         stage4.ecebFeedingProperly = true;
         stage4.ecebConvulsions = true;
         stage4.ecebSevereJaundice = true;
+        stage4.scheduledTime =
+            stage4.scheduledTime.subtract(Duration(minutes: 180));
 
         inputChildModel.assessmentsList = [
           Stage1(),
@@ -378,18 +386,29 @@ void mainBloc() {
             inputChildModel,
             _mockHiveRepo);
         when(_mockAssessmentsRepo.validatePhase4Assessments(
-                inputChildModel.assessmentsList[3] as Stage4,
-                DateTime.now().subtract(Duration(minutes: 185))))
-            .thenAnswer((realInvocation) {
+          inputChildModel.assessmentsList[3] as Stage4,
+        )).thenAnswer((realInvocation) {
           return;
         });
 
         when(_mockNotificationRepo
                 .removeScheduledNotification(inputChildModel.key))
             .thenAnswer((realInvocation) => Future.value());
+        when(_mockAssessmentsRepo.classifyHealthAfterStage4(
+                inputChildModel.assessmentsList[3] as Stage4))
+            .thenReturn("Normal");
+        when(_mockAssessmentsRepo
+                .changeColorBasedOnClassification(inputChildModel))
+            .thenAnswer((realInvocation) {});
 
         when(_mockAssessmentsRepo.addNextAssessment(inputChildModel))
-            .thenReturn(inputChildModel.assessmentsList);
+            .thenReturn([Stage1(), Stage2(), Stage3Danger(), stage4]);
+
+        when(_mockAssessmentsRepo.updateTrackedEntityInstance(
+                inputChildModel,
+                inputChildModel.key,
+                (inputChildModel.assessmentsList[1] as Stage2).ecebWardName))
+            .thenAnswer((realInvocation) => Future.value());
 
         when(_mockAssessmentsRepo.registerStageDetails(
                 inputChildModel.assessmentsList[3], inputChildModel.key))
@@ -402,7 +421,7 @@ void mainBloc() {
 
         return assessmentsBloc;
       },
-      act: (bloc) => bloc.add(AssessmentsEventCompleteStage4()),
+      act: (bloc) => bloc.add(AssessmentsEventCompleteStage4(3)),
       expect: () => [isA<AssessmentsAdded>()],
     );
 
@@ -424,7 +443,76 @@ void mainBloc() {
 
         return assessmentsBloc;
       },
-      act: (bloc) => bloc.add(AssessmentsEventCompleteStage4()),
+      act: (bloc) => bloc.add(AssessmentsEventCompleteStage4(3)),
+      expect: () => [isA<AssessmentsError>(), isA<AssessmentsInitial>()],
+    );
+    blocTest<AssessmentsBloc, AssessmentsState>(
+      'yields AssessmentsAdded on successful adding of phase 5',
+      build: () {
+        Stage5 stage5 = new Stage5();
+        stage5.ecebStage5NormalGiveparentsguidanceforhomecare = true;
+        stage5.ecebStage5NormalReassessBabyfordischarge = true;
+
+        inputChildModel.assessmentsList = [
+          Stage1(),
+          Stage2(),
+          Stage3Danger(),
+          Stage4(),
+          stage5
+        ];
+        AssessmentsBloc assessmentsBloc = new AssessmentsBloc(
+            _mockNotificationRepo,
+            _mockAssessmentsRepo,
+            inputChildModel,
+            _mockHiveRepo);
+        when(_mockAssessmentsRepo.validatePhase5Assessments(
+          inputChildModel.assessmentsList[4] as Stage5,
+        )).thenAnswer((realInvocation) {
+          return;
+        });
+
+        when(_mockNotificationRepo
+                .removeScheduledNotification(inputChildModel.key))
+            .thenAnswer((realInvocation) => Future.value());
+
+        when(_mockAssessmentsRepo.updateEnrollmentStatus(inputChildModel.key))
+            .thenAnswer((realInvocation) => Future.value());
+
+        when(_mockAssessmentsRepo.registerStageDetails(
+                inputChildModel.assessmentsList[4], inputChildModel.key))
+            .thenAnswer((realInvocation) => Future.value());
+
+        when(_mockHiveRepo.updateChild(inputChildModel.key, inputChildModel))
+            .thenAnswer((realInvocation) {
+          return;
+        });
+
+        return assessmentsBloc;
+      },
+      act: (bloc) => bloc.add(AssessmentsEventCompleteStage5()),
+      expect: () => [isA<AssessmentsAdded>()],
+    );
+
+    blocTest<AssessmentsBloc, AssessmentsState>(
+      'yields AssessmentsError when assessments are incomplete while adding of phase 5 assessments',
+      build: () {
+        inputChildModel.assessmentsList = [
+          Stage1(),
+          Stage2(),
+          Stage3Danger(),
+          Stage4(),
+          Stage5()
+        ];
+
+        AssessmentsBloc assessmentsBloc = new AssessmentsBloc(
+            _mockNotificationRepo,
+            _mockAssessmentsRepo,
+            inputChildModel,
+            _mockHiveRepo);
+
+        return assessmentsBloc;
+      },
+      act: (bloc) => bloc.add(AssessmentsEventCompleteStage5()),
       expect: () => [isA<AssessmentsError>(), isA<AssessmentsInitial>()],
     );
   });
