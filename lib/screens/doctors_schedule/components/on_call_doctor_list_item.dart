@@ -58,7 +58,7 @@ class _OnCallDoctorListItemState extends State<OnCallDoctorListItem> {
                         'authorization': basicAuth!,
                       },
                       imageBuilder: (context, imageProvider) => CircleAvatar(
-                            radius: 40,
+                            radius: 50,
                             backgroundImage: imageProvider,
                           ),
                       imageUrl: APIConfig()
