@@ -52,8 +52,7 @@ class _BaseClassState extends State<BaseClass> {
                   AppLocalizations.of(context)!.doctorsSchedule,
                 ),
                 onTap: () {
-                  // Update the state of the app.
-                  // ...
+                  Navigator.pushNamed(context, '/DoctorSchedule');
                 },
               ),
               ListTile(

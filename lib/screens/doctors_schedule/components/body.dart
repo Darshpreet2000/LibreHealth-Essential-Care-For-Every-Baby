@@ -12,20 +12,23 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OnCallDoctorBloc, OnCallDoctorState>(
       builder: (context, state) {
-      if (state is OnCallDoctorLoaded) {
+        if (state is OnCallDoctorLoaded) {
           List<OnCallDoctorModel> result =
               RepositoryProvider.of<HiveStorageRepository>(context)
                   .getOnCallDoctors();
           return ListView.builder(
-             itemBuilder: (context, index) {
-                      return OnCallDoctorListItem(onCallDoctorModel:  result[index],);
-                    },
+            itemCount: result.length,
+            itemBuilder: (context, index) {
+              return OnCallDoctorListItem(
+                onCallDoctorModel: result[index],
+              );
+            },
           );
         }
-         return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(child: CircularProgressIndicator()),
-          );
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(child: CircularProgressIndicator()),
+        );
       },
     );
   }
