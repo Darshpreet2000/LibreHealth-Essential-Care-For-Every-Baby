@@ -54,11 +54,11 @@ void mainBloc() {
 
         when(_mockAuthRepo.loginUser("testuser", "Admin@123")).thenAnswer(
           (_) async =>
-              Future.value(Profile("testuser", "id", "testuser", "Admin@123")),
+              Future.value(Profile("testuser", "id", "testuser", "Admin@123","")),
         );
 
         when(_mockHiveRepo.storeProfile(
-                Profile("testuser", "id", "testuser", "Admin@123")))
+                Profile("testuser", "id", "testuser", "Admin@123","")))
             .thenReturn(null);
         return authenticationBloc;
       },

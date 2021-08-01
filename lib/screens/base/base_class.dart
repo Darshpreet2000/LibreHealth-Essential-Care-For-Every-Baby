@@ -10,6 +10,7 @@ import 'package:newborn_care/screens/notifications/notification_screen.dart';
 import 'package:newborn_care/screens/profile/profile_screen.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:badges/badges.dart';
 
 class BaseClass extends StatefulWidget {
   final GlobalKey? globalKey;
@@ -53,15 +54,6 @@ class _BaseClassState extends State<BaseClass> {
                 ),
                 onTap: () {
                   Navigator.pushNamed(context, '/DoctorSchedule');
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.message,
-                    color: Theme.of(context).iconTheme.color),
-                title: Text(AppLocalizations.of(context)!.messages),
-                onTap: () {
-                  // Update the state of the app.
-                  // ...
                 },
               ),
               ListTile(
@@ -168,7 +160,11 @@ class _BaseClassState extends State<BaseClass> {
               label: AppLocalizations.of(context)!.notifications,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person_rounded),
+              icon: Badge(
+                  badgeContent:
+                      Text('3', style: TextStyle(color: Colors.white)),
+                  badgeColor: Colors.lightBlue,
+                  child: Icon(Icons.person_rounded)),
               label: AppLocalizations.of(context)!.profile,
             ),
           ],

@@ -13,6 +13,8 @@ class Profile {
   final String username;
   @HiveField(3)
   final String password;
+  @HiveField(4)
+  final String avatarID;
 
-  Profile(this.name, this.id, this.username, this.password);
+  Profile(this.name, this.id, this.username, this.password, this.avatarID);
 }

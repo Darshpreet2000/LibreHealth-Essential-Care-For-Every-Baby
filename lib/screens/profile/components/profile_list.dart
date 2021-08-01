@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
-import 'package:newborn_care/screens/list_of_babies/components/custom_drop_down.dart';
 import 'package:newborn_care/screens/profile/components/list_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -109,7 +108,6 @@ class ProfileList extends StatelessWidget {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
           ),
-          Expanded(child: CustomDropDown(enableDisableScroll))
         ],
       ),
     );
