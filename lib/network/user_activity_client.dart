@@ -34,7 +34,7 @@ class UserActivityClient {
         headers: <String, String>{
           'authorization': basicAuth,
         },
-      ).timeout(const Duration(seconds: 10));
+      ).timeout(const Duration(seconds: 15));
       return _response(response);
     } on TimeoutException {
       throw FetchDataException(
@@ -60,7 +60,7 @@ class UserActivityClient {
         headers: <String, String>{
           'authorization': basicAuth,
         },
-      ).timeout(const Duration(seconds: 10));
+      ).timeout(const Duration(seconds: 15));
       return _response(response);
     } on TimeoutException {
       throw FetchDataException(

@@ -22,14 +22,18 @@ class UserActivityBloc extends Bloc<UserActivityEvent, UserActivityState> {
     yield UserActivityLoading();
     if (event is UserActivityFetch) {
       try {
-        yield UserActivityLoaded(hiveStorageRepository.getNotificationsList());
+        yield UserActivityLoaded(
+            hiveStorageRepository.getNotificationsList(), 0);
         List<UserActivity> response =
             await _userActivityRepository.fetchUsersMessages();
+        int countNewNotifications =
+            _userActivityRepository.countNewNotifications(response);
         hiveStorageRepository.storeNotifications(response);
-        yield UserActivityLoaded(response);
+        yield UserActivityLoaded(response, countNewNotifications);
       } catch (e) {
         yield UserActivityError(e.toString());
-        yield UserActivityLoaded(hiveStorageRepository.getNotificationsList());
+        yield UserActivityLoaded(
+            hiveStorageRepository.getNotificationsList(), 0);
       }
     }
   }

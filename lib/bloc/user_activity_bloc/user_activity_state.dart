@@ -8,8 +8,9 @@ class UserActivityLoading extends UserActivityState {}
 
 class UserActivityLoaded extends UserActivityState {
   final List<UserActivity> userActivityList;
+  final int newNotificationsCount;
 
-  UserActivityLoaded(this.userActivityList);
+  UserActivityLoaded(this.userActivityList, this.newNotificationsCount);
 }
 
 class UserActivityError extends UserActivityState {

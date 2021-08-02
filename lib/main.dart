@@ -251,7 +251,8 @@ class _MyAppState extends State<MyApp> {
               navigatorKey.currentContext!,
               lock,
               context.read<HiveStorageRepository>(),
-              context.read<RefreshRepository>()),
+              context.read<RefreshRepository>(),
+              context.read<NotificationRepository>()),
         ),
         RepositoryProvider<RegisterBabyRepositoryImpl>(
           create: (context) => RegisterBabyRepositoryImpl(

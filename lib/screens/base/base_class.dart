@@ -23,6 +23,7 @@ class BaseClass extends StatefulWidget {
 
 class _BaseClassState extends State<BaseClass> {
   int selectedIndex = 0;
+  int notificationsCount = 0;
   @override
   void initState() {
     BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
@@ -108,36 +109,45 @@ class _BaseClassState extends State<BaseClass> {
             ],
           ),
         ),
-        body: BlocListener<RefreshBloc, RefreshState>(
+        body: BlocListener<UserActivityBloc, UserActivityState>(
           listener: (context, state) {
-            if (state is RefreshLoading) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text(
-                      AppLocalizations.of(context)!.syncingDataWithDHIS2)));
-            }
-            if (state is RefreshLoaded) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text(AppLocalizations.of(context)!.dataSynced)));
-            }
-            if (state is RefreshError) {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(SnackBar(content: Text(state.message)));
+            if (state is UserActivityLoaded) {
+              setState(() {
+                notificationsCount = state.newNotificationsCount;
+              });
             }
           },
-          child: RefreshIndicator(
-            onRefresh: () async {
-              BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
+          child: BlocListener<RefreshBloc, RefreshState>(
+            listener: (context, state) {
+              if (state is RefreshLoading) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                        AppLocalizations.of(context)!.syncingDataWithDHIS2)));
+              }
+              if (state is RefreshLoaded) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(AppLocalizations.of(context)!.dataSynced)));
+              }
+              if (state is RefreshError) {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text(state.message)));
+              }
             },
-            child: IndexedStack(
-              index: selectedIndex,
-              children: <Widget>[
-                Home(
-                  globalKey: widget.globalKey,
-                ),
-                ListOfBabies(),
-                Notifications(),
-                Profile()
-              ],
+            child: RefreshIndicator(
+              onRefresh: () async {
+                BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
+              },
+              child: IndexedStack(
+                index: selectedIndex,
+                children: <Widget>[
+                  Home(
+                    globalKey: widget.globalKey,
+                  ),
+                  ListOfBabies(),
+                  Notifications(),
+                  Profile()
+                ],
+              ),
             ),
           ),
         ),
@@ -160,11 +170,13 @@ class _BaseClassState extends State<BaseClass> {
               label: AppLocalizations.of(context)!.notifications,
             ),
             BottomNavigationBarItem(
-              icon: Badge(
-                  badgeContent:
-                      Text('3', style: TextStyle(color: Colors.white)),
-                  badgeColor: Colors.lightBlue,
-                  child: Icon(Icons.person_rounded)),
+              icon: notificationsCount > 0
+                  ? Badge(
+                      badgeContent: Text(notificationsCount.toString(),
+                          style: TextStyle(color: Colors.white)),
+                      badgeColor: Colors.lightBlue,
+                      child: Icon(Icons.person_rounded))
+                  : Icon(Icons.person_rounded),
               label: AppLocalizations.of(context)!.profile,
             ),
           ],
@@ -182,6 +194,11 @@ class _BaseClassState extends State<BaseClass> {
       BlocProvider.of<NotificationBloc>(context)
           .add(FetchNofiticationOfBabies());
     FocusManager.instance.primaryFocus?.unfocus();
+    if (index == 3) {
+      setState(() {
+        notificationsCount = 0;
+      });
+    }
     setState(() {
       selectedIndex = index;
     });

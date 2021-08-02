@@ -83,6 +83,16 @@ class NotificationRepository {
     );
   }
 
+  Future<void> messageNotification(String title) async {
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: Random().nextInt(100000000),
+        channelKey: 'eceb',
+        title: title,
+      ),
+    );
+  }
+
   Future<void> scheduledStageNotification(
       String key, String motherName, String body, DateTime date) async {
     await AwesomeNotifications().createNotification(
