@@ -8,3 +8,5 @@ abstract class UserActivityEvent extends Equatable {
 }
 
 class UserActivityFetch extends UserActivityEvent {}
+
+class UserActivityLoadMore extends UserActivityEvent {}

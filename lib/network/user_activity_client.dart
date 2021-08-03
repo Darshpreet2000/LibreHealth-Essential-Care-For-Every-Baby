@@ -19,7 +19,8 @@ class UserActivityClient {
   UserActivityClient(
       this.client, this.context, this.lock, this.refreshRepository);
 
-  Future fetchUserMessages(String username, String password) async {
+  Future fetchUserMessages(
+      String username, String password, int currentPage) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     try {
@@ -29,8 +30,9 @@ class UserActivityClient {
     }
     try {
       final response = await http.get(
-        Uri.parse(
-            DHIS2Config.serverURL + APIConfig().userMessages + "?pageSize=5"),
+        Uri.parse(DHIS2Config.serverURL +
+            APIConfig().userMessages +
+            "?pageSize=5&page=$currentPage"),
         headers: <String, String>{
           'authorization': basicAuth,
         },

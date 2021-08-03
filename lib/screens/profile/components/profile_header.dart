@@ -115,10 +115,6 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(Icons.edit),
-                    ),
                   ],
                 ),
               )

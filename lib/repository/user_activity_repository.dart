@@ -26,29 +26,26 @@ class UserActivityRepository {
     int count = newList.length;
     List<UserActivity> oldList = hiveStorageRepository.getNotificationsList();
     newList.forEach((newElement) {
-      bool isPresentInOld = false;
       for (var oldElement in oldList) {
         if (oldElement.id == newElement.id) {
           count--;
-          isPresentInOld = true;
           break;
         }
-      }
-      if (!isPresentInOld) {
-        notificationRepository.messageNotification(newElement.title);
       }
     });
 
     return count;
   }
 
-  Future fetchUsersMessages() async {
+  Future fetchUsersMessages(int currentPage) async {
     try {
       Profile profile = hiveStorageRepository.getProfile();
       String response = await userActivityClient.fetchUserMessages(
-          profile.username, profile.password);
+          profile.username, profile.password, currentPage);
       Map<String, dynamic> res = jsonDecode(response);
       List<UserActivity> result = [];
+      int maxPageSize = res['pager']['pageCount'];
+      if (currentPage > maxPageSize) throw Exception();
       for (var item in res['messageConversations']) {
         UserActivity userActivity = UserActivity.fromJson(item);
         String details = await userActivityClient.fetchUserMessagesDetails(

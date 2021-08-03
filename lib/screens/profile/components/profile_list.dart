@@ -1,21 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newborn_care/bloc/summary_bloc/summary_bloc.dart';
 import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
 import 'package:newborn_care/screens/profile/components/list_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileList extends StatelessWidget {
   final color = const Color(0xff82A0C8);
-  final enableDisableScroll;
-
-  ProfileList(this.enableDisableScroll);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserActivityBloc, UserActivityState>(
       builder: (context, state) {
-        if (state is UserActivityLoaded)
+        if (state is UserActivityLoaded ||
+            state is UserActivityLoadedWithProgress)
           return Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -25,16 +24,20 @@ class ProfileList extends StatelessWidget {
                 child: Column(
                   children: [
                     listHeading(context),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        rowItem(AppLocalizations.of(context)!.registeredBabies,
-                            "14", context),
-                        rowItem(AppLocalizations.of(context)!.dischargedBabies,
-                            "10", context),
-                        rowItem(AppLocalizations.of(context)!.dischargedBabies,
-                            "8", context),
-                      ],
+                    BlocBuilder<SummaryBloc, SummaryState>(
+                      builder: (context, state) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            rowItem(AppLocalizations.of(context)!.admitted,
+                                state.admitted.toString(), context),
+                            rowItem(AppLocalizations.of(context)!.discharged,
+                                state.discharged.toString(), context),
+                            rowItem(AppLocalizations.of(context)!.highRisk,
+                                state.danger.toString(), context),
+                          ],
+                        );
+                      },
                     ),
                     ListView.builder(
                       shrinkWrap: true,
@@ -46,7 +49,33 @@ class ProfileList extends StatelessWidget {
                           dateTime: state.userActivityList[index].dateTime,
                         );
                       },
-                    )
+                    ),
+                    if (state is UserActivityLoadedWithProgress)
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CircularProgressIndicator(),
+                      )
+                    else
+                      ElevatedButton(
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18.0),
+                                    side: BorderSide(
+                                        color: Colors.blueAccent, width: 2.0))),
+                          ),
+                          onPressed: () {
+                            BlocProvider.of<UserActivityBloc>(context)
+                                .add(UserActivityLoadMore());
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              "Load more",
+                              style: TextStyle(color: Colors.blueAccent),
+                            ),
+                          ))
                   ],
                 ),
               ));
