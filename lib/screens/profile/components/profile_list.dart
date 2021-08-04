@@ -55,7 +55,7 @@ class ProfileList extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: CircularProgressIndicator(),
                       )
-                    else
+                    else if(state.userActivityList.length>=5)
                       ElevatedButton(
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all<
