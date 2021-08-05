@@ -240,5 +240,8 @@
     },
    "date":"Date",
    "startTime":"Start time",
-   "endTime":"End time"
+   "endTime":"End time",
+   "loadMore":"Load more",
+   "noNotifications":"No notification alerts",
+   "noRegisteredBaby":"No registered baby in last 24 hours"
  }

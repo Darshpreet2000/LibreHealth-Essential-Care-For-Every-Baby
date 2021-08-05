@@ -37,6 +37,9 @@ class ListOfBabiesRepository {
           profile.username, profile.password);
       Map<String, dynamic> res = json.decode(response);
       for (var item in res['enrollments']) {
+        //to get only those enrollments which are updated in last 24 hours
+        DateTime lastUpdated = DateTime.parse(item['lastUpdated']);
+        if (DateTime.now().difference(lastUpdated).inDays >= 2) continue;
         String enrollmentID = item["enrollment"];
         String trackedEntityInstanceID = item["trackedEntityInstance"];
         bool isCompleted = (item["status"] == "COMPLETED");

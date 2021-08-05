@@ -55,7 +55,7 @@ class ProfileList extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: CircularProgressIndicator(),
                       )
-                    else if(state.userActivityList.length>=5)
+                    else if (state.userActivityList.length >= 5)
                       ElevatedButton(
                           style: ButtonStyle(
                             shape: MaterialStateProperty.all<
@@ -72,7 +72,7 @@ class ProfileList extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              "Load more",
+                              AppLocalizations.of(context)!.loadMore,
                               style: TextStyle(color: Colors.blueAccent),
                             ),
                           ))

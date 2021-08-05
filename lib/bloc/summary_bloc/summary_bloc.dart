@@ -18,14 +18,8 @@ class SummaryBloc extends Bloc<SummaryEvent, SummaryState> {
     SummaryEvent event,
   ) async* {
     if (event is FetchSummaryOf24Hours) {
-      try {
-        List<int> res = await summaryRepository.fetchSummaryOf24Hours();
-        hiveStorageRepository.saveSummaryOf24Hours(res);
-        yield SummaryInitial(res[0], res[1], res[2]);
-      } catch (e) {
-        List<int> list = hiveStorageRepository.getSummaryOf24Hours();
-        yield SummaryInitial(list[0], list[1], list[2]);
-      }
+      List<int> res = await summaryRepository.fetchSummaryOf24Hours();
+      yield SummaryInitial(res[0], res[1], res[2]);
     }
   }
 }

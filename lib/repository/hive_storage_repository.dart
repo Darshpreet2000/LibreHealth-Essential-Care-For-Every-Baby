@@ -18,18 +18,6 @@ class HiveStorageRepository {
     return [];
   }
 
-  // Summary of 24 hours
-  void saveSummaryOf24Hours(List<int> summary) {
-    box.put("summary", summary);
-  }
-
-  List<int> getSummaryOf24Hours() {
-    if (box.containsKey('summary'))
-      return box.get('summary');
-    else
-      return [0, 0, 0];
-  }
-
   // Settings storage
   bool getNotificationEnabled() {
     if (box.containsKey('notificationEnabled'))
@@ -79,7 +67,7 @@ class HiveStorageRepository {
     //get old list
     List<ChildModel> oldList = getListOfAllChild();
     await mapBox.clear();
-    childList.forEach((element) {
+    childList.forEach((element) async {
       //use old key if same child TEI
       //check if this child already present in old list
       oldList
@@ -88,7 +76,7 @@ class HiveStorageRepository {
         element.assessmentsList = item.assessmentsList;
         element.key = item.key;
       });
-      mapBox.put(element.key, element);
+      await mapBox.put(element.key, element);
     });
   }
 

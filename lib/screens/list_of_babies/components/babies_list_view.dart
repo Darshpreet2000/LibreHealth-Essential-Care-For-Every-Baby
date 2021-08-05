@@ -48,7 +48,21 @@ class BabiesListViewRecentlyAdded extends StatelessWidget {
                 ],
               ),
             );
-          }
+          } else if (state is ListOfBabiesLoaded &&
+              state.childListRecently.isEmpty &&
+              state.childListPastRegistered.isEmpty)
+            return Container(
+              height: MediaQuery.of(context).size.height / 1.8,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    AppLocalizations.of(context)!.noRegisteredBaby,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            );
           return Container();
         },
       ),
