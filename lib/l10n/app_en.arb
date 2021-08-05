@@ -244,5 +244,8 @@
    "loadMore":"Load more",
    "noNotifications":"No notification alerts",
    "noRegisteredBaby":"No registered baby in last 24 hours",
-   "aboutUs":"About Us"
+   "aboutUs":"About Us",
+   "aboutMessage":"The Goal of the Essential Care For Every Baby Project is to provide clinical decision-support for nurses and doctors delivering essential newborn care interventions during the first day of life. This application provides knowledge, skills, and competencies to nurses and doctors in low/middle-income settings so that they can provide life-saving care to newborns from birth through 24 hours postnatal. This App can work offline and can sync data with DHIS2. \nThis is Free & Open Source project, you can visit to LibreHealth to know more about it & can contribute if you have an interesting idea",
+   "visitProject":"Visit Project",
+   "shareMessage":"Try the LibreHealth Essesntial Care For Every Baby App, it is developed by LibreHealth & it provide clinical decision-support for nurses and doctors delivering essential newborn care interventions during the first day of life."
  }

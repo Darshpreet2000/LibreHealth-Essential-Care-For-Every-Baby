@@ -71,7 +71,7 @@ class _BaseClassState extends State<BaseClass> {
                     Icon(Icons.share, color: Theme.of(context).iconTheme.color),
                 title: Text(AppLocalizations.of(context)!.shareApp),
                 onTap: () {
-                  shareApp();
+                  shareApp(context);
                 },
               ),
               ListTile(

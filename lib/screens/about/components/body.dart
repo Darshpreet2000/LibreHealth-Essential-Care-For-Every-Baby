@@ -59,11 +59,7 @@ class Body extends StatelessWidget {
                         height: 8,
                       ),
                       Text(
-                        "The Goal of the Essential Care For Every Baby Project provide clinical decision-support for nurses and doctors delivering essential newborn care interventions during the first day of life." +
-                            "This application provides knowledge, skills, and competencies to nurses and doctors in low/middle-income settings so that they can provide life-saving care to newborns from birth through 24 hours postnatal." +
-                            " This App can work offline and can update downloaded data." +
-                            "\n This is Free & Open Source project," +
-                            " you can visit to LibreHealth to know more about it & can contribute if you have an interesting idea",
+                        AppLocalizations.of(context)!.aboutMessage,
                         style: TextStyle(
                           fontSize: 17,
                           height: 1.8,
@@ -99,7 +95,7 @@ class Body extends StatelessWidget {
                               }
                             },
                             child: Text(
-                              'Visit Project',
+                              AppLocalizations.of(context)!.visitProject,
                               style: TextStyle(
                                   color: Colors.blue,
                                   fontFamily: 'Source',
