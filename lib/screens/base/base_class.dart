@@ -62,8 +62,7 @@ class _BaseClassState extends State<BaseClass> {
                     color: Theme.of(context).iconTheme.color),
                 title: Text(AppLocalizations.of(context)!.about),
                 onTap: () {
-                  // Update the state of the app.
-                  // ...
+                  Navigator.pushNamed(context, "/AboutUs");
                 },
               ),
               ListTile(

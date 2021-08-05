@@ -75,29 +75,34 @@ class _ProfileHeaderState extends State<ProfileHeader> {
               ),
               Expanded(
                 flex: 2,
-                child: CachedNetworkImage(
-                    httpHeaders: <String, String>{
-                      'authorization': basicAuth!,
-                    },
-                    imageBuilder: (context, imageProvider) => CircleAvatar(
-                          radius: 50,
-                          backgroundImage: imageProvider,
-                        ),
-                    imageUrl: APIConfig().profileImageAPI(
-                        HiveStorageRepository().getProfile().avatarID),
-                    placeholder: (context, url) => Container(
-                        margin: EdgeInsets.only(
-                            left: 10, top: 16, bottom: 16, right: 10),
-                        height: 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        )),
-                    errorWidget: (context, url, error) => CircleAvatar(
+                child: HiveStorageRepository().getProfile().avatarID.isEmpty
+                    ? CircleAvatar(
                         radius: 40,
-                        backgroundImage: AssetImage('assets/person.jpg'))),
+                        backgroundImage: AssetImage('assets/person.jpg'))
+                    : CachedNetworkImage(
+                        httpHeaders: <String, String>{
+                            'authorization': basicAuth!,
+                          },
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                              radius: 50,
+                              backgroundImage: imageProvider,
+                            ),
+                        imageUrl: APIConfig().profileImageAPI(
+                            HiveStorageRepository().getProfile().avatarID),
+                        placeholder: (context, url) => Container(
+                            margin: EdgeInsets.only(
+                                left: 10, top: 16, bottom: 16, right: 10),
+                            height: 80,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: Center(
+                              child: CircularProgressIndicator(),
+                            )),
+                        errorWidget: (context, url, error) => CircleAvatar(
+                            radius: 40,
+                            backgroundImage: AssetImage('assets/person.jpg'))),
               ),
               Expanded(
                 flex: 1,
