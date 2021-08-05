@@ -8,6 +8,7 @@ import 'package:newborn_care/screens/home/home_screen.dart';
 import 'package:newborn_care/screens/list_of_babies/list_of_babies_screen.dart';
 import 'package:newborn_care/screens/notifications/notification_screen.dart';
 import 'package:newborn_care/screens/profile/profile_screen.dart';
+import 'package:newborn_care/screens/share_app/share_app.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:badges/badges.dart';
@@ -70,8 +71,7 @@ class _BaseClassState extends State<BaseClass> {
                     Icon(Icons.share, color: Theme.of(context).iconTheme.color),
                 title: Text(AppLocalizations.of(context)!.shareApp),
                 onTap: () {
-                  // Update the state of the app.
-                  // ...
+                  shareApp();
                 },
               ),
               ListTile(
