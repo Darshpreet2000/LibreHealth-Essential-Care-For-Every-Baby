@@ -28,8 +28,9 @@ class OnCallDoctorRepository {
   Future sendMessageToDoctor(String userIdOfOtherDoctor) async {
     Profile profile = hiveStorageRepository.getProfile();
     var jsonObject = {
-      "subject": AppLocalizations.of(context)!.onCallDoctorAlertMessage,
-      "text": AppLocalizations.of(context)!.youHaveBeenAlertedBy(profile.name),
+      "subject": AppLocalizations.of(context)!.onCallDoctorAlertMessage +
+          ", " +
+          AppLocalizations.of(context)!.youHaveBeenAlertedBy(profile.name),
       "users": [
         {"id": "$userIdOfOtherDoctor"},
       ],
