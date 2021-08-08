@@ -30,3 +30,11 @@ build:
 
 
 
+pages:
+  stage: pages
+  script:
+  - pip install -U sphinx
+  - sphinx-build -b html . public
+  artifacts:
+    paths:
+    - public
