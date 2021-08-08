@@ -20,8 +20,6 @@ The Goals of this project are
 Docs for ECEB
 
 .. toctree::
-   :hidden:
-   :maxdepth: 2
    :caption: Project Setup Guide
    
    installation.md 
@@ -29,8 +27,6 @@ Docs for ECEB
 
 
 .. toctree::
-   :hidden:
-   :maxdepth: 4
    :caption: Developers Guide
 
    developer_guide.rst
