@@ -10,6 +10,7 @@ before_script:
   - sudo add-apt-repository ppa:deadsnakes/ppa
   - sudo apt-get update
   - sudo apt-get install -y python3-sphinx
+  - sudo apt-get install -y python3-pip
   - apt install make
   - pip install sphinx-rtd-theme
   - pip install --upgrade myst-parser
