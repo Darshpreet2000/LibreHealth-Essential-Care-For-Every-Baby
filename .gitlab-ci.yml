@@ -11,6 +11,7 @@ before_script:
   - sudo apt-get update
   - sudo apt-get install -y python3-sphinx
   - apt install make
+  - pip install sphinx-rtd-theme
 
 
 
