@@ -24,6 +24,8 @@ Docs for ECEB
    :maxdepth: 2
    :caption: Project Setup Guide
    
+   installation.md 
+   user_guide.rst
 
 
 .. toctree::
@@ -31,5 +33,6 @@ Docs for ECEB
    :maxdepth: 4
    :caption: Developers Guide
 
+   developer_guide.rst
 
 
