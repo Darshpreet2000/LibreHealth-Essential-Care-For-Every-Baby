@@ -6,6 +6,12 @@ stages:
   - pages
 
 
+before_script:
+  - sudo apt-get install software-properties-common
+  - sudo add-apt-repository ppa:deadsnakes/ppa
+  - sudo apt-get update
+  - sudo apt-get install python3.8
+
 build:
   only:
       - master
@@ -24,11 +30,3 @@ build:
 
 
 
-pages:
-  stage: deploy
-  script:
-  - pip install -U sphinx
-  - sphinx-build -b html . public
-  artifacts:
-    paths:
-    - public
