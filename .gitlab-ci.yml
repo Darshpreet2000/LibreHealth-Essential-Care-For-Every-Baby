@@ -25,8 +25,9 @@ pages:
   script:
   - cd docs
   - make html
- 
+  - mv build/html public
+
   artifacts:
     paths:
-    - _build/html
+    - public
 
