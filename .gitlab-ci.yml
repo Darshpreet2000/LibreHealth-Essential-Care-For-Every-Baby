@@ -3,7 +3,13 @@ image: cirrusci/flutter:stable
 
 stages:
   - build
+  - pages
 
+before_script:
+  - sudo apt-get install software-properties-common
+  - sudo add-apt-repository ppa:deadsnakes/ppa
+  - sudo apt-get update
+  - sudo apt-get install python3.8
 
 build:
   only:
@@ -20,3 +26,14 @@ build:
   artifacts:
     paths:
     - build/app/outputs/flutter-apk/app-release.apk
+
+
+
+pages:
+  stage: deploy
+  script:
+  - pip install -U sphinx
+  - sphinx-build -b html . public
+  artifacts:
+    paths:
+    - public
