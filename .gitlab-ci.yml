@@ -19,6 +19,7 @@ before_script:
 pages:
   stage: pages
   script:
+  - cd /docs
   - make html
   - mv _build/html/ public/
   artifacts:
