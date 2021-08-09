@@ -26,7 +26,6 @@ build:
 pages:
   only:
       - master
-      - documentation
   stage: pages
   script:
   - sudo apt-get install software-properties-common
