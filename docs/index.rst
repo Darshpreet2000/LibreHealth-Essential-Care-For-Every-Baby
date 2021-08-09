@@ -17,8 +17,6 @@ The Goals of this project are
 5. If particular interventions are not delivered on time, or at all, capture of information regarding why this essential newborn care was late, or missed
 
 
-Docs for ECEB
-
 .. toctree::
    :caption: Project Setup Guide
    
