@@ -28,7 +28,7 @@ class RegisterBabyModel {
           },
           {
             "attribute": DHIS2Config.ecebBirthDateTime,
-            "value": DateFormat("yyyy-MM-ddThh:mm")
+            "value": DateFormat("yyyy-MM-ddTHH:mm")
                 .format(children[index].birthDateTime)
           },
           {
