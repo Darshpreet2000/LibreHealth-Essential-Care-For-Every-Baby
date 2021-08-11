@@ -3,20 +3,21 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i10;
-import 'dart:convert' as _i15;
-import 'dart:typed_data' as _i16;
+import 'dart:convert' as _i16;
+import 'dart:typed_data' as _i17;
 
 import 'package:flutter/src/widgets/framework.dart' as _i2;
-import 'package:http/src/base_request.dart' as _i17;
-import 'package:http/src/client.dart' as _i14;
+import 'package:http/src/base_request.dart' as _i18;
+import 'package:http/src/client.dart' as _i15;
 import 'package:http/src/response.dart' as _i7;
 import 'package:http/src/streamed_response.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:newborn_care/models/child_model.dart' as _i5;
-import 'package:newborn_care/models/network_request.dart' as _i13;
+import 'package:newborn_care/models/network_request.dart' as _i14;
+import 'package:newborn_care/models/on_call_doctor_model.dart' as _i11;
 import 'package:newborn_care/models/profile.dart' as _i6;
-import 'package:newborn_care/models/sort_list_enum.dart' as _i11;
-import 'package:newborn_care/models/user_activity.dart' as _i12;
+import 'package:newborn_care/models/sort_list_enum.dart' as _i12;
+import 'package:newborn_care/models/user_activity.dart' as _i13;
 import 'package:newborn_care/network/authentication_client.dart' as _i4;
 import 'package:newborn_care/repository/authentication_repository.dart' as _i9;
 import 'package:newborn_care/repository/hive_storage_repository.dart' as _i3;
@@ -99,6 +100,14 @@ class MockHiveStorageRepository extends _i1.Mock
   }
 
   @override
+  void saveOnCallDoctors(List<_i11.OnCallDoctorModel>? list) =>
+      super.noSuchMethod(Invocation.method(#saveOnCallDoctors, [list]),
+          returnValueForMissingStub: null);
+  @override
+  List<_i11.OnCallDoctorModel> getOnCallDoctors() => (super.noSuchMethod(
+      Invocation.method(#getOnCallDoctors, []),
+      returnValue: <_i11.OnCallDoctorModel>[]) as List<_i11.OnCallDoctorModel>);
+  @override
   void saveSummaryOf24Hours(List<int>? summary) =>
       super.noSuchMethod(Invocation.method(#saveSummaryOf24Hours, [summary]),
           returnValueForMissingStub: null);
@@ -131,11 +140,11 @@ class MockHiveStorageRepository extends _i1.Mock
       super.noSuchMethod(Invocation.method(#storeThemeData, [value]),
           returnValueForMissingStub: null);
   @override
-  _i11.SortListEnum getSortBy() =>
+  _i12.SortListEnum getSortBy() =>
       (super.noSuchMethod(Invocation.method(#getSortBy, []),
-          returnValue: _i11.SortListEnum.time) as _i11.SortListEnum);
+          returnValue: _i12.SortListEnum.time) as _i12.SortListEnum);
   @override
-  void storeSortBy(_i11.SortListEnum? sortListEnum) =>
+  void storeSortBy(_i12.SortListEnum? sortListEnum) =>
       super.noSuchMethod(Invocation.method(#storeSortBy, [sortListEnum]),
           returnValueForMissingStub: null);
   @override
@@ -160,26 +169,26 @@ class MockHiveStorageRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#getListOfAllChild, []),
           returnValue: <_i5.ChildModel>[]) as List<_i5.ChildModel>);
   @override
-  void storeNotifications(List<_i12.UserActivity>? notificationsList) => super
+  void storeNotifications(List<_i13.UserActivity>? notificationsList) => super
       .noSuchMethod(Invocation.method(#storeNotifications, [notificationsList]),
           returnValueForMissingStub: null);
   @override
-  List<_i12.UserActivity> getNotificationsList() =>
+  List<_i13.UserActivity> getNotificationsList() =>
       (super.noSuchMethod(Invocation.method(#getNotificationsList, []),
-          returnValue: <_i12.UserActivity>[]) as List<_i12.UserActivity>);
+          returnValue: <_i13.UserActivity>[]) as List<_i13.UserActivity>);
   @override
-  void storeNetworkRequest(_i13.NetworkRequest? request) =>
+  void storeNetworkRequest(_i14.NetworkRequest? request) =>
       super.noSuchMethod(Invocation.method(#storeNetworkRequest, [request]),
           returnValueForMissingStub: null);
   @override
-  void storeNetworkRequestList(List<_i13.NetworkRequest>? networkRequests) =>
+  void storeNetworkRequestList(List<_i14.NetworkRequest>? networkRequests) =>
       super.noSuchMethod(
           Invocation.method(#storeNetworkRequestList, [networkRequests]),
           returnValueForMissingStub: null);
   @override
-  List<_i13.NetworkRequest> getNetworkRequests() =>
+  List<_i14.NetworkRequest> getNetworkRequests() =>
       (super.noSuchMethod(Invocation.method(#getNetworkRequests, []),
-          returnValue: <_i13.NetworkRequest>[]) as List<_i13.NetworkRequest>);
+          returnValue: <_i14.NetworkRequest>[]) as List<_i14.NetworkRequest>);
   @override
   void storeProfile(_i6.Profile? profile) =>
       super.noSuchMethod(Invocation.method(#storeProfile, [profile]),
@@ -205,7 +214,7 @@ class MockHiveStorageRepository extends _i1.Mock
 /// A class which mocks [Client].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockClient extends _i1.Mock implements _i14.Client {
+class MockClient extends _i1.Mock implements _i15.Client {
   MockClient() {
     _i1.throwOnMissingStub(this);
   }
@@ -224,7 +233,7 @@ class MockClient extends _i1.Mock implements _i14.Client {
   _i10.Future<_i7.Response> post(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i15.Encoding? encoding}) =>
+          _i16.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#post, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
@@ -234,7 +243,7 @@ class MockClient extends _i1.Mock implements _i14.Client {
   _i10.Future<_i7.Response> put(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i15.Encoding? encoding}) =>
+          _i16.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#put, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
@@ -244,7 +253,7 @@ class MockClient extends _i1.Mock implements _i14.Client {
   _i10.Future<_i7.Response> patch(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i15.Encoding? encoding}) =>
+          _i16.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#patch, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
@@ -254,7 +263,7 @@ class MockClient extends _i1.Mock implements _i14.Client {
   _i10.Future<_i7.Response> delete(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i15.Encoding? encoding}) =>
+          _i16.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#delete, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
@@ -265,14 +274,14 @@ class MockClient extends _i1.Mock implements _i14.Client {
       (super.noSuchMethod(Invocation.method(#read, [url], {#headers: headers}),
           returnValue: Future<String>.value('')) as _i10.Future<String>);
   @override
-  _i10.Future<_i16.Uint8List> readBytes(Uri? url,
+  _i10.Future<_i17.Uint8List> readBytes(Uri? url,
           {Map<String, String>? headers}) =>
       (super.noSuchMethod(
               Invocation.method(#readBytes, [url], {#headers: headers}),
-              returnValue: Future<_i16.Uint8List>.value(_i16.Uint8List(0)))
-          as _i10.Future<_i16.Uint8List>);
+              returnValue: Future<_i17.Uint8List>.value(_i17.Uint8List(0)))
+          as _i10.Future<_i17.Uint8List>);
   @override
-  _i10.Future<_i8.StreamedResponse> send(_i17.BaseRequest? request) =>
+  _i10.Future<_i8.StreamedResponse> send(_i18.BaseRequest? request) =>
       (super.noSuchMethod(Invocation.method(#send, [request]),
               returnValue:
                   Future<_i8.StreamedResponse>.value(_FakeStreamedResponse()))

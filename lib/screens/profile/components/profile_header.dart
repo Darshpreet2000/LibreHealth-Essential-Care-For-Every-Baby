@@ -82,7 +82,7 @@ class _ProfileHeaderState extends State<ProfileHeader> {
                   child: FittedBox(
                     fit: BoxFit.cover,
                     child: CircleAvatar(
-                      backgroundImage: AssetImage('assets/doctor1.jpg'),
+                      backgroundImage: AssetImage('assets/person.jpg'),
                       radius: 50,
                     ),
                   ),

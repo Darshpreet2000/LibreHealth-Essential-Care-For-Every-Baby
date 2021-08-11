@@ -2,17 +2,18 @@
 // in newborn_care/test/assessments_tests/phase_2_test/phase_2_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i9;
+import 'dart:async' as _i10;
 
 import 'package:flutter/src/widgets/framework.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:newborn_care/models/child_model.dart' as _i3;
 import 'package:newborn_care/models/network_request.dart' as _i6;
+import 'package:newborn_care/models/on_call_doctor_model.dart' as _i8;
 import 'package:newborn_care/models/profile.dart' as _i4;
-import 'package:newborn_care/models/sort_list_enum.dart' as _i8;
-import 'package:newborn_care/models/user_activity.dart' as _i10;
+import 'package:newborn_care/models/sort_list_enum.dart' as _i9;
+import 'package:newborn_care/models/user_activity.dart' as _i11;
 import 'package:newborn_care/repository/hive_storage_repository.dart' as _i7;
-import 'package:newborn_care/repository/notification_repository.dart' as _i11;
+import 'package:newborn_care/repository/notification_repository.dart' as _i12;
 import 'package:newborn_care/repository/refresh_repository.dart' as _i5;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -67,6 +68,14 @@ class MockHiveStorageRepository extends _i1.Mock
   }
 
   @override
+  void saveOnCallDoctors(List<_i8.OnCallDoctorModel>? list) =>
+      super.noSuchMethod(Invocation.method(#saveOnCallDoctors, [list]),
+          returnValueForMissingStub: null);
+  @override
+  List<_i8.OnCallDoctorModel> getOnCallDoctors() => (super.noSuchMethod(
+      Invocation.method(#getOnCallDoctors, []),
+      returnValue: <_i8.OnCallDoctorModel>[]) as List<_i8.OnCallDoctorModel>);
+  @override
   void saveSummaryOf24Hours(List<int>? summary) =>
       super.noSuchMethod(Invocation.method(#saveSummaryOf24Hours, [summary]),
           returnValueForMissingStub: null);
@@ -99,11 +108,11 @@ class MockHiveStorageRepository extends _i1.Mock
       super.noSuchMethod(Invocation.method(#storeThemeData, [value]),
           returnValueForMissingStub: null);
   @override
-  _i8.SortListEnum getSortBy() =>
+  _i9.SortListEnum getSortBy() =>
       (super.noSuchMethod(Invocation.method(#getSortBy, []),
-          returnValue: _i8.SortListEnum.time) as _i8.SortListEnum);
+          returnValue: _i9.SortListEnum.time) as _i9.SortListEnum);
   @override
-  void storeSortBy(_i8.SortListEnum? sortListEnum) =>
+  void storeSortBy(_i9.SortListEnum? sortListEnum) =>
       super.noSuchMethod(Invocation.method(#storeSortBy, [sortListEnum]),
           returnValueForMissingStub: null);
   @override
@@ -111,10 +120,10 @@ class MockHiveStorageRepository extends _i1.Mock
       super.noSuchMethod(Invocation.method(#storeSingleChild, [child]),
           returnValueForMissingStub: null);
   @override
-  _i9.Future<void> storeListOfChild(List<_i3.ChildModel>? childList) =>
+  _i10.Future<void> storeListOfChild(List<_i3.ChildModel>? childList) =>
       (super.noSuchMethod(Invocation.method(#storeListOfChild, [childList]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future.value()) as _i9.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i10.Future<void>);
   @override
   void updateChild(String? key, _i3.ChildModel? childModel) =>
       super.noSuchMethod(Invocation.method(#updateChild, [key, childModel]),
@@ -128,13 +137,13 @@ class MockHiveStorageRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.method(#getListOfAllChild, []),
           returnValue: <_i3.ChildModel>[]) as List<_i3.ChildModel>);
   @override
-  void storeNotifications(List<_i10.UserActivity>? notificationsList) => super
+  void storeNotifications(List<_i11.UserActivity>? notificationsList) => super
       .noSuchMethod(Invocation.method(#storeNotifications, [notificationsList]),
           returnValueForMissingStub: null);
   @override
-  List<_i10.UserActivity> getNotificationsList() =>
+  List<_i11.UserActivity> getNotificationsList() =>
       (super.noSuchMethod(Invocation.method(#getNotificationsList, []),
-          returnValue: <_i10.UserActivity>[]) as List<_i10.UserActivity>);
+          returnValue: <_i11.UserActivity>[]) as List<_i11.UserActivity>);
   @override
   void storeNetworkRequest(_i6.NetworkRequest? request) =>
       super.noSuchMethod(Invocation.method(#storeNetworkRequest, [request]),
@@ -174,7 +183,7 @@ class MockHiveStorageRepository extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNotificationRepository extends _i1.Mock
-    implements _i11.NotificationRepository {
+    implements _i12.NotificationRepository {
   MockNotificationRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -184,31 +193,31 @@ class MockNotificationRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.getter(#context),
           returnValue: _FakeBuildContext()) as _i2.BuildContext);
   @override
-  _i9.Future<void> immediateNotification(
+  _i10.Future<void> immediateNotification(
           String? key, String? motherName, String? body) =>
       (super.noSuchMethod(
           Invocation.method(#immediateNotification, [key, motherName, body]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future.value()) as _i9.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i10.Future<void>);
   @override
-  _i9.Future<void> scheduledStageNotification(
+  _i10.Future<void> scheduledStageNotification(
           String? key, String? motherName, String? body, DateTime? date) =>
       (super.noSuchMethod(
           Invocation.method(
               #scheduledStageNotification, [key, motherName, body, date]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future.value()) as _i9.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i10.Future<void>);
   @override
-  _i9.Future<void> scheduledStageNotificationReminder(
+  _i10.Future<void> scheduledStageNotificationReminder(
           String? key, String? motherName, String? body, DateTime? date) =>
       (super.noSuchMethod(
           Invocation.method(#scheduledStageNotificationReminder,
               [key, motherName, body, date]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future.value()) as _i9.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i10.Future<void>);
   @override
-  _i9.Future<void> removeScheduledNotification(String? key) => (super
+  _i10.Future<void> removeScheduledNotification(String? key) => (super
       .noSuchMethod(Invocation.method(#removeScheduledNotification, [key]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future.value()) as _i9.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i10.Future<void>);
 }

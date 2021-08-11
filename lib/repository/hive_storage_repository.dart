@@ -1,11 +1,23 @@
 import 'package:newborn_care/main.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/network_request.dart';
+import 'package:newborn_care/models/on_call_doctor_model.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/sort_list_enum.dart';
 import 'package:newborn_care/models/user_activity.dart';
 
 class HiveStorageRepository {
+  // On Call Doctor
+  void saveOnCallDoctors(List<OnCallDoctorModel> list) {
+    listBox.put('onCallDoctorsList', list);
+  }
+
+  List<OnCallDoctorModel> getOnCallDoctors() {
+    if (listBox.containsKey('onCallDoctorsList'))
+      return listBox.get('onCallDoctorsList')!.cast<OnCallDoctorModel>();
+    return [];
+  }
+
   // Summary of 24 hours
   void saveSummaryOf24Hours(List<int> summary) {
     box.put("summary", summary);
