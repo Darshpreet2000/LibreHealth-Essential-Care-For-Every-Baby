@@ -104,6 +104,10 @@ class MockAssessmentsRepository extends _i1.Mock
           Invocation.method(#validatePhase2Assessments, [stage2, birthTime]),
           returnValueForMissingStub: null);
   @override
+  void validatePhase3Assessments(Object? obj) =>
+      super.noSuchMethod(Invocation.method(#validatePhase3Assessments, [obj]),
+          returnValueForMissingStub: null);
+  @override
   List<Object> addNextAssessment(_i8.ChildModel? childModel) =>
       (super.noSuchMethod(Invocation.method(#addNextAssessment, [childModel]),
           returnValue: <Object>[]) as List<Object>);
@@ -125,6 +129,10 @@ class MockAssessmentsRepository extends _i1.Mock
   _i15.Future<dynamic> registerStage2Details(_i14.Stage2? stage2, String? id) =>
       (super.noSuchMethod(
           Invocation.method(#registerStage2Details, [stage2, id]),
+          returnValue: Future<dynamic>.value()) as _i15.Future<dynamic>);
+  @override
+  _i15.Future<dynamic> registerStage3Details(Object? obj, String? id) =>
+      (super.noSuchMethod(Invocation.method(#registerStage3Details, [obj, id]),
           returnValue: Future<dynamic>.value()) as _i15.Future<dynamic>);
   @override
   _i15.Future<dynamic> updateTrackedEntityInstance(

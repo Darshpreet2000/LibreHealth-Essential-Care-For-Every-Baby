@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/models/stage_2.dart';
@@ -86,6 +85,27 @@ class AssessmentsBloc extends Bloc<AssessmentsEvent, AssessmentsState> {
             childModel,
             childModel.key,
             (childModel.assessmentsList[1] as Stage2).ecebWardName);
+
+        //update child data in local storage in phone
+        hiveStorageRepository.updateChild(childModel.key, childModel);
+        yield AssessmentsAdded(childModel);
+      } catch (e) {
+        yield AssessmentsError(e.toString());
+        yield AssessmentsInitial(childModel);
+      }
+    } else if (event is AssessmentsEventCompleteStage3) {
+      try {
+        // check if data is filled correctly
+        _assessmentsRepository
+            .validatePhase3Assessments(childModel.assessmentsList[2]);
+
+        notificationRepository.removeScheduledNotification(childModel.key);
+        //push data to dhis2 using api
+        _assessmentsRepository.registerStage3Details(
+            childModel.assessmentsList[2], childModel.key);
+
+        childModel.assessmentsList =
+            _assessmentsRepository.addNextAssessment(childModel);
 
         //update child data in local storage in phone
         hiveStorageRepository.updateChild(childModel.key, childModel);

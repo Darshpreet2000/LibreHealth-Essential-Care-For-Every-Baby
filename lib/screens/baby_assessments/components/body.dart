@@ -7,13 +7,16 @@ import 'package:newborn_care/bloc/refresh_bloc/refresh_bloc.dart';
 import 'package:newborn_care/models/child_model.dart';
 import 'package:newborn_care/models/stage_1.dart';
 import 'package:newborn_care/models/stage_2.dart';
+import 'package:newborn_care/models/stage_3_danger.dart';
+import 'package:newborn_care/models/stage_3_normal.dart';
+import 'package:newborn_care/models/stage_3_problem.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_1.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_2.dart';
-import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_3_danger.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_3_normal.dart';
-import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_3_problem.dart';
 import 'package:newborn_care/screens/list_of_babies/components/list_item.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'assessments_phases/phase_3_danger.dart';
+import 'assessments_phases/phase_3_problem.dart';
 
 class Body extends StatefulWidget {
   final ChildModel childModel;
@@ -80,19 +83,28 @@ class _BodyState extends State<Body> {
                                     as Stage2,
                                 widget.assessmentsBloc,
                                 state.childModel.color),
-                            state.childModel.classification ==
-                                    AppLocalizations.of(context)!.problem
-                                ? Phase3Problem()
-                                : Container(),
-                            state.childModel.classification ==
-                                    AppLocalizations.of(context)!.normal
-                                ? Phase3Normal()
-                                : Container(),
-                            state.childModel.classification ==
-                                    AppLocalizations.of(context)!.danger
-                                ? Phase3Danger()
-                                : Container(),
                           ],
+                        );
+                      } else if (state.childModel.assessmentsList[index]
+                          is Stage3Normal) {
+                        return Phase3Normal(
+                          state.childModel.assessmentsList[index]
+                              as Stage3Normal,
+                          widget.assessmentsBloc,
+                        );
+                      } else if (state.childModel.assessmentsList[index]
+                          is Stage3Problem) {
+                        return Phase3Problem(
+                          state.childModel.assessmentsList[index]
+                              as Stage3Problem,
+                          widget.assessmentsBloc,
+                        );
+                      } else if (state.childModel.assessmentsList[index]
+                          is Stage3Danger) {
+                        return Phase3Danger(
+                          state.childModel.assessmentsList[index]
+                              as Stage3Danger,
+                          widget.assessmentsBloc,
                         );
                       }
                       return Container();
