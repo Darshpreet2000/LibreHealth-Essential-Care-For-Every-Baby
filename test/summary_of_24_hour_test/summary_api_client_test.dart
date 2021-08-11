@@ -37,7 +37,7 @@ void assessmentClientTest() {
       summaryApiClient = new SummaryApiClient(_mockHttpClient, context);
       String basicAuth =
           'Basic ' + base64Encode(utf8.encode('username:password'));
-      
+
       when(_mockHttpClient.get(
         Uri.parse(DHIS2Config.serverURL +
             APIConfig().enrollments +
@@ -48,8 +48,7 @@ void assessmentClientTest() {
       )).thenAnswer((_) async => Future.value(http.Response(json, 200)));
 
       expect(
-          await summaryApiClient.fetchSummaryOf24Hours(
-              'username', 'password'),
+          await summaryApiClient.fetchSummaryOf24Hours('username', 'password'),
           json);
     });
     testWidgets('throws fetch data exception on no internet connection',
@@ -59,12 +58,11 @@ void assessmentClientTest() {
           localizationsDelegates: [
             AppLocalizations.delegate,
           ]));
-      String json = '';
       BuildContext context = tester.element(find.byType(Container));
       summaryApiClient = new SummaryApiClient(_mockHttpClient, context);
       String basicAuth =
           'Basic ' + base64Encode(utf8.encode('username:password'));
-      
+
       when(_mockHttpClient.get(
         Uri.parse(DHIS2Config.serverURL +
             APIConfig().enrollments +
@@ -74,9 +72,7 @@ void assessmentClientTest() {
         },
       )).thenThrow(SocketException("message"));
 
-      expect(
-           summaryApiClient.fetchSummaryOf24Hours(
-              'username', 'password'),
+      expect(summaryApiClient.fetchSummaryOf24Hours('username', 'password'),
           throwsA(isInstanceOf<FetchDataException>()));
     });
   });

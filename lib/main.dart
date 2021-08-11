@@ -17,6 +17,7 @@ import 'package:newborn_care/models/stage_2.dart';
 import 'package:newborn_care/models/stage_3_danger.dart';
 import 'package:newborn_care/models/stage_3_normal.dart';
 import 'package:newborn_care/models/stage_3_problem.dart';
+import 'package:newborn_care/models/stage_4.dart';
 import 'package:newborn_care/models/user_activity.dart';
 import 'package:newborn_care/repository/assessments_repository.dart';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
@@ -65,6 +66,7 @@ Future registerHive() async {
   Hive.registerAdapter(Stage3NormalAdapter());
   Hive.registerAdapter(Stage3ProblemAdapter());
   Hive.registerAdapter(Stage3DangerAdapter());
+  Hive.registerAdapter(Stage4Adapter());
   box = await Hive.openBox('eceb');
   listBox = await Hive.openBox<List>('eceblist');
   mapBox = await Hive.openBox<ChildModel>('ecebMap');

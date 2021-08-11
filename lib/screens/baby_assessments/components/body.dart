@@ -10,6 +10,7 @@ import 'package:newborn_care/models/stage_2.dart';
 import 'package:newborn_care/models/stage_3_danger.dart';
 import 'package:newborn_care/models/stage_3_normal.dart';
 import 'package:newborn_care/models/stage_3_problem.dart';
+import 'package:newborn_care/models/stage_4.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_1.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_2.dart';
 import 'package:newborn_care/screens/baby_assessments/components/assessments_phases/phase_3_normal.dart';
@@ -17,6 +18,7 @@ import 'package:newborn_care/screens/list_of_babies/components/list_item.dart';
 
 import 'assessments_phases/phase_3_danger.dart';
 import 'assessments_phases/phase_3_problem.dart';
+import 'assessments_phases/phase_4.dart';
 
 class Body extends StatefulWidget {
   final ChildModel childModel;
@@ -106,6 +108,12 @@ class _BodyState extends State<Body> {
                               as Stage3Danger,
                           widget.assessmentsBloc,
                         );
+                      } else if (state.childModel.assessmentsList[index]
+                          is Stage4) {
+                        return Phase4(
+                            state.childModel.assessmentsList[index] as Stage4,
+                            widget.assessmentsBloc,
+                            state.childModel.color);
                       }
                       return Container();
                     },
