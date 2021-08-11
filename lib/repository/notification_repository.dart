@@ -16,13 +16,23 @@ import 'package:synchronized/synchronized.dart';
 class NotificationRepository {
   final BuildContext context;
   NotificationRepository(this.context);
-  static intialize(GlobalKey<NavigatorState> navigatorKey, Lock lock) async {
+  static updateNotificationChannel(
+      HiveStorageRepository hiveStorageRepository) {
+    NotificationImportance notificationImportance;
+    if (hiveStorageRepository.getNotificationEnabled() &&
+        hiveStorageRepository.getNotificationSoundEnabled()) {
+      notificationImportance = NotificationImportance.Max;
+    } else if (hiveStorageRepository.getNotificationEnabled()) {
+      notificationImportance = NotificationImportance.Low;
+    } else
+      notificationImportance = NotificationImportance.None;
+
     AwesomeNotifications().initialize(
         // set the icon to null if you want to use the default app icon
         null,
         [
           NotificationChannel(
-              importance: NotificationImportance.Max,
+              importance: notificationImportance,
               channelKey: 'eceb',
               channelName: 'eceb',
               channelDescription: 'eceb',
@@ -34,6 +44,10 @@ class NotificationRepository {
         AwesomeNotifications().requestPermissionToSendNotifications();
       }
     });
+  }
+
+  static intialize(GlobalKey<NavigatorState> navigatorKey, Lock lock,
+      HiveStorageRepository hiveStorageRepository) async {
     AwesomeNotifications().actionStream.listen((receivedNotification) {
       if (receivedNotification.payload != null)
         navigatorKey.currentState!.push(MaterialPageRoute(builder: (context) {

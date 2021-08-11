@@ -6,6 +6,36 @@ import 'package:newborn_care/models/sort_list_enum.dart';
 import 'package:newborn_care/models/user_activity.dart';
 
 class HiveStorageRepository {
+  // Settings storage
+  bool getNotificationEnabled() {
+    if (box.containsKey('notificationEnabled'))
+      return box.get('notificationEnabled');
+    return true;
+  }
+
+  void storeNotificationEnabled(bool value) {
+    box.put('notificationEnabled', value);
+  }
+
+  bool getNotificationSoundEnabled() {
+    if (box.containsKey('notificationSoundEnabled'))
+      return box.get('notificationSoundEnabled');
+    return true;
+  }
+
+  void storeNotificationSoundEnabled(bool value) {
+    box.put('notificationSoundEnabled', value);
+  }
+
+  bool getThemeData() {
+    if (box.containsKey('theme')) return box.get('theme');
+    return false;
+  }
+
+  void storeThemeData(bool value) {
+    box.put('theme', value);
+  }
+
   //Sort By type saving in box
   SortListEnum getSortBy() {
     if (box.containsKey('sortListEnum')) return box.get('sortListEnum');

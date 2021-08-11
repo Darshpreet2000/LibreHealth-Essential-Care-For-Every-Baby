@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyTheme {
   static final darkTheme = ThemeData(
+    primarySwatch: Colors.blue,
     scaffoldBackgroundColor: Colors.grey.shade900,
     primaryColor: Colors.black,
     textButtonTheme: TextButtonThemeData(
@@ -9,6 +10,14 @@ class MyTheme {
         primary: Colors.white, // This is a custom color variable
       ),
     ),
+    checkboxTheme: CheckboxThemeData(fillColor: MaterialStateColor.resolveWith(
+      (states) {
+        if (states.contains(MaterialState.selected)) {
+          return Colors.blue; // the color when checkbox is selected;
+        }
+        return Colors.grey; //the color when checkbox is unselected;
+      },
+    )),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         primary: Colors.grey.shade800,
@@ -21,6 +30,7 @@ class MyTheme {
   );
 
   static final lightTheme = ThemeData(
+      primarySwatch: Colors.blue,
       scaffoldBackgroundColor: Colors.white,
       primaryColor: Color(0xff82A0C8),
       textButtonTheme: TextButtonThemeData(
