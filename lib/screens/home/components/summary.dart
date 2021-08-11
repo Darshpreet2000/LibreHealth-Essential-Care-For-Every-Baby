@@ -1,60 +1,83 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:newborn_care/bloc/list_of_babies_bloc/list_of_babies_bloc.dart';
+import 'package:newborn_care/bloc/summary_bloc/summary_bloc.dart';
 
 Widget summary(BuildContext context, GlobalKey globalKey) {
   final BottomNavigationBar? navigationBar =
       globalKey.currentWidget as BottomNavigationBar?;
 
-  return Container(
-    child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
+  return BlocListener<ListOfBabiesBloc, ListOfBabiesState>(
+    listener: (context, state) {
+      if (state is ListOfBabiesLoaded) {
+        BlocProvider.of<SummaryBloc>(context).add(FetchSummaryOf24Hours());
+      }
+    },
+    child: BlocBuilder<SummaryBloc, SummaryState>(
+      builder: (context, state) {
+        return Container(
+          child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              AppLocalizations.of(context)!.summaryOf24Hours,
-              style: TextStyle(
-                color: Colors.grey,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-              textAlign: TextAlign.left,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    AppLocalizations.of(context)!.summaryOf24Hours,
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Material(
+                      child: InkWell(
+                          onTap: () {
+                            navigationBar!.onTap!(1);
+                          },
+                          child: rowItem(
+                              AppLocalizations.of(context)!.admitted,
+                              state.admitted.toString(),
+                              "assets/blue.png",
+                              context)),
+                    ),
+                    Material(
+                      child: InkWell(
+                          onTap: () {
+                            navigationBar!.onTap!(1);
+                          },
+                          child: rowItem(
+                              AppLocalizations.of(context)!.discharged,
+                              state.discharged.toString(),
+                              "assets/grey.png",
+                              context)),
+                    ),
+                    Material(
+                      child: InkWell(
+                          onTap: () {
+                            navigationBar!.onTap!(1);
+                          },
+                          child: rowItem(
+                              AppLocalizations.of(context)!.highRisk,
+                              state.danger.toString(),
+                              "assets/red.png",
+                              context)),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Material(
-                child: InkWell(
-                    onTap: () {
-                      navigationBar!.onTap!(1);
-                    },
-                    child: rowItem(AppLocalizations.of(context)!.admitted, "14",
-                        "assets/blue.png", context)),
-              ),
-              Material(
-                child: InkWell(
-                    onTap: () {
-                      navigationBar!.onTap!(1);
-                    },
-                    child: rowItem(AppLocalizations.of(context)!.discharged,
-                        "10", "assets/grey.png", context)),
-              ),
-              Material(
-                child: InkWell(
-                    onTap: () {
-                      navigationBar!.onTap!(1);
-                    },
-                    child: rowItem(AppLocalizations.of(context)!.highRisk, "8",
-                        "assets/red.png", context)),
-              ),
-            ],
-          ),
-        ],
-      ),
+        );
+      },
     ),
   );
 }
