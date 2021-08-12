@@ -237,6 +237,8 @@
         "placeholders":{
             "minute":{}
         }
-    }
- 
+    },
+   "date":"Date",
+   "startTime":"Start time",
+   "endTime":"End time"
  }
