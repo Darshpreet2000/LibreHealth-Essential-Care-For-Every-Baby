@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hive/hive.dart';
 import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:newborn_care/bloc/list_of_babies_bloc/list_of_babies_bloc.dart';
+import 'package:newborn_care/bloc/notification_bloc/notification_bloc.dart';
 import 'package:newborn_care/bloc/on_call_doctor_bloc/on_call_doctor_bloc.dart';
 import 'package:newborn_care/bloc/settings_bloc/settings_bloc.dart';
 import 'package:newborn_care/bloc/summary_bloc/summary_bloc.dart';
@@ -26,6 +27,7 @@ import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/authentication_repository.dart';
 import 'package:newborn_care/repository/list_of_babies_repository.dart';
 import 'package:newborn_care/repository/notification_repository.dart';
+import 'package:newborn_care/repository/notification_screen_repository.dart';
 import 'package:newborn_care/repository/on_call_doctor_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/repository/register_baby_repository.dart';
@@ -144,6 +146,10 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         providers: [
+          BlocProvider<NotificationBloc>(
+            create: (BuildContext context) =>
+                NotificationBloc(context.read<NotificationScreenRepository>()),
+          ),
           BlocProvider<SummaryBloc>(
             create: (BuildContext context) => SummaryBloc(
                 context.read<SummaryRepository>(),
@@ -207,6 +213,12 @@ class _MyAppState extends State<MyApp> {
               lock,
               context.read<HiveStorageRepository>(),
               context.read<RefreshRepository>()),
+        ),
+        RepositoryProvider<NotificationScreenRepository>(
+          create: (context) => NotificationScreenRepository(
+            navigatorKey.currentContext!,
+            context.read<HiveStorageRepository>(),
+          ),
         ),
         RepositoryProvider<OnCallDoctorRepository>(
           create: (context) => OnCallDoctorRepository(
