@@ -8,5 +8,7 @@ enum RequestServiceType {
   @HiveField(1)
   addEvent,
   @HiveField(2)
-  updateRequest
+  updateRequest,
+  @HiveField(3)
+  sendMessage
 }

@@ -66,7 +66,7 @@ class NotificationScreenRepository {
         if (element.classification == danger ||
             element.classification == problem) {
           Object lastAssessment = element.assessmentsList.last;
-          if (lastAssessment is Stage4&&lastAssessment.isCompleted==false) {
+          if (lastAssessment is Stage4 && lastAssessment.isCompleted == false) {
             notificationModel = new NotificationModel(
                 element, AppLocalizations.of(context)!.phase4);
           }

@@ -213,6 +213,20 @@
     "dataSynced":"Data synced",
     "settings":"Settings",
     "notificationsSound":"Notifications sound",
-    "nightMode":"Night mode"
-
+    "nightMode":"Night mode",
+    "online":"Online",
+    "hasBeenAlerted":"{name} has been alerted",
+    "@hasBeenAlerted" :{
+        "placeholders":{
+            "name":{}
+        }
+    },
+    "onCallDoctorAlertMessage":"On Call Doctors Alert Message",
+    
+    "youHaveBeenAlertedBy":"You have been alerted by {name}",
+     "@youHaveBeenAlertedBy" :{
+        "placeholders":{
+            "name":{}
+        }
+    }
  }

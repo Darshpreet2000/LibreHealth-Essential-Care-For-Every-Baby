@@ -222,8 +222,9 @@ class _MyAppState extends State<MyApp> {
         ),
         RepositoryProvider<OnCallDoctorRepository>(
           create: (context) => OnCallDoctorRepository(
-            navigatorKey.currentContext!,
+            navigatorKey.currentContext!,lock,
             context.read<HiveStorageRepository>(),
+            context.read<RefreshRepository>(),
           ),
         ),
         RepositoryProvider<SummaryRepository>(

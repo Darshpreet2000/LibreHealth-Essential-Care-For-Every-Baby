@@ -85,8 +85,9 @@ class ListItemRiskAssessment extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 2),
-                        child: Text(
-                            DateFormat.yMd().add_jm().format(notificationModel!.childModel.birthTime)),
+                        child: Text(DateFormat.yMd()
+                            .add_jm()
+                            .format(notificationModel!.childModel.birthTime)),
                       ),
                     ],
                   ),

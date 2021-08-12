@@ -14,6 +14,8 @@ class OnCallDoctorModel {
   DateTime? onCallDoctorShiftEndTime;
   @HiveField(4)
   String? eventID;
+  @HiveField(4)
+  String? doctorID;
 
   OnCallDoctorModel(
       this.onCallDoctorName,
@@ -51,6 +53,9 @@ class OnCallDoctorModel {
               onCallDoctorScheduleDate!.day,
               int.parse(parts[0]),
               int.parse(parts[1]));
+          break;
+        case DHIS2Config.onCallDoctorID:
+          doctorID = element['value'];
           break;
       }
     });
