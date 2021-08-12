@@ -30,7 +30,7 @@ void mainBloc() {
   //Adds stage-4 assessments if list is empty
   group('AssessmentsRepository testing', () {
     testWidgets(
-        'Throws exception if assesments are done before 180 mins from birth',
+        'Throws exception if assesments are done before 180 mins from scheduled time',
         (WidgetTester tester) async {
       await tester.pumpWidget(MaterialApp(
           home: Material(child: Container()),
@@ -39,15 +39,18 @@ void mainBloc() {
           ]));
       BuildContext context = tester.element(find.byType(Container));
       var lock = Lock();
+      Stage4 stage4 = new Stage4();
       try {
         AssessmentsRepository(context, lock, _mockHiveStorageRepository,
                 _mockRefreshRepository, _mockNotificationRepository)
-            .validatePhase4Assessments(Stage4(), DateTime.now());
+            .validatePhase4Assessments(stage4);
       } catch (e) {
         expect(
             e.toString(),
             Exception(AppLocalizations.of(context)!
-                    .phase4AssessmentsToBeDoneOnlyAfter180MinutesFromBirth)
+                    .assessmentToBeDoneAfterMinutes(stage4.scheduledTime
+                        .difference(DateTime.now())
+                        .inMinutes))
                 .toString());
       }
     });
@@ -63,11 +66,11 @@ void mainBloc() {
       var lock = Lock();
       try {
         Stage4 stage4 = new Stage4();
-
+        stage4.scheduledTime =
+            stage4.scheduledTime.subtract(Duration(minutes: 180));
         AssessmentsRepository(context, lock, _mockHiveStorageRepository,
                 _mockRefreshRepository, _mockNotificationRepository)
-            .validatePhase4Assessments(
-                stage4, DateTime.now().subtract(Duration(minutes: 185)));
+            .validatePhase4Assessments(stage4);
       } catch (e) {
         expect(
             e.toString(),
@@ -86,16 +89,18 @@ void mainBloc() {
       var lock = Lock();
 
       Stage4 stage4 = new Stage4();
+      stage4.scheduledTime =
+          stage4.scheduledTime.subtract(Duration(minutes: 180));
       try {
         stage4.ecebFastBreathing = true;
         stage4.ecebChestIndrawing = true;
         stage4.ecebFeedingProperly = true;
         stage4.ecebConvulsions = true;
         stage4.ecebSevereJaundice = true;
+        stage4.scheduledTime.subtract(Duration(minutes: 185));
         AssessmentsRepository(context, lock, _mockHiveStorageRepository,
                 _mockRefreshRepository, _mockNotificationRepository)
-            .validatePhase4Assessments(
-                stage4, DateTime.now().subtract(Duration(minutes: 185)));
+            .validatePhase4Assessments(stage4);
       } catch (e) {}
       expect(stage4.isCompleted, true);
     });
@@ -109,7 +114,7 @@ void mainBloc() {
       BuildContext context = tester.element(find.byType(Container));
       var lock = Lock();
       ChildModel inputChildModel = new ChildModel("Oni", "postnatal", 1, 1234,
-          1234, DateTime.now(), "1234", "1234", 'None', 1, 'normal');
+          1234, DateTime.now(), "1234", "1234", 'None', "123", false);
       inputChildModel.assessmentsList = [Stage1(), Stage2(), Stage3Danger()];
       try {
         AssessmentsRepository(context, lock, _mockHiveStorageRepository,

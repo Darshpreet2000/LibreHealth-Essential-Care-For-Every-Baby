@@ -2,19 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:newborn_care/bloc/assessments_bloc/assessments_bloc.dart';
-import 'package:newborn_care/models/stage_3_danger.dart';
+import 'package:newborn_care/models/stage_5.dart';
 
-class Phase3Danger extends StatefulWidget {
-  final Stage3Danger stage3danger;
+class Phase5 extends StatefulWidget {
+  final Stage5 stage5;
   final AssessmentsBloc assessmentsBloc;
-  final int index;
-  const Phase3Danger(this.stage3danger, this.assessmentsBloc, this.index);
+
+  const Phase5(this.stage5, this.assessmentsBloc);
 
   @override
-  _Phase3DangerState createState() => _Phase3DangerState();
+  _Phase5State createState() => _Phase5State();
 }
 
-class _Phase3DangerState extends State<Phase3Danger> {
+class _Phase5State extends State<Phase5> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,31 +35,40 @@ class _Phase3DangerState extends State<Phase3Danger> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Text(
-              AppLocalizations.of(context)!.theBabyHasBeenClassifiedDanger,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              AppLocalizations.of(context)!.followingInterventionsToBeTaken,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.green[100],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(AppLocalizations.of(context)!.discharge,
+                      textAlign: TextAlign.start,
+                      style: TextStyle(color: Colors.black, fontSize: 16)),
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.red[100],
+                    color: Colors.green[100],
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: CheckboxListTile(
                   title: Text(
-                    AppLocalizations.of(context)!.gaveAntibiotics,
+                    AppLocalizations.of(context)!
+                        .ecebStage5NormalReassessBabyfordischarge,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
-                  value: widget.stage3danger.ecebStage3GiveAntibiotics,
+                  value: widget.stage5.ecebStage5NormalReassessBabyfordischarge,
                   onChanged: (newValue) {
                     setState(() {
-                      if (widget.stage3danger.isCompleted == false) {
-                        widget.stage3danger.ecebStage3GiveAntibiotics = true;
+                      if (widget.stage5.isCompleted == false) {
+                        widget.stage5.ecebStage5NormalReassessBabyfordischarge =
+                            true;
                       }
                     });
                   },
@@ -71,19 +80,23 @@ class _Phase3DangerState extends State<Phase3Danger> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.red[100],
+                    color: Colors.green[100],
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: CheckboxListTile(
                   title: Text(
-                    AppLocalizations.of(context)!.soughAdvancedCare,
+                    AppLocalizations.of(context)!
+                        .ecebStage5NormalGiveparentsguidanceforhomecare,
                     style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
-                  value: widget.stage3danger.ecebStage3SeekAdvancedCare,
+                  value: widget
+                      .stage5.ecebStage5NormalGiveparentsguidanceforhomecare,
                   onChanged: (newValue) {
                     setState(() {
-                      if (widget.stage3danger.isCompleted == false) {
-                        widget.stage3danger.ecebStage3SeekAdvancedCare = true;
+                      if (widget.stage5.isCompleted == false) {
+                        widget.stage5
+                                .ecebStage5NormalGiveparentsguidanceforhomecare =
+                            true;
                       }
                     });
                   },
@@ -99,17 +112,17 @@ class _Phase3DangerState extends State<Phase3Danger> {
                     shape: RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0))),
                 onPressed: () {
-                  if (widget.stage3danger.isCompleted == false) {
+                  if (widget.stage5.isCompleted == false) {
                     widget.assessmentsBloc
-                        .add(AssessmentsEventCompleteStage3(widget.index));
+                        .add(AssessmentsEventCompleteStage5());
                   }
                 },
                 child: Text(
-                  widget.stage3danger.isCompleted == false
+                  widget.stage5.isCompleted == false
                       ? AppLocalizations.of(context)!.saveAssessments
                       : AppLocalizations.of(context)!.assessmentsSaved,
                   style: TextStyle(
-                    color: widget.stage3danger.isCompleted == false
+                    color: widget.stage5.isCompleted == false
                         ? Colors.white
                         : Colors.white70,
                   ),

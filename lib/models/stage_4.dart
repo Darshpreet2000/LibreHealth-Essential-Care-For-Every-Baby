@@ -21,7 +21,10 @@ class Stage4 {
   @HiveField(6)
   bool? ecebConvulsions;
   @HiveField(7)
+  DateTime scheduledTime = DateTime.now().add(Duration(minutes: 180));
+  @HiveField(8)
   bool isCompleted = false;
+
   Stage4();
 
   Map<String, dynamic> toJson() => {

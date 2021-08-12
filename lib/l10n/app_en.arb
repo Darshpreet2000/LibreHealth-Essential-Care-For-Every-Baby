@@ -228,5 +228,15 @@
         "placeholders":{
             "name":{}
         }
+    },
+    "discharge":"Discharge",
+    "ecebStage5NormalReassessBabyfordischarge":"Reassess baby for discharge",    
+    "ecebStage5NormalGiveparentsguidanceforhomecare":"Give parents guidance for home care",
+    "assessmentToBeDoneAfterMinutes":"This assessment needs to be done after {minute} minutes from now",
+    "@assessmentToBeDoneAfterMinutes" :{
+        "placeholders":{
+            "minute":{}
+        }
     }
+ 
  }

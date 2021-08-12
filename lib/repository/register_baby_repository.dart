@@ -67,8 +67,8 @@ class RegisterBabyRepositoryImpl {
           key,
           key,
           'None',
-          _registerBabyModel.children.length,
-          _registerBabyModel.modeOfDeliveryName);
+          key,
+          false);
       //push data using api
       await registerBabyDetails(_registerBabyModel, key);
       //create stage 1 assessmens

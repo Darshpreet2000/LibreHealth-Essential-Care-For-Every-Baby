@@ -48,7 +48,7 @@ void mainBloc() {
       String danger = AppLocalizations.of(context)!.danger;
 
       ChildModel childModel = ChildModel("Oni", "postnatal", 1, 1234, 1234,
-          DateTime.now(), "1234", "1234", 'Danger', 1, 'normal');
+          DateTime.now(), "1234", "1234", 'Danger', "1234", false);
       childModel.assessmentsList = [Stage1(), Stage2(), Stage3Danger()];
       List<ChildModel> children = [childModel];
       NotificationScreenRepository notificationRepository =
@@ -76,7 +76,7 @@ void mainBloc() {
       String problem = AppLocalizations.of(context)!.problem;
 
       ChildModel childModel = ChildModel("Oni", "postnatal", 1, 1234, 1234,
-          DateTime.now(), "1234", "1234", 'Problem', 1, 'normal');
+          DateTime.now(), "1234", "1234", 'Problem', "1234", false);
       childModel.assessmentsList = [Stage1(), Stage2(), Stage3Problem()];
       List<ChildModel> children = [childModel];
       NotificationScreenRepository notificationRepository =
@@ -104,7 +104,7 @@ void mainBloc() {
       String problem = AppLocalizations.of(context)!.problem;
 
       ChildModel childModel = ChildModel("Oni", "postnatal", 1, 1234, 1234,
-          DateTime.now(), "1234", "1234", 'Problem', 1, 'normal');
+          DateTime.now(), "1234", "1234", 'Problem', "1234", false);
       childModel.assessmentsList = [Stage1(), Stage2(), Stage3Problem()];
       List<ChildModel> children = [childModel];
       NotificationScreenRepository notificationRepository =
@@ -132,7 +132,7 @@ void mainBloc() {
       String danger = AppLocalizations.of(context)!.danger;
 
       ChildModel childModel = ChildModel("Oni", "postnatal", 1, 1234, 1234,
-          DateTime.now(), "1234", "1234", 'Problem', 1, 'normal');
+          DateTime.now(), "1234", "1234", 'Problem', "1234", false);
       childModel.assessmentsList = [Stage1(), Stage2(), Stage3Danger()];
       List<ChildModel> children = [childModel];
       NotificationScreenRepository notificationRepository =
@@ -157,7 +157,7 @@ void mainBloc() {
       BuildContext context = tester.element(find.byType(Container));
 
       ChildModel childModel = ChildModel("Oni", "postnatal", 1, 1234, 1234,
-          DateTime.now(), "1234", "1234", 'Problem', 1, 'normal');
+          DateTime.now(), "1234", "1234", 'Problem', "1234", false);
       childModel.assessmentsList = [
         Stage1(),
         Stage2(),

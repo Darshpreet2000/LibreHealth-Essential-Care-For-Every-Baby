@@ -14,7 +14,7 @@ class OnCallDoctorModel {
   DateTime? onCallDoctorShiftEndTime;
   @HiveField(4)
   String? eventID;
-  @HiveField(4)
+  @HiveField(5)
   String? doctorID;
 
   OnCallDoctorModel(

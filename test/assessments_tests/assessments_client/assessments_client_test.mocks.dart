@@ -259,11 +259,17 @@ class MockRefreshRepository extends _i1.Mock implements _i17.RefreshRepository {
       super.noSuchMethod(Invocation.method(#startRefreshing, []),
           returnValueForMissingStub: null);
   @override
+  void addEnrollmentIDInRequest(_i16.NetworkRequest? request) => super
+      .noSuchMethod(Invocation.method(#addEnrollmentIDInRequest, [request]),
+          returnValueForMissingStub: null);
+  @override
   void addTrackedEntityIDInRequest(_i16.NetworkRequest? request) => super
       .noSuchMethod(Invocation.method(#addTrackedEntityIDInRequest, [request]),
           returnValueForMissingStub: null);
   @override
-  void updateChildTrackedEntityID(dynamic res, String? key) => super
-      .noSuchMethod(Invocation.method(#updateChildTrackedEntityID, [res, key]),
+  void updateChildTrackedEntityIDAndEnrollmentID(dynamic res, String? key) =>
+      super.noSuchMethod(
+          Invocation.method(
+              #updateChildTrackedEntityIDAndEnrollmentID, [res, key]),
           returnValueForMissingStub: null);
 }

@@ -2,19 +2,22 @@
 // in newborn_care/test/on_call_doctor_tests/on_call_bloc_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i8;
+import 'dart:async' as _i11;
 
 import 'package:flutter/src/widgets/framework.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:newborn_care/models/child_model.dart' as _i5;
-import 'package:newborn_care/models/network_request.dart' as _i12;
-import 'package:newborn_care/models/on_call_doctor_model.dart' as _i9;
-import 'package:newborn_care/models/profile.dart' as _i6;
-import 'package:newborn_care/models/sort_list_enum.dart' as _i10;
-import 'package:newborn_care/models/user_activity.dart' as _i11;
-import 'package:newborn_care/network/on_call_doctor_client.dart' as _i3;
-import 'package:newborn_care/repository/hive_storage_repository.dart' as _i4;
-import 'package:newborn_care/repository/on_call_doctor_repository.dart' as _i7;
+import 'package:newborn_care/models/child_model.dart' as _i8;
+import 'package:newborn_care/models/network_request.dart' as _i15;
+import 'package:newborn_care/models/on_call_doctor_model.dart' as _i12;
+import 'package:newborn_care/models/profile.dart' as _i9;
+import 'package:newborn_care/models/sort_list_enum.dart' as _i13;
+import 'package:newborn_care/models/user_activity.dart' as _i14;
+import 'package:newborn_care/network/message_client.dart' as _i5;
+import 'package:newborn_care/network/on_call_doctor_client.dart' as _i4;
+import 'package:newborn_care/repository/hive_storage_repository.dart' as _i6;
+import 'package:newborn_care/repository/on_call_doctor_repository.dart' as _i10;
+import 'package:newborn_care/repository/refresh_repository.dart' as _i7;
+import 'package:synchronized/synchronized.dart' as _i3;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: comment_references
@@ -24,21 +27,28 @@ import 'package:newborn_care/repository/on_call_doctor_repository.dart' as _i7;
 
 class _FakeBuildContext extends _i1.Fake implements _i2.BuildContext {}
 
+class _FakeLock extends _i1.Fake implements _i3.Lock {}
+
 class _FakeOnCallDoctorClient extends _i1.Fake
-    implements _i3.OnCallDoctorClient {}
+    implements _i4.OnCallDoctorClient {}
+
+class _FakeMessageClient extends _i1.Fake implements _i5.MessageClient {}
 
 class _FakeHiveStorageRepository extends _i1.Fake
-    implements _i4.HiveStorageRepository {}
+    implements _i6.HiveStorageRepository {}
 
-class _FakeChildModel extends _i1.Fake implements _i5.ChildModel {}
+class _FakeRefreshRepository extends _i1.Fake implements _i7.RefreshRepository {
+}
 
-class _FakeProfile extends _i1.Fake implements _i6.Profile {}
+class _FakeChildModel extends _i1.Fake implements _i8.ChildModel {}
+
+class _FakeProfile extends _i1.Fake implements _i9.Profile {}
 
 /// A class which mocks [OnCallDoctorRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockOnCallDoctorRepository extends _i1.Mock
-    implements _i7.OnCallDoctorRepository {
+    implements _i10.OnCallDoctorRepository {
   MockOnCallDoctorRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -52,52 +62,81 @@ class MockOnCallDoctorRepository extends _i1.Mock
       super.noSuchMethod(Invocation.setter(#context, _context),
           returnValueForMissingStub: null);
   @override
-  _i3.OnCallDoctorClient get onCallDoctorClient =>
-      (super.noSuchMethod(Invocation.getter(#onCallDoctorClient),
-          returnValue: _FakeOnCallDoctorClient()) as _i3.OnCallDoctorClient);
+  _i3.Lock get lock =>
+      (super.noSuchMethod(Invocation.getter(#lock), returnValue: _FakeLock())
+          as _i3.Lock);
   @override
-  set onCallDoctorClient(_i3.OnCallDoctorClient? _onCallDoctorClient) => super
+  set lock(_i3.Lock? _lock) =>
+      super.noSuchMethod(Invocation.setter(#lock, _lock),
+          returnValueForMissingStub: null);
+  @override
+  _i4.OnCallDoctorClient get onCallDoctorClient =>
+      (super.noSuchMethod(Invocation.getter(#onCallDoctorClient),
+          returnValue: _FakeOnCallDoctorClient()) as _i4.OnCallDoctorClient);
+  @override
+  set onCallDoctorClient(_i4.OnCallDoctorClient? _onCallDoctorClient) => super
       .noSuchMethod(Invocation.setter(#onCallDoctorClient, _onCallDoctorClient),
           returnValueForMissingStub: null);
   @override
-  _i4.HiveStorageRepository get hiveStorageRepository => (super.noSuchMethod(
+  _i5.MessageClient get messageClient =>
+      (super.noSuchMethod(Invocation.getter(#messageClient),
+          returnValue: _FakeMessageClient()) as _i5.MessageClient);
+  @override
+  set messageClient(_i5.MessageClient? _messageClient) =>
+      super.noSuchMethod(Invocation.setter(#messageClient, _messageClient),
+          returnValueForMissingStub: null);
+  @override
+  _i6.HiveStorageRepository get hiveStorageRepository => (super.noSuchMethod(
       Invocation.getter(#hiveStorageRepository),
-      returnValue: _FakeHiveStorageRepository()) as _i4.HiveStorageRepository);
+      returnValue: _FakeHiveStorageRepository()) as _i6.HiveStorageRepository);
   @override
   set hiveStorageRepository(
-          _i4.HiveStorageRepository? _hiveStorageRepository) =>
+          _i6.HiveStorageRepository? _hiveStorageRepository) =>
       super.noSuchMethod(
           Invocation.setter(#hiveStorageRepository, _hiveStorageRepository),
           returnValueForMissingStub: null);
   @override
-  _i8.Future<dynamic> getListOfOnCallDoctors() =>
-      (super.noSuchMethod(Invocation.method(#getListOfOnCallDoctors, []),
-          returnValue: Future<dynamic>.value()) as _i8.Future<dynamic>);
+  _i7.RefreshRepository get refreshRepository =>
+      (super.noSuchMethod(Invocation.getter(#refreshRepository),
+          returnValue: _FakeRefreshRepository()) as _i7.RefreshRepository);
   @override
-  List<_i9.OnCallDoctorModel> seperateDoctorsOnCall(
-          List<_i9.OnCallDoctorModel>? list) =>
+  set refreshRepository(_i7.RefreshRepository? _refreshRepository) => super
+      .noSuchMethod(Invocation.setter(#refreshRepository, _refreshRepository),
+          returnValueForMissingStub: null);
+  @override
+  _i11.Future<dynamic> sendMessageToDoctor(String? userIdOfOtherDoctor) =>
+      (super.noSuchMethod(
+          Invocation.method(#sendMessageToDoctor, [userIdOfOtherDoctor]),
+          returnValue: Future<dynamic>.value()) as _i11.Future<dynamic>);
+  @override
+  _i11.Future<dynamic> getListOfOnCallDoctors() =>
+      (super.noSuchMethod(Invocation.method(#getListOfOnCallDoctors, []),
+          returnValue: Future<dynamic>.value()) as _i11.Future<dynamic>);
+  @override
+  List<_i12.OnCallDoctorModel> seperateDoctorsOnCall(
+          List<_i12.OnCallDoctorModel>? list) =>
       (super.noSuchMethod(Invocation.method(#seperateDoctorsOnCall, [list]),
-              returnValue: <_i9.OnCallDoctorModel>[])
-          as List<_i9.OnCallDoctorModel>);
+              returnValue: <_i12.OnCallDoctorModel>[])
+          as List<_i12.OnCallDoctorModel>);
 }
 
 /// A class which mocks [HiveStorageRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockHiveStorageRepository extends _i1.Mock
-    implements _i4.HiveStorageRepository {
+    implements _i6.HiveStorageRepository {
   MockHiveStorageRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  void saveOnCallDoctors(List<_i9.OnCallDoctorModel>? list) =>
+  void saveOnCallDoctors(List<_i12.OnCallDoctorModel>? list) =>
       super.noSuchMethod(Invocation.method(#saveOnCallDoctors, [list]),
           returnValueForMissingStub: null);
   @override
-  List<_i9.OnCallDoctorModel> getOnCallDoctors() => (super.noSuchMethod(
+  List<_i12.OnCallDoctorModel> getOnCallDoctors() => (super.noSuchMethod(
       Invocation.method(#getOnCallDoctors, []),
-      returnValue: <_i9.OnCallDoctorModel>[]) as List<_i9.OnCallDoctorModel>);
+      returnValue: <_i12.OnCallDoctorModel>[]) as List<_i12.OnCallDoctorModel>);
   @override
   void saveSummaryOf24Hours(List<int>? summary) =>
       super.noSuchMethod(Invocation.method(#saveSummaryOf24Hours, [summary]),
@@ -131,63 +170,63 @@ class MockHiveStorageRepository extends _i1.Mock
       super.noSuchMethod(Invocation.method(#storeThemeData, [value]),
           returnValueForMissingStub: null);
   @override
-  _i10.SortListEnum getSortBy() =>
+  _i13.SortListEnum getSortBy() =>
       (super.noSuchMethod(Invocation.method(#getSortBy, []),
-          returnValue: _i10.SortListEnum.time) as _i10.SortListEnum);
+          returnValue: _i13.SortListEnum.time) as _i13.SortListEnum);
   @override
-  void storeSortBy(_i10.SortListEnum? sortListEnum) =>
+  void storeSortBy(_i13.SortListEnum? sortListEnum) =>
       super.noSuchMethod(Invocation.method(#storeSortBy, [sortListEnum]),
           returnValueForMissingStub: null);
   @override
-  void storeSingleChild(_i5.ChildModel? child) =>
+  void storeSingleChild(_i8.ChildModel? child) =>
       super.noSuchMethod(Invocation.method(#storeSingleChild, [child]),
           returnValueForMissingStub: null);
   @override
-  _i8.Future<void> storeListOfChild(List<_i5.ChildModel>? childList) =>
+  _i11.Future<void> storeListOfChild(List<_i8.ChildModel>? childList) =>
       (super.noSuchMethod(Invocation.method(#storeListOfChild, [childList]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future.value()) as _i8.Future<void>);
+          returnValueForMissingStub: Future.value()) as _i11.Future<void>);
   @override
-  void updateChild(String? key, _i5.ChildModel? childModel) =>
+  void updateChild(String? key, _i8.ChildModel? childModel) =>
       super.noSuchMethod(Invocation.method(#updateChild, [key, childModel]),
           returnValueForMissingStub: null);
   @override
-  _i5.ChildModel getSingleChild(String? key) =>
+  _i8.ChildModel getSingleChild(String? key) =>
       (super.noSuchMethod(Invocation.method(#getSingleChild, [key]),
-          returnValue: _FakeChildModel()) as _i5.ChildModel);
+          returnValue: _FakeChildModel()) as _i8.ChildModel);
   @override
-  List<_i5.ChildModel> getListOfAllChild() =>
+  List<_i8.ChildModel> getListOfAllChild() =>
       (super.noSuchMethod(Invocation.method(#getListOfAllChild, []),
-          returnValue: <_i5.ChildModel>[]) as List<_i5.ChildModel>);
+          returnValue: <_i8.ChildModel>[]) as List<_i8.ChildModel>);
   @override
-  void storeNotifications(List<_i11.UserActivity>? notificationsList) => super
+  void storeNotifications(List<_i14.UserActivity>? notificationsList) => super
       .noSuchMethod(Invocation.method(#storeNotifications, [notificationsList]),
           returnValueForMissingStub: null);
   @override
-  List<_i11.UserActivity> getNotificationsList() =>
+  List<_i14.UserActivity> getNotificationsList() =>
       (super.noSuchMethod(Invocation.method(#getNotificationsList, []),
-          returnValue: <_i11.UserActivity>[]) as List<_i11.UserActivity>);
+          returnValue: <_i14.UserActivity>[]) as List<_i14.UserActivity>);
   @override
-  void storeNetworkRequest(_i12.NetworkRequest? request) =>
+  void storeNetworkRequest(_i15.NetworkRequest? request) =>
       super.noSuchMethod(Invocation.method(#storeNetworkRequest, [request]),
           returnValueForMissingStub: null);
   @override
-  void storeNetworkRequestList(List<_i12.NetworkRequest>? networkRequests) =>
+  void storeNetworkRequestList(List<_i15.NetworkRequest>? networkRequests) =>
       super.noSuchMethod(
           Invocation.method(#storeNetworkRequestList, [networkRequests]),
           returnValueForMissingStub: null);
   @override
-  List<_i12.NetworkRequest> getNetworkRequests() =>
+  List<_i15.NetworkRequest> getNetworkRequests() =>
       (super.noSuchMethod(Invocation.method(#getNetworkRequests, []),
-          returnValue: <_i12.NetworkRequest>[]) as List<_i12.NetworkRequest>);
+          returnValue: <_i15.NetworkRequest>[]) as List<_i15.NetworkRequest>);
   @override
-  void storeProfile(_i6.Profile? profile) =>
+  void storeProfile(_i9.Profile? profile) =>
       super.noSuchMethod(Invocation.method(#storeProfile, [profile]),
           returnValueForMissingStub: null);
   @override
-  _i6.Profile getProfile() =>
+  _i9.Profile getProfile() =>
       (super.noSuchMethod(Invocation.method(#getProfile, []),
-          returnValue: _FakeProfile()) as _i6.Profile);
+          returnValue: _FakeProfile()) as _i9.Profile);
   @override
   void markUserAsLoggedIn() =>
       super.noSuchMethod(Invocation.method(#markUserAsLoggedIn, []),

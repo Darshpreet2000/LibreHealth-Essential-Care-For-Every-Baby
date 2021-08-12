@@ -7,8 +7,8 @@ import 'package:newborn_care/models/stage_3_normal.dart';
 class Phase3Normal extends StatefulWidget {
   final Stage3Normal stage3normal;
   final AssessmentsBloc assessmentsBloc;
-
-  const Phase3Normal(this.stage3normal, this.assessmentsBloc);
+  final int index;
+  const Phase3Normal(this.stage3normal, this.assessmentsBloc, this.index);
 
   @override
   _Phase3NormalState createState() => _Phase3NormalState();
@@ -157,7 +157,7 @@ class _Phase3NormalState extends State<Phase3Normal> {
                 onPressed: () {
                   if (widget.stage3normal.isCompleted == false) {
                     widget.assessmentsBloc
-                        .add(AssessmentsEventCompleteStage3());
+                        .add(AssessmentsEventCompleteStage3(widget.index));
                   }
                 },
                 child: Text(

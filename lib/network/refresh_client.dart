@@ -39,7 +39,7 @@ class RefreshClient {
           .put(
             Uri.parse(request.url),
             headers: request.headers,
-            body: request.data,
+            body: request.data.toString().isEmpty ? null : request.data,
           )
           .timeout(const Duration(seconds: 15));
       return _response(response);
@@ -56,8 +56,11 @@ class RefreshClient {
     switch (response.statusCode) {
       case 200:
         var responseJson = response.body.toString();
-        return responseJson;  
+        return responseJson;
       case 201:
+        var responseJson = response.body.toString();
+        return responseJson;
+      case 204:
         var responseJson = response.body.toString();
         return responseJson;
       case 400:

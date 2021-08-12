@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../request_service_type.dart';
+part of 'request_service_type.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -21,6 +21,8 @@ class RequestServiceTypeAdapter extends TypeAdapter<RequestServiceType> {
         return RequestServiceType.updateRequest;
       case 3:
         return RequestServiceType.sendMessage;
+      case 4:
+        return RequestServiceType.updateEnrollmentStatusRequest;
       default:
         return RequestServiceType.registerBaby;
     }
@@ -40,6 +42,9 @@ class RequestServiceTypeAdapter extends TypeAdapter<RequestServiceType> {
         break;
       case RequestServiceType.sendMessage:
         writer.writeByte(3);
+        break;
+      case RequestServiceType.updateEnrollmentStatusRequest:
+        writer.writeByte(4);
         break;
     }
   }

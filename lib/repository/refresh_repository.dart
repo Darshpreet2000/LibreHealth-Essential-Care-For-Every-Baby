@@ -24,8 +24,14 @@ class RefreshRepository {
             request.requestServiceType == RequestServiceType.updateRequest) {
           addTrackedEntityIDInRequest(request);
         }
+        if (request.requestServiceType ==
+            RequestServiceType.updateEnrollmentStatusRequest) {
+          addEnrollmentIDInRequest(request);
+        }
         var response;
-        if (request.requestServiceType == RequestServiceType.updateRequest)
+        if (request.requestServiceType == RequestServiceType.updateRequest ||
+            request.requestServiceType ==
+                RequestServiceType.updateEnrollmentStatusRequest)
           response = await RefreshClient(http.Client(), context)
               .doPutNetworkRequest(request);
         else
@@ -33,7 +39,7 @@ class RefreshRepository {
               .doPostNetworkRequest(request);
 
         if (request.requestServiceType == RequestServiceType.registerBaby) {
-          updateChildTrackedEntityID(response, request.key);
+          updateChildTrackedEntityIDAndEnrollmentID(response, request.key);
         }
         networkRequests.removeAt(0);
         HiveStorageRepository().storeNetworkRequestList(networkRequests);
@@ -41,6 +47,12 @@ class RefreshRepository {
     } catch (e) {
       throw e;
     }
+  }
+
+  void addEnrollmentIDInRequest(NetworkRequest request) {
+    String enrollmentID =
+        HiveStorageRepository().getSingleChild(request.key).enrollmentID;
+    request.url = request.url.replaceAll(request.key, enrollmentID);
   }
 
   void addTrackedEntityIDInRequest(NetworkRequest request) {
@@ -59,15 +71,19 @@ class RefreshRepository {
         request.data.replaceAll(DHIS2Config.trackedEntity, trackedEntityId);
   }
 
-  void updateChildTrackedEntityID(var res, String key) {
+  void updateChildTrackedEntityIDAndEnrollmentID(var res, String key) {
     var json = jsonDecode(res);
     var response = (json["response"]);
     var importSummary = (response["importSummaries"]);
     var importArray = (importSummary[0]);
-    String responseKey = (importArray["reference"]);
-    //update trackedEntity id
+    String originalTrackedEntityID = (importArray["reference"]);
+    var enrollments = (importArray["enrollments"]);
+    var enrollmentSummary = enrollments["importSummaries"];
+    var originalEnrollmentID = enrollmentSummary[0]["reference"];
+    //update trackedEntity id and enrollment ID
     ChildModel child = HiveStorageRepository().getSingleChild(key);
-    child.trackedEntityID = responseKey;
+    child.trackedEntityID = originalTrackedEntityID;
+    child.enrollmentID = originalEnrollmentID;
     HiveStorageRepository().updateChild(child.key, child);
   }
 }
