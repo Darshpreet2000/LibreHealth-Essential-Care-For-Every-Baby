@@ -33,6 +33,7 @@ import 'package:newborn_care/repository/on_call_doctor_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/repository/register_baby_repository.dart';
 import 'package:newborn_care/repository/summary_repository.dart';
+import 'package:newborn_care/screens/about/about_screen.dart';
 import 'package:newborn_care/screens/base/base_class.dart';
 import 'package:newborn_care/screens/doctors_schedule/doctor_schedule.dart';
 import 'package:newborn_care/screens/facility_login/facility_login.dart';
@@ -137,6 +138,7 @@ class _MyAppState extends State<MyApp> {
                     '/FacilityLoginScreen': (context) => FacilityLogin(),
                     '/IndividualLoginScreen': (context) => IndividualLogin(),
                     '/RegisterABaby': (context) => RegisterABaby(),
+                    '/AboutUs': (context) => About(),
                     '/DoctorSchedule': (context) => DoctorSchedule(),
                     '/Base': (context) => BaseClass(
                           globalKey: globalKey,
@@ -251,7 +253,8 @@ class _MyAppState extends State<MyApp> {
               navigatorKey.currentContext!,
               lock,
               context.read<HiveStorageRepository>(),
-              context.read<RefreshRepository>()),
+              context.read<RefreshRepository>(),
+              context.read<NotificationRepository>()),
         ),
         RepositoryProvider<RegisterBabyRepositoryImpl>(
           create: (context) => RegisterBabyRepositoryImpl(

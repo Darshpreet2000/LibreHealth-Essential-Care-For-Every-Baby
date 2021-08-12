@@ -25,7 +25,7 @@ class ListOfBabiesBloc extends Bloc<ListOfBabiesEvent, ListOfBabiesState> {
       try {
         childListMap = await listOfBabiesRepository.fetchListOfBabies();
         //store the list
-        hiveStorageRepository.storeListOfChild(childListMap);
+        await hiveStorageRepository.storeListOfChild(childListMap);
       } catch (e) {
         yield ListOfBabiesErrorState(e.toString());
         childListMap = hiveStorageRepository.getListOfAllChild();

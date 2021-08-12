@@ -17,5 +17,5 @@ class SummaryInitial extends SummaryState {
   SummaryInitial(this.admitted, this.discharged, this.danger);
 
   @override
-  List<Object?> get props => [admitted, danger, discharged];
+  List<Object?> get props => [admitted, discharged, danger];
 }

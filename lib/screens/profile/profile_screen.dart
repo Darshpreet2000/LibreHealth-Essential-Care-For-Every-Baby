@@ -10,21 +10,11 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  bool scrollEnabled = true;
-  void enableDisableScroll() {
-    setState(() {
-      scrollEnabled = !scrollEnabled;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawer: SafeArea(child: SettingsDrawer()),
       body: CustomScrollView(
-        physics: scrollEnabled
-            ? AlwaysScrollableScrollPhysics()
-            : NeverScrollableScrollPhysics(),
         slivers: [
           SliverAppBar(
             actions: <Widget>[Container()],
@@ -49,7 +39,7 @@ class _ProfileState extends State<Profile> {
           ),
           SliverList(
               delegate: SliverChildListDelegate([
-            Body(enableDisableScroll),
+            Body(),
           ]))
         ],
       ),

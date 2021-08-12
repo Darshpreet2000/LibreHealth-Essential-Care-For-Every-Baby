@@ -17,8 +17,17 @@ class AuthenticationRepository {
   Future loginUser(String username, String password) async {
     String response = await authenticationClient.loginUser(username, password);
     Map<String, dynamic> res = jsonDecode(response);
-    Profile profile = new Profile(res["name"],
-        "***" + res['id'].substring(res['id'].length - 3), username, password);
+    String avatarID = "";
+    if (res.containsKey("avatar")) {
+      Map<String, dynamic> avatar = res["avatar"];
+      if (avatar.containsKey("id")) avatarID = avatar["id"];
+    }
+    Profile profile = new Profile(
+        res["name"],
+        "***" + res['id'].substring(res['id'].length - 3),
+        username,
+        password,
+        avatarID);
     return profile;
   }
 
