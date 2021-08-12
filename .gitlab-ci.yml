@@ -3,6 +3,7 @@ image: cirrusci/flutter:stable
 
 stages:
   - build
+  - pages
 
 
 build:
@@ -20,3 +21,28 @@ build:
   artifacts:
     paths:
     - build/app/outputs/flutter-apk/app-release.apk
+
+
+pages:
+  only:
+      - master
+  stage: pages
+  script:
+  - sudo apt-get install software-properties-common
+  - sudo add-apt-repository ppa:deadsnakes/ppa
+  - sudo apt-get update
+  - sudo apt-get install -y python3-sphinx
+  - sudo apt-get install -y python3-pip
+  - apt install make
+  - pip install sphinx-rtd-theme
+  - pip install --upgrade myst-parser
+  - cd docs
+  - make html
+  - cd -
+  - mv docs/_build/html/ public/
+
+  artifacts:
+    paths:
+    - public
+
+

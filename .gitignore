@@ -125,4 +125,5 @@ app.*.map.json
 !.idea/dictionaries/
 !.idea/runConfigurations/
 
-
+# docs related
+/docs/_build/

@@ -7,9 +7,15 @@
 
 ## Goal
 
-To provide clinical decision-support for nurses and doctors delivering essential newborn care interventions during the first day of life. 
+To provide clinical decision-support for nurses and doctors delivering essential newborn care interventions during the first day of life. This application provides knowledge, skills, and competencies to nurses and doctors in low/middle-income settings so that they can provide life-saving care to newborns from birth through 24 hours postnatal. App uses DHIS2 as backend & can be setup for any hospital/organization
 
-This project is developed using Flutter, it supports Android, IOS, Web application with single codebase
+This project is developed using Flutter, it supports Android & IOS with single codebase
+
+## Link to documentation 
+
+Link for User & developer documentation of this App
+
+https://librehealth.gitlab.io/incubating-projects/mhbs/lh-mhbs-eceb/
 
 ## Importing DHIS2 Metadata
 
@@ -28,13 +34,6 @@ To configure the DHIS2 to use this app, the below two Metadata files need to be 
  | <img src="/screenshots/Notification.png" align="top">| <img src="/screenshots/Profile.png" align="top">|<img src="/screenshots/Login.png" align="top">|
 ||Notification Screen  | Profile Screen | Login Screen|
 
-#### Landscape 
-
-|   |  | 
-| ------ | ------ |  
-| <img src="/screenshots/Home_Landscape.png" align="top"> | <img src="/screenshots/List_of_Babies_Landscape.png" align="top"> |
-| <img src="/screenshots/Notification_Landscape.png" align="top">| <img src="/screenshots/Profile_Landscape.png" align="top">  | 
-|<img src="/screenshots/Initial_Landscape.png" align="top">| <img src="/screenshots/Login_Landscape.png" align="top">||
 
 ## License
 
