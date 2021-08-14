@@ -135,6 +135,8 @@ class _BaseClassState extends State<BaseClass> {
             child: RefreshIndicator(
               onRefresh: () async {
                 BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
+                  BlocProvider.of<UserActivityBloc>(context).add(UserActivityFetch());
+  
               },
               child: IndexedStack(
                 index: selectedIndex,

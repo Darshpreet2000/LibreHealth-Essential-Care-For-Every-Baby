@@ -31,7 +31,11 @@ class DHIS2Config {
       "#{ecebWeight} < 2000    &&  (#{ecebAssessTemperature}> 95.5 && #{ecebAssessTemperature} < 99.5)  && !#{ecebFastBreathing}  && !#{ecebSevereJaundice}  && !#{ecebChestIndrawing}  && !#{ecebFeedingProperly}";
   static String programRuleDanger =
       "#{ecebSevereJaundice} ||#{ecebAssessTemperature}<= 95.9 || #{ecebAssessTemperature} >= 99.5  || #{ecebWeight} < 1500 || #{ecebChestIndrawing} || !#{ecebFeedingProperly} || #{ecebFastBreathing} || #{ecebConvulsions}";
-
+  // program Rules
+  static String programRuleNormalID = "BKmJahtMAJU";
+  static String programRuleProblemID = "JwGBKWVJ3vX";
+  static String programRuleDangerID = "uyoAwOlhAKU";
+  
   static setUpProgramRules() {
     programRuleNormal = programRuleNormal.replaceAll('#', '');
     programRuleProblem = programRuleProblem.replaceAll('#', '');

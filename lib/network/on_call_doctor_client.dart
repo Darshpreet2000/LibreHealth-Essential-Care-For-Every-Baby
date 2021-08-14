@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 import 'package:newborn_care/exceptions/custom_exceptions.dart';
 import 'package:newborn_care/utils/api_config.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
@@ -23,12 +22,11 @@ class OnCallDoctorClient {
       final response = await client.get(
         //get all tracked entites which were updated in 24 hours
         Uri.parse(DHIS2Config.serverURL +
-            APIConfig().onCallDoctors +
-            "&lastUpdatedStartDate=${DateFormat('yyyy-MM-dd').format(DateTime.now().subtract(Duration(days: 1)))}"),
+            APIConfig().onCallDoctors ),
         headers: <String, String>{
           'authorization': basicAuth,
         },
-      ).timeout(const Duration(seconds: 10));
+      ).timeout(const Duration(seconds: 15));
       return _response(response);
     } on TimeoutException {
       throw FetchDataException(
