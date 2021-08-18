@@ -39,7 +39,12 @@ To configure the DHIS2 to use this app, the below two Metadata files need to be 
 |Settings Screen | Home Screen | Drawer |
 | <img src="/screenshots/list_of_babies_dark.png" align="top">| <img src="/screenshots/doctor_schedule_dark.png" align="top">|<img src="/screenshots/settings_dark.png" align="top">|
 | List of Babies | Doctor Schedule Screen | Settings Screen |
-
+| <img src="/screenshots/stage1.png" align="top">| <img src="/screenshots/stage2.png" align="top">|<img src="/screenshots/register.png" align="top">|
+| Stage 1 | Stage 2 | Register |
+| <img src="/screenshots/normal.png" align="top">| <img src="/screenshots/problem.png" align="top">|<img src="/screenshots/danger.png" align="top">|
+| Normal | Problem | Danger |
+| <img src="/screenshots/discharge.png" align="top">| <img src="/screenshots/notify.png" align="top">|<img src="/screenshots/about.png" align="top">|
+| Discharge | Notification | About Screen |
 
 ## License
 
