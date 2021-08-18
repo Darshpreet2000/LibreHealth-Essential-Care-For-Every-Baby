@@ -29,11 +29,22 @@ To configure the DHIS2 to use this app, the below two Metadata files need to be 
 
 |   |  | |
 | ------ | ------ | ------ | 
-|<img src="/screenshots/Initial.png"  align="top"> |  <img src="/screenshots/Home.png" align="top">| <img src="/screenshots/List_of_Babies.png" align="top"> |
-| Initial Screen  |Home Screen  |List of Babies Screen  
- | <img src="/screenshots/Notification.png" align="top">| <img src="/screenshots/Profile.png" align="top">|<img src="/screenshots/Login.png" align="top">|
-||Notification Screen  | Profile Screen | Login Screen|
-
+|<img src="/screenshots/Login.png"  align="top"> |  <img src="/screenshots/Home.png" align="top">| <img src="/screenshots/List_of_Babies.png" align="top"> |
+| Login Screen  |Home Screen  |List of Babies Screen  
+| <img src="/screenshots/sortby.png" align="top">| <img src="/screenshots/Profile.png" align="top">|<img src="/screenshots/risk_assessments.png" align="top">|
+|Sort By Feature  | Profile Screen | Risk Assessments|
+| <img src="/screenshots/monitoring_alerts.png" align="top">| <img src="/screenshots/drawer.png" align="top">|<img src="/screenshots/doctor_schedule.png" align="top">|
+|Monitoring Alerts  | Drawer  | Doctor Schedule Screen|
+| <img src="/screenshots/settings.png" align="top">| <img src="/screenshots/home_dark.png" align="top">|<img src="/screenshots/drawer_dark.png" align="top">|
+|Settings Screen | Home Screen | Drawer |
+| <img src="/screenshots/list_of_babies_dark.png" align="top">| <img src="/screenshots/doctor_schedule_dark.png" align="top">|<img src="/screenshots/settings_dark.png" align="top">|
+| List of Babies | Doctor Schedule Screen | Settings Screen |
+| <img src="/screenshots/stage1.png" align="top">| <img src="/screenshots/stage2.png" align="top">|<img src="/screenshots/register.png" align="top">|
+| Stage 1 | Stage 2 | Register |
+| <img src="/screenshots/normal.png" align="top">| <img src="/screenshots/problem.png" align="top">|<img src="/screenshots/danger.png" align="top">|
+| Normal | Problem | Danger |
+| <img src="/screenshots/discharge.png" align="top">| <img src="/screenshots/notify.png" align="top">|<img src="/screenshots/about.png" align="top">|
+| Discharge | Notification | About Screen |
 
 ## License
 
