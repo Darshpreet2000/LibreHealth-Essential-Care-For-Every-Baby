@@ -2,7 +2,7 @@
     package="com.example.newborn_care">
    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="Newborn Care"
+        android:label="LibreHealth Essential Care For Every Baby"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

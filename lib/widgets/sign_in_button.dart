@@ -6,16 +6,22 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SignIn extends StatelessWidget {
   final userNameTextController;
   final passwordTextController;
-
+  final serverTextController;
+  final orgTextController;
   const SignIn(
       {Key? key,
+      required this.serverTextController,
       required this.userNameTextController,
-      required this.passwordTextController})
+      required this.passwordTextController,
+       required this.orgTextController})
       : super(key: key);
 
   bool calculateWhetherDisabledReturnsBool() {
-    if (userNameTextController.text.toString().isEmpty ||
-        passwordTextController.text.toString().isEmpty) return true;
+    if (serverTextController.text.toString().isEmpty ||
+        userNameTextController.text.toString().isEmpty ||
+        passwordTextController.text.toString().isEmpty||
+        orgTextController.text.toString().isEmpty
+        ) return true;
     return false;
   }
 
@@ -36,8 +42,12 @@ class SignIn extends StatelessWidget {
             ? null
             : () {
                 BlocProvider.of<AuthenticationBloc>(context).add(
-                    AuthenticationLoginEvent(userNameTextController.text,
-                        passwordTextController.text));
+                    AuthenticationLoginEvent(
+                        userNameTextController.text,
+                        passwordTextController.text,
+                        serverTextController.text,
+                        orgTextController.text
+                        ));
               },
         style: ElevatedButton.styleFrom(
             primary: Colors.white,

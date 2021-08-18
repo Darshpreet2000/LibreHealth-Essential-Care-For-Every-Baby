@@ -252,25 +252,27 @@ class AssessmentsRepository {
   }
 
   String classifyHealthAfterStage2(Stage2 stage2) {
-    return ClassificationRepository(context).classifyBabyHealth(
-        ecebSevereJaundice: stage2.ecebSevereJaundice,
-        ecebAssessTemperature: stage2.ecebAssessTemperature,
-        ecebWeight: stage2.ecebWeight,
-        ecebChestIndrawing: stage2.ecebChestIndrawing,
-        ecebFeedingProperly: stage2.ecebFeedingProperly,
-        ecebFastBreathing: stage2.ecebFastBreathing,
-        ecebConvulsions: stage2.ecebConvulsions);
+    return ClassificationRepository(context, hiveStorageRepository)
+        .classifyBabyHealth(
+            ecebSevereJaundice: stage2.ecebSevereJaundice,
+            ecebAssessTemperature: stage2.ecebAssessTemperature,
+            ecebWeight: stage2.ecebWeight,
+            ecebChestIndrawing: stage2.ecebChestIndrawing,
+            ecebFeedingProperly: stage2.ecebFeedingProperly,
+            ecebFastBreathing: stage2.ecebFastBreathing,
+            ecebConvulsions: stage2.ecebConvulsions);
   }
 
   String classifyHealthAfterStage4(Stage4 stage4) {
-    return ClassificationRepository(context).classifyBabyHealth(
-        ecebSevereJaundice: stage4.ecebSevereJaundice,
-        ecebAssessTemperature: stage4.ecebAssessTemperature,
-        ecebWeight: stage4.ecebWeight,
-        ecebChestIndrawing: stage4.ecebChestIndrawing,
-        ecebFeedingProperly: stage4.ecebFeedingProperly,
-        ecebFastBreathing: stage4.ecebFastBreathing,
-        ecebConvulsions: stage4.ecebConvulsions);
+    return ClassificationRepository(context, hiveStorageRepository)
+        .classifyBabyHealth(
+            ecebSevereJaundice: stage4.ecebSevereJaundice,
+            ecebAssessTemperature: stage4.ecebAssessTemperature,
+            ecebWeight: stage4.ecebWeight,
+            ecebChestIndrawing: stage4.ecebChestIndrawing,
+            ecebFeedingProperly: stage4.ecebFeedingProperly,
+            ecebFastBreathing: stage4.ecebFastBreathing,
+            ecebConvulsions: stage4.ecebConvulsions);
   }
 
   Future updateTrackedEntityInstance(

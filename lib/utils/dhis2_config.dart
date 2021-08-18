@@ -1,8 +1,9 @@
 class DHIS2Config {
-  static const String serverURL = "https://bmgfdev.soic.iupui.edu";
+  static String serverURL = "https://play.dhis2.org";
+
   static const String programECEBID = "gC4kB3ulSJl";
   static const String programOnCallDoctorsID = "w0HOou10V4s";
-  static const String orgUnit = "yvWZnR3olFA";
+  static  String orgUnit = "yvWZnR3olFA";
 
   //Tracked Entity Instance
   static const String trackedEntity = "gBy25NmwMRc";
@@ -35,12 +36,6 @@ class DHIS2Config {
   static String programRuleNormalID = "BKmJahtMAJU";
   static String programRuleProblemID = "JwGBKWVJ3vX";
   static String programRuleDangerID = "uyoAwOlhAKU";
-  
-  static setUpProgramRules() {
-    programRuleNormal = programRuleNormal.replaceAll('#', '');
-    programRuleProblem = programRuleProblem.replaceAll('#', '');
-    programRuleDanger = programRuleDanger.replaceAll('#', '');
-  }
 
   //Stage - 1 Assessments
   static const String stage1ID = "URydNJS8i3T";

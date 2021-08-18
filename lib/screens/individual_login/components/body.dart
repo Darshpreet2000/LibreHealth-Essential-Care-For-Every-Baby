@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newborn_care/bloc/authentication_bloc/authentication_bloc.dart';
 import 'package:newborn_care/widgets/long_app_bar.dart';
+import 'package:newborn_care/widgets/organization_unit.dart';
 import 'package:newborn_care/widgets/password.dart';
+import 'package:newborn_care/widgets/server_url.dart';
 import 'package:newborn_care/widgets/short_app_bar_login.dart';
 import 'package:newborn_care/widgets/sign_in_button.dart';
 import 'package:newborn_care/widgets/user_name.dart';
@@ -14,7 +16,9 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  var serverNameTextController = new TextEditingController();
   var userNameTextController = new TextEditingController();
+  var orgUnitTextController = new TextEditingController();
   var passwordTextController = new TextEditingController();
 
   @override
@@ -50,6 +54,9 @@ class _BodyState extends State<Body> {
                       state is AuthenticationLoading
                           ? CircularProgressIndicator()
                           : Container(),
+                      ServerUrl(
+                        textController: serverNameTextController,
+                      ),OrganizationUnit(textController: orgUnitTextController,),
                       UserName(
                         textController: userNameTextController,
                       ),
@@ -57,8 +64,10 @@ class _BodyState extends State<Body> {
                         textController: passwordTextController,
                       ),
                       SignIn(
+                        serverTextController: serverNameTextController,
                         userNameTextController: userNameTextController,
                         passwordTextController: passwordTextController,
+                        orgTextController: orgUnitTextController,
                       )
                     ],
                   ),

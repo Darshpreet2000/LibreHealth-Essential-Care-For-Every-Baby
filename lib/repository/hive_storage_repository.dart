@@ -5,8 +5,42 @@ import 'package:newborn_care/models/on_call_doctor_model.dart';
 import 'package:newborn_care/models/profile.dart';
 import 'package:newborn_care/models/sort_list_enum.dart';
 import 'package:newborn_care/models/user_activity.dart';
+import 'package:newborn_care/utils/dhis2_config.dart';
 
 class HiveStorageRepository {
+  //program Rules
+  void saveProgramRule(String id, String data) {
+    box.put(id, data);
+  }
+
+  String getProgramRule(String id) {
+    if (box.containsKey(id)) return box.get(id);
+    return "";
+  }
+
+  bool containsProgramRule(String id) {
+    return box.containsKey(id);
+  }
+  //org Unit
+  void saveOrgUnit(String org){
+    DHIS2Config.orgUnit = org;
+    box.put('org', org);
+  } 
+  String getOrgUnit() {
+    if (box.containsKey('org')) return box.get('org');
+    return "";
+  }
+  //Server url
+  void saveServerURL(String server) {
+    DHIS2Config.serverURL = server;
+    box.put('serverURL', server);
+  }
+
+  String getServerURL() {
+    if (box.containsKey('serverURL')) return box.get('serverURL');
+    return "";
+  }
+
   // On Call Doctor
   void saveOnCallDoctors(List<OnCallDoctorModel> list) {
     listBox.put('onCallDoctorsList', list);

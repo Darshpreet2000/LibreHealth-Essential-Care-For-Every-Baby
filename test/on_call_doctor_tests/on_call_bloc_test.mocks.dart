@@ -134,6 +134,34 @@ class MockHiveStorageRepository extends _i1.Mock
   }
 
   @override
+  void saveProgramRule(String? id, String? data) =>
+      super.noSuchMethod(Invocation.method(#saveProgramRule, [id, data]),
+          returnValueForMissingStub: null);
+  @override
+  String getProgramRule(String? id) =>
+      (super.noSuchMethod(Invocation.method(#getProgramRule, [id]),
+          returnValue: '') as String);
+  @override
+  bool containsProgramRule(String? id) =>
+      (super.noSuchMethod(Invocation.method(#containsProgramRule, [id]),
+          returnValue: false) as bool);
+  @override
+  void saveOrgUnit(String? org) =>
+      super.noSuchMethod(Invocation.method(#saveOrgUnit, [org]),
+          returnValueForMissingStub: null);
+  @override
+  String getOrgUnit() =>
+      (super.noSuchMethod(Invocation.method(#getOrgUnit, []), returnValue: '')
+          as String);
+  @override
+  void saveServerURL(String? server) =>
+      super.noSuchMethod(Invocation.method(#saveServerURL, [server]),
+          returnValueForMissingStub: null);
+  @override
+  String getServerURL() =>
+      (super.noSuchMethod(Invocation.method(#getServerURL, []), returnValue: '')
+          as String);
+  @override
   void saveOnCallDoctors(List<_i12.OnCallDoctorModel>? list) =>
       super.noSuchMethod(Invocation.method(#saveOnCallDoctors, [list]),
           returnValueForMissingStub: null);

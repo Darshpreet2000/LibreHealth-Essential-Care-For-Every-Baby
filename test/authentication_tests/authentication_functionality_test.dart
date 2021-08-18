@@ -11,13 +11,19 @@ import 'package:newborn_care/network/authentication_client.dart';
 import 'dart:convert';
 import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/repository/authentication_repository.dart';
+import 'package:newborn_care/repository/program_rule_repository.dart';
 import 'package:newborn_care/utils/api_config.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
 import 'package:http/http.dart' as http;
 import 'authentication_functionality_test.mocks.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-@GenerateMocks([AuthenticationRepository, HiveStorageRepository, http.Client])
+@GenerateMocks([
+  AuthenticationRepository,
+  HiveStorageRepository,
+  http.Client,
+  ProgramRuleRepository
+])
 void main() {
   mainBloc();
 }
@@ -26,6 +32,7 @@ void mainBloc() {
   final _mockAuthRepo = MockAuthenticationRepository();
   final _mockHiveRepo = MockHiveStorageRepository();
   final _mockHttpClient = MockClient();
+  final _mockProgramRuleRepo = MockProgramRuleRepository();
   //hive storage repo test two cases
   // 1. User loggedIn return true
   // 2. Not LoggedIn return false
@@ -49,10 +56,10 @@ void mainBloc() {
     blocTest<AuthenticationBloc, AuthenticationState>(
       'yields AuthenticationLoaded on successful user logged In',
       build: () {
-        AuthenticationBloc authenticationBloc =
-            new AuthenticationBloc(_mockAuthRepo, _mockHiveRepo);
+        AuthenticationBloc authenticationBloc = new AuthenticationBloc(
+            _mockAuthRepo, _mockHiveRepo, _mockProgramRuleRepo);
 
-        when(_mockAuthRepo.loginUser("testuser", "Admin@123")).thenAnswer(
+        when(_mockAuthRepo.loginUser("testuser", "Admin@123", "","")).thenAnswer(
           (_) async => Future.value(
               Profile("testuser", "id", "testuser", "Admin@123", "")),
         );
@@ -63,22 +70,22 @@ void mainBloc() {
         return authenticationBloc;
       },
       act: (bloc) =>
-          bloc.add(AuthenticationLoginEvent("testuser", "Admin@123")),
+          bloc.add(AuthenticationLoginEvent("testuser", "Admin@123", "","")),
       expect: () => [AuthenticationLoading(), AuthenticationLoaded()],
     );
     blocTest<AuthenticationBloc, AuthenticationState>(
       'yields AuthenticationError on unsuccessful user log In',
       build: () {
-        AuthenticationBloc authenticationBloc =
-            new AuthenticationBloc(_mockAuthRepo, _mockHiveRepo);
+        AuthenticationBloc authenticationBloc = new AuthenticationBloc(
+            _mockAuthRepo, _mockHiveRepo, _mockProgramRuleRepo);
 
-        when(_mockAuthRepo.loginUser("testuser", "Admin@123"))
+        when(_mockAuthRepo.loginUser("testuser", "Admin@123", "",""))
             .thenThrow(Exception("No internet connection"));
 
         return authenticationBloc;
       },
       act: (bloc) =>
-          bloc.add(AuthenticationLoginEvent("testuser", "Admin@123")),
+          bloc.add(AuthenticationLoginEvent("testuser", "Admin@123", "","")),
       expect: () => [
         AuthenticationLoading(),
         AuthenticationError("Exception:No internet connection")

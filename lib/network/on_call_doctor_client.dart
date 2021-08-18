@@ -21,12 +21,11 @@ class OnCallDoctorClient {
     try {
       final response = await client.get(
         //get all tracked entites which were updated in 24 hours
-        Uri.parse(DHIS2Config.serverURL +
-            APIConfig().onCallDoctors ),
+        Uri.parse(DHIS2Config.serverURL + APIConfig().onCallDoctors),
         headers: <String, String>{
           'authorization': basicAuth,
         },
-      ).timeout(const Duration(seconds: 15));
+      );
       return _response(response);
     } on TimeoutException {
       throw FetchDataException(

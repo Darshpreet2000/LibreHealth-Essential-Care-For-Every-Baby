@@ -4,11 +4,13 @@ import 'package:newborn_care/bloc/list_of_babies_bloc/list_of_babies_bloc.dart';
 import 'package:newborn_care/bloc/notification_bloc/notification_bloc.dart';
 import 'package:newborn_care/bloc/refresh_bloc/refresh_bloc.dart';
 import 'package:newborn_care/bloc/user_activity_bloc/user_activity_bloc.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/screens/home/home_screen.dart';
 import 'package:newborn_care/screens/list_of_babies/list_of_babies_screen.dart';
 import 'package:newborn_care/screens/notifications/notification_screen.dart';
 import 'package:newborn_care/screens/profile/profile_screen.dart';
 import 'package:newborn_care/screens/share_app/share_app.dart';
+import 'package:newborn_care/utils/dhis2_config.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:badges/badges.dart';
@@ -27,6 +29,8 @@ class _BaseClassState extends State<BaseClass> {
   int notificationsCount = 0;
   @override
   void initState() {
+    DHIS2Config.serverURL = HiveStorageRepository().getServerURL();
+    DHIS2Config.orgUnit = HiveStorageRepository().getOrgUnit();
     BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
     BlocProvider.of<ListOfBabiesBloc>(context).add(ListOfBabiesFetchData());
     BlocProvider.of<UserActivityBloc>(context).add(UserActivityFetch());
@@ -135,8 +139,8 @@ class _BaseClassState extends State<BaseClass> {
             child: RefreshIndicator(
               onRefresh: () async {
                 BlocProvider.of<RefreshBloc>(context).add(RefreshEventStart());
-                  BlocProvider.of<UserActivityBloc>(context).add(UserActivityFetch());
-  
+                BlocProvider.of<UserActivityBloc>(context)
+                    .add(UserActivityFetch());
               },
               child: IndexedStack(
                 index: selectedIndex,

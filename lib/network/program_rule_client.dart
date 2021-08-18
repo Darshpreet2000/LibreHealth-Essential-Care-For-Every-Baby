@@ -4,20 +4,19 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:newborn_care/exceptions/custom_exceptions.dart';
 import 'package:newborn_care/utils/api_config.dart';
-import 'package:newborn_care/utils/dhis2_config.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ProgramRuleClient{
-      http.Client client;
+class ProgramRuleClient {
+  http.Client client;
   BuildContext context;
   ProgramRuleClient(this.client, this.context);
 
-  Future fetchProgramRules(String username, String password,String id) async {
+  Future fetchProgramRules(String username, String password, String id) async {
     String basicAuth =
         'Basic ' + base64Encode(utf8.encode('$username:$password'));
     try {
       final response = await client.get(
-        Uri.parse(DHIS2Config.serverURL + APIConfig().getProgramRulesAPI(id)),
+        Uri.parse(APIConfig().getProgramRulesAPI(id)),
         headers: <String, String>{
           'authorization': basicAuth,
         },
