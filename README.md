@@ -2,7 +2,7 @@
 <p align="center"><img src="assets/app_icon.png" width="150"></p> 
 <h2 align="center"><b>LibreHealth Essential Care For Every Baby</b></h2>
 <h4 align="center">A Newborn Baby Care Support App</h4>
-<p align="center"><img src="https://f-droid.org/wiki/images/0/06/F-Droid-button_get-it-on.png"></a></p> 
+<p align="center"><a href="https://f-droid.org/en/packages/io.librehealth.toolkit.essential_care_for_every_baby/"><img src="https://f-droid.org/wiki/images/0/06/F-Droid-button_get-it-on.png"></a></p> 
 </div>
 
 </div>
