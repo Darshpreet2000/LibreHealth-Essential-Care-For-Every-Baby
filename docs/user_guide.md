@@ -18,9 +18,15 @@ To setup this application for your DHIS2 instance, first import the metadata fro
 
 2. On Call Doctors Program [**Link**](https://gitlab.com/librehealth/incubating-projects/mhbs/lh-mhbs-eceb/-/blob/master/metadata_on_call_doctor_program.json)
 
-### Adding Link for server
 
-Add the link for server in this app screen, the app will use this DHIS2 server for all other functionalities.
+### Enter Link for server in Login Screen
+
+Add the link for server in the app login screen, the app will use this DHIS2 server for all other functionalities.
+
+
+### Enter Organization Unit in Login Screen
+
+Add the Organization unit ID in login Screen
 
 
 ### Creating On Call Doctors in DHIS2 program event
