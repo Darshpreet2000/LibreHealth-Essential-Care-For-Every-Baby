@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:newborn_care/models/stage_2.dart';
 import 'package:newborn_care/repository/classification_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:newborn_care/utils/dhis2_config.dart';
+
+import 'assessments_client/assessments_client_test.mocks.dart';
 
 void main() {
   classificationRepositoryTest();
 }
 
 void classificationRepositoryTest() {
+  final _mockHive = new MockHiveStorageRepository();
   group('Classification Repository testing', () {
     testWidgets('if temperature < 95.5 or > 99.5 then classifies as danger',
         (WidgetTester tester) async {
@@ -18,6 +23,14 @@ void classificationRepositoryTest() {
             AppLocalizations.delegate,
           ]));
       BuildContext context = tester.element(find.byType(Container));
+      when(_mockHive.containsProgramRule(DHIS2Config.programRuleNormalID))
+          .thenReturn(false);
+
+      when(_mockHive.containsProgramRule(DHIS2Config.programRuleDangerID))
+          .thenReturn(false);
+
+      when(_mockHive.containsProgramRule(DHIS2Config.programRuleProblemID))
+          .thenReturn(false);
       Stage2 stage2 = new Stage2();
       stage2.ecebWardName = "postnatal";
       stage2.ecebAssessTemperature = 101;
@@ -42,7 +55,7 @@ void classificationRepositoryTest() {
       stage2.ecebConvulsions = true;
       stage2.ecebSevereJaundice = true;
       expect(
-          ClassificationRepository(context).classifyBabyHealth(
+          ClassificationRepository(context, _mockHive).classifyBabyHealth(
               ecebSevereJaundice: stage2.ecebSevereJaundice,
               ecebAssessTemperature: stage2.ecebAssessTemperature,
               ecebWeight: stage2.ecebWeight,
@@ -61,6 +74,14 @@ void classificationRepositoryTest() {
             AppLocalizations.delegate,
           ]));
       BuildContext context = tester.element(find.byType(Container));
+      when(_mockHive.containsProgramRule(DHIS2Config.programRuleNormalID))
+          .thenReturn(false);
+
+      when(_mockHive.containsProgramRule(DHIS2Config.programRuleDangerID))
+          .thenReturn(false);
+
+      when(_mockHive.containsProgramRule(DHIS2Config.programRuleProblemID))
+          .thenReturn(false);
       Stage2 stage2 = new Stage2();
       stage2.ecebWardName = "postnatal";
       stage2.ecebAssessTemperature = 98;
@@ -85,7 +106,7 @@ void classificationRepositoryTest() {
       stage2.ecebConvulsions = true;
       stage2.ecebSevereJaundice = true;
       expect(
-          ClassificationRepository(context).classifyBabyHealth(
+          ClassificationRepository(context, _mockHive).classifyBabyHealth(
               ecebSevereJaundice: stage2.ecebSevereJaundice,
               ecebAssessTemperature: stage2.ecebAssessTemperature,
               ecebWeight: stage2.ecebWeight,
@@ -104,6 +125,14 @@ void classificationRepositoryTest() {
             AppLocalizations.delegate,
           ]));
       BuildContext context = tester.element(find.byType(Container));
+      when(_mockHive.containsProgramRule(DHIS2Config.programRuleNormalID))
+          .thenReturn(false);
+
+      when(_mockHive.containsProgramRule(DHIS2Config.programRuleDangerID))
+          .thenReturn(false);
+
+      when(_mockHive.containsProgramRule(DHIS2Config.programRuleProblemID))
+          .thenReturn(false);
       Stage2 stage2 = new Stage2();
       stage2.ecebWardName = "postnatal";
       stage2.ecebAssessTemperature = 98;
@@ -129,7 +158,7 @@ void classificationRepositoryTest() {
       stage2.ecebConvulsions = false;
       stage2.ecebSevereJaundice = false;
       expect(
-          ClassificationRepository(context).classifyBabyHealth(
+          ClassificationRepository(context, _mockHive).classifyBabyHealth(
               ecebSevereJaundice: stage2.ecebSevereJaundice,
               ecebAssessTemperature: stage2.ecebAssessTemperature,
               ecebWeight: stage2.ecebWeight,
@@ -147,6 +176,14 @@ void classificationRepositoryTest() {
             AppLocalizations.delegate,
           ]));
       BuildContext context = tester.element(find.byType(Container));
+      when(_mockHive.containsProgramRule(DHIS2Config.programRuleNormalID))
+          .thenReturn(false);
+
+      when(_mockHive.containsProgramRule(DHIS2Config.programRuleDangerID))
+          .thenReturn(false);
+
+      when(_mockHive.containsProgramRule(DHIS2Config.programRuleProblemID))
+          .thenReturn(false);
       Stage2 stage2 = new Stage2();
       stage2.ecebWardName = "postnatal";
       stage2.ecebAssessTemperature = 98;
@@ -172,7 +209,7 @@ void classificationRepositoryTest() {
       stage2.ecebConvulsions = false;
       stage2.ecebSevereJaundice = false;
       expect(
-          ClassificationRepository(context).classifyBabyHealth(
+          ClassificationRepository(context, _mockHive).classifyBabyHealth(
               ecebSevereJaundice: stage2.ecebSevereJaundice,
               ecebAssessTemperature: stage2.ecebAssessTemperature,
               ecebWeight: stage2.ecebWeight,

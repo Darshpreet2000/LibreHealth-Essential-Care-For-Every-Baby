@@ -18,10 +18,17 @@ Execute the following command in console to get the required dependencies:
 flutter pub get 
 ```
 
-**Step 2:**
+**Step 3:**
 
 Open Android/IOS device & run below command
 
 ```
 flutter run 
 ```
+
+# Test Credentials for Application
+
+Server URL : https://bmgfdev.soic.iupui.edu
+Organization ID: yvWZnR3olFA
+Username: testuser
+Password: Admin@123

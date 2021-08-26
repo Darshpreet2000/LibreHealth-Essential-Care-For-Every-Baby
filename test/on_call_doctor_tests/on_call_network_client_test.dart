@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:intl/intl.dart';
 import 'package:mockito/mockito.dart';
 import 'package:newborn_care/exceptions/custom_exceptions.dart';
 import 'package:newborn_care/network/on_call_doctor_client.dart';
@@ -39,9 +38,7 @@ void assessmentClientTest() {
       onCallDoctorClient = new OnCallDoctorClient(_mockHttpClient, context);
       String basicAuth =
           'Basic ' + base64Encode(utf8.encode('username:password'));
-      String url = DHIS2Config.serverURL +
-          APIConfig().onCallDoctors +
-          "&lastUpdatedStartDate=${DateFormat('yyyy-MM-dd').format(DateTime.now().subtract(Duration(days: 1)))}";
+      String url = DHIS2Config.serverURL + APIConfig().onCallDoctors;
 
       when(_mockHttpClient.get(
         Uri.parse(url),
@@ -65,10 +62,7 @@ void assessmentClientTest() {
       onCallDoctorClient = new OnCallDoctorClient(_mockHttpClient, context);
       String basicAuth =
           'Basic ' + base64Encode(utf8.encode('username:password'));
-      String url = DHIS2Config.serverURL +
-          APIConfig().onCallDoctors +
-          "&lastUpdatedStartDate=${DateFormat('yyyy-MM-dd').format(DateTime.now().subtract(Duration(days: 1)))}";
-
+      String url = DHIS2Config.serverURL + APIConfig().onCallDoctors;
       when(_mockHttpClient.get(
         Uri.parse(url),
         headers: <String, String>{

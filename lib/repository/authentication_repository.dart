@@ -14,7 +14,9 @@ class AuthenticationRepository {
   }
   AuthenticationRepository.test(
       this.context, this.hiveStorageRepository, this.authenticationClient);
-  Future loginUser(String username, String password) async {
+  Future loginUser(String username, String password, String server,String orgUnit) async {
+    hiveStorageRepository.saveServerURL(server);
+    hiveStorageRepository.saveOrgUnit(orgUnit);
     String response = await authenticationClient.loginUser(username, password);
     Map<String, dynamic> res = jsonDecode(response);
     String avatarID = "";

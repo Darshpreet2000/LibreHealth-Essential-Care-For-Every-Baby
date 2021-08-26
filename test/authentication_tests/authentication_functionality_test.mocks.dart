@@ -18,6 +18,7 @@ import 'package:newborn_care/models/user_activity.dart' as _i12;
 import 'package:newborn_care/network/authentication_client.dart' as _i4;
 import 'package:newborn_care/repository/authentication_repository.dart' as _i8;
 import 'package:newborn_care/repository/hive_storage_repository.dart' as _i3;
+import 'package:newborn_care/repository/program_rule_repository.dart' as _i16;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -80,8 +81,10 @@ class MockAuthenticationRepository extends _i1.Mock
           Invocation.setter(#authenticationClient, _authenticationClient),
           returnValueForMissingStub: null);
   @override
-  _i9.Future<dynamic> loginUser(String? username, String? password) =>
-      (super.noSuchMethod(Invocation.method(#loginUser, [username, password]),
+  _i9.Future<dynamic> loginUser(String? username, String? password,
+          String? server, String? orgUnit) =>
+      (super.noSuchMethod(
+          Invocation.method(#loginUser, [username, password, server, orgUnit]),
           returnValue: Future<dynamic>.value()) as _i9.Future<dynamic>);
   @override
   bool checkUserLoggedIn() =>
@@ -100,6 +103,34 @@ class MockHiveStorageRepository extends _i1.Mock
     _i1.throwOnMissingStub(this);
   }
 
+  @override
+  void saveProgramRule(String? id, String? data) =>
+      super.noSuchMethod(Invocation.method(#saveProgramRule, [id, data]),
+          returnValueForMissingStub: null);
+  @override
+  String getProgramRule(String? id) =>
+      (super.noSuchMethod(Invocation.method(#getProgramRule, [id]),
+          returnValue: '') as String);
+  @override
+  bool containsProgramRule(String? id) =>
+      (super.noSuchMethod(Invocation.method(#containsProgramRule, [id]),
+          returnValue: false) as bool);
+  @override
+  void saveOrgUnit(String? org) =>
+      super.noSuchMethod(Invocation.method(#saveOrgUnit, [org]),
+          returnValueForMissingStub: null);
+  @override
+  String getOrgUnit() =>
+      (super.noSuchMethod(Invocation.method(#getOrgUnit, []), returnValue: '')
+          as String);
+  @override
+  void saveServerURL(String? server) =>
+      super.noSuchMethod(Invocation.method(#saveServerURL, [server]),
+          returnValueForMissingStub: null);
+  @override
+  String getServerURL() =>
+      (super.noSuchMethod(Invocation.method(#getServerURL, []), returnValue: '')
+          as String);
   @override
   void saveOnCallDoctors(List<_i10.OnCallDoctorModel>? list) =>
       super.noSuchMethod(Invocation.method(#saveOnCallDoctors, [list]),
@@ -284,6 +315,31 @@ class MockClient extends _i1.Mock implements _i7.Client {
   @override
   void close() => super.noSuchMethod(Invocation.method(#close, []),
       returnValueForMissingStub: null);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [ProgramRuleRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockProgramRuleRepository extends _i1.Mock
+    implements _i16.ProgramRuleRepository {
+  MockProgramRuleRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.BuildContext get context =>
+      (super.noSuchMethod(Invocation.getter(#context),
+          returnValue: _FakeBuildContext()) as _i2.BuildContext);
+  @override
+  _i3.HiveStorageRepository get hiveStorageRepository => (super.noSuchMethod(
+      Invocation.getter(#hiveStorageRepository),
+      returnValue: _FakeHiveStorageRepository()) as _i3.HiveStorageRepository);
+  @override
+  void updateProgramRules() =>
+      super.noSuchMethod(Invocation.method(#updateProgramRules, []),
+          returnValueForMissingStub: null);
   @override
   String toString() => super.toString();
 }

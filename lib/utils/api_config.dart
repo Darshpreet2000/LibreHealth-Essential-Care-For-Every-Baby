@@ -19,4 +19,7 @@ class APIConfig {
   String getaddEventsAPI(
           String orgUnitId, String programID, String trackedEntityInstanceID) =>
       "/api/events.json?orgUnit=$orgUnitId&program=$programID&trackedEntityInstance=$trackedEntityInstanceID";
+  String getProgramRulesAPI(String id) {
+    return DHIS2Config.serverURL + "/api/programRules/$id";
+  }
 }

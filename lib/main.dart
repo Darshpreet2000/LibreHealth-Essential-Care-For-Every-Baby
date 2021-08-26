@@ -30,6 +30,7 @@ import 'package:newborn_care/repository/list_of_babies_repository.dart';
 import 'package:newborn_care/repository/notification_repository.dart';
 import 'package:newborn_care/repository/notification_screen_repository.dart';
 import 'package:newborn_care/repository/on_call_doctor_repository.dart';
+import 'package:newborn_care/repository/program_rule_repository.dart';
 import 'package:newborn_care/repository/refresh_repository.dart';
 import 'package:newborn_care/repository/register_baby_repository.dart';
 import 'package:newborn_care/repository/summary_repository.dart';
@@ -194,9 +195,10 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider<AuthenticationBloc>(
             create: (BuildContext context) => AuthenticationBloc(
-              context.read<AuthenticationRepository>(),
-              context.read<HiveStorageRepository>(),
-            ),
+                context.read<AuthenticationRepository>(),
+                context.read<HiveStorageRepository>(),
+                ProgramRuleRepository(navigatorKey.currentContext!,
+                    context.read<HiveStorageRepository>())),
           ),
         ],
       ),

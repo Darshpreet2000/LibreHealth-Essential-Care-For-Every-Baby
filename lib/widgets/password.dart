@@ -16,7 +16,7 @@ class _PasswordState extends State<Password> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(8.0),
       child: TextField(
         controller: widget.textController,
         obscureText: !this._showPassword,

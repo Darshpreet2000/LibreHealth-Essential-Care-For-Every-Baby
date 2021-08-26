@@ -1,12 +1,14 @@
 import 'package:expression_language/expression_language.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:interpolation/interpolation.dart';
+import 'package:newborn_care/repository/hive_storage_repository.dart';
 import 'package:newborn_care/utils/dhis2_config.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ClassificationRepository {
   BuildContext context;
-  ClassificationRepository(this.context);
+  HiveStorageRepository hiveStorageRepository;
+  ClassificationRepository(this.context, this.hiveStorageRepository);
 
   String classifyBabyHealth(
       {required bool? ecebSevereJaundice,
@@ -16,10 +18,20 @@ class ClassificationRepository {
       required bool? ecebFeedingProperly,
       required bool? ecebFastBreathing,
       required bool? ecebConvulsions}) {
-    DHIS2Config.setUpProgramRules();
-
     var interpolation = Interpolation();
-    var programRuleDanger = interpolation.eval(DHIS2Config.programRuleDanger, {
+    String programRuleDangerCondition = hiveStorageRepository
+            .containsProgramRule(DHIS2Config.programRuleDangerID)
+        ? hiveStorageRepository.getProgramRule(DHIS2Config.programRuleDangerID)
+        : DHIS2Config.programRuleDanger;
+    String programRuleProblemCondition = hiveStorageRepository
+            .containsProgramRule(DHIS2Config.programRuleProblemID)
+        ? hiveStorageRepository.getProgramRule(DHIS2Config.programRuleProblemID)
+        : DHIS2Config.programRuleProblem;
+    programRuleDangerCondition = programRuleDangerCondition.replaceAll('#', '');
+    programRuleProblemCondition =
+        programRuleProblemCondition.replaceAll('#', '');
+
+    var programRuleDanger = interpolation.eval(programRuleDangerCondition, {
       'ecebSevereJaundice': ecebSevereJaundice,
       'ecebAssessTemperature': ecebAssessTemperature,
       'ecebWeight': ecebWeight,
@@ -28,8 +40,7 @@ class ClassificationRepository {
       'ecebFastBreathing': ecebFastBreathing,
       'ecebConvulsions': ecebConvulsions,
     });
-    var programRuleProblem =
-        interpolation.eval(DHIS2Config.programRuleProblem, {
+    var programRuleProblem = interpolation.eval(programRuleProblemCondition, {
       'ecebSevereJaundice': ecebSevereJaundice,
       'ecebAssessTemperature': ecebAssessTemperature,
       'ecebWeight': ecebWeight,
