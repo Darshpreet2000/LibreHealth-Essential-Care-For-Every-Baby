@@ -1,8 +1,8 @@
 <div align="center">
-<p align="center"><img src="assets/app_icon.png" width="150"></p> 
+<p align="center"><img src="assets/app_icon.png" width="150"></p>
 <h2 align="center"><b>LibreHealth Essential Care For Every Baby</b></h2>
 <h4 align="center">A Newborn Baby Care Support App</h4>
-<p align="center"><a href="https://f-droid.org/en/packages/io.librehealth.toolkit.essential_care_for_every_baby/"><img src="https://f-droid.org/wiki/images/0/06/F-Droid-button_get-it-on.png"></a></p> 
+<p align="center"><a href="https://f-droid.org/en/packages/io.librehealth.mhbs.essential_care_for_every_baby/"><img src="https://f-droid.org/wiki/images/0/06/F-Droid-button_get-it-on.png"></a></p>
 </div>
 
 </div>
@@ -25,13 +25,13 @@ Features
 
 This project is developed using Flutter, it supports Android & IOS with single codebase
 
-## Link to documentation 
+## Link to documentation
 
 Link for User & developer documentation of this App
 
 https://librehealth.gitlab.io/incubating-projects/mhbs/lh-mhbs-eceb/
-  
-  
+
+
 
 
 ## Maintainers and Developers
@@ -46,9 +46,9 @@ https://librehealth.gitlab.io/incubating-projects/mhbs/lh-mhbs-eceb/
 ## Screenshots
 
 |   |  | |
-| ------ | ------ | ------ | 
+| ------ | ------ | ------ |
 |<img src="/screenshots/Login.png"  align="top"> |  <img src="/screenshots/Home.png" align="top">| <img src="/screenshots/List_of_Babies.png" align="top"> |
-| Login Screen  |Home Screen  |List of Babies Screen  
+| Login Screen  |Home Screen  |List of Babies Screen
 | <img src="/screenshots/sortby.png" align="top">| <img src="/screenshots/Profile.png" align="top">|<img src="/screenshots/risk_assessments.png" align="top">|
 |Sort By Feature  | Profile Screen | Risk Assessments|
 | <img src="/screenshots/monitoring_alerts.png" align="top">| <img src="/screenshots/drawer.png" align="top">|<img src="/screenshots/doctor_schedule.png" align="top">|
