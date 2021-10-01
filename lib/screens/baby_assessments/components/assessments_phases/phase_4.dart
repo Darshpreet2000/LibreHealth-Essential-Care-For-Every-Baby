@@ -150,21 +150,6 @@ class _Phase4State extends State<Phase4> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      AppLocalizations.of(context)!.isBabyFeedingProperly,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  switchYesNo(widget.stage4.ecebFeedingProperly, (newValue) {
-                    setState(() {
-                      widget.stage4.ecebFeedingProperly = newValue!;
-                    });
-                  }, context, widget.stage4.isCompleted),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
                       AppLocalizations.of(context)!.jaundiceSigns,
                       style: TextStyle(
                           color: Colors.black,
@@ -175,6 +160,21 @@ class _Phase4State extends State<Phase4> {
                   switchYesNo(widget.stage4.ecebSevereJaundice, (newValue) {
                     setState(() {
                       widget.stage4.ecebSevereJaundice = newValue!;
+                    });
+                  }, context, widget.stage4.isCompleted),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.isBabyFeedingProperly,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  switchYesNo(widget.stage4.ecebFeedingProperly, (newValue) {
+                    setState(() {
+                      widget.stage4.ecebFeedingProperly = newValue!;
                     });
                   }, context, widget.stage4.isCompleted),
                 ],
