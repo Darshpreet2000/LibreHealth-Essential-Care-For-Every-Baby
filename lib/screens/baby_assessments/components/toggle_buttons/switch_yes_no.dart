@@ -17,9 +17,9 @@ Widget switchYesNo(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        side: BorderSide(color: Colors.blue, width: 2.5),
+                        side: BorderSide(color: Colors.red[700]!, width: 2.5),
                         primary: isSelected != null && isSelected == true
-                            ? Colors.blue
+                            ? Colors.red[700]
                             : null,
                         shape: RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(30.0))),
@@ -46,9 +46,9 @@ Widget switchYesNo(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        side: BorderSide(color: Colors.blue, width: 2.5),
+                        side: BorderSide(color: Colors.green, width: 2.5),
                         primary: isSelected != null && isSelected == false
-                            ? Colors.blue
+                            ? Colors.green
                             : null,
                         shape: RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(30.0))),

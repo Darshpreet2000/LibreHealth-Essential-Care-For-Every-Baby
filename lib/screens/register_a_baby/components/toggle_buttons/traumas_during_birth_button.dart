@@ -27,12 +27,12 @@ class _TraumasDuringBirthButtonState extends State<TraumasDuringBirthButton> {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      side: BorderSide(color: Colors.blue, width: 2.5),
+                      side: BorderSide(color: Colors.red[600]!, width: 2.5),
                       primary:
                           widget._babyDetailsModel.traumasDuringBirth != null &&
                                   widget._babyDetailsModel.traumasDuringBirth ==
                                       true
-                              ? Colors.blue
+                              ? Colors.red[600]
                               : null,
                       shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0))),
@@ -61,12 +61,12 @@ class _TraumasDuringBirthButtonState extends State<TraumasDuringBirthButton> {
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      side: BorderSide(color: Colors.blue, width: 2.5),
+                      side: BorderSide(color: Colors.green, width: 2.5),
                       primary:
                           widget._babyDetailsModel.traumasDuringBirth != null &&
                                   widget._babyDetailsModel.traumasDuringBirth ==
                                       false
-                              ? Colors.blue
+                              ? Colors.green
                               : null,
                       shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0))),

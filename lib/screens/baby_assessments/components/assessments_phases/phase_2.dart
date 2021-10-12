@@ -237,21 +237,6 @@ class _Phase2State extends State<Phase2> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      AppLocalizations.of(context)!.isBabyFeedingProperly,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  switchYesNo(widget.stage2.ecebFeedingProperly, (newValue) {
-                    setState(() {
-                      widget.stage2.ecebFeedingProperly = newValue!;
-                    });
-                  }, context, widget.stage2.isCompleted),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
                       AppLocalizations.of(context)!.convulsionsSigns,
                       style: TextStyle(
                           color: Colors.black,
@@ -277,6 +262,21 @@ class _Phase2State extends State<Phase2> {
                   switchYesNo(widget.stage2.ecebSevereJaundice, (newValue) {
                     setState(() {
                       widget.stage2.ecebSevereJaundice = newValue!;
+                    });
+                  }, context, widget.stage2.isCompleted),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.isBabyFeedingProperly,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  switchYesNo(widget.stage2.ecebFeedingProperly, (newValue) {
+                    setState(() {
+                      widget.stage2.ecebFeedingProperly = newValue!;
                     });
                   }, context, widget.stage2.isCompleted),
                 ],
