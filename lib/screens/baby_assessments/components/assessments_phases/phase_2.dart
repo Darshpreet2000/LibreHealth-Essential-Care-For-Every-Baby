@@ -358,7 +358,7 @@ class _Phase2State extends State<Phase2> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            AppLocalizations.of(context)!.systematicExaminationsPerformed,
+            AppLocalizations.of(context)!.systemicExaminationsPerformed,
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
