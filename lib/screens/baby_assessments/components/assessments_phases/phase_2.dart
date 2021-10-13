@@ -323,10 +323,14 @@ class _Phase2State extends State<Phase2> {
             CheckboxListTile(
               contentPadding: EdgeInsets.all(4),
 
-              title: Text(
-                title,
-                style: TextStyle(
-                    color: Colors.blue[700], fontWeight: FontWeight.bold),
+              title: FittedBox(
+                fit: BoxFit.none,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  title,
+                  style: TextStyle(
+                      color: Colors.blue[700], fontWeight: FontWeight.bold),
+                ),
               ),
               value: value,
               onChanged: (newVal) {
@@ -437,7 +441,7 @@ class _Phase2State extends State<Phase2> {
               ),
               Expanded(
                 child: checkBoxFormWidget(
-                  AppLocalizations.of(context)!.muscuoskeletal,
+                  AppLocalizations.of(context)!.musculoskeletal,
                   widget.stage2.ecebExaminationMuscoskeletal,
                   (newValue) {
                     if (widget.stage2.isCompleted == false)
